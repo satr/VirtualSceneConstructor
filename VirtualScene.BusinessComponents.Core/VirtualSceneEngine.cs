@@ -3,13 +3,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Threading;
-using SharpGL;
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
-using SharpGL.Version;
-using VirtualScene.BusinessComponents.Core.Properties;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -18,17 +12,11 @@ namespace VirtualScene.BusinessComponents.Core
     /// </summary>
     public class VirtualSceneEngine
     {
-        private const int DefaultUpdateRate = 40;//in milliseconds
-        private const int MinimumWidth = 800;
-        private const int MinimumHeight = 600;
         private DispatcherTimer _timer;
 
-        /// <summary>
-        /// The main OpenGL instance.
-        /// </summary>
-        private readonly OpenGL _gl = new OpenGL();
-        private readonly Vertex _defaultCameraPosition;
+
         private readonly ObservableCollection<VirtualSceneViewport> _viewports = new ObservableCollection<VirtualSceneViewport>();
+        private readonly VirtualSceneFactory _virtualSceneFactory;
 
         /// <summary>
         /// Creates a new instance of the 3D scene.
@@ -37,10 +25,9 @@ namespace VirtualScene.BusinessComponents.Core
         {
             CommonSceneContainer = new ObservableCollection<SceneElement>();
             CommonSceneContainer.CollectionChanged += CommonSceneContainerChanged;
-            SetUpdateRate(DefaultUpdateRate);
-            _defaultCameraPosition = new Vertex(-10, -10, 10);
+            SetUpdateRate(Constants.VirtualScene.DefaultUpdateRate);
             SetupTimer();
-            CommonSceneContainer.Add(new Cube());
+            _virtualSceneFactory = new VirtualSceneFactory();
         }
 
         private void CommonSceneContainerChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -129,50 +116,13 @@ namespace VirtualScene.BusinessComponents.Core
         /// <returns>Returnd the new viewport</returns>
         public VirtualSceneViewport CreateViewport()
         {
-            var viewport = new VirtualSceneViewport(CreateScene());
+            var viewport = new VirtualSceneViewport(_virtualSceneFactory.Create());
             _viewports.Add(viewport);
             foreach (var sceneElement in CommonSceneContainer)
             {
                 viewport.Scene.SceneContainer.AddChild(sceneElement);
             }
             return viewport;
-        }
-
-        private Scene CreateScene(int width = MinimumWidth, int height = MinimumHeight, int bitDepth = 32)
-        {
-            ValidateSceneArguments(width, height, bitDepth);
-            _gl.Create(OpenGLVersion.OpenGL4_4, RenderContextType.DIBSection, width, height, bitDepth, null);
-            var scene = new Scene { OpenGL = _gl };
-            SharpGL.SceneGraph.Helpers.SceneHelper.InitialiseModelingScene(scene);
-            scene.CurrentCamera = CreateCamera<ArcBallCamera>(_defaultCameraPosition);
-            return scene;
-        }
-
-        private static void ValidateSceneArguments(int width, int height, int bitDepth)
-        {
-            if (width < MinimumWidth)
-                throw new ArgumentOutOfRangeException("width", string.Format(Resources.Message_ValidateSceneArguments_Minimum_width_value_N, MinimumWidth));
-            if (height < MinimumHeight)
-                throw new ArgumentOutOfRangeException("height", string.Format(Resources.Message_ValidateSceneArguments_Minimum_height_value_N, MinimumHeight));
-            if (bitDepth < 8)
-                throw new ArgumentOutOfRangeException("bitDepth", Resources.Message_ValidateSceneArguments_Minimum_bitDepth_value_N);
-            if (bitDepth > 32)
-                throw new ArgumentOutOfRangeException("bitDepth", Resources.Message_ValidateSceneArguments_Maximum_bitDepth_value_N);
-        }
-
-        /// <summary>
-        /// Creates the camera
-        /// </summary>
-        /// <typeparam name="T">Type of the camera.</typeparam>
-        /// <param name="position">Position of the camera in the scene.</param>
-        /// <returns>Returns a new camera.</returns>
-        private static Camera CreateCamera<T>(Vertex position)
-            where T:Camera, new()
-        {
-            return new T
-            {
-                Position = position
-            };
         }
     }
 }
