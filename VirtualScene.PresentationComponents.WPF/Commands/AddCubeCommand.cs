@@ -13,8 +13,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <summary>
         /// Creates a new instance of the AddCubeCommand
         /// </summary>
-        /// <param name="virtualSceneContent"></param>
-        public AddCubeCommand(VirtualSceneContent virtualSceneContent): base(virtualSceneContent)
+        /// <param name="sceneContent"></param>
+        public AddCubeCommand(SceneContent sceneContent): base(sceneContent)
         {
         }
 
@@ -28,7 +28,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
             _y += 1;
             item.Transformation.TranslateX += _x;
             item.Transformation.TranslateY += _y;
-            VirtualSceneContent.VirtualSceneEngine.CommonSceneContainer.Add(item);
+            SceneContent.SceneEngine.CommonSceneContainer.Add(item);
         }
     }
 }

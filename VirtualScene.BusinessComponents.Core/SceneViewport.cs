@@ -5,16 +5,16 @@ namespace VirtualScene.BusinessComponents.Core
     /// <summary>
     /// The viewport containig a scene and the navigation component.
     /// </summary>
-    public class VirtualSceneViewport
+    public class SceneViewport
     {
         /// <summary>
         /// Creates the new instance of the viewport.
         /// </summary>
         /// <param name="scene"></param>
-        public VirtualSceneViewport(Scene scene)
+        public SceneViewport(Scene scene)
         {
             Scene = scene;
-            Navigation = new VirtualSceneNavigation(scene);
+            Navigation = new SceneNavigation(scene);
         }
 
         /// <summary>
@@ -25,6 +25,6 @@ namespace VirtualScene.BusinessComponents.Core
         /// <summary>
         /// The component responcible for the navigation within scene of the viewport.
         /// </summary>
-        public VirtualSceneNavigation Navigation { get; private set; }
+        public SceneNavigation Navigation { get; private set; }
     }
 }

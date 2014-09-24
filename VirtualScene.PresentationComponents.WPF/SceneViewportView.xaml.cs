@@ -11,14 +11,14 @@ namespace VirtualScene.PresentationComponents.WPF
         /// <summary>
         /// VirtualSceneContext property to create a viewport based on the SceneViewportView user-control
         /// </summary>
-        public static readonly DependencyProperty VirtualSceneContentProperty = DependencyProperty.Register("VirtualSceneContent", typeof(VirtualSceneContent), typeof(SceneViewportView), new PropertyMetadata(null, UpdateVirtualSceneContent));
+        public static readonly DependencyProperty SceneContentProperty = DependencyProperty.Register("SceneContent", typeof(SceneContent), typeof(SceneViewportView), new PropertyMetadata(null, UpdateVirtualSceneContent));
 // ReSharper disable NotAccessedField.Local
         private Viewport _viewport;
 // ReSharper restore NotAccessedField.Local
 
         private static void UpdateVirtualSceneContent(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((SceneViewportView) d).VirtualSceneContent = (VirtualSceneContent) e.NewValue;
+            ((SceneViewportView) d).SceneContent = (SceneContent) e.NewValue;
         }
 
         /// <summary>
@@ -32,13 +32,13 @@ namespace VirtualScene.PresentationComponents.WPF
         /// <summary>
         /// VirtualSceneContext property to create a viewport based on the SceneViewportView user-control
         /// </summary>
-        public VirtualSceneContent VirtualSceneContent
+        public SceneContent SceneContent
         {
-            get { return (VirtualSceneContent)GetValue(VirtualSceneContentProperty); }
+            get { return (SceneContent)GetValue(SceneContentProperty); }
             set
             {
                 var virtualSceneContent = value;
-                SetValue(VirtualSceneContentProperty, virtualSceneContent);
+                SetValue(SceneContentProperty, virtualSceneContent);
                 _viewport = new Viewport(SceneView, virtualSceneContent);
             }
         }

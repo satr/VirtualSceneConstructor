@@ -16,13 +16,13 @@ namespace VirtualScene.PresentationComponents.WPF
         /// <summary>
         /// Creates a new instance of the presenter
         /// </summary>
-        /// <param name="virtualSceneContent">Content of the virtual scene.</param>
-        public Presenter(VirtualSceneContent virtualSceneContent)
+        /// <param name="sceneContent">Content of the virtual scene.</param>
+        public Presenter(SceneContent sceneContent)
         {
             TopElements = new List<UIElement>
             {
-                CreateButton(Resources.Title_Add_Cube, new AddCubeCommand(virtualSceneContent)),
-                CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(virtualSceneContent))
+                CreateButton(Resources.Title_Add_Cube, new AddCubeCommand(sceneContent)),
+                CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(sceneContent))
             };
         }
 

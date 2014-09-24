@@ -10,24 +10,24 @@ namespace VirtualScene.BusinessComponents.Core
     /// <summary>
     /// The 3D scene engine.
     /// </summary>
-    public class VirtualSceneEngine
+    public class SceneEngine
     {
         private DispatcherTimer _timer;
 
 
-        private readonly ObservableCollection<VirtualSceneViewport> _viewports = new ObservableCollection<VirtualSceneViewport>();
-        private readonly VirtualSceneFactory _virtualSceneFactory;
+        private readonly ObservableCollection<SceneViewport> _viewports = new ObservableCollection<SceneViewport>();
+        private readonly SceneFactory _sceneFactory;
 
         /// <summary>
         /// Creates a new instance of the 3D scene.
         /// </summary>
-        public VirtualSceneEngine()
+        public SceneEngine()
         {
             CommonSceneContainer = new ObservableCollection<SceneElement>();
             CommonSceneContainer.CollectionChanged += CommonSceneContainerChanged;
-            SetUpdateRate(Constants.VirtualScene.DefaultUpdateRate);
+            SetUpdateRate(Constants.Scene.DefaultUpdateRate);
             SetupTimer();
-            _virtualSceneFactory = new VirtualSceneFactory();
+            _sceneFactory = new SceneFactory();
         }
 
         private void CommonSceneContainerChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -114,9 +114,9 @@ namespace VirtualScene.BusinessComponents.Core
         /// Creates the viewport with a scene. All previously added acene elements are automatically added to the new vieport.
         /// </summary>
         /// <returns>Returnd the new viewport</returns>
-        public VirtualSceneViewport CreateViewport()
+        public SceneViewport CreateViewport()
         {
-            var viewport = new VirtualSceneViewport(_virtualSceneFactory.Create());
+            var viewport = new SceneViewport(_sceneFactory.Create());
             _viewports.Add(viewport);
             foreach (var sceneElement in CommonSceneContainer)
             {

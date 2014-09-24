@@ -17,14 +17,14 @@ namespace VirtualScene.Application.WPF.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            _presenter = new Presenter(VirtualSceneContent);
+            _presenter = new Presenter(SceneContent);
         }
 
         /// <summary>
         /// VirtualSceneContext holding a state of the virtual scene
         /// </summary>
-        public VirtualSceneContent VirtualSceneContent {
-            get { return ((App) System.Windows.Application.Current).VirtualSceneContent; }
+        public SceneContent SceneContent {
+            get { return ((App) System.Windows.Application.Current).SceneContent; }
         }
 
         /// <summary>

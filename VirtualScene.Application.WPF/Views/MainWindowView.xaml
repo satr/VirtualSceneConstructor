@@ -8,7 +8,7 @@
         <StackPanel Orientation="Horizontal" Height="50">
             <WrapPanel x:Name="TopPanel" />
         </StackPanel>
-        <wpf:SceneViewportView VirtualSceneContent="{Binding VirtualSceneContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <wpf:SceneViewportView SceneContent="{Binding SceneContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
     </StackPanel>
 </Window>

@@ -12,15 +12,15 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <summary>
         /// VirtualSceneContext 
         /// </summary>
-        protected VirtualSceneContent VirtualSceneContent { get; set; }
+        protected SceneContent SceneContent { get; set; }
 
         /// <summary>
         /// /// Creates a new instance of a command
         /// </summary>
-        /// <param name="virtualSceneContent"></param>
-        protected CommandBase(VirtualSceneContent virtualSceneContent)
+        /// <param name="sceneContent"></param>
+        protected CommandBase(SceneContent sceneContent)
         {
-            VirtualSceneContent = virtualSceneContent;
+            SceneContent = sceneContent;
         }
 
         /// <summary>

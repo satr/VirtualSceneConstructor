@@ -6,7 +6,7 @@ namespace VirtualScene.BusinessComponents.Core
     /// <summary>
     /// The component responcible for the navigation within the scene
     /// </summary>
-    public class VirtualSceneNavigation
+    public class SceneNavigation
     {
         private readonly Scene _scene;
 
@@ -14,7 +14,7 @@ namespace VirtualScene.BusinessComponents.Core
         /// Creates a new instance The component responcible for the navigation within the scene
         /// </summary>
         /// <param name="scene">The scene</param>
-        public VirtualSceneNavigation(Scene scene)
+        public SceneNavigation(Scene scene)
         {
             _scene = scene;
         }

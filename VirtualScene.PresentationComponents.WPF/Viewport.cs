@@ -12,18 +12,18 @@ namespace VirtualScene.PresentationComponents.WPF
     {
         private bool _disposed;
         private readonly SceneView _sceneView;
-        private readonly VirtualSceneViewport _virtualSceneViewport;
+        private readonly SceneViewport _sceneViewport;
 
         /// <summary>
         /// Create ethe new instance of the viewport
         /// </summary>
         /// <param name="sceneView"></param>
-        /// <param name="virtualSceneContent"></param>
-        public Viewport(SceneView sceneView, VirtualSceneContent virtualSceneContent)
+        /// <param name="sceneContent"></param>
+        public Viewport(SceneView sceneView, SceneContent sceneContent)
         {
             _sceneView = sceneView;
-            _virtualSceneViewport = virtualSceneContent.VirtualSceneEngine.CreateViewport();
-            _sceneView.Scene = _virtualSceneViewport.Scene;
+            _sceneViewport = sceneContent.SceneEngine.CreateViewport();
+            _sceneView.Scene = _sceneViewport.Scene;
             Bind();
         }
 
@@ -57,14 +57,14 @@ namespace VirtualScene.PresentationComponents.WPF
             var sceneView = ((SceneView)sender);
             Mouse.OverrideCursor = Cursors.None;
             var position = e.GetPosition(sceneView);
-            _virtualSceneViewport.Navigation.MouseDown((int) position.X, (int) position.Y);
+            _sceneViewport.Navigation.MouseDown((int) position.X, (int) position.Y);
         }
 
         private void ViewportMouseUp(object sender, MouseButtonEventArgs e)
         {
             var sceneView = ((SceneView)sender);
             var position = e.GetPosition(sceneView);
-            _virtualSceneViewport.Navigation.MouseUp((int) position.X, (int) position.Y);
+            _sceneViewport.Navigation.MouseUp((int) position.X, (int) position.Y);
             Mouse.OverrideCursor = null;
         }
 
@@ -73,7 +73,7 @@ namespace VirtualScene.PresentationComponents.WPF
             if (e.LeftButton != MouseButtonState.Pressed)
                 return;
             var position = e.GetPosition((UIElement)sender);
-            _virtualSceneViewport.Navigation.MouseMove((int)position.X, (int)position.Y);
+            _sceneViewport.Navigation.MouseMove((int)position.X, (int)position.Y);
         }
 
         /// <summary>

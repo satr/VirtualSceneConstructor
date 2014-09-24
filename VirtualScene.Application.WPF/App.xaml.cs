@@ -11,7 +11,7 @@ namespace VirtualScene.Application.WPF
         /// <summary>
         /// VirtualSceneContext holding a state of the virtual scene
         /// </summary>
-        public VirtualSceneContent VirtualSceneContent { get; private set; }
+        public SceneContent SceneContent { get; private set; }
 
         /// <summary>
         /// Raises the System.Windows.Application.Startup event.
@@ -20,7 +20,7 @@ namespace VirtualScene.Application.WPF
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            VirtualSceneContent = new VirtualSceneContent();
+            SceneContent = new SceneContent();
         }
     }
 }

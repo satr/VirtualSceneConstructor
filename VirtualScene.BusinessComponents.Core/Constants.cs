@@ -8,7 +8,7 @@
         /// <summary>
         /// Constants of the Virtual scene
         /// </summary>
-        public static class VirtualScene
+        public static class Scene
         {
             /// <summary>
             /// Minimum width of the scene
