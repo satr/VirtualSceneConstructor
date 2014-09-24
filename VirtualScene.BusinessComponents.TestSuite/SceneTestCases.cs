@@ -36,5 +36,6 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _scene.SceneContainer.AddChild(new Cube());
             Assert.AreEqual(2 + Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
         }
+
     }
 }

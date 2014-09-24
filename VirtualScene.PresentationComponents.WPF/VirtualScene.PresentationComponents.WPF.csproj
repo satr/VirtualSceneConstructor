@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AddCubeCommand.cs" />
+    <Compile Include="Commands\AddPolygonCommandBase.cs" />
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Presenter.cs" />
