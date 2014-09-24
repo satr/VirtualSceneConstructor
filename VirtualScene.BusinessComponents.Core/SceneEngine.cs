@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Threading;
+using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -16,58 +18,23 @@ namespace VirtualScene.BusinessComponents.Core
 
 
         private readonly ObservableCollection<SceneViewport> _viewports = new ObservableCollection<SceneViewport>();
-        private readonly SceneFactory _sceneFactory;
 
         /// <summary>
         /// Creates a new instance of the 3D scene.
         /// </summary>
         public SceneEngine()
         {
-            CommonSceneContainer = new ObservableCollection<SceneElement>();
-            CommonSceneContainer.CollectionChanged += CommonSceneContainerChanged;
-            SetUpdateRate(Constants.Scene.DefaultUpdateRate);
+            Cameras = new ObservableCollection<Camera>();
+            UpdateRate = Constants.SceneEngine.DefaultUpdateRate;
+            SetUpdateRate(Constants.SceneEngine.DefaultUpdateRate);
+            Scene = new SceneFactory().Create();
             SetupTimer();
-            _sceneFactory = new SceneFactory();
-        }
-
-        private void CommonSceneContainerChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.NewItems != null)
-            {
-                AddSceneElements(e.NewItems);
-            }
-            if (e.OldItems != null)
-            {
-                RemoveSceneElements(e.OldItems);
-            }
-        }
-
-        private void RemoveSceneElements(IEnumerable sceneElements)
-        {
-            foreach (SceneElement sceneElement in sceneElements)
-            {
-                foreach (var viewport in _viewports)
-                {
-                    viewport.Scene.SceneContainer.RemoveChild(sceneElement);
-                }
-            }
-        }
-
-        private void AddSceneElements(IEnumerable sceneElements)
-        {
-            foreach (SceneElement sceneElement in sceneElements)
-            {
-                foreach (var viewport in _viewports)
-                {
-                    viewport.Scene.SceneContainer.AddChild(sceneElement);
-                }
-            }
         }
 
         /// <summary>
-        /// The container with scene elements
+        /// The scene
         /// </summary>
-        public ObservableCollection<SceneElement> CommonSceneContainer { get; set; }
+        public Scene Scene { get; private set; }
 
         /// <summary>
         /// The update rate for external modifications.
@@ -116,13 +83,14 @@ namespace VirtualScene.BusinessComponents.Core
         /// <returns>Returnd the new viewport</returns>
         public SceneViewport CreateViewport()
         {
-            var viewport = new SceneViewport(_sceneFactory.Create());
+            var viewport = new SceneViewport(Scene, Cameras);
             _viewports.Add(viewport);
-            foreach (var sceneElement in CommonSceneContainer)
-            {
-                viewport.Scene.SceneContainer.AddChild(sceneElement);
-            }
             return viewport;
         }
+
+        /// <summary>
+        /// Cameras in the scene
+        /// </summary>
+        public ObservableCollection<Camera> Cameras { get; private set; }
     }
 }

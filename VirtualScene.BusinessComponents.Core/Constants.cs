@@ -31,9 +31,21 @@
             public const int MaximumColorDepth = 32;
 
             /// <summary>
-            /// Default update rate for external 
+            /// By default the scene engine contains a design primitives folder and folder with grid and a axises.
             /// </summary>
-            public const int DefaultUpdateRate = 40;//in milliseconds
+            public const int DefaultSceneElementsCount = 2;
+        }
+
+
+        /// <summary>
+        /// Constants for SceneEngine
+        /// </summary>
+        public class SceneEngine
+        {
+            /// <summary>
+            /// Default update rate, in milliseconds
+            /// </summary>
+            public const int DefaultUpdateRate = 40;
         }
     }
 }
