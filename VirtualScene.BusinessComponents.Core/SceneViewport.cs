@@ -18,7 +18,7 @@ namespace VirtualScene.BusinessComponents.Core
         {
             Cameras = cameras;
             Scene = scene;
-            Navigation = new SceneNavigation(scene);
+            Navigation = new SceneNavigation();
         }
 
         /// <summary>

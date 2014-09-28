@@ -1,4 +1,3 @@
-using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -8,27 +7,17 @@ namespace VirtualScene.BusinessComponents.Core
     /// </summary>
     public class SceneNavigation
     {
-        private readonly Scene _scene;
-
-        /// <summary>
-        /// Creates a new instance The component responcible for the navigation within the scene
-        /// </summary>
-        /// <param name="scene">The scene</param>
-        public SceneNavigation(Scene scene)
-        {
-            _scene = scene;
-        }
-
         /// <summary>
         /// Navigate withing the scene while the mouse moves
         /// </summary>
         /// <param name="x">Position X</param>
         /// <param name="y">Position Y</param>
-        public void MouseMove(int x, int y)
+        /// <param name="camera"></param>
+        public void MouseMove(int x, int y, Camera camera)
         {
-            var camera = NavigationCamera;
-            if (camera != null)
-                camera.ArcBall.MouseMove(x, y);
+            var navigationCamera = GetNavigationCamera(camera);
+            if (navigationCamera != null)
+                navigationCamera.ArcBall.MouseMove(x, y);
 
         }
 
@@ -37,11 +26,12 @@ namespace VirtualScene.BusinessComponents.Core
         /// </summary>
         /// <param name="x">Position X</param>
         /// <param name="y">Position Y</param>
-        public void MouseUp(int x, int y)
+        /// <param name="camera"></param>
+        public void MouseUp(int x, int y, Camera camera)
         {
-            var camera = NavigationCamera;
-            if (camera != null)
-                camera.ArcBall.MouseUp(x, y);
+            var navigationCamera = GetNavigationCamera(camera);
+            if (navigationCamera != null)
+                navigationCamera.ArcBall.MouseUp(x, y);
 
         }
 
@@ -50,16 +40,17 @@ namespace VirtualScene.BusinessComponents.Core
         /// </summary>
         /// <param name="x">Position X</param>
         /// <param name="y">Position Y</param>
-        public void MouseDown(int x, int y)
+        /// <param name="camera"></param>
+        public void MouseDown(int x, int y, Camera camera)
         {
-            var camera = NavigationCamera;
-            if (camera != null)
-                camera.ArcBall.MouseDown(x, y);
+            var navigationCamera = GetNavigationCamera(camera);
+            if (navigationCamera != null)
+                navigationCamera.ArcBall.MouseDown(x, y);
         }
 
-        private ArcBallCamera NavigationCamera
+        private ArcBallCamera GetNavigationCamera(Camera camera)
         {
-            get { return _scene.CurrentCamera as ArcBallCamera; }
+            return camera as ArcBallCamera;
         }
     }
 }

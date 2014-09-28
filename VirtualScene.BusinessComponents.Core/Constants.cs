@@ -1,4 +1,6 @@
-﻿namespace VirtualScene.BusinessComponents.Core
+﻿using SharpGL.SceneGraph;
+
+namespace VirtualScene.BusinessComponents.Core
 {
     /// <summary>
     /// Constants
@@ -42,6 +44,11 @@
         /// </summary>
         public class SceneEngine
         {
+            /// <summary>
+            /// Default position and orientation of the camera
+            /// </summary>
+            public static Vertex DefaultCameraVector = new Vertex(-10, -10, 10);
+
             /// <summary>
             /// Default update rate, in milliseconds
             /// </summary>

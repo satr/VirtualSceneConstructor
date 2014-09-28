@@ -61,6 +61,15 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add camera.
+        /// </summary>
+        internal static string Title_Add_Camera {
+            get {
+                return ResourceManager.GetString("Title_Add_Camera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Cube.
         /// </summary>
         internal static string Title_Add_Cube {
@@ -75,6 +84,15 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         internal static string Title_Add_Sphere {
             get {
                 return ResourceManager.GetString("Title_Add_Sphere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera: {0}.
+        /// </summary>
+        internal static string Title_SelectCameraInViewport_N {
+            get {
+                return ResourceManager.GetString("Title_SelectCameraInViewport_N", resourceCulture);
             }
         }
     }

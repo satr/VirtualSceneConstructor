@@ -6,7 +6,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// <summary>
     /// The command creates a cube and adds it to the scene
     /// </summary>
-    public class AddCubeCommand : AddPolygonCommandBase
+    public class AddCubeCommand : AddSceneObjectCommandBase
     {
         private int _x = 0;
         private int _y = 0;
@@ -25,7 +25,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x += 1;
             _y += 1;
-            BusinessManager.AddSceneElementInSpace<Cube>(Scene, _x, _y, 0);
+            BusinessManager.AddSceneElementInSpace<Cube>(SceneEngine.Scene, _x, _y, 0);
         }
     }
 }

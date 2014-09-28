@@ -1,8 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.BusinessComponents.TestSuite
@@ -24,7 +22,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
             Assert.IsNotNull(_sceneEngine.Scene);
             Assert.AreEqual(Constants.SceneEngine.DefaultUpdateRate, _sceneEngine.UpdateRate);
             Assert.IsNotNull(_sceneEngine.Cameras);
-            Assert.AreEqual(0, _sceneEngine.Cameras.Count);
+            Assert.AreEqual(1, _sceneEngine.Cameras.Count);
+            Assert.AreEqual(typeof(ArcBallCamera), _sceneEngine.Cameras[0].GetType());
         }
 
         [TestMethod]
@@ -63,7 +62,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
 
         private static Camera CreateCamera()
         {
-            return CameraFactory.Create<ArcBallCamera>(new Vertex(0,0,0));
+            return CameraFactory.Create<ArcBallCamera>(new Vertex(0,0,0), "");
         }
 
     }

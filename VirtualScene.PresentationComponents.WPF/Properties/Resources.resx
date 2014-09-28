@@ -120,4 +120,10 @@
   <data name="Title_Add_Sphere" xml:space="preserve">
     <value>Add Sphere</value>
   </data>
+  <data name="Title_SelectCameraInViewport_N" xml:space="preserve">
+    <value>Camera: {0}</value>
+  </data>
+  <data name="Title_Add_Camera" xml:space="preserve">
+    <value>Add camera</value>
+  </data>
 </root>

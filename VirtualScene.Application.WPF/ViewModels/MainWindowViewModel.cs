@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Windows;
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF;
 
 namespace VirtualScene.Application.WPF.ViewModels
@@ -17,14 +16,7 @@ namespace VirtualScene.Application.WPF.ViewModels
         /// </summary>
         public MainWindowViewModel()
         {
-            _presenter = new Presenter(SceneContent);
-        }
-
-        /// <summary>
-        /// VirtualSceneContext holding a state of the virtual scene
-        /// </summary>
-        public SceneContent SceneContent {
-            get { return ((App) System.Windows.Application.Current).SceneContent; }
+            _presenter = new Presenter();
         }
 
         /// <summary>

@@ -8,6 +8,11 @@
         private readonly SceneEngine _sceneEngine;
 
         /// <summary>
+        /// Single instance of the Scene Content
+        /// </summary>
+        public static SceneContent Instance = new SceneContent();
+
+        /// <summary>
         /// Creates a new instance of the content of the virtual scene
         /// </summary>
         public SceneContent()

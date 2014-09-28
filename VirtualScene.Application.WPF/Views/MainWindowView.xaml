@@ -8,10 +8,9 @@
         <StackPanel Orientation="Horizontal" Height="50">
             <WrapPanel x:Name="TopPanel" />
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-        <wpf:SceneViewportView SceneContent="{Binding SceneContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        <wpf:SceneViewportView SceneContent="{Binding SceneContent}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        </StackPanel>
+        <Grid>
+            <wpf:SceneViewportView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        </Grid>
 
     </StackPanel>
 </Window>

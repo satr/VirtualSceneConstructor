@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
@@ -10,17 +9,10 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     public abstract class CommandBase : ICommand
     {
         /// <summary>
-        /// VirtualSceneContext 
-        /// </summary>
-        protected SceneContent SceneContent { get; set; }
-
-        /// <summary>
         /// /// Creates a new instance of a command
         /// </summary>
-        /// <param name="sceneContent"></param>
-        protected CommandBase(SceneContent sceneContent)
+        protected CommandBase()
         {
-            SceneContent = sceneContent;
         }
 
         /// <summary>

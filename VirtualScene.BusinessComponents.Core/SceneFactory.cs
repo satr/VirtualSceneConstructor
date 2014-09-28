@@ -1,6 +1,5 @@
 using SharpGL;
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
 using SharpGL.Version;
 using VirtualScene.BusinessComponents.Core.Validators;
 
@@ -12,7 +11,6 @@ namespace VirtualScene.BusinessComponents.Core
     public class SceneFactory
     {
         private readonly OpenGL _gl = new OpenGL();
-        private readonly Vertex _defaultCameraPosition = new Vertex(-10, -10, 10);
 
         /// <summary>
         /// Creates a new scene
@@ -27,7 +25,6 @@ namespace VirtualScene.BusinessComponents.Core
             _gl.Create(OpenGLVersion.OpenGL4_4, RenderContextType.DIBSection, width, height, bitDepth, null);
             var scene = new Scene { OpenGL = _gl };
             SharpGL.SceneGraph.Helpers.SceneHelper.InitialiseModelingScene(scene);
-            scene.CurrentCamera = CameraFactory.Create<ArcBallCamera>(_defaultCameraPosition);
             return scene;
         }
     }

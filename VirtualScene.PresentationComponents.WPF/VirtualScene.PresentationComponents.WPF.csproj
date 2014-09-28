@@ -35,6 +35,10 @@
     <DocumentationFile>bin\Release\VirtualScene.PresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Apex, Version=1.2.1.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SharpGL\sharpgl-master\source\SharpGL\Dependencies\Apex.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -50,12 +54,16 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AddCameraCommand.cs" />
     <Compile Include="Commands\AddCubeCommand.cs" />
-    <Compile Include="Commands\AddPolygonCommandBase.cs" />
+    <Compile Include="Commands\AddSceneObjectCommandBase.cs" />
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\CommandWithSceneContentBase.cs" />
     <Compile Include="Presenter.cs" />
-    <Compile Include="Viewport.cs" />
+    <Compile Include="SceneViewportModel.cs" />
+    <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
+    <Compile Include="SceneViewportViewModel.cs" />
     <Page Include="SceneViewportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -6,6 +6,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
+        <Grid.ContextMenu>
+            <ContextMenu ItemsSource="{Binding ViewportContextMenu}">
+            </ContextMenu>
+        </Grid.ContextMenu>
          <WPF:SceneView x:Name="SceneView" />
     </Grid>
 </UserControl>

@@ -6,7 +6,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// <summary>
     /// The command creates a sphere and adds it to the scene
     /// </summary>
-    public class AddSphereCommand: AddPolygonCommandBase
+    public class AddSphereCommand: AddSceneObjectCommandBase
     {
         private int _x = 0;
         private int _y = 0;
@@ -26,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x -= 1;
             _y += 1;
-            BusinessManager.AddSceneElementInSpace<Sphere>(Scene, _x, _y, 0);
+            BusinessManager.AddSceneElementInSpace<Sphere>(SceneEngine.Scene, _x, _y, 0);
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Windows.Threading;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Core;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -24,10 +21,17 @@ namespace VirtualScene.BusinessComponents.Core
         /// </summary>
         public SceneEngine()
         {
-            Cameras = new ObservableCollection<Camera>();
             UpdateRate = Constants.SceneEngine.DefaultUpdateRate;
             SetUpdateRate(Constants.SceneEngine.DefaultUpdateRate);
             Scene = new SceneFactory().Create();
+            var defaultCamera = CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, "");
+            Cameras = new ObservableCollection<Camera>
+            {
+                defaultCamera,
+                CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, "Camera 2"),
+                CameraFactory.Create<FrustumCamera>(new Vertex(0,0, 10), ""),
+            };
+            Scene.CurrentCamera = defaultCamera;
             SetupTimer();
         }
 
