@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using VirtualScene.PresentationComponents.WPF;
+using VirtualScene.PresentationComponents.WPF.Presenters;
 
 namespace VirtualScene.Application.WPF.ViewModels
 {

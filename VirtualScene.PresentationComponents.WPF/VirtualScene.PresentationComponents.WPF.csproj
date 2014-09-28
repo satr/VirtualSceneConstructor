@@ -39,6 +39,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SharpGL\sharpgl-master\source\SharpGL\Dependencies\Apex.dll</HintPath>
     </Reference>
+    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -60,18 +61,24 @@
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
-    <Compile Include="Presenter.cs" />
-    <Compile Include="SceneViewportModel.cs" />
+    <Compile Include="Presenters\Presenter.cs" />
+    <Compile Include="ViewModels\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
-    <Compile Include="SceneViewportViewModel.cs" />
-    <Page Include="SceneViewportView.xaml">
+    <Compile Include="Models\SceneViewportViewModel.cs" />
+    <Compile Include="Views\SceneViewControl.xaml.cs">
+      <DependentUpon>SceneViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SceneViewportView.xaml.cs">
+      <DependentUpon>SceneViewportView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\SceneViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SceneViewportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="SceneViewportView.xaml.cs">
-      <DependentUpon>SceneViewportView.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

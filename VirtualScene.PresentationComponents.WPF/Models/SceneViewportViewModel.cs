@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Controls;
-using SharpGL.WPF;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
+using VirtualScene.PresentationComponents.WPF.Views;
 
-namespace VirtualScene.PresentationComponents.WPF
+namespace VirtualScene.PresentationComponents.WPF.Models
 {
     /// <summary>
     ///     Scene viewport view model
@@ -15,11 +16,11 @@ namespace VirtualScene.PresentationComponents.WPF
         /// <summary>
         ///     Creates a new instance of the view-model of the main window of the application.
         /// </summary>
-        /// <param name="sceneView"></param>
-        public SceneViewportViewModel(SceneView sceneView)
+        /// <param name="sceneViewControl"></param>
+        public SceneViewportViewModel(SceneViewControl sceneViewControl)
         {
 
-            _sceneViewportModel = new SceneViewportModel(sceneView, SceneContent.Instance);
+            _sceneViewportModel = new SceneViewportModel(sceneViewControl, SceneContent.Instance);
 
         }
 

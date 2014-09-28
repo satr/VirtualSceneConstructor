@@ -1,4 +1,6 @@
-﻿namespace VirtualScene.PresentationComponents.WPF
+﻿using VirtualScene.PresentationComponents.WPF.Models;
+
+namespace VirtualScene.PresentationComponents.WPF.Views
 {
     /// <summary>
     ///     Interaction logic for SceneViewportView.xaml
@@ -11,7 +13,7 @@
         public SceneViewportView()
         {
             InitializeComponent();
-            DataContext = new SceneViewportViewModel(SceneView);
+            DataContext = new SceneViewportViewModel(SceneViewControl);
         }
     }
 }

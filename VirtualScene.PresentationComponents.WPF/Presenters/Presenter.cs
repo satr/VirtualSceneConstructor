@@ -7,7 +7,7 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.Properties;
 
-namespace VirtualScene.PresentationComponents.WPF
+namespace VirtualScene.PresentationComponents.WPF.Presenters
 {
     /// <summary>
     /// Presenter provides UI components for application
