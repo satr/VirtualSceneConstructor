@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
@@ -19,9 +21,7 @@ namespace VirtualScene.PresentationComponents.WPF.Models
         /// <param name="sceneViewControl"></param>
         public SceneViewportViewModel(SceneViewControl sceneViewControl)
         {
-
             _sceneViewportModel = new SceneViewportModel(sceneViewControl, SceneContent.Instance);
-
         }
 
         /// <summary>

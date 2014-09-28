@@ -1,3 +1,4 @@
+using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -51,6 +52,22 @@ namespace VirtualScene.BusinessComponents.Core
         private ArcBallCamera GetNavigationCamera(Camera camera)
         {
             return camera as ArcBallCamera;
+        }
+
+        /// <summary>
+        /// Move the camera forward
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="dz"></param>
+        public void Move(Camera camera, float dx, float dy, float dz)
+        {
+            var navigationCamera = GetNavigationCamera(camera);
+            if (navigationCamera != null)
+            {
+                navigationCamera.Position = new Vertex(camera.Position.X + dx, camera.Position.Y + dy, camera.Position.Z + dz);
+            }
         }
     }
 }

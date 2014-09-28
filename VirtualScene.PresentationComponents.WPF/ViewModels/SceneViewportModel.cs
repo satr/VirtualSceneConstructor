@@ -46,7 +46,6 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             _sceneViewControl.MouseDown += ViewportMouseDown;
             _sceneViewControl.MouseUp += ViewportMouseUp;
             _sceneViewControl.MouseMove += ViewportMouseMove;
-            _sceneViewControl.KeyDown += ViewportKeyDown;
             _sceneContent.SceneEngine.Cameras.CollectionChanged += CamerasCollectionChanged;
         }
 
@@ -57,7 +56,6 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             _sceneViewControl.MouseDown -= ViewportMouseDown;
             _sceneViewControl.MouseUp -= ViewportMouseUp;
             _sceneViewControl.MouseMove -= ViewportMouseMove;
-            _sceneViewControl.KeyDown -= ViewportKeyDown;
             _sceneContent.SceneEngine.Cameras.CollectionChanged -= CamerasCollectionChanged;
         }
 
@@ -106,11 +104,6 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
                 Command = new SetCameraToSceneViewCommand(_sceneViewControl, camera),
             };
             return menuItem;
-        }
-
-        private static void ViewportKeyDown(object sender, KeyEventArgs e)
-        {
-
         }
 
         private void ViewportMouseDown(object sender, MouseButtonEventArgs e)

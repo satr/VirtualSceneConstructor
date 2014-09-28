@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -52,7 +53,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
             InitializeComponent();
 
             //  Handle the size changed event.
-            SizeChanged += SceneView_SizeChanged;
+            SizeChanged += SceneViewSizeChanged;
         }
 
         /// <summary>
@@ -60,7 +61,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.Windows.SizeChangedEventArgs"/> instance containing the event data.</param>
-        void SceneView_SizeChanged(object sender, SizeChangedEventArgs e)
+        void SceneViewSizeChanged(object sender, SizeChangedEventArgs e)
         {
             //  If we don't have a scene, we're done.
             if (!SceneResizeEnabled || Scene == null)
@@ -290,8 +291,6 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         {
 //            var me = o as SceneViewControl;
         }
-
-
     }
 
 }

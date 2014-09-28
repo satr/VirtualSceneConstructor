@@ -94,5 +94,19 @@ namespace VirtualScene.BusinessComponents.Core
         /// Cameras in the scene
         /// </summary>
         public ObservableCollection<Camera> Cameras { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dx"></param>
+        /// <param name="dy"></param>
+        /// <param name="dz"></param>
+        public void Move(float dx, float dy, float dz)
+        {
+            foreach (var viewport in _viewports)
+            {
+                viewport.Navigation.Move(Scene.CurrentCamera, dx, dy, dz);
+            }
+        }
     }
 }
