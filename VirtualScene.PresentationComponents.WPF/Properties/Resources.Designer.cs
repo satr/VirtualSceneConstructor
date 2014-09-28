@@ -22,7 +22,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.PresentationComponents.WPF.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Add camera.
         /// </summary>
-        internal static string Title_Add_Camera {
+        public static string Title_Add_Camera {
             get {
                 return ResourceManager.GetString("Title_Add_Camera", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Add Cube.
         /// </summary>
-        internal static string Title_Add_Cube {
+        public static string Title_Add_Cube {
             get {
                 return ResourceManager.GetString("Title_Add_Cube", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Add Sphere.
         /// </summary>
-        internal static string Title_Add_Sphere {
+        public static string Title_Add_Sphere {
             get {
                 return ResourceManager.GetString("Title_Add_Sphere", resourceCulture);
             }
@@ -90,9 +90,36 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Camera: {0}.
         /// </summary>
-        internal static string Title_SelectCameraInViewport_N {
+        public static string Title_Camera_N {
             get {
-                return ResourceManager.GetString("Title_SelectCameraInViewport_N", resourceCulture);
+                return ResourceManager.GetString("Title_Camera_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Title_Cancel {
+            get {
+                return ResourceManager.GetString("Title_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Title_Name {
+            get {
+                return ResourceManager.GetString("Title_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Title_OK {
+            get {
+                return ResourceManager.GetString("Title_OK", resourceCulture);
             }
         }
     }

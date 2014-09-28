@@ -34,6 +34,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             _sceneContent = sceneContent;
             _sceneViewport = _sceneContent.SceneEngine.CreateViewport();
             _sceneViewControl.Scene = _sceneViewport.Scene;
+            _sceneViewControl.Camera = _sceneViewport.Scene.CurrentCamera;
             InitViewportContextMenu(_sceneContent);
             Bind();
         }
@@ -100,7 +101,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         {
             var menuItem = new MenuItem
             {
-                Header = string.Format(Resources.Title_SelectCameraInViewport_N, camera.Name),
+                Header = string.Format(Resources.Title_Camera_N, camera.Name),
                 Tag = camera,
                 Command = new SetCameraToSceneViewCommand(_sceneViewControl, camera),
             };

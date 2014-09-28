@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
-using VirtualScene.Application.WPF.ViewModels;
+﻿using VirtualScene.Application.WPF.ViewModels;
 
 namespace VirtualScene.Application.WPF.Views
 {

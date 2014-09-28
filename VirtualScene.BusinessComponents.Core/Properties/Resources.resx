@@ -129,4 +129,7 @@
   <data name="Message_ValidateSceneArguments_Maximum_bitDepth_value_N" xml:space="preserve">
     <value>Maximum bitDepth value: {0}</value>
   </data>
+  <data name="Title_Navigation_Camera" xml:space="preserve">
+    <value>Navigation</value>
+  </data>
 </root>

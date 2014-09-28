@@ -39,7 +39,7 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Scene.BusinessComponents.Core.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.BusinessComponents.Core.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -93,6 +93,15 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         internal static string Message_ValidateSceneArguments_Minimum_width_value_N {
             get {
                 return ResourceManager.GetString("Message_ValidateSceneArguments_Minimum_width_value_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Navigation.
+        /// </summary>
+        internal static string Title_Navigation_Camera {
+            get {
+                return ResourceManager.GetString("Title_Navigation_Camera", resourceCulture);
             }
         }
     }

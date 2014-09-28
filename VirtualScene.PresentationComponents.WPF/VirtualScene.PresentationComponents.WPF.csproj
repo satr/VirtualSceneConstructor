@@ -61,16 +61,26 @@
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
+    <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Presenters\Presenter.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="ViewModels\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
     <Compile Include="Models\SceneViewportViewModel.cs" />
+    <Compile Include="Views\EntityNameDialogView.xaml.cs">
+      <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EntityNameDialogViewModel.cs" />
     <Compile Include="Views\SceneViewControl.xaml.cs">
       <DependentUpon>SceneViewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\EntityNameDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SceneViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,7 +105,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

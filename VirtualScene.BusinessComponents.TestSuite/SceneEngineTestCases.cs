@@ -48,22 +48,6 @@ namespace VirtualScene.BusinessComponents.TestSuite
             var sceneViewport = _sceneEngine.CreateViewport();
             Assert.IsNotNull(sceneViewport);
             Assert.IsNotNull(sceneViewport.Scene);
-            Assert.IsNotNull(sceneViewport.Cameras);
-            Assert.AreEqual(0, sceneViewport.Cameras.Count);
         }
-
-        [TestMethod]
-        public void CameraAddedToEngineIsAvailableInViewportAlsoTest()
-        {
-            var sceneViewport = _sceneEngine.CreateViewport();
-            _sceneEngine.Cameras.Add(CreateCamera());
-            Assert.AreEqual(1, sceneViewport.Cameras.Count);
-        }
-
-        private static Camera CreateCamera()
-        {
-            return CameraFactory.Create<ArcBallCamera>(new Vertex(0,0,0), "");
-        }
-
     }
 }

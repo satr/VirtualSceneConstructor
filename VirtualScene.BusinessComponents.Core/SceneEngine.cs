@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
+using VirtualScene.BusinessComponents.Core.Properties;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -12,7 +13,6 @@ namespace VirtualScene.BusinessComponents.Core
     public class SceneEngine
     {
         private DispatcherTimer _timer;
-
 
         private readonly ObservableCollection<SceneViewport> _viewports = new ObservableCollection<SceneViewport>();
 
@@ -24,12 +24,10 @@ namespace VirtualScene.BusinessComponents.Core
             UpdateRate = Constants.SceneEngine.DefaultUpdateRate;
             SetUpdateRate(Constants.SceneEngine.DefaultUpdateRate);
             Scene = new SceneFactory().Create();
-            var defaultCamera = CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, "");
+            var defaultCamera = CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, Resources.Title_Navigation_Camera);
             Cameras = new ObservableCollection<Camera>
             {
                 defaultCamera,
-                CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, "Camera 2"),
-                CameraFactory.Create<FrustumCamera>(new Vertex(0,0, 10), ""),
             };
             Scene.CurrentCamera = defaultCamera;
             SetupTimer();
@@ -87,7 +85,7 @@ namespace VirtualScene.BusinessComponents.Core
         /// <returns>Returnd the new viewport</returns>
         public SceneViewport CreateViewport()
         {
-            var viewport = new SceneViewport(Scene, Cameras);
+            var viewport = new SceneViewport(Scene);
             _viewports.Add(viewport);
             return viewport;
         }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Windows;
-using VirtualScene.PresentationComponents.WPF;
 using VirtualScene.PresentationComponents.WPF.Presenters;
 
 namespace VirtualScene.Application.WPF.ViewModels
@@ -23,7 +22,7 @@ namespace VirtualScene.Application.WPF.ViewModels
         /// <summary>
         /// UI-elements for the top view area
         /// </summary>
-        public IEnumerable<UIElement> TopElements
+        public IList<UIElement> TopElements
         {
             get { return _presenter.TopElements; }
         }
