@@ -1,22 +1,22 @@
 using SharpGL.SceneGraph.Cameras;
-using VirtualScene.PresentationComponents.WPF.Views;
+using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
     internal class SetCameraToSceneViewCommand : CommandBase
     {
-        private readonly SceneViewModel _sceneViewModel;
+        private readonly SceneViewport _sceneViewport;
         private readonly Camera _camera;
 
-        public SetCameraToSceneViewCommand(SceneViewModel sceneViewModel, Camera camera)
+        public SetCameraToSceneViewCommand(SceneViewport sceneViewport, Camera camera)
         {
-            _sceneViewModel = sceneViewModel;
+            _sceneViewport = sceneViewport;
             _camera = camera;
         }
 
         protected override void Execute()
         {
-            _sceneViewModel.Camera = _camera;
+            _sceneViewport.CurrentCamera = _camera;
         }
     }
 }

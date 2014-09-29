@@ -15,7 +15,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
     /// </summary>
     public class SceneViewportModel
     {
-        private readonly SceneViewModel _sceneViewModel;
+        private readonly SceneViewport _sceneViewport;
 
         /// <summary>
         /// Create ethe new instance of the viewport
@@ -24,10 +24,10 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// <param name="sceneContent"></param>
         public SceneViewportModel(SceneViewModel sceneViewModel, SceneContent sceneContent)
         {
-            _sceneViewModel = sceneViewModel;
-            _sceneViewModel.DrawFPS = true;
-            _sceneViewModel.Viewport = sceneContent.SceneEngine.CreateViewport();
-            _sceneViewModel.SceneResizeEnabled = false;
+            _sceneViewport = sceneContent.SceneEngine.CreateViewport();
+            sceneViewModel.Viewport = _sceneViewport;
+            sceneViewModel.Viewport.FPSEnabled = true;
+            sceneViewModel.SceneResizeEnabled = false;
             InitViewportContextMenu(sceneContent);
             sceneContent.SceneEngine.Cameras.CollectionChanged += CamerasCollectionChanged;
         }
@@ -73,7 +73,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             {
                 Header = string.Format(Resources.Title_Camera_N, camera.Name),
                 Tag = camera,
-                Command = new SetCameraToSceneViewCommand(_sceneViewModel, camera),
+                Command = new SetCameraToSceneViewCommand(_sceneViewport, camera),
             };
             return menuItem;
         }

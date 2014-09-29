@@ -1,7 +1,7 @@
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Factories
 {
     /// <summary>
     /// Factory creating cameras

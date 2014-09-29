@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Factories;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

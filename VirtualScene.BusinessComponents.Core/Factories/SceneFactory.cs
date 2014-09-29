@@ -3,7 +3,7 @@ using SharpGL.SceneGraph;
 using SharpGL.Version;
 using VirtualScene.BusinessComponents.Core.Validators;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Factories
 {
     /// <summary>
     /// Factory creating scenes

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Cameras;
+using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Properties;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -24,7 +25,7 @@ namespace VirtualScene.BusinessComponents.Core
             UpdateRate = Constants.SceneEngine.DefaultUpdateRate;
             SetUpdateRate(Constants.SceneEngine.DefaultUpdateRate);
             Scene = new SceneFactory().Create();
-            var defaultCamera = CameraFactory.Create<ArcBallCamera>(Constants.SceneEngine.DefaultCameraVector, Resources.Title_Navigation_Camera);
+            var defaultCamera = CameraFactory.Create<LookAtCamera>(Constants.SceneEngine.DefaultCameraVector, Resources.Title_Navigation_Camera);
             Cameras = new ObservableCollection<Camera>
             {
                 defaultCamera,
@@ -105,7 +106,7 @@ namespace VirtualScene.BusinessComponents.Core
         {
             foreach (var viewport in _viewports)
             {
-                viewport.Navigation.Move(Scene.CurrentCamera, dx, dy, dz);
+                viewport.Navigation.Move(dx, dy, dz);
             }
         }
     }

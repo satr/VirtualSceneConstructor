@@ -3,13 +3,10 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using SharpGL.RenderContextProviders;
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
 using SharpGL.WPF;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Annotations;
@@ -21,14 +18,6 @@ namespace VirtualScene.PresentationComponents.WPF.Views
     /// </summary>
     public class SceneViewModel: INotifyPropertyChanged
     {
-        private const int MinSceneWidth = 20;
-
-        private const int MinSceneHeight = 20;
-
-        private int _lastSizeChangedWidth;
-
-        private int _lastSizeChangedHeight;
-
         /// <summary>
         /// The dispatcher timer.
         /// </summary>
@@ -43,11 +32,9 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// The last frame time in milliseconds.
         /// </summary>
         private double _frameTime;
+        private double _frameRate = 28.0f;
 
         private ImageSource _imageSource;
-
-        private double _frameRate = 28.0f;
-        private SceneViewport _viewport;
 
         /// <summary>
         /// Creates a new instance of the SceneViewModel
@@ -63,32 +50,15 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         public void ChangeSceneViewSize(int width, int height)
         {
             //  If we don't have a scene, we're done.
-            if (!SceneResizeEnabled || Scene == null)
+            if (!SceneResizeEnabled || Viewport == null || Viewport.Scene == null)
                 return;
 
             //  Lock on the scene.
-            lock (Scene)
+            lock (Viewport.Scene)
             {
-                //  Get the dimensions.
-                if (_lastSizeChangedHeight == height && _lastSizeChangedWidth == width)//avoid repeating resizing calls
-                    return;
-                if (width <= MinSceneWidth || height <= MinSceneHeight)//limit the minimum size of the scene.
-                    return;
-                _lastSizeChangedWidth = width;
-                _lastSizeChangedHeight = height;
-                //  Resize the scene.
-                Scene.OpenGL.SetDimensions(width, height);
-                Scene.Resize(width, height);
+                Viewport.ResizeScene(width, height);
             }
         }
-
-        /// <summary>
-        /// Gets or sets the camera.
-        /// </summary>
-        /// <value>
-        /// The camera.
-        /// </value>
-        public Camera Camera { get; set; }
 
         /// <summary>
         /// Enables resizing of the scene. 
@@ -112,23 +82,6 @@ namespace VirtualScene.PresentationComponents.WPF.Views
                 SetupTimer(_frameRate);
             }
         }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether to draw FPS.
-        /// </summary>
-        /// <value>
-        ///   <c>true</c> if draw FPS; otherwise, <c>false</c>.
-        /// </value>
-        public bool DrawFPS { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the scene.
-        /// </summary>
-        /// <value>
-        /// The scene.
-        /// </value>
-        public Scene Scene { get; set; }
 
         /// <summary>
         /// Setup update scene DispatcherTimer
@@ -160,27 +113,20 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         void TimerTick(object sender, EventArgs e)
         {
             //  If we don't have a scene, we're done.
-            if (Scene == null)
+            if (Viewport == null || Viewport.Scene == null)
                 return;
 
             //  Lock on the Scene.
-            lock (Scene)
+            lock (Viewport.Scene)
             {
                 //  Start the stopwatch so that we can time the rendering.
                 _stopwatch.Restart();
 
-                //  Draw the scene.
-                Scene.Draw(Camera);
-
-                //  Draw the FPS.
-                if (DrawFPS)
-                {
-                    Scene.OpenGL.DrawText(5, 5, 1.0f, 0.0f, 0.0f, "Courier New", 12.0f, string.Format("Draw Time: {0:0.0000} ms ~ {1:0.0} FPS", _frameTime, 1000.0 / _frameTime));
-                    Scene.OpenGL.Flush();
-                }
+                Viewport.DrawScene();
+                Viewport.DrawFPS(_frameTime);
 
                 IntPtr hBitmap;
-                if (TryGetHandleToBitmap(Scene.OpenGL.RenderContextProvider, out hBitmap))
+                if (TryGetHandleToBitmap(Viewport.Scene.OpenGL.RenderContextProvider, out hBitmap))
                 {
                     UpdateImageSource(hBitmap);
                 }
@@ -226,18 +172,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// <summary>
         /// The viewport of the scene
         /// </summary>
-        public SceneViewport Viewport
-        {
-            get { return _viewport; }
-            set
-            {
-                if (Equals(value, _viewport)) 
-                    return;
-                _viewport = value;
-                Scene = _viewport.Scene;
-                Camera = Scene.CurrentCamera;
-            }
-        }
+        public SceneViewport Viewport { get; set; }
 
         private static bool TryGetHandleToBitmap(IRenderContextProvider renderContextProvider, out IntPtr handleToBitmap)
         {
@@ -280,7 +215,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// <param name="position">Position where the mouse was put down</param>
         public void MouseDown(Point position)
         {
-            Viewport.Navigation.MouseDown((int)position.X, (int)position.Y, Camera);
+            HandleMouseEvent(position, Viewport.Navigation.MouseDown);
         }
 
         /// <summary>
@@ -289,7 +224,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// <param name="position">Position where the mouse was up</param>
         public void MouseUp(Point position)
         {
-            Viewport.Navigation.MouseUp((int)position.X, (int)position.Y, Camera);
+            HandleMouseEvent(position, Viewport.Navigation.MouseUp);
         }
 
         /// <summary>
@@ -298,7 +233,12 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// <param name="position">Position where the mouse was moved</param>
         public void MouseMove(Point position)
         {
-            Viewport.Navigation.MouseMove((int)position.X, (int)position.Y, Camera);
+            HandleMouseEvent(position, Viewport.Navigation.MouseMove);
+        }
+
+        private static void HandleMouseEvent(Point position, Action<int, int> eventHandler)
+        {
+            eventHandler((int) position.X, (int) position.Y);
         }
     }
 }

@@ -45,10 +45,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessManager.cs" />
-    <Compile Include="CameraFactory.cs" />
+    <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Validators\SceneArgumentValidator.cs" />
-    <Compile Include="SceneFactory.cs" />
+    <Compile Include="Factories\SceneFactory.cs" />
     <Compile Include="SceneNavigation.cs" />
     <Compile Include="SceneViewport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
