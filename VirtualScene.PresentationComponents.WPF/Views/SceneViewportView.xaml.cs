@@ -13,7 +13,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         public SceneViewportView()
         {
             InitializeComponent();
-            DataContext = new SceneViewportViewModel(SceneViewControl);
+            DataContext = new SceneViewportViewModel(SceneViewControl.ViewModel);
         }
     }
 }

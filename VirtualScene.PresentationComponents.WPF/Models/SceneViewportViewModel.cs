@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Collections.Generic;
 using System.Windows.Controls;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
@@ -18,10 +16,10 @@ namespace VirtualScene.PresentationComponents.WPF.Models
         /// <summary>
         ///     Creates a new instance of the view-model of the main window of the application.
         /// </summary>
-        /// <param name="sceneViewControl"></param>
-        public SceneViewportViewModel(SceneViewControl sceneViewControl)
+        /// <param name="sceneViewModel"></param>
+        public SceneViewportViewModel(SceneViewModel sceneViewModel)
         {
-            _sceneViewportModel = new SceneViewportModel(sceneViewControl, SceneContent.Instance);
+            _sceneViewportModel = new SceneViewportModel(sceneViewModel, SceneContent.Instance);
         }
 
         /// <summary>

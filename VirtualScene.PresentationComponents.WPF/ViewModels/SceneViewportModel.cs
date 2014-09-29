@@ -1,9 +1,7 @@
-using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Controls;
-using System.Windows.Input;
 using SharpGL.SceneGraph.Cameras;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Commands;
@@ -17,48 +15,22 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
     /// </summary>
     public class SceneViewportModel
     {
-        private bool _disposed;
-        private readonly SceneViewControl _sceneViewControl;
-        private readonly SceneViewport _sceneViewport;
-        private readonly SceneContent _sceneContent;
+        private readonly SceneViewModel _sceneViewModel;
 
         /// <summary>
         /// Create ethe new instance of the viewport
         /// </summary>
-        /// <param name="sceneViewControl"></param>
+        /// <param name="sceneViewModel"></param>
         /// <param name="sceneContent"></param>
-        public SceneViewportModel(SceneViewControl sceneViewControl, SceneContent sceneContent)
+        public SceneViewportModel(SceneViewModel sceneViewModel, SceneContent sceneContent)
         {
-            _sceneViewControl = sceneViewControl;
-            _sceneViewControl.DrawFPS = true;
-            _sceneContent = sceneContent;
-            _sceneViewport = _sceneContent.SceneEngine.CreateViewport();
-            _sceneViewControl.Scene = _sceneViewport.Scene;
-            _sceneViewControl.Camera = _sceneViewport.Scene.CurrentCamera;
-            InitViewportContextMenu(_sceneContent);
-            Bind();
+            _sceneViewModel = sceneViewModel;
+            _sceneViewModel.DrawFPS = true;
+            _sceneViewModel.Viewport = sceneContent.SceneEngine.CreateViewport();
+            _sceneViewModel.SceneResizeEnabled = false;
+            InitViewportContextMenu(sceneContent);
+            sceneContent.SceneEngine.Cameras.CollectionChanged += CamerasCollectionChanged;
         }
-
-        private void Bind()
-        {
-            if (_sceneViewControl == null)
-                return;
-            _sceneViewControl.MouseDown += ViewportMouseDown;
-            _sceneViewControl.MouseUp += ViewportMouseUp;
-            _sceneViewControl.MouseMove += ViewportMouseMove;
-            _sceneContent.SceneEngine.Cameras.CollectionChanged += CamerasCollectionChanged;
-        }
-
-        private void UnBind()
-        {
-            if(_sceneViewControl == null)
-                return;
-            _sceneViewControl.MouseDown -= ViewportMouseDown;
-            _sceneViewControl.MouseUp -= ViewportMouseUp;
-            _sceneViewControl.MouseMove -= ViewportMouseMove;
-            _sceneContent.SceneEngine.Cameras.CollectionChanged -= CamerasCollectionChanged;
-        }
-
 
         private void InitViewportContextMenu(SceneContent sceneContent)
         {
@@ -101,45 +73,9 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             {
                 Header = string.Format(Resources.Title_Camera_N, camera.Name),
                 Tag = camera,
-                Command = new SetCameraToSceneViewCommand(_sceneViewControl, camera),
+                Command = new SetCameraToSceneViewCommand(_sceneViewModel, camera),
             };
             return menuItem;
-        }
-
-        private void ViewportMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Mouse.OverrideCursor = Cursors.None;
-            NavigateCamera(_sceneViewport.Navigation.MouseDown, e);
-        }
-
-        private void ViewportMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            NavigateCamera(_sceneViewport.Navigation.MouseUp, e);
-            Mouse.OverrideCursor = null;
-        }
-
-        private void ViewportMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.LeftButton != MouseButtonState.Pressed)
-                return;
-            NavigateCamera(_sceneViewport.Navigation.MouseMove, e);
-        }
-
-        private void NavigateCamera(Action<int, int, Camera> navigateCameraAction, MouseEventArgs mouseEventArgs)
-        {
-            var position = mouseEventArgs.GetPosition(_sceneViewControl);
-            navigateCameraAction((int)position.X, (int)position.Y, _sceneViewControl.Camera);
-        }
-
-        /// <summary>
-        /// Disposes the viewport
-        /// </summary>
-        public void Dispose()
-        {
-            if (_disposed)
-                return;
-            UnBind();
-            _disposed = true;
         }
     }
 }

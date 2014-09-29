@@ -13,12 +13,16 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     public class AddCameraCommand<T> : AddSceneObjectCommandBase
         where T: Camera, new()
     {
+        private string _title;
+
         /// <summary>
         /// Create a new instance of the command
         /// </summary>
         /// <param name="sceneContent">Content od the scene</param>
-        public AddCameraCommand(SceneContent sceneContent) : base(sceneContent)
+        /// <param name="title"></param>
+        public AddCameraCommand(SceneContent sceneContent, string title) : base(sceneContent)
         {
+            _title = title;
         }
 
         /// <summary>
@@ -27,7 +31,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         protected override void Execute()
         {
             var entityNameViewModel = new EntityNameViewModel { Name = CreateCameraNameBasedOnCameraType() };
-            var dialogResult = new EntityNameDialogView(Properties.Resources.Title_Add_Camera, entityNameViewModel).ShowDialog();
+            _title = Properties.Resources.Title_Add_Arc_Camera;
+            var dialogResult = new EntityNameDialogView(_title, entityNameViewModel).ShowDialog();
             if(!dialogResult.HasValue || !dialogResult.Value)
                 return;
             SceneEngine.Cameras.Add(CameraFactory.Create<T>(Constants.SceneEngine.DefaultCameraVector, entityNameViewModel.Name));

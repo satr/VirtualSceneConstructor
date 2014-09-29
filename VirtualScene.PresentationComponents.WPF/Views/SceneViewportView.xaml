@@ -10,6 +10,6 @@
             <ContextMenu ItemsSource="{Binding ViewportContextMenu}">
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Views:SceneViewControl x:Name="SceneViewControl" SceneResizeEnabled="False" />
+        <Views:SceneViewControl x:Name="SceneViewControl" />
     </StackPanel>
 </UserControl>

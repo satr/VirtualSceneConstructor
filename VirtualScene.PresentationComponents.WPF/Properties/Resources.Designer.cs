@@ -61,11 +61,11 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add camera.
+        ///   Looks up a localized string similar to Add Arc camera.
         /// </summary>
-        public static string Title_Add_Camera {
+        public static string Title_Add_Arc_Camera {
             get {
-                return ResourceManager.GetString("Title_Add_Camera", resourceCulture);
+                return ResourceManager.GetString("Title_Add_Arc_Camera", resourceCulture);
             }
         }
         
@@ -75,6 +75,15 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         public static string Title_Add_Cube {
             get {
                 return ResourceManager.GetString("Title_Add_Cube", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Free camera.
+        /// </summary>
+        public static string Title_Add_Free_Camera {
+            get {
+                return ResourceManager.GetString("Title_Add_Free_Camera", resourceCulture);
             }
         }
         

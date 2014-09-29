@@ -126,8 +126,8 @@
   <data name="Title_Camera_N" xml:space="preserve">
     <value>Camera: {0}</value>
   </data>
-  <data name="Title_Add_Camera" xml:space="preserve">
-    <value>Add camera</value>
+  <data name="Title_Add_Arc_Camera" xml:space="preserve">
+    <value>Add Arc camera</value>
   </data>
   <data name="Title_Name" xml:space="preserve">
     <value>Name</value>
@@ -137,5 +137,8 @@
   </data>
   <data name="Title_Cancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="Title_Add_Free_Camera" xml:space="preserve">
+    <value>Add Free camera</value>
   </data>
 </root>

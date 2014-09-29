@@ -5,18 +5,18 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
 {
     internal class SetCameraToSceneViewCommand : CommandBase
     {
-        private readonly SceneViewControl _sceneViewControl;
+        private readonly SceneViewModel _sceneViewModel;
         private readonly Camera _camera;
 
-        public SetCameraToSceneViewCommand(SceneViewControl sceneViewControl, Camera camera)
+        public SetCameraToSceneViewCommand(SceneViewModel sceneViewModel, Camera camera)
         {
-            _sceneViewControl = sceneViewControl;
+            _sceneViewModel = sceneViewModel;
             _camera = camera;
         }
 
         protected override void Execute()
         {
-            _sceneViewControl.Camera = _camera;
+            _sceneViewModel.Camera = _camera;
         }
     }
 }

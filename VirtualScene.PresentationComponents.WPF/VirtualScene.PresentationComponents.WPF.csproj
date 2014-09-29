@@ -64,6 +64,7 @@
     <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
     <Compile Include="Models\SceneViewportViewModel.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Views\SceneViewControl.xaml.cs">
       <DependentUpon>SceneViewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SceneViewModel.cs" />
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>

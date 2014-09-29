@@ -16,9 +16,9 @@ namespace VirtualScene.BusinessComponents.Core
         /// <param name="camera"></param>
         public void MouseMove(int x, int y, Camera camera)
         {
-            var navigationCamera = GetNavigationCamera(camera);
-            if (navigationCamera != null)
-                navigationCamera.ArcBall.MouseMove(x, y);
+            var arcBallCamera = GetArcBallCamera(camera);
+            if (arcBallCamera != null)
+                arcBallCamera.ArcBall.MouseMove(x, y);
 
         }
 
@@ -30,9 +30,9 @@ namespace VirtualScene.BusinessComponents.Core
         /// <param name="camera"></param>
         public void MouseUp(int x, int y, Camera camera)
         {
-            var navigationCamera = GetNavigationCamera(camera);
-            if (navigationCamera != null)
-                navigationCamera.ArcBall.MouseUp(x, y);
+            var arcBallCamera = GetArcBallCamera(camera);
+            if (arcBallCamera != null)
+                arcBallCamera.ArcBall.MouseUp(x, y);
 
         }
 
@@ -44,14 +44,19 @@ namespace VirtualScene.BusinessComponents.Core
         /// <param name="camera"></param>
         public void MouseDown(int x, int y, Camera camera)
         {
-            var navigationCamera = GetNavigationCamera(camera);
-            if (navigationCamera != null)
-                navigationCamera.ArcBall.MouseDown(x, y);
+            var arcBallCamera = GetArcBallCamera(camera);
+            if (arcBallCamera != null)
+                arcBallCamera.ArcBall.MouseDown(x, y);
         }
 
-        private ArcBallCamera GetNavigationCamera(Camera camera)
+        private static ArcBallCamera GetArcBallCamera(Camera camera)
         {
             return camera as ArcBallCamera;
+        }
+
+        private static LookAtCamera GetLookAtCamera(Camera camera)
+        {
+            return camera as LookAtCamera;
         }
 
         /// <summary>
@@ -63,11 +68,19 @@ namespace VirtualScene.BusinessComponents.Core
         /// <param name="dz"></param>
         public void Move(Camera camera, float dx, float dy, float dz)
         {
-            var navigationCamera = GetNavigationCamera(camera);
-            if (navigationCamera != null)
+            if(GetArcBallCamera(camera) != null)
+                return;
+            var lookAtCamera = GetLookAtCamera(camera);
+            if (lookAtCamera != null)
             {
-                navigationCamera.Position = new Vertex(camera.Position.X + dx, camera.Position.Y + dy, camera.Position.Z + dz);
+                lookAtCamera.Position = OffsetLookAtCamera(dx, dy, dz, lookAtCamera.Position);
+                lookAtCamera.Target = OffsetLookAtCamera(dx, dy, dz, lookAtCamera.Target);
             }
+        }
+
+        private static Vertex OffsetLookAtCamera(float dx, float dy, float dz, Vertex pos)
+        {
+            return new Vertex(pos.X + dx, pos.Y + dy, pos.Z + dz);
         }
     }
 }
