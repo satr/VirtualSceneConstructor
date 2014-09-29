@@ -35,13 +35,18 @@
     <DocumentationFile>bin\Release\VirtualScene.PresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Accessibility" />
     <Reference Include="Apex, Version=1.2.1.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\SharpGL\sharpgl-master\source\SharpGL\Dependencies\Apex.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
     <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -50,6 +55,8 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -61,6 +68,7 @@
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
+    <Compile Include="Commands\ShowHelpCommand.cs" />
     <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Presenters\Presenter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
@@ -72,6 +80,10 @@
       <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\EntityNameDialogViewModel.cs" />
+    <Compile Include="Views\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HelpViewModel.cs" />
     <Compile Include="Views\SceneViewControl.xaml.cs">
       <DependentUpon>SceneViewControl.xaml</DependentUpon>
     </Compile>
@@ -80,6 +92,10 @@
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\EntityNameDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,7 +146,11 @@
       <Name>VirtualScene.BusinessComponents.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Help.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

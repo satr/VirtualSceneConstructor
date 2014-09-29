@@ -141,4 +141,10 @@
   <data name="Title_Add_Free_Camera" xml:space="preserve">
     <value>Add Free camera</value>
   </data>
+  <data name="Title_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Title_Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
 </root>

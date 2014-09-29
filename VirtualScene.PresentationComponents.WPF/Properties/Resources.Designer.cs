@@ -115,6 +115,24 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Title_Close {
+            get {
+                return ResourceManager.GetString("Title_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string Title_Help {
+            get {
+                return ResourceManager.GetString("Title_Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Title_Name {

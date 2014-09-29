@@ -1,9 +1,20 @@
-﻿namespace VirtualScene.Application.WPF
+﻿using System.Windows;
+
+namespace VirtualScene.Application.WPF
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App
     {
+        /// <summary>
+        /// Raises the <see cref="E:System.Windows.Application.Startup"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="T:System.Windows.StartupEventArgs"/> that contains the event data.</param>
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ShutdownMode = ShutdownMode.OnMainWindowClose;
+            base.OnStartup(e);
+        }
     }
 }

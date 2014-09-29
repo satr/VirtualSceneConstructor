@@ -31,6 +31,7 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
                 CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(sceneContent)),
                 CreateButton(Resources.Title_Add_Arc_Camera, new AddCameraCommand<ArcBallCamera>(sceneContent, Resources.Title_Add_Arc_Camera)),
                 CreateButton(Resources.Title_Add_Free_Camera, new AddCameraCommand<LookAtCamera>(sceneContent, Resources.Title_Add_Free_Camera)),
+                CreateButton(Resources.Title_Help, new ShowHelpCommand()),
             };
         }
 
