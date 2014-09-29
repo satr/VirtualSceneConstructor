@@ -9,14 +9,14 @@ namespace VirtualScene.Application.WPF.ViewModels
     /// </summary>
     public class MainWindowViewModel
     {
-        private readonly Presenter _presenter;
+        private readonly ApplicationPresenter _applicationPresenter;
 
         /// <summary>
         /// Creates a new instance of the view-model of the main window of the application.
         /// </summary>
         public MainWindowViewModel()
         {
-            _presenter = new Presenter();
+            _applicationPresenter = new ApplicationPresenter();
         }
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace VirtualScene.Application.WPF.ViewModels
         /// </summary>
         public IList<UIElement> TopElements
         {
-            get { return _presenter.TopElements; }
+            get { return _applicationPresenter.TopElements; }
         }
     }
 }

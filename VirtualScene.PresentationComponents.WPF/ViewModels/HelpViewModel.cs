@@ -3,7 +3,7 @@ using System.IO;
 using System.Windows.Controls;
 using VirtualScene.PresentationComponents.WPF.Commands;
 
-namespace VirtualScene.PresentationComponents.WPF.Views
+namespace VirtualScene.PresentationComponents.WPF.ViewModels
 {
     /// <summary>
     /// The view model for the HelpView

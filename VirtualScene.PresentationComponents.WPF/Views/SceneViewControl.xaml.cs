@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.PresentationComponents.WPF.Views
 {

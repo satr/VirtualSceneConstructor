@@ -11,7 +11,7 @@ using SharpGL.WPF;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Annotations;
 
-namespace VirtualScene.PresentationComponents.WPF.Views
+namespace VirtualScene.PresentationComponents.WPF.ViewModels
 {
     /// <summary>
     /// The view model for the SceneViewControl

@@ -70,7 +70,7 @@
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
     <Compile Include="Commands\ShowHelpCommand.cs" />
     <Compile Include="Models\EntityNameViewModel.cs" />
-    <Compile Include="Presenters\Presenter.cs" />
+    <Compile Include="Presenters\ApplicationPresenter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\SceneViewportModel.cs" />
@@ -83,11 +83,11 @@
     <Compile Include="Views\HelpView.xaml.cs">
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HelpViewModel.cs" />
+    <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="Views\SceneViewControl.xaml.cs">
       <DependentUpon>SceneViewControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SceneViewModel.cs" />
+    <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>

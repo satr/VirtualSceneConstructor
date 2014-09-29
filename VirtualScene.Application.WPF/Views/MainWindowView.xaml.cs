@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using VirtualScene.Application.WPF.ViewModels;
 using VirtualScene.BusinessComponents.Core;
 
@@ -25,7 +24,7 @@ namespace VirtualScene.Application.WPF.Views
             KeyDown += OnKeyDown;
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs keyEventArgs)
+        private static void OnKeyDown(object sender, KeyEventArgs keyEventArgs)
         {
             const float movingStep = 0.2f;
             if(keyEventArgs.Key == Key.Up || keyEventArgs.Key == Key.W)

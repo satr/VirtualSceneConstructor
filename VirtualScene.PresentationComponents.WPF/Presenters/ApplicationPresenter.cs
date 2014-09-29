@@ -10,14 +10,14 @@ using VirtualScene.PresentationComponents.WPF.Properties;
 namespace VirtualScene.PresentationComponents.WPF.Presenters
 {
     /// <summary>
-    /// Presenter provides UI components for application
+    /// ApplicationPresenter provides UI components for application
     /// </summary>
-    public class Presenter
+    public class ApplicationPresenter
     {
         /// <summary>
         /// Creates a new instance of the presenter
         /// </summary>
-        public Presenter()
+        public ApplicationPresenter()
         {
             var sceneContent = SceneContent.Instance;
             InitTopElements(sceneContent);

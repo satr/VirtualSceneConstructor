@@ -1,4 +1,6 @@
-﻿namespace VirtualScene.PresentationComponents.WPF.Views
+﻿using VirtualScene.PresentationComponents.WPF.ViewModels;
+
+namespace VirtualScene.PresentationComponents.WPF.Views
 {
     /// <summary>
     /// Interaction logic for HelpView.xaml
