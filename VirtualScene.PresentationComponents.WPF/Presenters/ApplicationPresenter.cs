@@ -19,9 +19,14 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         /// </summary>
         public ApplicationPresenter()
         {
-            var sceneContent = SceneContent.Instance;
-            InitTopElements(sceneContent);
+            SceneContent = new SceneContent();
+            InitTopElements(SceneContent);
         }
+
+        /// <summary>
+        /// The content of the scene
+        /// </summary>
+        public SceneContent SceneContent { get; private set; }
 
         private void InitTopElements(SceneContent sceneContent)
         {
@@ -29,6 +34,7 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
             {
                 CreateButton(Resources.Title_Add_Cube, new AddCubeCommand(sceneContent)),
                 CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(sceneContent)),
+                CreateButton(Resources.Title_Import3D_model, new Import3DModelCommand(sceneContent)),
                 CreateButton(Resources.Title_Add_Arc_Camera, new AddCameraCommand<ArcBallCamera>(sceneContent, Resources.Title_Add_Arc_Camera)),
                 CreateButton(Resources.Title_Add_Free_Camera, new AddCameraCommand<LookAtCamera>(sceneContent, Resources.Title_Add_Free_Camera)),
                 CreateButton(Resources.Title_Help, new ShowHelpCommand()),
@@ -51,5 +57,4 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         public IList<UIElement> TopElements { get; private set; }
 
     }
-
 }

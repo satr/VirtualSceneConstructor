@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:Views="clr-namespace:VirtualScene.PresentationComponents.WPF.Views"  xmlns:WPF="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"  x:Class="VirtualScene.PresentationComponents.WPF.Views.SceneViewportView"
+﻿<UserControl x:Class="VirtualScene.PresentationComponents.WPF.Views.SceneViewportView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,6 +10,6 @@
             <ContextMenu ItemsSource="{Binding ViewportContextMenu}">
             </ContextMenu>
         </StackPanel.ContextMenu>
-        <Views:SceneViewControl x:Name="SceneViewControl" />
+        <Image Source="{Binding ImageSource}" />
     </StackPanel>
 </UserControl>

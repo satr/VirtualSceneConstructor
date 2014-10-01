@@ -1,5 +1,7 @@
 ﻿using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Core;
+using VirtualScene.BusinessComponents.Common;
+using VirtualScene.BusinessComponents.Core.Importers;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -23,6 +25,16 @@ namespace VirtualScene.BusinessComponents.Core
             sceneElement.Transformation.TranslateY += y;
             sceneElement.Transformation.TranslateZ += z;
             scene.SceneContainer.AddChild(sceneElement);
+        }
+
+        /// <summary>
+        /// Import of the 3D model from the file to the scene
+        /// </summary>
+        /// <param name="fullFileName">Path to the file with 3D model</param>
+        /// <param name="sceneContent">The content of the scene</param>
+        public void Import3DModel(string fullFileName, SceneContent sceneContent)
+        {
+            ServiceLocator.Get<WavefrontFormatImporter>().LoadDataToScene(fullFileName, sceneContent.SceneEngine.Scene);
         }
     }
 }

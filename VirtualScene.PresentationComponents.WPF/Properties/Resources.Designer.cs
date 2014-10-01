@@ -133,6 +133,15 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import 3D model.
+        /// </summary>
+        public static string Title_Import3D_model {
+            get {
+                return ResourceManager.GetString("Title_Import3D_model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string Title_Name {

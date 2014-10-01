@@ -70,12 +70,15 @@
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
     <Compile Include="Commands\ShowHelpCommand.cs" />
     <Compile Include="Models\EntityNameViewModel.cs" />
+    <Compile Include="Models\ImageSourceEventArg.cs" />
     <Compile Include="Presenters\ApplicationPresenter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\Import3DModelCommand.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\SceneViewportModel.cs" />
+    <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
-    <Compile Include="Models\SceneViewportViewModel.cs" />
+    <Compile Include="ViewModels\SceneViewportViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\EntityNameDialogView.xaml.cs">
       <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
     </Compile>
@@ -84,10 +87,6 @@
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HelpViewModel.cs" />
-    <Compile Include="Views\SceneViewControl.xaml.cs">
-      <DependentUpon>SceneViewControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\SceneViewModel.cs" />
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>
@@ -96,10 +95,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HelpView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SceneViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +135,10 @@
     <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.WPF\SharpGL.WPF.csproj">
       <Project>{53e67055-13d2-4467-bb57-79589afac2cd}</Project>
       <Name>SharpGL.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
+      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
+      <Name>VirtualScene.BusinessComponents.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>

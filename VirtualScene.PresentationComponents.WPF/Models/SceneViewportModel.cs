@@ -1,22 +1,28 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using System.Windows;
+using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using SharpGL.RenderContextProviders;
+using SharpGL.SceneGraph.Cameras;
 using SharpGL.WPF;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
-using VirtualScene.PresentationComponents.WPF.Annotations;
+using VirtualScene.PresentationComponents.WPF.Commands;
+using VirtualScene.PresentationComponents.WPF.Presenters;
+using VirtualScene.PresentationComponents.WPF.Properties;
 
-namespace VirtualScene.PresentationComponents.WPF.ViewModels
+namespace VirtualScene.PresentationComponents.WPF.Models
 {
     /// <summary>
-    /// The view model for the SceneViewControl
+    /// The model of the scene viewport
     /// </summary>
-    public class SceneViewModel: INotifyPropertyChanged
+    public class SceneViewportModel 
     {
         /// <summary>
         /// The dispatcher timer.
@@ -34,15 +40,82 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         private double _frameTime;
         private double _frameRate = 28.0f;
 
-        private ImageSource _imageSource;
+        /// <summary>
+        /// Create ethe new instance of the viewport
+        /// </summary>
+        public SceneViewportModel()
+        {
+            SceneResizeEnabled = false;
+            var sceneEngine = ServiceLocator.Get<ApplicationPresenter>().SceneContent.SceneEngine;
+            Viewport = sceneEngine.CreateViewport();
+            Viewport.FPSEnabled = true;
+            InitViewportContextMenu(sceneEngine.Cameras);
+        }
 
         /// <summary>
-        /// Creates a new instance of the SceneViewModel
+        /// Navigation within the viewport
         /// </summary>
-        public SceneViewModel()
+        public SceneNavigation Navigation
         {
-            SceneResizeEnabled = true;
+            get { return Viewport.Navigation; }
         }
+
+        private SceneViewport Viewport { get; set; }
+
+        private void InitViewportContextMenu(ObservableCollection<Camera> cameras)
+        {
+            ViewportContextMenu = new ObservableCollection<MenuItem>();
+            foreach (var camera in cameras)
+                ViewportContextMenu.Add(CreateViewportMenuItemSelectCamera(camera));
+            cameras.CollectionChanged += CamerasCollectionChanged;
+        }
+
+        private void CamerasCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            AddCameras(e.NewItems);
+            RemoveCameras(e.OldItems);
+        }
+
+        private void AddCameras(IEnumerable addedCameras)
+        {
+            if (addedCameras == null) 
+                return;
+            foreach (Camera addedCamera in addedCameras)
+            {
+                ViewportContextMenu.Add(CreateViewportMenuItemSelectCamera(addedCamera));
+            }
+        }
+
+        private void RemoveCameras(IEnumerable removedCameras)
+        {
+            if (removedCameras == null) 
+                return;
+            foreach (Camera removedCamera in removedCameras)
+            {
+                var menuItem = ViewportContextMenu.FirstOrDefault(mi => Equals(mi.Tag, removedCamera));
+                if (menuItem == null)
+                    continue;
+                ViewportContextMenu.Remove(menuItem);
+            }
+        }
+
+        /// <summary>
+        /// Context menu items for viewports
+        /// </summary>
+        public ObservableCollection<MenuItem> ViewportContextMenu { get; set; }
+
+        private MenuItem CreateViewportMenuItemSelectCamera<T>(T camera)
+            where T : Camera
+        {
+            var menuItem = new MenuItem
+            {
+                Header = string.Format(Resources.Title_Camera_N, camera.Name),
+                Tag = camera,
+                Command = new SetCameraToSceneViewCommand(Viewport, camera),
+            };
+            return menuItem;
+        }
+
 
         /// <summary>
         /// Handles the SizeChanged event of the SceneViewControl control.
@@ -76,7 +149,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             get { return _frameRate; }
             set
             {
-                if (value.Equals(_frameRate)) 
+                if (value.Equals(_frameRate))
                     return;
                 _frameRate = value;
                 SetupTimer(_frameRate);
@@ -139,41 +212,6 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             }
         }
 
-
-        private void UpdateImageSource(IntPtr hBitmap)
-        {
-            //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
-            //  meaning the drawing comes out transparent.
-            var newFormatedBitmapSource = new FormatConvertedBitmap();
-            newFormatedBitmapSource.BeginInit();
-            newFormatedBitmapSource.Source = BitmapConversion.HBitmapToBitmapSource(hBitmap);
-            newFormatedBitmapSource.DestinationFormat = PixelFormats.Rgb24;
-            newFormatedBitmapSource.EndInit();
-
-            //  Copy the pixels over.
-            ImageSource = newFormatedBitmapSource;
-        }
-
-        /// <summary>
-        /// SOurce of the image control
-        /// </summary>
-        public ImageSource ImageSource
-        {
-            get { return _imageSource; }
-            set
-            {
-                if (Equals(value, _imageSource)) 
-                    return;
-                _imageSource = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// The viewport of the scene
-        /// </summary>
-        public SceneViewport Viewport { get; set; }
-
         private static bool TryGetHandleToBitmap(IRenderContextProvider renderContextProvider, out IntPtr handleToBitmap)
         {
             var dibSectionRenderContextProvider = renderContextProvider as DIBSectionRenderContextProvider;
@@ -192,53 +230,35 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
             return false;
         }
 
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void UpdateImageSource(IntPtr hBitmap)
+        {
+            //  TODO: We have to remove the alpha channel - for some reason it comes out as 0.0 
+            //  meaning the drawing comes out transparent.
+            var newFormatedBitmapSource = new FormatConvertedBitmap();
+            newFormatedBitmapSource.BeginInit();
+            newFormatedBitmapSource.Source = BitmapConversion.HBitmapToBitmapSource(hBitmap);
+            newFormatedBitmapSource.DestinationFormat = PixelFormats.Rgb24;
+            newFormatedBitmapSource.EndInit();
+
+            //  Copy the pixels over.
+            OnImageSourceUpdated(new ImageSourceEventArg(newFormatedBitmapSource));
+        }
 
         /// <summary>
-        /// OnPropertyChanged event invocator
+        /// Occured when an image is updated
         /// </summary>
-        /// <param name="propertyName">The name of the changed property</param>
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public event EventHandler<ImageSourceEventArg> ImageSourceUpdated;
+
+        /// <summary>
+        /// Event invocator for updated image source
+        /// </summary>
+        /// <param name="e">Event argument for an updated image</param>
+        private void OnImageSourceUpdated(ImageSourceEventArg e)
         {
-            var handler = PropertyChanged;
+            var handler = ImageSourceUpdated;
             if (handler != null) 
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        /// <summary>
-        /// Mouse down event occurs on the view
-        /// </summary>
-        /// <param name="position">Position where the mouse was put down</param>
-        public void MouseDown(Point position)
-        {
-            HandleMouseEvent(position, Viewport.Navigation.MouseDown);
-        }
-
-        /// <summary>
-        /// Mouse up event occurs on the view
-        /// </summary>
-        /// <param name="position">Position where the mouse was up</param>
-        public void MouseUp(Point position)
-        {
-            HandleMouseEvent(position, Viewport.Navigation.MouseUp);
-        }
-
-        /// <summary>
-        /// Mouse move event occurs on the view
-        /// </summary>
-        /// <param name="position">Position where the mouse was moved</param>
-        public void MouseMove(Point position)
-        {
-            HandleMouseEvent(position, Viewport.Navigation.MouseMove);
-        }
-
-        private static void HandleMouseEvent(Point position, Action<int, int> eventHandler)
-        {
-            eventHandler((int) position.X, (int) position.Y);
+                handler(this, e);
         }
     }
 }

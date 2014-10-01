@@ -3,24 +3,18 @@
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
     /// <summary>
-    /// TODO
+    /// Base command for scene content and scene objects related operations
     /// </summary>
     public abstract class CommandWithSceneContentBase : CommandBase
     {
         /// <summary>
-        /// TODO
+        /// Creates a new instance of the base command for scene content and scene objects related operations
         /// </summary>
         /// <param name="sceneContent"></param>
         protected CommandWithSceneContentBase(SceneContent sceneContent)
         {
             SceneContent = sceneContent;
-            BusinessManager = new BusinessManager();
         }
-
-        /// <summary>
-        /// Busimess manager
-        /// </summary>
-        protected BusinessManager BusinessManager { get; private set; }
 
         /// <summary>
         /// VirtualSceneContext 

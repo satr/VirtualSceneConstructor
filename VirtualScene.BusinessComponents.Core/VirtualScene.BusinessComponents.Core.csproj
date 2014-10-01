@@ -31,11 +31,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\VirtualScene.BusinessComponents.Core.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +49,7 @@
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Importers\WavefrontFormatImporter.cs" />
     <Compile Include="Validators\SceneArgumentValidator.cs" />
     <Compile Include="Factories\SceneFactory.cs" />
     <Compile Include="SceneNavigation.cs" />
@@ -71,6 +74,10 @@
       <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
       <Name>SharpGL.SceneGraph</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.Serialization\SharpGL.Serialization.csproj">
+      <Project>{FDFA2632-A960-4778-A517-CA9E337C037C}</Project>
+      <Name>SharpGL.Serialization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.WPF\SharpGL.WPF.csproj">
       <Project>{53e67055-13d2-4467-bb57-79589afac2cd}</Project>
       <Name>SharpGL.WPF</Name>
@@ -78,6 +85,10 @@
     <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL\SharpGL.csproj">
       <Project>{5ef45533-e2c7-46f2-b4a3-b8f36cd406e0}</Project>
       <Name>SharpGL %28SharpGL\SharpGL%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
+      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
+      <Name>VirtualScene.BusinessComponents.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

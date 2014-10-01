@@ -1,4 +1,5 @@
 ﻿using SharpGL.SceneGraph.Primitives;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
@@ -8,8 +9,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// </summary>
     public class AddCubeCommand : AddSceneObjectCommandBase
     {
-        private int _x = 0;
-        private int _y = 0;
+        private int _x;
+        private int _y;
         /// <summary>
         /// Creates a new instance of the AddCubeCommand
         /// </summary>
@@ -25,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x += 1;
             _y += 1;
-            BusinessManager.AddSceneElementInSpace<Cube>(SceneEngine.Scene, _x, _y, 0);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneEngine.Scene, _x, _y, 0);
         }
     }
 }

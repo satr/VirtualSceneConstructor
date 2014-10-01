@@ -1,4 +1,5 @@
 ﻿using SharpGL.SceneGraph.Quadrics;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
@@ -8,8 +9,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// </summary>
     public class AddSphereCommand: AddSceneObjectCommandBase
     {
-        private int _x = 0;
-        private int _y = 0;
+        private int _x, _y;
 
         /// <summary>
         /// Creates a new instance of the AddSphereCommand
@@ -26,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x -= 1;
             _y += 1;
-            BusinessManager.AddSceneElementInSpace<Sphere>(SceneEngine.Scene, _x, _y, 0);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Sphere>(SceneEngine.Scene, _x, _y, 0);
         }
     }
 }

@@ -147,4 +147,7 @@
   <data name="Title_Help" xml:space="preserve">
     <value>Help</value>
   </data>
+  <data name="Title_Import3D_model" xml:space="preserve">
+    <value>Import 3D model</value>
+  </data>
 </root>
