@@ -15,7 +15,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// Creates a new instance of the AddCubeCommand
         /// </summary>
         /// <param name="sceneContent"></param>
-        public AddCubeCommand(SceneContent sceneContent): base(sceneContent)
+        public AddCubeCommand(ISceneContent sceneContent): base(sceneContent)
         {
         }
 
@@ -26,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x += 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneEngine.Scene, _x, _y, 0);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneEngine, _x, _y, 0);
         }
     }
 }

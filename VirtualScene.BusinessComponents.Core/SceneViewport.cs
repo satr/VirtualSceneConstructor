@@ -21,7 +21,7 @@ namespace VirtualScene.BusinessComponents.Core
         {
             Scene = scene;
             CurrentCamera = Scene.CurrentCamera;
-            Navigation = new SceneNavigation(this);
+            Navigation = new SceneViewportNavigation(this);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace VirtualScene.BusinessComponents.Core
         /// <summary>
         /// The component responcible for the navigation within scene of the viewport.
         /// </summary>
-        public SceneNavigation Navigation { get; private set; }
+        public SceneViewportNavigation Navigation { get; private set; }
 
         /// <summary>
         /// Draw the scene

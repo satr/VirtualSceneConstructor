@@ -55,7 +55,7 @@ namespace VirtualScene.PresentationComponents.WPF.Models
         /// <summary>
         /// Navigation within the viewport
         /// </summary>
-        public SceneNavigation Navigation
+        public SceneViewportNavigation Navigation
         {
             get { return Viewport.Navigation; }
         }

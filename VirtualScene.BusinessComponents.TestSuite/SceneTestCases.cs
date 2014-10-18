@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
@@ -6,31 +6,31 @@ using VirtualScene.BusinessComponents.Core.Factories;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
-    [TestClass]
+    [TestFixture]
     public class SceneTestCases
     {
         private Scene _scene;
 
-        [TestInitialize]
+        [SetUp]
         public void Init()
         {
             _scene = new SceneFactory().Create();
         }
 
-        [TestMethod]
+        [Test]
         public void InitialStateTests()
         {
             Assert.AreEqual(Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void AddCubeTest()
         {
             _scene.SceneContainer.AddChild(new Cube());
             Assert.AreEqual(1 + Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
         }
 
-        [TestMethod]
+        [Test]
         public void AddTwoCubesTest()
         {
             _scene.SceneContainer.AddChild(new Cube());

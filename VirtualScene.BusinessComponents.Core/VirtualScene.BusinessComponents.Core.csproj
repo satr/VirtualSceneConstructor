@@ -47,12 +47,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessManager.cs" />
+    <Compile Include="Entities\ISceneEntity.cs" />
+    <Compile Include="Entities\SceneEntity.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Factories\SceneContentFactory.cs" />
     <Compile Include="Importers\WavefrontFormatImporter.cs" />
+    <Compile Include="Factories\SceneEngineFactory.cs" />
+    <Compile Include="ISceneContent.cs" />
+    <Compile Include="ISceneEngine.cs" />
+    <Compile Include="ISceneNavigation.cs" />
+    <Compile Include="IStage.cs" />
+    <Compile Include="MoveEventArgs.cs" />
+    <Compile Include="SceneNavigation.cs" />
+    <Compile Include="Factories\SceneNavigationFactory.cs" />
+    <Compile Include="Stage.cs" />
     <Compile Include="Validators\SceneArgumentValidator.cs" />
     <Compile Include="Factories\SceneFactory.cs" />
-    <Compile Include="SceneNavigation.cs" />
+    <Compile Include="SceneViewportNavigation.cs" />
     <Compile Include="SceneViewport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

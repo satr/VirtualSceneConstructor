@@ -19,7 +19,7 @@ namespace VirtualScene.BusinessComponents.Core.Factories
         /// <param name="height">Height of the scene</param>
         /// <param name="bitDepth">Color depth of the scene</param>
         /// <returns></returns>
-        public Scene Create(int width = Constants.Scene.MinimumWidth, int height = Constants.Scene.MinimumHeight, int bitDepth = Constants.Scene.MaximumColorDepth)
+        public virtual Scene Create(int width = Constants.Scene.MinimumWidth, int height = Constants.Scene.MinimumHeight, int bitDepth = Constants.Scene.MaximumColorDepth)
         {
             SceneArgumentValidator.ValidateArguments(width, height, bitDepth);
             _gl.Create(OpenGLVersion.OpenGL4_4, RenderContextType.DIBSection, width, height, bitDepth, null);

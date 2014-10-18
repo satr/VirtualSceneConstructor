@@ -59,7 +59,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
             return line.Substring(spacePos + 1);
         }
 
-        private static void LoadMaterials(string path, Scene scene)
+        private static void LoadMaterials(string path, ISceneEngine sceneEngine)
         {
             //  Create a stream reader.
             using (var reader = new StreamReader(path))
@@ -82,7 +82,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                     {
                         // Add new material to scene's assets.
                         mtl = new Material();
-                        scene.Assets.Add(mtl);
+                        sceneEngine.AddAsset(mtl);
 
                         // Name of material is on same line, immediately follows newmatl.
                         mtl.Name = ReadMaterialValue(line);
@@ -109,7 +109,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                             // Get texture map.                    		
                             string textureFile = ReadMaterialValue(line);
                             // Set texture for material.
-                            mtl.Texture = LoadOrCreateTexture(path, scene, textureFile);
+                            mtl.Texture = sceneEngine.LoadOrCreateTexture(path, textureFile);
                         }
                         else if (line.StartsWith("d") || line.StartsWith("Tr"))
                         {
@@ -122,33 +122,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
             }
         }
 
-        private static Texture LoadOrCreateTexture(string path, Scene scene, string textureFile)
-        {
-            var texture = scene.Assets.OfType<Texture>().FirstOrDefault(t => Equals(t.Name, textureFile));
-            if (texture != null)
-                return texture;
-
-            texture = new Texture();
-            //  Does the texture file exist?
-            if (!File.Exists(textureFile))
-            {
-                //  It doesn't, assume its in the same location
-                //  as the obj file.
-                string directoryName = Path.GetDirectoryName(path);
-                string fileName = Path.GetFileName(textureFile);
-                if (string.IsNullOrWhiteSpace(directoryName) || string.IsNullOrWhiteSpace(fileName))
-                    return texture;
-                textureFile = Path.Combine(directoryName, fileName);
-                if (!File.Exists(textureFile))
-                    return texture;
-            }
-
-            // Create/load texture.
-            texture.Create(scene.OpenGL, textureFile);
-            return texture;
-        }
-
-        public void LoadDataToScene(string fullFileName, Scene scene)
+        public void LoadDataToScene(string fullFileName, ISceneEngine sceneEngine)
         {
             var split = new[] {' '};
 
@@ -224,7 +198,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                         var face = new Face();
 
                         if (!string.IsNullOrWhiteSpace(mtlName))
-                            face.Material = scene.Assets.OfType<Material>().FirstOrDefault(t => t.Name == mtlName);
+                            face.Material = sceneEngine.GetAssets<Material>().FirstOrDefault(t => t.Name == mtlName);
 
                         //  Get the face indices
                         string[] indices = line.Substring(2).Split(split, StringSplitOptions.RemoveEmptyEntries);
@@ -249,7 +223,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
 
                             // Load materials file.
                             var mtlPath = ReadMaterialValue(line);
-                            LoadMaterials(mtlPath, scene);
+                            LoadMaterials(mtlPath, sceneEngine);
                         }
 
                         if (line.StartsWith("usemtl"))
@@ -262,7 +236,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                 }
             }
 
-            scene.SceneContainer.AddChild(polygon);
+            sceneEngine.AddSceneElement(polygon);
         }
 
         private static void AddIndexesToFace(IEnumerable<string> indices, Face face)

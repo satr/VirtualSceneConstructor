@@ -15,7 +15,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// Creates a new instance of the AddSphereCommand
         /// </summary>
         /// <param name="sceneContent"></param>
-        public AddSphereCommand(SceneContent sceneContent): base(sceneContent)
+        public AddSphereCommand(ISceneContent sceneContent): base(sceneContent)
         {
         }
 
@@ -26,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x -= 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Sphere>(SceneEngine.Scene, _x, _y, 0);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Sphere>(SceneEngine, _x, _y, 0);
         }
     }
 }

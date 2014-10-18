@@ -14,7 +14,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// Creates a new instance of the Import3DModel command
         /// </summary>
         /// <param name="sceneContent"></param>
-        public Import3DModelCommand(SceneContent sceneContent)
+        public Import3DModelCommand(ISceneContent sceneContent)
             : base(sceneContent)
         {
         }

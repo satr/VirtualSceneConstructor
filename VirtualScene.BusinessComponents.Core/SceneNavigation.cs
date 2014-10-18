@@ -1,93 +1,44 @@
-using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Cameras;
+﻿using System;
+using System.Windows.Input;
 
 namespace VirtualScene.BusinessComponents.Core
 {
     /// <summary>
-    /// The component responsible for the navigation within the scene
+    /// Navigation in the scene
     /// </summary>
-    public class SceneNavigation
+    public class SceneNavigation : ISceneNavigation
     {
-        private readonly ISceneViewport _sceneViewport;
-
         /// <summary>
-        /// Creates a new instance of the navigation component
+        /// Invoked when the keyboard's key has been got down
         /// </summary>
-        /// <param name="sceneViewport"></param>
-        public SceneNavigation(ISceneViewport sceneViewport)
+        /// <param name="keyEventArgs">Keys state</param>
+        public void KeyboardAction(KeyEventArgs keyEventArgs)
         {
-            _sceneViewport = sceneViewport;
-        }
-
-        /// <summary>
-        /// Navigate withing the scene while the mouse moves
-        /// </summary>
-        /// <param name="x">Position X</param>
-        /// <param name="y">Position Y</param>
-        public void MouseMove(int x, int y)
-        {
-            var arcBallCamera = GetArcBallCamera();
-            if (arcBallCamera != null)
-                arcBallCamera.ArcBall.MouseMove(x, y);
-
+            const float movingStep = 0.2f;
+            if (keyEventArgs.Key == Key.Up || keyEventArgs.Key == Key.W)
+                OnMove(movingStep, 0f, 0f);
+            if (keyEventArgs.Key == Key.Down || keyEventArgs.Key == Key.S)
+                OnMove(-movingStep, 0f, 0f);
+            if (keyEventArgs.Key == Key.Left || keyEventArgs.Key == Key.A)
+                OnMove(0f, movingStep, 0f);
+            if (keyEventArgs.Key == Key.Right || keyEventArgs.Key == Key.D)
+                OnMove(0f, -movingStep, 0f);
+            if (keyEventArgs.Key == Key.R || keyEventArgs.Key == Key.PageUp)
+                OnMove(0f, 0f, movingStep);
+            if (keyEventArgs.Key == Key.F || keyEventArgs.Key == Key.PageDown)
+                OnMove(0f, 0f, -movingStep);
         }
 
         /// <summary>
-        /// Notify the current navigation camera abour the mouse-up event
+        /// Occurs when the object need to be moved
         /// </summary>
-        /// <param name="x">Position X</param>
-        /// <param name="y">Position Y</param>
-        public void MouseUp(int x, int y)
-        {
-            var arcBallCamera = GetArcBallCamera();
-            if (arcBallCamera != null)
-                arcBallCamera.ArcBall.MouseUp(x, y);
+        public event EventHandler<MoveEventArgs> Move;
 
-        }
-
-        /// <summary>
-        /// Notify the current navigation camera abour the mouse-down event
-        /// </summary>
-        /// <param name="x">Position X</param>
-        /// <param name="y">Position Y</param>
-        public void MouseDown(int x, int y)
+        private void OnMove(float x, float y, float z)
         {
-            var arcBallCamera = GetArcBallCamera();
-            if (arcBallCamera != null)
-                arcBallCamera.ArcBall.MouseDown(x, y);
-        }
-
-        /// <summary>
-        /// Move the camera forward
-        /// </summary>
-        /// <param name="dx"></param>
-        /// <param name="dy"></param>
-        /// <param name="dz"></param>
-        public void Move(float dx, float dy, float dz)
-        {
-            if(GetArcBallCamera() != null)
-                return;
-            var lookAtCamera = GetLookAtCamera();
-            if (lookAtCamera != null)
-            {
-                lookAtCamera.Position = OffsetLookAtCamera(dx, dy, dz, lookAtCamera.Position);
-                lookAtCamera.Target = OffsetLookAtCamera(dx, dy, dz, lookAtCamera.Target);
-            }
-        }
-
-        private static Vertex OffsetLookAtCamera(float dx, float dy, float dz, Vertex pos)
-        {
-            return new Vertex(pos.X + dx, pos.Y + dy, pos.Z + dz);
-        }
-
-        private ArcBallCamera GetArcBallCamera()
-        {
-            return _sceneViewport.CurrentCamera as ArcBallCamera;
-        }
-
-        private LookAtCamera GetLookAtCamera()
-        {
-            return _sceneViewport.CurrentCamera as LookAtCamera;
+            var handler = Move;
+            if (handler != null) 
+                handler(this, new MoveEventArgs(x, y, z));
         }
     }
 }

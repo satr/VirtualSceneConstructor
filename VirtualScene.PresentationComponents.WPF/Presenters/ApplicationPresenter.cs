@@ -3,7 +3,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SharpGL.SceneGraph.Cameras;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.Properties;
 
@@ -19,16 +21,16 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         /// </summary>
         public ApplicationPresenter()
         {
-            SceneContent = new SceneContent();
+            SceneContent = ServiceLocator.Get<SceneContentFactory>().Create();
             InitTopElements(SceneContent);
         }
 
         /// <summary>
         /// The content of the scene
         /// </summary>
-        public SceneContent SceneContent { get; private set; }
+        public ISceneContent SceneContent { get; private set; }
 
-        private void InitTopElements(SceneContent sceneContent)
+        private void InitTopElements(ISceneContent sceneContent)
         {
             TopElements = new List<UIElement>
             {

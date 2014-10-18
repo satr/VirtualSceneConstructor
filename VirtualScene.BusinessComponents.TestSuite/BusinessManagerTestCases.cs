@@ -1,38 +1,28 @@
-using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SharpGL.SceneGraph;
+using Moq;
+using NUnit.Framework;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Factories;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
-    [TestClass]
+    [TestFixture]
     public class BusinessManagerTestCases
     {
         private BusinessManager _businessManager;
-        private static SceneFactory _sceneFactory;
-        private Scene _scene;
+        private Mock<ISceneEngine> _sceneEngineMock;
 
-        [ClassInitialize]
-        public static void ClassFixture(TestContext testContext)
-        {
-            _sceneFactory = new SceneFactory();
-        }
-
-        [TestInitialize]
+        [SetUp]
         public void Init()
         {
+            _sceneEngineMock = new Mock<ISceneEngine>();
             _businessManager = new BusinessManager();
-            _scene = _sceneFactory.Create();
         }
 
-        [TestMethod]
-        public void AddCumeToSceneTest()
+        [Test]
+        public void AddCubeToSceneTest()
         {
-            _businessManager.AddSceneElementInSpace<Cube>(_scene, 0, 0, 0);
-            Assert.AreEqual(1 + Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
-            Assert.IsTrue(_scene.SceneContainer.Children.OfType<Cube>().Any());
+            _businessManager.AddSceneElementInSpace<Cube>(_sceneEngineMock.Object, 0, 0, 0);
+            _sceneEngineMock.Verify(m => m.AddSceneElement(It.IsAny<Cube>()), Times.Once());
         }
     }
 }

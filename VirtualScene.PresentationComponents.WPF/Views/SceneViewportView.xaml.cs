@@ -24,21 +24,24 @@ namespace VirtualScene.PresentationComponents.WPF.Views
 
         private void OnMouseMoveEventHandler(object s, MouseEventArgs e)
         {
-            if (e.LeftButton != MouseButtonState.Pressed)
-                return;
-            _sceneViewportViewModel.MouseMove(e.GetPosition(this));
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                _sceneViewportViewModel.LeftButtonMouseMove(e.GetPosition(this));
+            }
         }
 
         private void OnMouseUpEventHandler(object s, MouseButtonEventArgs e)
         {
-            _sceneViewportViewModel.MouseUp(e.GetPosition(this));
+            if (e.LeftButton == MouseButtonState.Released)
+                _sceneViewportViewModel.LeftButtonMouseUp(e.GetPosition(this));
             Mouse.OverrideCursor = null;
         }
 
         private void OnMouseDownEventHandler(object s, MouseButtonEventArgs e)
         {
             Mouse.OverrideCursor = Cursors.None;
-            _sceneViewportViewModel.MouseDown(e.GetPosition(this));
+            if (e.LeftButton == MouseButtonState.Pressed)
+                _sceneViewportViewModel.LeftButtonMouseDown(e.GetPosition(this));
         }
 
         /// <summary>
@@ -48,7 +51,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            _sceneViewportViewModel.NotifyViewTemplateApdated();
+            _sceneViewportViewModel.NotifyViewTemplateApplied();
         }
     }
 }

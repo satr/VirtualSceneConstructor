@@ -1,5 +1,6 @@
 using System.Reflection;
 using SharpGL.SceneGraph.Cameras;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.PresentationComponents.WPF.Models;
@@ -21,7 +22,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// </summary>
         /// <param name="sceneContent">Content od the scene</param>
         /// <param name="title"></param>
-        public AddCameraCommand(SceneContent sceneContent, string title) : base(sceneContent)
+        public AddCameraCommand(ISceneContent sceneContent, string title) : base(sceneContent)
         {
             _title = title;
         }
@@ -36,7 +37,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
             var dialogResult = new EntityNameDialogView(_title, entityNameViewModel).ShowDialog();
             if(!dialogResult.HasValue || !dialogResult.Value)
                 return;
-            SceneEngine.Cameras.Add(CameraFactory.Create<T>(Constants.SceneEngine.DefaultCameraVector, entityNameViewModel.Name));
+            SceneEngine.Cameras.Add(ServiceLocator.Get<CameraFactory>().Create<T>(Constants.SceneEngine.DefaultCameraVector, entityNameViewModel.Name));
         }
 
         private static string CreateCameraNameBasedOnCameraType()

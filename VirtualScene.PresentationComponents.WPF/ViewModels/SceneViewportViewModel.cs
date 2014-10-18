@@ -52,7 +52,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// Mouse down event occurs on the view
         /// </summary>
         /// <param name="position">Position where the mouse was put down</param>
-        public void MouseDown(Point position)
+        public void LeftButtonMouseDown(Point position)
         {
             HandleMouseEvent(_sceneViewportModel.Navigation.MouseDown, position);
         }
@@ -61,7 +61,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// Mouse up event occurs on the view
         /// </summary>
         /// <param name="position">Position where the mouse was up</param>
-        public void MouseUp(Point position)
+        public void LeftButtonMouseUp(Point position)
         {
             HandleMouseEvent(_sceneViewportModel.Navigation.MouseUp, position);
         }
@@ -70,7 +70,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// Mouse move event occurs on the view
         /// </summary>
         /// <param name="position">Position where the mouse was moved</param>
-        public void MouseMove(Point position)
+        public void LeftButtonMouseMove(Point position)
         {
             HandleMouseEvent(_sceneViewportModel.Navigation.MouseMove, position);
         }
@@ -83,7 +83,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// <summary>
         /// Notified when the view template as applied
         /// </summary>
-        public void NotifyViewTemplateApdated()
+        public void NotifyViewTemplateApplied()
         {
             _sceneViewportModel.SetupTimer();
         }

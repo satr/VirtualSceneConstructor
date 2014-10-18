@@ -11,7 +11,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// Creates a new instance of the base command for scene content and scene objects related operations
         /// </summary>
         /// <param name="sceneContent"></param>
-        protected CommandWithSceneContentBase(SceneContent sceneContent)
+        protected CommandWithSceneContentBase(ISceneContent sceneContent)
         {
             SceneContent = sceneContent;
         }
@@ -19,6 +19,6 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <summary>
         /// VirtualSceneContext 
         /// </summary>
-        protected SceneContent SceneContent { get; set; }
+        protected ISceneContent SceneContent { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace VirtualScene.BusinessComponents.Core.Factories
         /// <param name="position">Position of the camera in the scene.</param>
         /// <param name="name"></param>
         /// <returns>Returns a new camera.</returns>
-        public static Camera Create<T>(Vertex position, string name = null)
+        public virtual Camera Create<T>(Vertex position, string name = null)
             where T : Camera, new()
         {
             var camera = new T
