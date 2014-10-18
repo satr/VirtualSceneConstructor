@@ -1,6 +1,7 @@
 using Moq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Primitives;
+using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 
 namespace VirtualScene.BusinessComponents.TestSuite
@@ -16,6 +17,12 @@ namespace VirtualScene.BusinessComponents.TestSuite
         {
             _sceneEngineMock = new Mock<ISceneEngine>();
             _businessManager = new BusinessManager();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            ServiceLocator.Clear();
         }
 
         [Test]

@@ -119,26 +119,25 @@ namespace VirtualScene.BusinessComponents.Core
         }
 
         /// <summary>
-        /// Occures when a scene entity added or removed from the stage
+        /// Add an entity to the scene
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        public void StageEntitiesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /// <param name="sceneEntity">The entity to be added to the scene</param>
+        public void AddSceneEntity(ISceneEntity sceneEntity)
         {
-            if (e.NewItems != null)
-            {
-                foreach (SceneEntity newItem in e.NewItems)
-                {
-                    AddSceneElement(newItem.Geometry);
-                }
-            }
-            if (e.OldItems == null) 
-                return;
-            foreach (SceneEntity oldItem in e.OldItems)
-            {
-                if (Scene.SceneContainer.Children.Contains(oldItem.Geometry))
-                    Scene.SceneContainer.RemoveChild(oldItem.Geometry);
-            }
+            var sceneElement = sceneEntity.Geometry;
+            if (!Scene.SceneContainer.Children.Contains(sceneElement))
+                Scene.SceneContainer.AddChild(sceneElement);
+        }
+
+        /// <summary>
+        /// Remove an entity from the scene
+        /// </summary>
+        /// <param name="sceneEntity">The entity to be removed from the scene</param>
+        public void RemoveSceneEntity(ISceneEntity sceneEntity)
+        {
+            var sceneElement = sceneEntity.Geometry;
+            if (Scene.SceneContainer.Children.Contains(sceneElement))
+                Scene.SceneContainer.RemoveChild(sceneElement);
         }
 
         /// <summary>

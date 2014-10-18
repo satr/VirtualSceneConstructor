@@ -68,6 +68,7 @@
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
+    <Compile Include="Models\Import3DModelModel.cs" />
     <Compile Include="Commands\ShowHelpCommand.cs" />
     <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Models\ImageSourceEventArg.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
+    <Compile Include="Commands\OpenFileWith3DModelCommand.cs" />
     <Compile Include="ViewModels\SceneViewportViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Views\EntityNameDialogView.xaml.cs">
@@ -87,6 +89,10 @@
       <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="Views\Import3DModelView.xaml.cs">
+      <DependentUpon>Import3DModelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Import3DModelViewModel.cs" />
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>
@@ -95,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HelpView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Import3DModelView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

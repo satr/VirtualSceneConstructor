@@ -1,6 +1,10 @@
-﻿using SharpGL.SceneGraph.Core;
+﻿using System;
+using SharpGL.SceneGraph.Core;
 using VirtualScene.BusinessComponents.Common;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Importers;
+using VirtualScene.BusinessComponents.Core.Pools;
+using VirtualScene.BusinessComponents.Core.Properties;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -29,11 +33,19 @@ namespace VirtualScene.BusinessComponents.Core
         /// <summary>
         /// Import of the 3D model from the file to the scene
         /// </summary>
+        /// <param name="name">he name of the entity in the scene</param>
         /// <param name="fullFileName">Path to the file with 3D model</param>
         /// <param name="sceneContent">The content of the scene</param>
-        public void Import3DModel(string fullFileName, ISceneContent sceneContent)
+        public IActionResult Import3DModel(string name, string fullFileName, ISceneContent sceneContent)
         {
-            ServiceLocator.Get<WavefrontFormatImporter>().LoadDataToScene(fullFileName, sceneContent.SceneEngine);
+            var actionResult = ServiceLocator.Get<GeometryImportersPool>()
+                                         .GetWavefrontFormatImporter()
+                                         .LoadGeometry(fullFileName, sceneContent.SceneEngine);
+            if(!actionResult.Success)
+                return actionResult;
+            var sceneEntity = new SceneEntity { Name = name, Geometry = actionResult.Value };
+            sceneContent.Add(sceneEntity);
+            return actionResult;
         }
     }
 }

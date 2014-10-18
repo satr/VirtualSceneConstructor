@@ -5,11 +5,16 @@ using System.IO;
 using System.Linq;
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Assets;
+using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using VirtualScene.BusinessComponents.Core.Properties;
 
 namespace VirtualScene.BusinessComponents.Core.Importers
 {
-    internal class WavefrontFormatImporter
+    /// <summary>
+    /// The importer of geometry from 3D files with Wavefront format
+    /// </summary>
+    public class WavefrontFormatImporter : IGeometryImporter
     {
         private const char SpaceChar = ' ';
 
@@ -122,19 +127,40 @@ namespace VirtualScene.BusinessComponents.Core.Importers
             }
         }
 
-        public void LoadDataToScene(string fullFileName, ISceneEngine sceneEngine)
+        /// <summary>
+        /// Load of 3D geometry from the file
+        /// </summary>
+        /// <param name="fullFileName">The path to the file with 3D geometry</param>
+        /// <param name="sceneEngine">The engine of the scene</param>
+        /// <returns></returns>
+        public ActionResult<SceneElement> LoadGeometry(string fullFileName, ISceneEngine sceneEngine)
+        {
+            var polygon = new Polygon();
+            
+            var actionResult = new ActionResult<SceneElement>("Import Wavefront format geometry") {Value = polygon};
+
+            if (!File.Exists(fullFileName))
+            {
+                actionResult.AddError(Resources.Message_LoadGeometry_File_N_not_found, fullFileName);
+                return actionResult;
+            }
+            try
+            {
+                LoadGeometryFromFile(fullFileName, sceneEngine, polygon, actionResult);
+            }
+            catch (Exception e)
+            {
+                actionResult.AddError(e);
+            }
+            return actionResult;
+        }
+
+        private static void LoadGeometryFromFile(string fullFileName, ISceneEngine sceneEngine, Polygon polygon, ActionResult<SceneElement> actionResult)
         {
             var split = new[] {' '};
-
-            //  Create a scene and polygon.
-            var polygon = new Polygon();
-
             string mtlName = null;
-
-            //  Create a stream reader.
             using (var reader = new StreamReader(fullFileName))
             {
-                //  Read line by line.
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -142,101 +168,122 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                     if (line.StartsWith("#"))
                         continue;
 
-                    //  Do we have a texture coordinate?
-                    if (line.StartsWith("vt"))
+                    if (line.StartsWith("vt")) //texture coordinate
                     {
-                        //  Get the texture coord strings.
-                        string[] values = line.Substring(3).Split(split, StringSplitOptions.RemoveEmptyEntries);
-
-                        //  Parse texture coordinates.
-                        float u = float.Parse(values[0]);
-                        float v = float.Parse(values[1]);
-
-                        //  Add the texture coordinate.
-                        polygon.UVs.Add(new UV(u, v));
-
+                        AddTextureCoordinate(polygon, line, split);
                         continue;
                     }
 
-                    //  Do we have a normal coordinate?
-                    if (line.StartsWith("vn"))
+                    if (line.StartsWith("vn")) //normal coordinate
                     {
-                        //  Get the normal coord strings.
-                        string[] values = line.Substring(3).Split(split, StringSplitOptions.RemoveEmptyEntries);
-
-                        //  Parse normal coordinates.
-                        float x = float.Parse(values[0]);
-                        float y = float.Parse(values[1]);
-                        float z = float.Parse(values[2]);
-
-                        //  Add the normal.
-                        polygon.Normals.Add(new Vertex(x, y, z));
-
+                        AddNormal(polygon, line, split);
                         continue;
                     }
 
-                    //  Do we have a vertex?
-                    if (line.StartsWith("v"))
+                    if (line.StartsWith("v")) //vertex
                     {
-                        //  Get the vertex coord strings.
-                        string[] values = line.Substring(2).Split(split, StringSplitOptions.RemoveEmptyEntries);
-
-                        //  Parse vertex coordinates.
-                        float x = float.Parse(values[0]);
-                        float y = float.Parse(values[1]);
-                        float z = float.Parse(values[2]);
-
-                        //   Add the vertices.
-                        polygon.Vertices.Add(new Vertex(x, y, z));
-
+                        AddVertices(polygon, line, split);
                         continue;
                     }
 
-                    //  Do we have a face?
-                    if (line.StartsWith("f"))
+                    if (line.StartsWith("f")) //Face
                     {
-                        var face = new Face();
-
-                        if (!string.IsNullOrWhiteSpace(mtlName))
-                            face.Material = sceneEngine.GetAssets<Material>().FirstOrDefault(t => t.Name == mtlName);
-
-                        //  Get the face indices
-                        string[] indices = line.Substring(2).Split(split, StringSplitOptions.RemoveEmptyEntries);
-
-                        //  Add each index.
-                        AddIndexesToFace(indices, face);
-
-                        //  Add the face.
-                        polygon.Faces.Add(face);
-
+                        AddFace(sceneEngine, polygon, mtlName, line, split);
                         continue;
                     }
 
-                    var currentDirectory = Environment.CurrentDirectory;
-                    try
-                    {
-                        if (line.StartsWith("mtllib") && fullFileName != null && File.Exists(fullFileName))
-                        {
-                            // Set current directory in case a relative path to material file is used.
-                            // ReSharper disable once AssignNullToNotNullAttribute
-                            Environment.CurrentDirectory = Path.GetDirectoryName(fullFileName);
-
-                            // Load materials file.
-                            var mtlPath = ReadMaterialValue(line);
-                            LoadMaterials(mtlPath, sceneEngine);
-                        }
-
-                        if (line.StartsWith("usemtl"))
-                            mtlName = ReadMaterialValue(line);
-                    }
-                    finally
-                    {
-                        Environment.CurrentDirectory = currentDirectory;
-                    }
+                    AddMaterials(fullFileName, sceneEngine, line, ref mtlName, actionResult);
                 }
             }
+        }
 
-            sceneEngine.AddSceneElement(polygon);
+        private static void AddMaterials(string fullFileName, ISceneEngine sceneEngine, string line, ref string mtlName, ActionResult<SceneElement> actionResult)
+        {
+            var currentDirectory = Environment.CurrentDirectory;
+            try
+            {
+                var fileInfo = new FileInfo(fullFileName);
+                if (line.StartsWith("mtllib") && fullFileName != null && fileInfo.Exists && fileInfo.Directory != null)
+                {
+                    // Set current directory in case a relative path to material file is used.
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    Environment.CurrentDirectory = fileInfo.Directory.FullName;
+
+                    // Load materials file.
+                    var mtlPath = ReadMaterialValue(line);
+                    if (!File.Exists(mtlPath))
+                    {
+                        actionResult.AddWarning("File with material \"{0}\" not found.", mtlPath);
+                        return;
+                    }
+                    LoadMaterials(mtlPath, sceneEngine);
+                }
+
+                if (line.StartsWith("usemtl"))
+                    mtlName = ReadMaterialValue(line);
+            }
+            finally
+            {
+                Environment.CurrentDirectory = currentDirectory;
+            }
+        }
+
+        private static void AddFace(ISceneEngine sceneEngine, Polygon polygon, string mtlName, string line, char[] split)
+        {
+            var face = new Face();
+
+            if (!string.IsNullOrWhiteSpace(mtlName))
+                face.Material = sceneEngine.GetAssets<Material>().FirstOrDefault(t => t.Name == mtlName);
+
+            //  Get the face indices
+            string[] indices = line.Substring(2).Split(split, StringSplitOptions.RemoveEmptyEntries);
+
+            //  Add each index.
+            AddIndexesToFace(indices, face);
+
+            //  Add the face.
+            polygon.Faces.Add(face);
+        }
+
+        private static void AddVertices(Polygon polygon, string line, char[] split)
+        {
+//  Get the vertex coord strings.
+            string[] values = line.Substring(2).Split(split, StringSplitOptions.RemoveEmptyEntries);
+
+            //  Parse vertex coordinates.
+            float x = float.Parse(values[0]);
+            float y = float.Parse(values[1]);
+            float z = float.Parse(values[2]);
+
+            //   Add the vertices.
+            polygon.Vertices.Add(new Vertex(x, y, z));
+        }
+
+        private static void AddNormal(Polygon polygon, string line, char[] split)
+        {
+//  Get the normal coord strings.
+            string[] values = line.Substring(3).Split(split, StringSplitOptions.RemoveEmptyEntries);
+
+            //  Parse normal coordinates.
+            float x = float.Parse(values[0]);
+            float y = float.Parse(values[1]);
+            float z = float.Parse(values[2]);
+
+            //  Add the normal.
+            polygon.Normals.Add(new Vertex(x, y, z));
+        }
+
+        private static void AddTextureCoordinate(Polygon polygon, string line, char[] split)
+        {
+//  Get the texture coord strings.
+            string[] values = line.Substring(3).Split(split, StringSplitOptions.RemoveEmptyEntries);
+
+            //  Parse texture coordinates.
+            float u = float.Parse(values[0]);
+            float v = float.Parse(values[1]);
+
+            //  Add the texture coordinate.
+            polygon.UVs.Add(new UV(u, v));
         }
 
         private static void AddIndexesToFace(IEnumerable<string> indices, Face face)
@@ -249,12 +296,6 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                     (parts.Length > 1 && parts[1].Length > 0) ? int.Parse(parts[1]) - 1 : -1,
                     (parts.Length > 2 && parts[2].Length > 0) ? int.Parse(parts[2]) - 1 : -1));
             }
-        }
-
-        public bool SaveData(Scene scene, string path)
-        {
-            throw new NotImplementedException("The SaveData method has not been implemented for .obj files.");
-            //return SaveData(scene, scene.SceneContainer, path);
         }
     }
 }

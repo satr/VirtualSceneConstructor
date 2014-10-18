@@ -1,4 +1,6 @@
-﻿namespace VirtualScene.BusinessComponents.Core
+﻿using VirtualScene.BusinessComponents.Core.Entities;
+
+namespace VirtualScene.BusinessComponents.Core
 {
     /// <summary>
     /// Interface to the content of the scene
@@ -19,5 +21,11 @@
         /// Navigation in the scene
         /// </summary>
         ISceneNavigation Navigation { get; set; }
+
+        /// <summary>
+        /// Add a new entity to the scene
+        /// </summary>
+        /// <param name="sceneEntity"></param>
+        void Add(ISceneEntity sceneEntity);
     }
 }

@@ -150,4 +150,13 @@
   <data name="Title_Import3D_model" xml:space="preserve">
     <value>Import 3D model</value>
   </data>
+  <data name="Title_Import_3D_model" xml:space="preserve">
+    <value>Import 3D model</value>
+  </data>
+  <data name="Title_File_name" xml:space="preserve">
+    <value>File name</value>
+  </data>
+  <data name="Title_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
 </root>

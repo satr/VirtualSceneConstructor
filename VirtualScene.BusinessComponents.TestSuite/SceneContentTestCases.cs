@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Moq;
 using NUnit.Framework;
 using VirtualScene.BusinessComponents.Common;
@@ -15,6 +16,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
         private Mock<ISceneEngine> _sceneEngineMock;
         private Mock<SceneEngineFactory> _sceneEngineFactoryMock;
         private IStage _stage;
+        private ObservableCollection<ISceneEntity> _sceneEntities;
 
         [SetUp]
         public void Init()
@@ -23,7 +25,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _sceneEngineMock = new Mock<ISceneEngine>();
             _sceneEngineFactoryMock.Setup(m => m.Create()).Returns(_sceneEngineMock.Object);
             var stageMock = new Mock<IStage>();
-            stageMock.SetupGet(p => p.Entities).Returns(new ObservableCollection<ISceneEntity>());
+            _sceneEntities = new ObservableCollection<ISceneEntity>();
+            stageMock.SetupGet(p => p.Entities).Returns(_sceneEntities);
             _stage = stageMock.Object;
             _sceneContent = new SceneContent();
         }
@@ -66,6 +69,46 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _sceneContent.Stage = stage;
 
             _sceneEngineMock.Verify(m => m.Clear(), Times.Once());
+        }
+
+        [Test]
+        public void TestSceneEngineHandlesSceneEntityAddedToStage()
+        {
+            _sceneContent.Stage = _stage;
+
+            var sceneEntity = new Mock<ISceneEntity>().Object;
+            _stage.Entities.Add(sceneEntity);
+
+            _sceneEngineMock.Verify(m => m.AddSceneEntity(sceneEntity), Times.Once());
+        }
+
+        [Test]
+        public void TestSceneEngineHandlesSceneEntityRemovedToStage()
+        {
+            var sceneEntity = new Mock<ISceneEntity>().Object;
+            _stage.Entities.Add(sceneEntity);
+            _sceneContent.Stage = _stage;
+
+            _stage.Entities.Remove(sceneEntity);
+
+            _sceneEngineMock.Verify(m => m.RemoveSceneEntity(sceneEntity), Times.Once());
+        }
+
+        [Test, ExpectedException(typeof(InvalidOperationException))]
+        public void TestFailOnAddingAnEntityWhenStageIsNotInitialzed()
+        {
+            _sceneContent.Add(new Mock<ISceneEntity>().Object);
+        }
+
+        [Test]
+        public void TestStageGetsNewEntityWhenItIsAddedToSceneContent()
+        {
+            _sceneContent.Stage = _stage;
+            var sceneEntity = new Mock<ISceneEntity>().Object;
+
+            _sceneContent.Add(sceneEntity);
+
+            CollectionAssert.Contains(_sceneEntities, sceneEntity);
         }
 
 

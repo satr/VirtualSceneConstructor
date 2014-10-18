@@ -50,7 +50,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         protected virtual void OnCanExecuteChanged()
         {
             var handler = CanExecuteChanged;
-            if (handler != null) handler(this, EventArgs.Empty);
+            if (handler != null) 
+                handler(this, EventArgs.Empty);
         }
     }
 }

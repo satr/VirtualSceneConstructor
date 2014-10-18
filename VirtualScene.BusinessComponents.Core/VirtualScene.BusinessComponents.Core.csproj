@@ -46,12 +46,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionResult.cs" />
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Entities\ISceneEntity.cs" />
     <Compile Include="Entities\SceneEntity.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Factories\SceneContentFactory.cs" />
+    <Compile Include="IActionResult.cs" />
+    <Compile Include="Importers\IGeometryImporter.cs" />
+    <Compile Include="Pools\GeometryImportersPool.cs" />
     <Compile Include="Importers\WavefrontFormatImporter.cs" />
     <Compile Include="Factories\SceneEngineFactory.cs" />
     <Compile Include="ISceneContent.cs" />
@@ -79,6 +83,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +108,7 @@
       <Name>VirtualScene.BusinessComponents.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

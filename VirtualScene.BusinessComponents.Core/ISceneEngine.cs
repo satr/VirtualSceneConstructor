@@ -5,6 +5,7 @@ using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using VirtualScene.BusinessComponents.Core.Entities;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -45,11 +46,16 @@ namespace VirtualScene.BusinessComponents.Core
         void Move(float dx, float dy, float dz);
 
         /// <summary>
-        /// Occures when a scene entity added or removed from the stage
+        /// Add an entity to the scene
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void StageEntitiesChanged(object sender, NotifyCollectionChangedEventArgs e);
+        /// <param name="sceneEntity">The entity to be added to the scene</param>
+        void AddSceneEntity(ISceneEntity sceneEntity);
+
+        /// <summary>
+        /// Remove an entity from the scene
+        /// </summary>
+        /// <param name="sceneEntity">The entity to be removed from the scene</param>
+        void RemoveSceneEntity(ISceneEntity sceneEntity);
 
         /// <summary>
         /// Clear the scene

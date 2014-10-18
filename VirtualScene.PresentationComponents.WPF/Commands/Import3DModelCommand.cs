@@ -1,6 +1,7 @@
-using Microsoft.Win32;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.PresentationComponents.WPF.Models;
+using VirtualScene.PresentationComponents.WPF.Views;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
@@ -9,7 +10,6 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// </summary>
     internal class Import3DModelCommand : AddSceneObjectCommandBase
     {
-        const string OpenFileDialogFilter = "Wavefont Obj Files (*.obj)|*.obj";
         /// <summary>
         /// Creates a new instance of the Import3DModel command
         /// </summary>
@@ -21,16 +21,12 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
 
         protected override void Execute()
         {
-            var fileDialog = new OpenFileDialog
-            {
-                Multiselect = false,
-                Filter = OpenFileDialogFilter,
-                Title = Properties.Resources.Title_Import3D_model
-            };
-            var dialogResult = fileDialog.ShowDialog();
-            if (!dialogResult.HasValue || !dialogResult.Value)
+            var model = new Import3DModelModel();
+            var view = new Import3DModelView(model);
+            view.ShowDialog();
+            if (!view.DialogResult.HasValue || !view.DialogResult.Value)
                 return;
-            ServiceLocator.Get<BusinessManager>().Import3DModel(fileDialog.FileName, SceneContent);
+            ServiceLocator.Get<BusinessManager>().Import3DModel(model.Name, model.FullFileName, SceneContent);
         }
     }
 }
