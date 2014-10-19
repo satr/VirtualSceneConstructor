@@ -3,6 +3,7 @@ using NUnit.Framework;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -10,12 +11,12 @@ namespace VirtualScene.BusinessComponents.TestSuite
     public class BusinessManagerTestCases
     {
         private BusinessManager _businessManager;
-        private Mock<ISceneEngine> _sceneEngineMock;
+        private Mock<ISceneContent> _sceneContentMock;
 
         [SetUp]
         public void Init()
         {
-            _sceneEngineMock = new Mock<ISceneEngine>();
+            _sceneContentMock = new Mock<ISceneContent>();
             _businessManager = new BusinessManager();
         }
 
@@ -28,8 +29,9 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void AddCubeToSceneTest()
         {
-            _businessManager.AddSceneElementInSpace<Cube>(_sceneEngineMock.Object, 0, 0, 0);
-            _sceneEngineMock.Verify(m => m.AddSceneElement(It.IsAny<Cube>()), Times.Once());
+            const string testEntityName = "TestEntityName";
+            _businessManager.AddSceneElementInSpace<Cube>(_sceneContentMock.Object, 0, 0, 0, testEntityName);
+            _sceneContentMock.Verify(m => m.Add(It.IsAny<ISceneEntity>()), Times.Once());
         }
     }
 }

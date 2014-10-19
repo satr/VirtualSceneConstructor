@@ -164,13 +164,6 @@ namespace VirtualScene.BusinessComponents.Core
         }
 
         /// <summary>
-        /// Add a scene element to a scene
-        /// </summary>
-        public void AddSceneElement(SceneElement sceneElement) {
-            Scene.SceneContainer.AddChild(sceneElement);
-        }
-
-        /// <summary>
         /// Gets the asset list of epecified type
         /// </summary>
         /// <typeparam name="T">Type of the asset</typeparam>

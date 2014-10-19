@@ -16,18 +16,19 @@ namespace VirtualScene.BusinessComponents.Core
         /// <summary>
         /// Add a new polygon to the scene
         /// </summary>
-        /// <param name="sceneEngine"></param>
+        /// <param name="sceneContent"></param>
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        public void AddSceneElementInSpace<T>(ISceneEngine sceneEngine, int x, int y, int z)
+        /// <param name="name"></param>
+        public void AddSceneElementInSpace<T>(ISceneContent sceneContent, int x, int y, int z, string name)
             where T : SceneElement, IHasObjectSpace, new()
         {
             var sceneElement = new T();
             sceneElement.Transformation.TranslateX += x;
             sceneElement.Transformation.TranslateY += y;
             sceneElement.Transformation.TranslateZ += z;
-            sceneEngine.AddSceneElement(sceneElement);
+            sceneContent.Add(new SceneEntity{Name = name, Geometry = sceneElement});
         }
 
         /// <summary>

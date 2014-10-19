@@ -1,6 +1,7 @@
 ﻿using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.PresentationComponents.WPF.Properties;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
@@ -26,7 +27,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         {
             _x += 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneEngine, _x, _y, 0);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneContent, _x, _y, 0, Resources.Title_Cube);
         }
     }
 }

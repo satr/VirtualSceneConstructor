@@ -8,6 +8,8 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.Properties;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
+using VirtualScene.PresentationComponents.WPF.Views;
 
 namespace VirtualScene.PresentationComponents.WPF.Presenters
 {
@@ -16,6 +18,9 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
     /// </summary>
     public class ApplicationPresenter
     {
+        private readonly FrameworkElement _stageContentView;
+        private readonly SceneEntityDetailView _sceneEntityDetailView;
+
         /// <summary>
         /// Creates a new instance of the presenter
         /// </summary>
@@ -24,6 +29,8 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
             SceneContent = ServiceLocator.Get<SceneContentFactory>().Create();
             InitTopElements(SceneContent);
             SceneContent.Stage = new Stage();
+            _stageContentView = new StageContentView(new StageContentViewModel(SceneContent));
+            _sceneEntityDetailView = new SceneEntityDetailView(new SceneEntityDetailViewModel());
         }
 
         /// <summary>
@@ -59,5 +66,22 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         /// </summary>
         public IList<UIElement> TopElements { get; private set; }
 
+        /// <summary>
+        /// The view displaying the content of the stage
+        /// </summary>
+        /// <returns>The view</returns>
+        public FrameworkElement GetStageContentView()
+        {
+            return _stageContentView;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <returns></returns>
+        public FrameworkElement GetDetailView()
+        {
+            return _sceneEntityDetailView;
+        }
     }
 }

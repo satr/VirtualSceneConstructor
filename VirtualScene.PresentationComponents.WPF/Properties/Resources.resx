@@ -159,4 +159,16 @@
   <data name="Title_Import" xml:space="preserve">
     <value>Import</value>
   </data>
+  <data name="Title_Stage" xml:space="preserve">
+    <value>Stage</value>
+  </data>
+  <data name="Title_Cube" xml:space="preserve">
+    <value>Cube</value>
+  </data>
+  <data name="Title_Sphere" xml:space="preserve">
+    <value>Sphere</value>
+  </data>
+  <data name="Title_Geometry_Type" xml:space="preserve">
+    <value>Geometry Type</value>
+  </data>
 </root>

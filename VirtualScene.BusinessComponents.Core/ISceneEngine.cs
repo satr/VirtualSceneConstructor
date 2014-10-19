@@ -68,11 +68,6 @@ namespace VirtualScene.BusinessComponents.Core
         int SceneElementsCount { get; }
 
         /// <summary>
-        /// Add a scene element to a scene
-        /// </summary>
-        void AddSceneElement(SceneElement sceneElement);
-
-        /// <summary>
         /// Gets the asset list of epecified type
         /// </summary>
         /// <typeparam name="T">Type of the asset</typeparam>

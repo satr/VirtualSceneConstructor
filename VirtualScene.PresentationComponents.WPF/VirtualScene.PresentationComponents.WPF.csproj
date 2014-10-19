@@ -75,12 +75,14 @@
     <Compile Include="Presenters\ApplicationPresenter.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\Import3DModelCommand.cs" />
+    <Compile Include="Presenters\StagePresenter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
     <Compile Include="Commands\OpenFileWith3DModelCommand.cs" />
     <Compile Include="ViewModels\SceneViewportViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\ContentTreeViewModelBase.cs" />
     <Compile Include="Views\EntityNameDialogView.xaml.cs">
       <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
     </Compile>
@@ -93,9 +95,17 @@
       <DependentUpon>Import3DModelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Import3DModelViewModel.cs" />
+    <Compile Include="Views\SceneEntityDetailView.xaml.cs">
+      <DependentUpon>SceneEntityDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\SceneEntityDetailViewModel.cs" />
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StageContentView.xaml.cs">
+      <DependentUpon>StageContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\StageContentViewModel.cs" />
     <Page Include="Views\EntityNameDialogView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,9 +118,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SceneEntityDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SceneViewportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StageContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

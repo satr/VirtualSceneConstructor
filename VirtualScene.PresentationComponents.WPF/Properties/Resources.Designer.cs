@@ -124,11 +124,29 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cube.
+        /// </summary>
+        public static string Title_Cube {
+            get {
+                return ResourceManager.GetString("Title_Cube", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name.
         /// </summary>
         public static string Title_File_name {
             get {
                 return ResourceManager.GetString("Title_File_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geometry Type.
+        /// </summary>
+        public static string Title_Geometry_Type {
+            get {
+                return ResourceManager.GetString("Title_Geometry_Type", resourceCulture);
             }
         }
         
@@ -183,6 +201,24 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         public static string Title_OK {
             get {
                 return ResourceManager.GetString("Title_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sphere.
+        /// </summary>
+        public static string Title_Sphere {
+            get {
+                return ResourceManager.GetString("Title_Sphere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stage.
+        /// </summary>
+        public static string Title_Stage {
+            get {
+                return ResourceManager.GetString("Title_Stage", resourceCulture);
             }
         }
     }
