@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Cameras;
-using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core.Entities;
 
 namespace VirtualScene.BusinessComponents.Core

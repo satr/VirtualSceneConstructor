@@ -3,11 +3,12 @@ using SharpGL.SceneGraph.Cameras;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
-using VirtualScene.PresentationComponents.WPF.Models;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Views;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands
 {
     /// <summary>
     /// The command adding a new camera
@@ -16,7 +17,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
     public class AddCameraCommand<T> : AddSceneObjectCommandBase
         where T: Camera, new()
     {
-        private string _title;
+        private readonly string _title;
 
         /// <summary>
         /// Create a new instance of the command
@@ -33,12 +34,11 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         /// </summary>
         protected override void Execute()
         {
-            var entityNameViewModel = new EntityNameViewModel { Name = CreateCameraNameBasedOnCameraType() };
-            _title = Resources.Title_Add_Arc_Camera;
-            var dialogResult = new EntityNameDialogView(_title, entityNameViewModel).ShowDialog();
-            if(!dialogResult.HasValue || !dialogResult.Value)
+            var viewModel = new EntityNameDialogViewModel(_title, CreateCameraNameBasedOnCameraType());
+            new EntityNameDialogView(viewModel).ShowDialog();
+            if (viewModel.OperationCancelled)
                 return;
-            SceneEngine.Cameras.Add(ServiceLocator.Get<CameraFactory>().Create<T>(Constants.SceneEngine.DefaultCameraVector, entityNameViewModel.Name));
+            SceneEngine.Cameras.Add(ServiceLocator.Get<CameraFactory>().Create<T>(Constants.SceneEngine.DefaultCameraVector, viewModel.Name));
         }
 
         private static string CreateCameraNameBasedOnCameraType()

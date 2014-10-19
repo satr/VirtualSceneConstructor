@@ -1,8 +1,6 @@
-﻿using System;
-using SharpGL.SceneGraph.Core;
+﻿using SharpGL.SceneGraph.Core;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.BusinessComponents.Core.Importers;
 using VirtualScene.BusinessComponents.Core.Pools;
 using VirtualScene.BusinessComponents.Core.Properties;
 

@@ -2,7 +2,7 @@ using SharpGL.SceneGraph.Cameras;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Commands;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands
 {
     internal class SetCameraToSceneViewCommand : CommandBase
     {

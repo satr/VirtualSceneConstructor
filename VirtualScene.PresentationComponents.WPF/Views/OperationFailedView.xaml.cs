@@ -3,15 +3,15 @@
 namespace VirtualScene.PresentationComponents.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for EntityNameDialogView.xaml
+    /// Interaction logic for OperationFailedView.xaml
     /// </summary>
-    public partial class EntityNameDialogView
+    public partial class OperationFailedView
     {
         /// <summary>
-        /// Creates a new oinstance of the EntityNameDialogView
+        /// Creates a new instance of the view
         /// </summary>
-        /// <param name="viewModel">The view-model to enter a name on the view</param>
-        public EntityNameDialogView(ViewModelBase viewModel)
+        /// <param name="viewModel">The view-model of the view</param>
+        public OperationFailedView(OperationFailedViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

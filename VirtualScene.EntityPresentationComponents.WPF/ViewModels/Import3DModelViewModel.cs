@@ -1,8 +1,6 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.EntityPresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
@@ -12,11 +10,6 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
     /// </summary>
     public class Import3DModelViewModel: ViewModelBase
     {
-        /// <summary>
-        /// Occures when the view should be closed.
-        /// </summary>
-        public event EventHandler CloseView;
-
         private string _fileName;
 
         private string _name;
@@ -29,13 +22,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
         {
             OpenFileCommand = new OpenFileWith3DModelCommand(this);
             ImportCommand = new PerformImport3DModelCommand(this, sceneContent).AfterExecuteAction(OnCloseView);
-            CancelCommand = new DelegateCommand(OnCloseView);
         }
-
-        /// <summary>
-        /// The command closing the view
-        /// </summary>
-        public DelegateCommand CancelCommand { get; set; }
 
         /// <summary>
         /// The command performing the import from the file
@@ -75,18 +62,6 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
                 _name = value;
                 OnPropertyChanged();
             }
-        }
-
-        /// <summary>
-        /// The operation status. When  "true" - the operation has been cancelled
-        /// </summary>
-        public bool OperationCancelled { get; set; }
-
-        private  void OnCloseView()
-        {
-            var handler = CloseView;
-            if (handler != null) 
-                handler(this, EventArgs.Empty);
         }
     }
 }

@@ -132,4 +132,13 @@
   <data name="Title_File_name" xml:space="preserve">
     <value>File name</value>
   </data>
+  <data name="Title_Repeat" xml:space="preserve">
+    <value>Repeat</value>
+  </data>
+  <data name="Title_Operation_failed_N" xml:space="preserve">
+    <value>Operation failed: {0}</value>
+  </data>
+  <data name="Title_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
 </root>

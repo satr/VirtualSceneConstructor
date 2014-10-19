@@ -1,47 +1,30 @@
-﻿using System.Windows;
-using VirtualScene.PresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.Models;
+﻿using VirtualScene.PresentationComponents.WPF.Commands;
 
 namespace VirtualScene.PresentationComponents.WPF.ViewModels
 {
     /// <summary>
     /// The view model for EntityNameDialogView
     /// </summary>
-    public class EntityNameDialogViewModel
+    public class EntityNameDialogViewModel: ViewModelBase
     {
-        private readonly EntityNameViewModel _viewModel;
-        private readonly Window _view;
+        private string _name;
 
         /// <summary>
         /// Creates a new instance of the EntityNameDialogViewModel
         /// </summary>
         /// <param name="title">The title of the dialog</param>
-        /// <param name="view">The dialog view</param>
-        /// <param name="viewModel">The entity name view model</param>
-        public EntityNameDialogViewModel(string title, Window view, EntityNameViewModel viewModel)
+        /// <param name="name">The entity name</param>
+        public EntityNameDialogViewModel(string title, string name)
         {
             Title = title;
-            _viewModel = viewModel;
-            _view = view;
-            AcceptCommand = new DelegateCommand(()=>CloseView(true));
-            CancelCommand = new DelegateCommand(()=>CloseView(false));
-        }
-
-        private void CloseView(bool accepted)
-        {
-            _view.DialogResult = accepted;
-            _view.Close();
+            _name = name;
+            AcceptCommand = new DelegateCommand(OnCloseView);
         }
 
         /// <summary>
         /// The command on the dialog accepted
         /// </summary>
         public DelegateCommand AcceptCommand { get; set; }
-
-        /// <summary>
-        /// The command on the dialog canceled
-        /// </summary>
-        public DelegateCommand CancelCommand { get; set; }
 
         /// <summary>
         /// The title of the dialog
@@ -53,8 +36,14 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// </summary>
         public string Name
         {
-            get { return _viewModel.Name; }
-            set { _viewModel.Name = value; }
+            get { return _name; }
+            set
+            {
+                if (value == _name) 
+                    return;
+                _name = value;
+                OnPropertyChanged();
+            }
         }
     }
 }

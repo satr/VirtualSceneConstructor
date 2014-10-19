@@ -47,17 +47,18 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AddCameraCommand.cs" />
-    <Compile Include="Commands\AddCubeCommand.cs" />
-    <Compile Include="Commands\AddSceneObjectCommandBase.cs" />
-    <Compile Include="Commands\AddSphereCommand.cs" />
-    <Compile Include="Commands\Import3DModelCommand.cs" />
-    <Compile Include="Commands\OpenFileWith3DModelCommand.cs" />
-    <Compile Include="Commands\PerformImport3DModelCommand.cs" />
-    <Compile Include="Commands\SetCameraToSceneViewCommand.cs" />
+    <Compile Include="Commands\CameraCommands\AddCameraCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\AddCubeCommand.cs" />
+    <Compile Include="Commands\CommonCommands\AddSceneObjectCommandBase.cs" />
+    <Compile Include="Commands\GeometryCommands\AddSphereCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\Import3DModelCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\OpenFileWith3DModelCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\PerformImport3DModelCommand.cs" />
+    <Compile Include="Commands\CameraCommands\SetCameraToSceneViewCommand.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Presenters\CameraPresenter.cs" />
     <Compile Include="Presenters\GeometryPrimitivePresenter.cs" />
+    <Compile Include="Commands\StageCommands\SaveStageCommand.cs" />
     <Compile Include="Presenters\SceneEntityPresenter.cs" />
     <Compile Include="Presenters\SceneViewportPresenter.cs" />
     <Compile Include="Presenters\StagePresenter.cs" />
@@ -99,6 +100,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -127,6 +129,10 @@
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.EntityBusinessComponents\VirtualScene.EntityBusinessComponents.csproj">
+      <Project>{B56FD199-DE98-43A2-8926-AC0C0DE7C4AA}</Project>
+      <Name>VirtualScene.EntityBusinessComponents</Name>
     </ProjectReference>
     <ProjectReference Include="..\VirtualScene.PresentationComponents.WPF\VirtualScene.PresentationComponents.WPF.csproj">
       <Project>{92c10edb-a772-4be8-8900-5b6744bd659d}</Project>

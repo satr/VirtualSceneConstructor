@@ -147,4 +147,7 @@
   <data name="Message_AddMaterials_File_with_material_N_not_found" xml:space="preserve">
     <value>File with material "{0}" not found.</value>
   </data>
+  <data name="Title_Save_Stage" xml:space="preserve">
+    <value>Save Stage</value>
+  </data>
 </root>

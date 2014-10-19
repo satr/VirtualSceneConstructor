@@ -1,22 +1,23 @@
-﻿using SharpGL.SceneGraph.Primitives;
+﻿using SharpGL.SceneGraph.Quadrics;
 using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Commands
 {
     /// <summary>
-    /// The command creates a cube and adds it to the scene
+    /// The command creates a sphere and adds it to the scene
     /// </summary>
-    public class AddCubeCommand : AddSceneObjectCommandBase
+    public class AddSphereCommand: AddSceneObjectCommandBase
     {
-        private int _x;
-        private int _y;
+        private int _x, _y;
+
         /// <summary>
-        /// Creates a new instance of the AddCubeCommand
+        /// Creates a new instance of the AddSphereCommand
         /// </summary>
         /// <param name="sceneContent"></param>
-        public AddCubeCommand(ISceneContent sceneContent): base(sceneContent)
+        public AddSphereCommand(ISceneContent sceneContent): base(sceneContent)
         {
         }
 
@@ -25,9 +26,9 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         /// </summary>
         protected override void Execute()
         {
-            _x += 1;
+            _x -= 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneContent, _x, _y, 0, Resources.Title_Cube);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Sphere>(SceneContent, _x, _y, 0, Resources.Title_Sphere);
         }
     }
 }

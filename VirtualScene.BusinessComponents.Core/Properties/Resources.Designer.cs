@@ -149,5 +149,14 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
                 return ResourceManager.GetString("Title_Navigation_Camera", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Stage.
+        /// </summary>
+        internal static string Title_Save_Stage {
+            get {
+                return ResourceManager.GetString("Title_Save_Stage", resourceCulture);
+            }
+        }
     }
 }

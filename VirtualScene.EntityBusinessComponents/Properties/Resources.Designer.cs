@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VirtualScene.PresentationComponents.WPF.Properties {
+namespace VirtualScene.EntityBusinessComponents.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.PresentationComponents.WPF.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.EntityBusinessComponents.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,74 +61,11 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Save Stage.
         /// </summary>
-        public static string Title_Cancel {
+        public static string Title_Save_Stage {
             get {
-                return ResourceManager.GetString("Title_Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Close.
-        /// </summary>
-        public static string Title_Close {
-            get {
-                return ResourceManager.GetString("Title_Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Details.
-        /// </summary>
-        public static string Title_Details {
-            get {
-                return ResourceManager.GetString("Title_Details", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File name.
-        /// </summary>
-        public static string Title_File_name {
-            get {
-                return ResourceManager.GetString("Title_File_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Title_Name {
-            get {
-                return ResourceManager.GetString("Title_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK.
-        /// </summary>
-        public static string Title_OK {
-            get {
-                return ResourceManager.GetString("Title_OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Operation failed: {0}.
-        /// </summary>
-        public static string Title_Operation_failed_N {
-            get {
-                return ResourceManager.GetString("Title_Operation_failed_N", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Repeat.
-        /// </summary>
-        public static string Title_Repeat {
-            get {
-                return ResourceManager.GetString("Title_Repeat", resourceCulture);
+                return ResourceManager.GetString("Title_Save_Stage", resourceCulture);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using VirtualScene.BusinessComponents.Core;
 using VirtualScene.PresentationComponents.WPF.Commands;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands
 {
     /// <summary>
     /// Adds a new scene element to a scene

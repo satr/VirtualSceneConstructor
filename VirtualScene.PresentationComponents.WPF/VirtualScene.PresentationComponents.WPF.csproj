@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
-    <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Models\ImageSourceEventArg.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Presenters\ContentPresenterBase.cs" />
@@ -61,7 +60,15 @@
       <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\EntityNameDialogViewModel.cs" />
+    <Compile Include="Views\OperationFailedView.xaml.cs">
+      <DependentUpon>OperationFailedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\OperationFailedViewModel.cs" />
     <Page Include="Views\EntityNameDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OperationFailedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
