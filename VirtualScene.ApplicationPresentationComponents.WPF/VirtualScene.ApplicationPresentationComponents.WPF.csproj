@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92C10EDB-A772-4BE8-8900-5B6744BD659D}</ProjectGuid>
+    <ProjectGuid>{3B87088C-1FE4-4E55-8964-D0738D05A3B8}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>VirtualScene.PresentationComponents.WPF</RootNamespace>
-    <AssemblyName>VirtualScene.PresentationComponents.WPF</AssemblyName>
+    <RootNamespace>VirtualScene.ApplicationPresentationComponents.WPF</RootNamespace>
+    <AssemblyName>VirtualScene.ApplicationPresentationComponents.WPF</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\VirtualScene.PresentationComponents.WPF.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\VirtualScene.ApplicationPresentationComponents.WPF.XML</DocumentationFile>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -32,17 +32,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\VirtualScene.PresentationComponents.WPF.XML</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DocumentationFile>bin\Release\VirtualScene.ApplicationPresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
-    <Reference Include="Apex, Version=1.2.1.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SharpGL\sharpgl-master\source\SharpGL\Dependencies\Apex.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="ReachFramework" />
-    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -62,27 +58,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CommandBase.cs" />
-    <Compile Include="Commands\CommandWithSceneContentBase.cs" />
-    <Compile Include="Models\EntityNameViewModel.cs" />
-    <Compile Include="Models\ImageSourceEventArg.cs" />
-    <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Presenters\ContentPresenterBase.cs" />
-    <Compile Include="Presenters\EntityPresenterBase.cs" />
-    <Compile Include="Presenters\IContentPresenter.cs" />
-    <Compile Include="Presenters\IEntityPresenter.cs" />
-    <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\EntityNameDialogView.xaml.cs">
-      <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ViewModels\EntityNameDialogViewModel.cs" />
-    <Page Include="Views\EntityNameDialogView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="Commands\ShowHelpCommand.cs" />
+    <Compile Include="Presenters\ApplicationPresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -95,6 +72,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="ViewModels\HelpViewModel.cs" />
+    <Compile Include="Views\HelpView.xaml.cs">
+      <DependentUpon>HelpView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainEntityContentView.xaml.cs">
+      <DependentUpon>MainEntityContentView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -111,10 +95,6 @@
       <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
       <Name>SharpGL.SceneGraph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.WPF\SharpGL.WPF.csproj">
-      <Project>{53e67055-13d2-4467-bb57-79589afac2cd}</Project>
-      <Name>SharpGL.WPF</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
       <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
       <Name>VirtualScene.BusinessComponents.Common</Name>
@@ -123,11 +103,25 @@
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.EntityPresentationComponents.WPF\VirtualScene.EntityPresentationComponents.WPF.csproj">
+      <Project>{c9dbffab-1b05-4bb5-85b7-a5e0739e2c8c}</Project>
+      <Name>VirtualScene.EntityPresentationComponents.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.PresentationComponents.WPF\VirtualScene.PresentationComponents.WPF.csproj">
+      <Project>{92c10edb-a772-4be8-8900-5b6744bd659d}</Project>
+      <Name>VirtualScene.PresentationComponents.WPF</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Help.htm">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Page Include="Views\HelpView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainEntityContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

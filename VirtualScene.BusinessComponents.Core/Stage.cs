@@ -17,6 +17,11 @@ namespace VirtualScene.BusinessComponents.Core
         }
 
         /// <summary>
+        /// The name of the stage
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// A list of visual representations of objects in the scene
         /// </summary>
         public ObservableCollection<ISceneEntity> Entities { get; set; }

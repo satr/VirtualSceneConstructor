@@ -1,0 +1,15 @@
+﻿<Window x:Class="VirtualScene.ApplicationPresentationComponents.WPF.Views.HelpView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:properties="clr-namespace:VirtualScene.PresentationComponents.WPF.Properties;assembly=VirtualScene.PresentationComponents.WPF"
+        xmlns:appProperties="clr-namespace:VirtualScene.ApplicationPresentationComponents.WPF.Properties"
+        Title="{x:Static appProperties:Resources.Title_Help}" Height="414" Width="486" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+        </Grid.RowDefinitions>
+        <WebBrowser x:Name="Browser" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+        <Button Content="{x:Static properties:Resources.Title_Close}" Command="{Binding HideHelpCommand}" Width="60" Grid.Row="1" HorizontalAlignment="Right" Margin="6"></Button>
+    </Grid>
+</Window>

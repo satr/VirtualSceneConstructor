@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VirtualScene.PresentationComponents.WPF.Properties {
+namespace VirtualScene.ApplicationPresentationComponents.WPF.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.PresentationComponents.WPF.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("VirtualScene.ApplicationPresentationComponents.WPF.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,20 @@ namespace VirtualScene.PresentationComponents.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Presenter for the type &quot;{0}&quot; has been already added..
         /// </summary>
-        public static string Title_Cancel {
+        public static string Message_Presenter_for_the_type_N_has_been_already_added {
             get {
-                return ResourceManager.GetString("Title_Cancel", resourceCulture);
+                return ResourceManager.GetString("Message_Presenter_for_the_type_N_has_been_already_added", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close.
+        ///   Looks up a localized string similar to Help.
         /// </summary>
-        public static string Title_Close {
+        public static string Title_Help {
             get {
-                return ResourceManager.GetString("Title_Close", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File name.
-        /// </summary>
-        public static string Title_File_name {
-            get {
-                return ResourceManager.GetString("Title_File_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        public static string Title_Name {
-            get {
-                return ResourceManager.GetString("Title_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK.
-        /// </summary>
-        public static string Title_OK {
-            get {
-                return ResourceManager.GetString("Title_OK", resourceCulture);
+                return ResourceManager.GetString("Title_Help", resourceCulture);
             }
         }
     }

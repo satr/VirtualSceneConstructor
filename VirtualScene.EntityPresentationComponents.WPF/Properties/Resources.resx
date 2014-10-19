@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title_Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Title_Add_Arc_Camera" xml:space="preserve">
+    <value>Add Arc camera</value>
   </data>
-  <data name="Title_OK" xml:space="preserve">
-    <value>OK</value>
+  <data name="Title_Add_Cube" xml:space="preserve">
+    <value>Add Cube</value>
   </data>
-  <data name="Title_Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="Title_Add_Free_Camera" xml:space="preserve">
+    <value>Add Free camera</value>
   </data>
-  <data name="Title_Close" xml:space="preserve">
-    <value>Close</value>
+  <data name="Title_Add_Sphere" xml:space="preserve">
+    <value>Add Sphere</value>
   </data>
-  <data name="Title_File_name" xml:space="preserve">
-    <value>File name</value>
+  <data name="Title_Camera_N" xml:space="preserve">
+    <value>Camera: {0}</value>
+  </data>
+  <data name="Title_Camera_Type" xml:space="preserve">
+    <value>Camera Type</value>
+  </data>
+  <data name="Title_Cube" xml:space="preserve">
+    <value>Cube</value>
+  </data>
+  <data name="Title_Geometry_Type" xml:space="preserve">
+    <value>Geometry Type</value>
+  </data>
+  <data name="Title_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Title_Import3D_model" xml:space="preserve">
+    <value>Import 3D model</value>
+  </data>
+  <data name="Title_Import_3D_model" xml:space="preserve">
+    <value>Import 3D model</value>
+  </data>
+  <data name="Title_Sphere" xml:space="preserve">
+    <value>Sphere</value>
+  </data>
+  <data name="Title_Stage" xml:space="preserve">
+    <value>Stage</value>
   </data>
 </root>

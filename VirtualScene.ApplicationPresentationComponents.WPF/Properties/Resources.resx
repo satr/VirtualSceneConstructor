@@ -117,19 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Title_Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="Title_Help" xml:space="preserve">
+    <value>Help</value>
   </data>
-  <data name="Title_OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="Title_Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Title_Close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="Title_File_name" xml:space="preserve">
-    <value>File name</value>
+  <data name="Message_Presenter_for_the_type_N_has_been_already_added" xml:space="preserve">
+    <value>Presenter for the type "{0}" has been already added.</value>
   </data>
 </root>

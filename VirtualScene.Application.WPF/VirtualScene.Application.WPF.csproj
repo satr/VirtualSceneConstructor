@@ -106,6 +106,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VirtualScene.ApplicationPresentationComponents.WPF\VirtualScene.ApplicationPresentationComponents.WPF.csproj">
+      <Project>{3B87088C-1FE4-4E55-8964-D0738D05A3B8}</Project>
+      <Name>VirtualScene.ApplicationPresentationComponents.WPF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
       <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
       <Name>VirtualScene.BusinessComponents.Common</Name>
