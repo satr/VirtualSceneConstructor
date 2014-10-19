@@ -68,7 +68,7 @@
     <Compile Include="Commands\AddSphereCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CommandWithSceneContentBase.cs" />
-    <Compile Include="Models\Import3DModelModel.cs" />
+    <Compile Include="Commands\PerformImport3DModelCommand.cs" />
     <Compile Include="Commands\ShowHelpCommand.cs" />
     <Compile Include="Models\EntityNameViewModel.cs" />
     <Compile Include="Models\ImageSourceEventArg.cs" />

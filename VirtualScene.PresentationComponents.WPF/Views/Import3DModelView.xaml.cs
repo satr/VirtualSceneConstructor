@@ -1,4 +1,4 @@
-﻿using VirtualScene.PresentationComponents.WPF.Models;
+﻿using System.Windows.Input;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.PresentationComponents.WPF.Views
@@ -11,11 +11,12 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// <summary>
         /// Creates a new instance of the view accepting parameters for importing of 3D model
         /// </summary>
-        /// <param name="model">The model of the view</param>
-        public Import3DModelView(Import3DModelModel model)
+        /// <param name="viewModel">The view-model of the view</param>
+        public Import3DModelView(Import3DModelViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = new Import3DModelViewModel(model);
+            DataContext = viewModel;
+            viewModel.CloseView += (s,e) => Close();
         }
     }
 }

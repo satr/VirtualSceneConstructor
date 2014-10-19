@@ -1,28 +1,28 @@
 ﻿using Microsoft.Win32;
-using VirtualScene.PresentationComponents.WPF.Models;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
     /// <summary>
-    /// The command opening the dialog to choose the file with 3D model
+    /// The command opening the dialog to choose the file with 3D viewModel
     /// </summary>
     public class OpenFileWith3DModelCommand: CommandBase
     {
-        private readonly Import3DModelModel _model;
+        private readonly Import3DModelViewModel _viewModel;
 
         /// <summary>
         /// Creates a new instance of the command
         /// </summary>
-        /// <param name="model">The model to keep state of the importing 3D model operation</param>
-        public OpenFileWith3DModelCommand(Import3DModelModel model)
+        /// <param name="viewModel">The viewModel to keep state of the importing 3D viewModel operation</param>
+        public OpenFileWith3DModelCommand(Import3DModelViewModel viewModel)
         {
-            _model = model;
+            _viewModel = viewModel;
         }
 
         const string OpenFileDialogFilter = "Wavefont Obj Files (*.obj)|*.obj";
 
         /// <summary>
-        /// Executes the command to open the dialog to select a file with 3D model
+        /// Executes the command to open the dialog to select a file with 3D viewModel
         /// </summary>
         protected override void Execute()
         {
@@ -32,10 +32,11 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
                 Filter = OpenFileDialogFilter,
                 Title = Properties.Resources.Title_Import3D_model
             };
-            _model.OperationCancelled = fileDialog.ShowDialog()?? false;
-            if(_model.OperationCancelled)
+            var dialogResult = fileDialog.ShowDialog()?? false;
+            _viewModel.OperationCancelled = !dialogResult;
+            if(_viewModel.OperationCancelled)
                 return;
-            _model.FullFileName = fileDialog.FileName;
+            _viewModel.FileName = fileDialog.FileName;
         }
     }
 }

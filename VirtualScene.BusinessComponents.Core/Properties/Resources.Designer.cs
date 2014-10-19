@@ -61,6 +61,15 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File with material &quot;{0}&quot; not found..
+        /// </summary>
+        internal static string Message_AddMaterials_File_with_material_N_not_found {
+            get {
+                return ResourceManager.GetString("Message_AddMaterials_File_with_material_N_not_found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error occured during the operation &quot;{0}&quot;: {1}.
         /// </summary>
         internal static string Message_Error_occured_during_the_operation_M_N {

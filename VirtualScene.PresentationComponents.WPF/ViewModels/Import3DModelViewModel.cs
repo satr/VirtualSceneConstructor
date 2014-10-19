@@ -1,24 +1,44 @@
-﻿using VirtualScene.PresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.Models;
+﻿using System;
+using System.Windows.Input;
+using VirtualScene.BusinessComponents.Core;
+using VirtualScene.PresentationComponents.WPF.Commands;
 
 namespace VirtualScene.PresentationComponents.WPF.ViewModels
 {
     /// <summary>
     /// The view model of the import 3D model view
     /// </summary>
-    public class Import3DModelViewModel
+    public class Import3DModelViewModel: ViewModelBase
     {
-        private Import3DModelModel _model;
+        /// <summary>
+        /// Occures when the view should be closed.
+        /// </summary>
+        public event EventHandler CloseView;
+
+        private string _fileName;
+
+        private string _name;
 
         /// <summary>
         /// Creates a new instance of the import 3D view-model
         /// </summary>
-        /// <param name="model">The model to keep state of the importing 3D model operation</param>
-        public Import3DModelViewModel(Import3DModelModel model)
+        /// <param name="sceneContent"></param>
+        public Import3DModelViewModel(ISceneContent sceneContent)
         {
-            _model = model;
-            OpenFileCommand = new OpenFileWith3DModelCommand(_model);
+            OpenFileCommand = new OpenFileWith3DModelCommand(this);
+            ImportCommand = new PerformImport3DModelCommand(this, sceneContent).AfterExecuteAction(OnCloseView);
+            CancelCommand = new DelegateCommand(OnCloseView);
         }
+
+        /// <summary>
+        /// The command closing the view
+        /// </summary>
+        public DelegateCommand CancelCommand { get; set; }
+
+        /// <summary>
+        /// The command performing the import from the file
+        /// </summary>
+        public ICommand ImportCommand { get; set; }
 
         /// <summary>
         /// The command opening a dialog to select the file with 3D model
@@ -30,7 +50,14 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// </summary>
         public string FileName
         {
-            get { return _model.FullFileName; }
+            get { return _fileName; }
+            set
+            {
+                if (Equals(_fileName = value))
+                    return;
+                _fileName = value;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
@@ -38,7 +65,26 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// </summary>
         public string Name
         {
-            get { return _model.Name; }
+            get { return _name; }
+            set
+            {
+                if(Equals(_name = value))
+                    return;
+                _name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// The operation status. When  "true" - the operation has been cancelled
+        /// </summary>
+        public bool OperationCancelled { get; set; }
+
+        private  void OnCloseView()
+        {
+            var handler = CloseView;
+            if (handler != null) 
+                handler(this, EventArgs.Empty);
         }
     }
 }

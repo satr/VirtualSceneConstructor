@@ -1,12 +1,11 @@
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
-using VirtualScene.PresentationComponents.WPF.Models;
+using VirtualScene.PresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Views;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {
     /// <summary>
-    /// The command importing 3D model
+    /// The command opening the dialog for importing 3D model
     /// </summary>
     internal class Import3DModelCommand : AddSceneObjectCommandBase
     {
@@ -21,12 +20,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
 
         protected override void Execute()
         {
-            var model = new Import3DModelModel();
-            var view = new Import3DModelView(model);
-            view.ShowDialog();
-            if (!view.DialogResult.HasValue || !view.DialogResult.Value)
-                return;
-            ServiceLocator.Get<BusinessManager>().Import3DModel(model.Name, model.FullFileName, SceneContent);
+            new Import3DModelView(new Import3DModelViewModel(SceneContent)).ShowDialog();
         }
     }
 }

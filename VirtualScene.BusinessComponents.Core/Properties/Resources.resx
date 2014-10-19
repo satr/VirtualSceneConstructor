@@ -144,4 +144,7 @@
   <data name="Message_Not_defined" xml:space="preserve">
     <value>Not defined</value>
   </data>
+  <data name="Message_AddMaterials_File_with_material_N_not_found" xml:space="preserve">
+    <value>File with material "{0}" not found.</value>
+  </data>
 </root>

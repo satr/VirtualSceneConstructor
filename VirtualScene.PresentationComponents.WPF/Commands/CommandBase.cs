@@ -8,6 +8,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
     /// </summary>
     public abstract class CommandBase : ICommand
     {
+        private Action _afterExecuteAction;
+
         /// <summary>
         /// /// Creates a new instance of a command
         /// </summary>
@@ -32,6 +34,13 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         public void Execute(object parameter)
         {
             Execute();
+            PerformAfterExecuteAction();
+        }
+
+        private void PerformAfterExecuteAction()
+        {
+            if (_afterExecuteAction != null)
+                _afterExecuteAction();
         }
 
         /// <summary>
@@ -52,6 +61,17 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
             var handler = CanExecuteChanged;
             if (handler != null) 
                 handler(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Define the action performed after command is executed. Usual ussage - to close the view.
+        /// </summary>
+        /// <param name="action">The action to be executed.</param>
+        /// <returns>Instance of this command.</returns>
+        public ICommand AfterExecuteAction(Action action)
+        {
+            _afterExecuteAction = action;
+            return this;
         }
     }
 }

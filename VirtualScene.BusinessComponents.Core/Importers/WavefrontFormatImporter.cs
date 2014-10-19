@@ -213,7 +213,7 @@ namespace VirtualScene.BusinessComponents.Core.Importers
                     var mtlPath = ReadMaterialValue(line);
                     if (!File.Exists(mtlPath))
                     {
-                        actionResult.AddWarning("File with material \"{0}\" not found.", mtlPath);
+                        actionResult.AddWarning(Resources.Message_AddMaterials_File_with_material_N_not_found, mtlPath);
                         return;
                     }
                     LoadMaterials(mtlPath, sceneEngine);

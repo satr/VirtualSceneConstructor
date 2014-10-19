@@ -23,6 +23,7 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         {
             SceneContent = ServiceLocator.Get<SceneContentFactory>().Create();
             InitTopElements(SceneContent);
+            SceneContent.Stage = new Stage();
         }
 
         /// <summary>
