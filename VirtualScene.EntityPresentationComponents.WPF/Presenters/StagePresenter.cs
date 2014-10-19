@@ -3,7 +3,6 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
 using VirtualScene.EntityPresentationComponents.WPF.Views;
 using VirtualScene.PresentationComponents.WPF.Presenters;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
 {

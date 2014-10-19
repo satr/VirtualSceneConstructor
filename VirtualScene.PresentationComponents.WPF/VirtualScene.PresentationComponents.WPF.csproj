@@ -35,28 +35,12 @@
     <DocumentationFile>bin\Release\VirtualScene.PresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Accessibility" />
-    <Reference Include="Apex, Version=1.2.1.0, Culture=neutral, PublicKeyToken=98d06957926c086d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\SharpGL\sharpgl-master\source\SharpGL\Dependencies\Apex.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="ReachFramework" />
-    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Printing" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="UIAutomationProvider" />
-    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -107,18 +91,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
-      <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
-      <Name>SharpGL.SceneGraph</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.WPF\SharpGL.WPF.csproj">
-      <Project>{53e67055-13d2-4467-bb57-79589afac2cd}</Project>
-      <Name>SharpGL.WPF</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
-      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
-      <Name>VirtualScene.BusinessComponents.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
