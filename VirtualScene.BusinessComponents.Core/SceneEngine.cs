@@ -9,10 +9,10 @@ using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Properties;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core
 {

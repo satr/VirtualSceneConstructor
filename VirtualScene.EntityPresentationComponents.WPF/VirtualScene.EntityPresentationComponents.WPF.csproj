@@ -122,13 +122,13 @@
       <Project>{5ef45533-e2c7-46f2-b4a3-b8f36cd406e0}</Project>
       <Name>SharpGL %28SharpGL\SharpGL%29</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
-      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
-      <Name>VirtualScene.BusinessComponents.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
+      <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
+      <Name>VirtualScene.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\VirtualScene.EntityBusinessComponents\VirtualScene.EntityBusinessComponents.csproj">
       <Project>{B56FD199-DE98-43A2-8926-AC0C0DE7C4AA}</Project>

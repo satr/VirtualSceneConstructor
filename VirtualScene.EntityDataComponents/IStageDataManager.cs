@@ -1,4 +1,5 @@
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.Common;
 
 namespace VirtualScene.EntityDataComponents
 {
@@ -11,8 +12,6 @@ namespace VirtualScene.EntityDataComponents
         /// Save the stage with specified name.
         /// </summary>
         /// <param name="stage">The stage to be saved.</param>
-        /// <param name="stageName">The name of the stage.</param>
-        /// <param name="actionResult">Result of the operation.</param>
-        void Save(IStage stage, string stageName, ActionResult<IStage> actionResult);
+        IActionResult Save(IStage stage);
     }
 }

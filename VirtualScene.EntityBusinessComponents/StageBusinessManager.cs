@@ -1,5 +1,5 @@
-﻿using VirtualScene.BusinessComponents.Common;
-using VirtualScene.BusinessComponents.Core;
+﻿using VirtualScene.BusinessComponents.Core;
+using VirtualScene.Common;
 using VirtualScene.EntityBusinessComponents.Properties;
 using VirtualScene.EntityDataComponents;
 
@@ -14,15 +14,10 @@ namespace VirtualScene.EntityBusinessComponents
         /// Save the stage with specified name.
         /// </summary>
         /// <param name="stage">The stage to be saved.</param>
-        /// <param name="stageName">The name of the stage. When stage's name is different than this name - the stage is saved with this new name.</param>
         /// <returns></returns>
-        public ActionResult<IStage> Save(IStage stage, string stageName)
+        public IActionResult Save(IStage stage)
         {
-            var actionResult = new ActionResult<IStage>(Resources.Title_Save_Stage);
-            DataManager.Save(stage, stageName, actionResult);
-            if (actionResult.Success)
-                stage.Name = stageName;
-            return actionResult;
+            return DataManager.Save(stage);
         }
 
         /// <summary>

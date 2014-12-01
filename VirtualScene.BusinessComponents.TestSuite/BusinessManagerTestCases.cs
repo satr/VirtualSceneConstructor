@@ -1,9 +1,9 @@
 using Moq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Primitives;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

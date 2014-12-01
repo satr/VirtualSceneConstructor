@@ -1,5 +1,5 @@
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.ViewModels;

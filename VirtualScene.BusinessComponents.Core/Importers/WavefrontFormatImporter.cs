@@ -8,6 +8,7 @@ using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core.Properties;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core.Importers
 {

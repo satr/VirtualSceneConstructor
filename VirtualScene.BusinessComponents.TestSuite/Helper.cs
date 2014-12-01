@@ -1,5 +1,5 @@
 ﻿using Moq;
-using VirtualScene.BusinessComponents.Common;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

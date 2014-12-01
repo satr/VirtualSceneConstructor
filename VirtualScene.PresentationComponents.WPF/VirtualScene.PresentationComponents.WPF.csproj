@@ -102,6 +102,10 @@
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
+      <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
+      <Name>VirtualScene.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help.htm">

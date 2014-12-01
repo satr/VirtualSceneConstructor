@@ -70,29 +70,11 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error occured during the operation &quot;{0}&quot;: {1}.
-        /// </summary>
-        internal static string Message_Error_occured_during_the_operation_M_N {
-            get {
-                return ResourceManager.GetString("Message_Error_occured_during_the_operation_M_N", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to File {0} not found..
         /// </summary>
         internal static string Message_LoadGeometry_File_N_not_found {
             get {
                 return ResourceManager.GetString("Message_LoadGeometry_File_N_not_found", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not defined.
-        /// </summary>
-        internal static string Message_Not_defined {
-            get {
-                return ResourceManager.GetString("Message_Not_defined", resourceCulture);
             }
         }
         

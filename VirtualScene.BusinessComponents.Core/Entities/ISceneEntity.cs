@@ -11,5 +11,10 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// Visual representation of the SceneEntity
         /// </summary>
         SceneElement Geometry { get; set; }
+
+        /// <summary>
+        /// The name of the entity in the scene
+        /// </summary>
+        string Name { get; set; }
     }
 }

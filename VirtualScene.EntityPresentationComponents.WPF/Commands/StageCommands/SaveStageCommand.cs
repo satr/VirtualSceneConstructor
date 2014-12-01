@@ -1,6 +1,5 @@
-using System.Linq;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.Common;
 using VirtualScene.EntityBusinessComponents;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.PresentationComponents.WPF.Commands;
@@ -27,22 +26,34 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.StageCommands
         /// </summary>
         protected override void Execute()
         {
-            var stageName = SceneContent.Stage.Name;
             var operationName = Resources.Title_Save_Stage;
-            var viewModel = new EntityNameDialogViewModel(operationName, stageName);
-            do
+            var entityNameDialogViewModel = new EntityNameDialogViewModel(operationName, SceneContent.Stage.Name);
+            var entityNameDialogView = new EntityNameDialogView(entityNameDialogViewModel);
+            while (true)
             {
-                new EntityNameDialogView(viewModel).ShowDialog();
-                if (viewModel.OperationCancelled)
+                entityNameDialogView.ShowDialog();
+                if (entityNameDialogViewModel.OperationCancelled)
                     return;
-                var actionResult = ServiceLocator.Get<StageBusinessManager>().Save(SceneContent.Stage, viewModel.Name);
+                SceneContent.Stage.Name = entityNameDialogViewModel.Name;
+                var actionResult = BusinessManager.Save(SceneContent.Stage);
                 if(actionResult.Success)
                     return;
-                var operationFailedViewModel = new OperationFailedViewModel(operationName, actionResult.Errors.ToArray());
-                new OperationFailedView(operationFailedViewModel).ShowDialog();
+                var operationFailedViewModel = DisplayOperationFailedDialog(operationName, actionResult);
                 if(operationFailedViewModel.OperationCancelled)
                     break;
-            } while (true);
+            }
+        }
+
+        private static OperationFailedViewModel DisplayOperationFailedDialog(string operationName, IActionResult actionResult)
+        {
+            var operationFailedViewModel = new OperationFailedViewModel(operationName, actionResult);
+            new OperationFailedView(operationFailedViewModel).ShowDialog();
+            return operationFailedViewModel;
+        }
+
+        private static StageBusinessManager BusinessManager
+        {
+            get { return ServiceLocator.Get<StageBusinessManager>(); }
         }
     }
 }

@@ -70,13 +70,13 @@
       <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
       <Name>SharpGL.SceneGraph</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
-      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
-      <Name>VirtualScene.BusinessComponents.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
+      <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
+      <Name>VirtualScene.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

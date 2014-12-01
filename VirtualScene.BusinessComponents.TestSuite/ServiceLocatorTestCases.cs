@@ -1,6 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
-using VirtualScene.BusinessComponents.Common;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

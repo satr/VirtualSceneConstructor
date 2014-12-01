@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using VirtualScene.BusinessComponents.Core.Properties;
+using VirtualScene.Common.Properties;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.Common
 {
     /// <summary>
     /// The result of the operation with the value the operation returns.

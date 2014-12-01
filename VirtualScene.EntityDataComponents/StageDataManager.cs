@@ -1,4 +1,6 @@
 ﻿using VirtualScene.BusinessComponents.Core;
+using VirtualScene.Common;
+using VirtualScene.DataComponents.Common.DataAdapters;
 
 namespace VirtualScene.EntityDataComponents
 {
@@ -7,17 +9,20 @@ namespace VirtualScene.EntityDataComponents
     /// </summary>
     public class StageDataManager : IStageDataManager
     {
+
+        private static IDataAdapter<IStage> DataAdapter
+        {
+            get { return ServiceLocator.Get<DataAdaptersPool>().GetFileSystemDataAdapter<IStage>(); }
+        }
+
         /// <summary>
         /// Save the stage with specified name.
         /// </summary>
         /// <param name="stage">The stage to be saved.</param>
-        /// <param name="stageName">The name of the stage.</param>
-        /// <param name="actionResult">Result of the operation.</param>
-        public void Save(IStage stage, string stageName, ActionResult<IStage> actionResult)
+        /// <returns>Result of the operation</returns>
+        public IActionResult Save(IStage stage)
         {
-            actionResult.AddError("Test fail1");
-            actionResult.AddError("Test fail2");
-            //TODO
+            return DataAdapter.Save(stage);
         }
     }
 }

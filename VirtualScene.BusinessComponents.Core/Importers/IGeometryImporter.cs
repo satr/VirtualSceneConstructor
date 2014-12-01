@@ -1,4 +1,5 @@
 using SharpGL.SceneGraph.Core;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core.Importers
 {

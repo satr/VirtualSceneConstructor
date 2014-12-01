@@ -4,10 +4,10 @@ using System.Reflection;
 using Moq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Assets;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Importers;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

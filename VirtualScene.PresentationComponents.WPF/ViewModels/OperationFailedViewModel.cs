@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
+using VirtualScene.Common;
 using VirtualScene.PresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.Properties;
 
@@ -16,10 +17,10 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         /// Creates a new instance of the view-model 
         /// </summary>
         /// <param name="operationName">The name of failed operation</param>
-        /// <param name="errors"></param>
-        public OperationFailedViewModel(string operationName, params string[] errors)
+        /// <param name="actionResult">The result of an operation</param>
+        public OperationFailedViewModel(string operationName, IActionResult actionResult)
         {
-            Errors = errors;
+            Errors = actionResult.Errors;
             _operationName = operationName;
             RepeatCommand = new DelegateCommand(OnCloseView);
         }

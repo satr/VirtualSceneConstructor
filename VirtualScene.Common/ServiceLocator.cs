@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VirtualScene.BusinessComponents.Common
+namespace VirtualScene.Common
 {
     /// <summary>
     /// Creates and returns instances of types

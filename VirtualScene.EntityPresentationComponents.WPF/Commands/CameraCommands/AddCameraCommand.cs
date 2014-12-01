@@ -1,8 +1,8 @@
 using System.Reflection;
 using SharpGL.SceneGraph.Cameras;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.PresentationComponents.WPF.ViewModels;

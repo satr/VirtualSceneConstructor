@@ -1,7 +1,7 @@
 using System.Windows;
 using VirtualScene.Application.WPF.Views;
 using VirtualScene.ApplicationPresentationComponents.WPF.Presenters;
-using VirtualScene.BusinessComponents.Common;
+using VirtualScene.Common;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.Application.WPF.ViewModels

@@ -135,14 +135,8 @@
   <data name="Title_Add_The_stage_of_the_scene_is_not_initialized" xml:space="preserve">
     <value>The stage of the scene is not initialized</value>
   </data>
-  <data name="Message_Error_occured_during_the_operation_M_N" xml:space="preserve">
-    <value>Error occured during the operation "{0}": {1}</value>
-  </data>
   <data name="Message_LoadGeometry_File_N_not_found" xml:space="preserve">
     <value>File {0} not found.</value>
-  </data>
-  <data name="Message_Not_defined" xml:space="preserve">
-    <value>Not defined</value>
   </data>
   <data name="Message_AddMaterials_File_with_material_N_not_found" xml:space="preserve">
     <value>File with material "{0}" not found.</value>

@@ -99,13 +99,13 @@
       <Project>{3B87088C-1FE4-4E55-8964-D0738D05A3B8}</Project>
       <Name>VirtualScene.ApplicationPresentationComponents.WPF</Name>
     </ProjectReference>
-    <ProjectReference Include="..\VirtualScene.BusinessComponents.Common\VirtualScene.BusinessComponents.Common.csproj">
-      <Project>{0DEFBE63-AC89-4476-BEB2-1D8ECCA08484}</Project>
-      <Name>VirtualScene.BusinessComponents.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
+      <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
+      <Name>VirtualScene.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\VirtualScene.PresentationComponents.WPF\VirtualScene.PresentationComponents.WPF.csproj">
       <Project>{92C10EDB-A772-4BE8-8900-5B6744BD659D}</Project>

@@ -1,11 +1,11 @@
 using Moq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Core;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Importers;
 using VirtualScene.BusinessComponents.Core.Pools;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

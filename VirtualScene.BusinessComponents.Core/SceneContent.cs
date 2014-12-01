@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Specialized;
-using VirtualScene.BusinessComponents.Common;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Properties;
+using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core
 {
