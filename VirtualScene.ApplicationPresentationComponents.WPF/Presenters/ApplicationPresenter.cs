@@ -5,6 +5,7 @@ using VirtualScene.ApplicationPresentationComponents.WPF.Commands;
 using VirtualScene.ApplicationPresentationComponents.WPF.Properties;
 using VirtualScene.ApplicationPresentationComponents.WPF.Views;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.Presenters;

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.StageCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;

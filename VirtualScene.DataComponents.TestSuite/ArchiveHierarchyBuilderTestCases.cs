@@ -2,8 +2,9 @@
 using System.Text;
 using NUnit.Framework;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
+using VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive;
 using VirtualScene.UnitTesting.Common;
-using ArchiveEntryNames = VirtualScene.DataComponents.Common.DataAdapters.FileSystem.StageFileSystemDataAdapter.ArchiveEntryNames;
+using ArchiveEntryNames = VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive.ArchiveEntryNames;
 
 namespace VirtualScene.DataComponents.TestSuite
 {

@@ -2,8 +2,6 @@
 using System.Linq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Quadrics;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;

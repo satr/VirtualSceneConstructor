@@ -1,7 +1,9 @@
-﻿namespace VirtualScene.BusinessComponents.Core.Factories
+﻿using VirtualScene.BusinessComponents.Core.Entities;
+
+namespace VirtualScene.BusinessComponents.Core.Factories
 {
     /// <summary>
-    /// Creates instances of the SceneNavigation
+    /// Creates instances of the SceneNavigator
     /// </summary>
     public class SceneNavigationFactory
     {
@@ -9,9 +11,9 @@
         /// 
         /// </summary>
         /// <returns></returns>
-        public virtual ISceneNavigation Create()
+        public virtual ISceneNavigator Create()
         {
-            return new SceneNavigation();
+            return new SceneNavigator();
         }
     }
 }

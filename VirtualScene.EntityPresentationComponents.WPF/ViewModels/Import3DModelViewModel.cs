@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 

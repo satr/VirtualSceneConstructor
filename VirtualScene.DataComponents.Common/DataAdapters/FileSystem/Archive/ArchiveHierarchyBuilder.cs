@@ -2,17 +2,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
+namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
-    public class ArchiveHierarchyBuilder<T>
+    /// <summary>
+    /// The builder to construct hierarchy of entries from an archive.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal class ArchiveHierarchyBuilder<T>
     {
         private readonly IArchiveEntry<T> _rootArchiveEntry = new ArchiveEntry<T>("\\");
 
+        /// <summary>
+        /// The hierarchy of entries.
+        /// </summary>
+        /// <returns>The root archive-entry.</returns>
         public IArchiveEntry<T> GetHierarchy()
         {
             return _rootArchiveEntry;
         }
 
+        /// <summary>
+        /// Add an archive-entry with its path.
+        /// </summary>
+        /// <param name="obj">The entry in the archive.</param>
+        /// <param name="path">The path of the entry within archive.</param>
         public void Add(T obj, string path)
         {
             if(string.IsNullOrWhiteSpace(path))
@@ -27,18 +40,18 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
         {
             switch (elements[index])
             {
-                case StageFileSystemDataAdapter.ArchiveEntryNames.Entry:
+                case ArchiveEntryNames.Entry:
                     archiveEntry.Entity = obj;
                     break;
-                case StageFileSystemDataAdapter.ArchiveEntryNames.Geometry:
+                case ArchiveEntryNames.Geometry:
                     if (archiveEntry.Geometry == null)
                         archiveEntry.Geometry = new ArchiveEntry<T>(GetArchiveEntryPath(elements, index));
                     AddArchiveEntity(obj, elements, index + 1, archiveEntry.Geometry);
                     break;
-                case StageFileSystemDataAdapter.ArchiveEntryNames.EntryType:
+                case ArchiveEntryNames.EntryType:
                     archiveEntry.EntityType = obj;
                     break;
-                case StageFileSystemDataAdapter.ArchiveEntryNames.Items:
+                case ArchiveEntryNames.Items:
                     if (elements.Count <= index)
                         return;
                     var path = GetArchiveEntryPath(elements, index + 1);
@@ -73,29 +86,5 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
             }
             return builder.ToString();
         }
-    }
-
-    public interface IArchiveEntry<T>
-    {
-        IList<IArchiveEntry<T>> Items { get; set; }
-        T EntityType { get; set; }
-        T Entity { get; set; }
-        string Path { get; set; }
-        IArchiveEntry<T> Geometry { get; set; }
-    }
-
-    class ArchiveEntry<T> : IArchiveEntry<T>
-    {
-        public ArchiveEntry(string path)
-        {
-            Path = path;
-            Items = new List<IArchiveEntry<T>>();
-        }
-
-        public string Path { get; set; }
-        public IArchiveEntry<T> Geometry { get; set; }
-        public IList<IArchiveEntry<T>> Items { get; set; }
-        public T EntityType { get; set; }
-        public T Entity { get; set; }
     }
 }

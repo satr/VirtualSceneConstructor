@@ -45,8 +45,15 @@
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Entities\GeometryEqualityHelper.cs" />
     <Compile Include="Entities\GeometryPrimitiveFactory.cs" />
+    <Compile Include="Entities\ISceneContent.cs" />
     <Compile Include="Entities\ISceneEntity.cs" />
+    <Compile Include="Entities\ISceneNavigator.cs" />
+    <Compile Include="Entities\IStage.cs" />
+    <Compile Include="Entities\SceneContent.cs" />
     <Compile Include="Entities\SceneEntity.cs" />
+    <Compile Include="Entities\SceneNavigator.cs" />
+    <Compile Include="Entities\Stage.cs" />
+    <Compile Include="Events\MoveEventArgs.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Factories\SceneContentFactory.cs" />
@@ -54,14 +61,8 @@
     <Compile Include="Pools\GeometryImportersPool.cs" />
     <Compile Include="Importers\WavefrontFormatImporter.cs" />
     <Compile Include="Factories\SceneEngineFactory.cs" />
-    <Compile Include="ISceneContent.cs" />
     <Compile Include="ISceneEngine.cs" />
-    <Compile Include="ISceneNavigation.cs" />
-    <Compile Include="IStage.cs" />
-    <Compile Include="MoveEventArgs.cs" />
-    <Compile Include="SceneNavigation.cs" />
     <Compile Include="Factories\SceneNavigationFactory.cs" />
-    <Compile Include="Stage.cs" />
     <Compile Include="Validators\SceneArgumentValidator.cs" />
     <Compile Include="Factories\SceneFactory.cs" />
     <Compile Include="SceneViewportNavigation.cs" />
@@ -72,7 +73,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="SceneContent.cs" />
     <Compile Include="SceneEngine.cs" />
   </ItemGroup>
   <ItemGroup>

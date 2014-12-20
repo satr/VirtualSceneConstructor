@@ -45,12 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAdapters\DataAdaptersPool.cs" />
-    <Compile Include="DataAdapters\FileSystem\ArchiveHierarchyBuilder.cs" />
+    <Compile Include="DataAdapters\FileSystem\Archive\ArchiveEntry.cs" />
+    <Compile Include="DataAdapters\FileSystem\Archive\ArchiveEntryNames.cs" />
+    <Compile Include="DataAdapters\FileSystem\Archive\ArchiveHierarchyBuilder.cs" />
+    <Compile Include="DataAdapters\FileSystem\Archive\ArchiveManager.cs" />
+    <Compile Include="DataAdapters\FileSystem\Archive\IArchiveEntry.cs" />
     <Compile Include="DataAdapters\FileSystem\FileSystemDataAdapter.cs" />
     <Compile Include="DataAdapters\FileSystem\FileSystemEnvironmentWrapper.cs" />
     <Compile Include="DataAdapters\FileSystem\IFileSystemDataAdapter.cs" />
     <Compile Include="DataAdapters\FileSystem\StageFileSystemDataAdapter.cs" />
-    <Compile Include="DataAdapters\FileSystem\XmlArchiveDataAdapter.cs" />
     <Compile Include="DataAdapters\IDataAdapter.cs" />
     <Compile Include="DataAdapters\TypeInfo.cs" />
     <Compile Include="Exceptions\FileFoundWhenDirectoryExpectedException.cs" />

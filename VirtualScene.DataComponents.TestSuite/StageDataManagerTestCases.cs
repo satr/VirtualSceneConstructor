@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters;
 using VirtualScene.EntityDataComponents;

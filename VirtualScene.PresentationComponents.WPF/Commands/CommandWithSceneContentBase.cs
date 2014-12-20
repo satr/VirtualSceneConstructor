@@ -1,4 +1,5 @@
 ﻿using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 
 namespace VirtualScene.PresentationComponents.WPF.Commands
 {

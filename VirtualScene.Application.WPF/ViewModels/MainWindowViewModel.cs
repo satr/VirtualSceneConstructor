@@ -28,7 +28,7 @@ namespace VirtualScene.Application.WPF.ViewModels
             {
                 mainWindowView.AddTopElement(uiElement);
             }
-            mainWindowView.KeyDown += (s, e) => applicationPresenter.SceneContent.Navigation.KeyboardAction(e);
+            mainWindowView.KeyDown += (s, e) => applicationPresenter.SceneContent.Navigator.KeyboardAction(e);
             ContentView1 = applicationPresenter.GetStageContentView();
             ContentView2 = applicationPresenter.GetDetailView();
             ContentView3 = applicationPresenter.Get3DViewport1();

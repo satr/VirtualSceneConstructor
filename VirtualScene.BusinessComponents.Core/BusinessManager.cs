@@ -1,6 +1,8 @@
-﻿using SharpGL.SceneGraph.Core;
+﻿using System;
+using SharpGL.SceneGraph.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Pools;
+using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -39,7 +41,7 @@ namespace VirtualScene.BusinessComponents.Core
             sceneElement.Transformation.TranslateX += x;
             sceneElement.Transformation.TranslateY += y;
             sceneElement.Transformation.TranslateZ += z;
-            sceneContent.Add(new SceneEntity{Name = name, Geometry = sceneElement});
+            AddToStage(new SceneEntity { Name = name, Geometry = sceneElement }, sceneContent);
         }
 
         /// <summary>
@@ -56,8 +58,15 @@ namespace VirtualScene.BusinessComponents.Core
             if(!actionResult.Success)
                 return actionResult;
             var sceneEntity = new SceneEntity { Name = name, Geometry = actionResult.Value };
-            sceneContent.Add(sceneEntity);
+            AddToStage(sceneEntity, sceneContent);
             return actionResult;
+        }
+
+        private static void AddToStage(ISceneEntity sceneEntity, ISceneContent sceneContent)
+        {
+            if (sceneContent.Stage == null)
+                throw new InvalidOperationException(Resources.Title_Add_The_stage_of_the_scene_is_not_initialized);
+            sceneContent.Stage.Items.Add(sceneEntity);
         }
     }
 }

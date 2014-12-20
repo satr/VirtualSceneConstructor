@@ -1,4 +1,6 @@
-﻿namespace VirtualScene.BusinessComponents.Core.Factories
+﻿using VirtualScene.BusinessComponents.Core.Entities;
+
+namespace VirtualScene.BusinessComponents.Core.Factories
 {
     /// <summary>
     /// Create instances of scene-content

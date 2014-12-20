@@ -1,8 +1,7 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Xml.Serialization;
-using VirtualScene.BusinessComponents.Core.Entities;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Entities
 {
     /// <summary>
     /// The stage with objects in 3D environment

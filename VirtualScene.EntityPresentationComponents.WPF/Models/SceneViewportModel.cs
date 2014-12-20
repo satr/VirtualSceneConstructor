@@ -12,6 +12,7 @@ using SharpGL.RenderContextProviders;
 using SharpGL.SceneGraph.Cameras;
 using SharpGL.WPF;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;

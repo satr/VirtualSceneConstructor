@@ -1,5 +1,6 @@
 ﻿using SharpGL.SceneGraph.Quadrics;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;

@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Models;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 

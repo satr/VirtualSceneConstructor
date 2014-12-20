@@ -94,19 +94,13 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _sceneEngineMock.Verify(m => m.RemoveSceneEntity(sceneEntity), Times.Once());
         }
 
-        [Test, ExpectedException(typeof(InvalidOperationException))]
-        public void TestFailOnAddingAnEntityWhenStageIsNotInitialzed()
-        {
-            _sceneContent.Add(new Mock<ISceneEntity>().Object);
-        }
-
         [Test]
         public void TestStageGetsNewEntityWhenItIsAddedToSceneContent()
         {
             _sceneContent.Stage = _stage;
             var sceneEntity = new Mock<ISceneEntity>().Object;
 
-            _sceneContent.Add(sceneEntity);
+            _sceneContent.Stage.Items.Add(sceneEntity);
 
             CollectionAssert.Contains(_sceneEntities, sceneEntity);
         }

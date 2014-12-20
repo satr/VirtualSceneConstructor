@@ -1,4 +1,5 @@
 using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.EntityBusinessComponents;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;

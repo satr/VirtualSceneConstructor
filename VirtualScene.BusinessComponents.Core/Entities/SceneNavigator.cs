@@ -1,12 +1,13 @@
-﻿using System;
+using System;
 using System.Windows.Input;
+using VirtualScene.BusinessComponents.Core.Events;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Entities
 {
     /// <summary>
     /// Navigation in the scene
     /// </summary>
-    public class SceneNavigation : ISceneNavigation
+    public class SceneNavigator : ISceneNavigator
     {
         /// <summary>
         /// Invoked when the keyboard's key has been got down

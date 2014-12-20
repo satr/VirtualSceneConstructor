@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="BusinessManagerImport3DModelTestCases.cs" />
     <Compile Include="BusinessManagerTestCases.cs" />
+    <Compile Include="BusinessManagerTestCasesBase.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Mother.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,6 @@
 using System;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Events
 {
     /// <summary>
     /// Arguments of moving object in scene event
