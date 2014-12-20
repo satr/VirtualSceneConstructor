@@ -8,6 +8,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
     /// <summary>
     /// Access to file-system files and folders
     /// </summary>
+    /// <typeparam name="T">Type of the entity.</typeparam>
     public abstract class FileSystemDataAdapter<T> : IFileSystemDataAdapter<T>
     {
         private readonly string _fileSystemCommonDocumentsFolderPath;

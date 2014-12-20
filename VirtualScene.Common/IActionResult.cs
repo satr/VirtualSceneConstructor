@@ -42,5 +42,7 @@ namespace VirtualScene.Common
         /// <param name="format">The format of the message</param>
         /// <param name="args">Arguments of the formatted message (optional)</param>
         void AddWarning(string format, params object[] args);
+
+        void CombineWith(IActionResult actionResult);
     }
 }

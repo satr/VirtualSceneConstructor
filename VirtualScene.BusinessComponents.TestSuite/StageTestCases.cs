@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 
@@ -19,8 +18,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestAddEntity()
         {
-            var sceneEntity = new SceneEntity {Geometry = new Cube()};
-            _stage.Entities.Add(sceneEntity);
+            var sceneEntity = new SceneEntity { Geometry = GeometryPrimitiveFactory.CreateCube() };
+            _stage.Items.Add(sceneEntity);
 
         }
     }

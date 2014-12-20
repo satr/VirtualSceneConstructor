@@ -33,7 +33,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
         /// The content of the view
         /// </summary>
         public ObservableCollection<ISceneEntity> Source {
-            get { return _sceneContent.Stage.Entities; }
+            get { return _sceneContent.Stage.Items; }
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using SharpGL.SceneGraph.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Pools;
-using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
 
 namespace VirtualScene.BusinessComponents.Core
@@ -14,15 +13,29 @@ namespace VirtualScene.BusinessComponents.Core
         /// <summary>
         /// Add a new polygon to the scene
         /// </summary>
-        /// <param name="sceneContent"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <param name="name"></param>
+        /// <param name="sceneContent">The content of the scene.</param>
+        /// <param name="x">The translation X of the scene element.</param>
+        /// <param name="y">The translation Y of the scene element.</param>
+        /// <param name="z">The translation Z of the scene element.</param>
+        /// <param name="name">The name of the scene element.</param>
         public void AddSceneElementInSpace<T>(ISceneContent sceneContent, int x, int y, int z, string name)
             where T : SceneElement, IHasObjectSpace, new()
         {
-            var sceneElement = new T();
+            AddSceneElementInSpace(sceneContent, new T(), x, y, z, name);
+        }
+
+        /// <summary>
+        /// Add a new polygon to the scene
+        /// </summary>
+        /// <param name="sceneContent">The content of the scene.</param>
+        /// <param name="sceneElement">The scene element.</param>
+        /// <param name="x">The translation X of the scene element.</param>
+        /// <param name="y">The translation Y of the scene element.</param>
+        /// <param name="z">The translation Z of the scene element.</param>
+        /// <param name="name">The name of the scene element.</param>
+        public void AddSceneElementInSpace<T>(ISceneContent sceneContent, T sceneElement, int x, int y, int z, string name)
+            where T : SceneElement, IHasObjectSpace
+        {
             sceneElement.Transformation.TranslateX += x;
             sceneElement.Transformation.TranslateY += y;
             sceneElement.Transformation.TranslateZ += z;

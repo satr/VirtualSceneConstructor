@@ -39,7 +39,7 @@ namespace VirtualScene.BusinessComponents.Core
         {
             if (Stage == null)
                 throw new InvalidOperationException(Resources.Title_Add_The_stage_of_the_scene_is_not_initialized);
-            Stage.Entities.Add(sceneEntity);
+            Stage.Items.Add(sceneEntity);
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace VirtualScene.BusinessComponents.Core
                 if(Equals(_stage, value))
                     return;
                 if (_stage != null)
-                    _stage.Entities.CollectionChanged -= EntitiesOnCollectionChanged;
+                    _stage.Items.CollectionChanged -= EntitiesOnCollectionChanged;
                 _stage = value;
                 _sceneEngine.Clear();
                 if (_stage != null)
-                    _stage.Entities.CollectionChanged += EntitiesOnCollectionChanged;
+                    _stage.Items.CollectionChanged += EntitiesOnCollectionChanged;
             }
         }
 

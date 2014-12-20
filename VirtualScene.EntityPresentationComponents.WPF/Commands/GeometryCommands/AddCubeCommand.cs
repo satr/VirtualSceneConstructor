@@ -1,10 +1,10 @@
-﻿using SharpGL.SceneGraph.Primitives;
-using VirtualScene.BusinessComponents.Core;
+﻿using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands
 {
     /// <summary>
     /// The command creates a cube and adds it to the scene
@@ -16,7 +16,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         /// <summary>
         /// Creates a new instance of the AddCubeCommand
         /// </summary>
-        /// <param name="sceneContent"></param>
+        /// <param name="sceneContent">The content of the scene.</param>
         public AddCubeCommand(ISceneContent sceneContent): base(sceneContent)
         {
         }
@@ -28,7 +28,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         {
             _x += 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Cube>(SceneContent, _x, _y, 0, Resources.Title_Cube);
+            //The class Polygon is used instead of the class Cube - read the comment in the CreateCube factory method.
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace(SceneContent, GeometryPrimitiveFactory.CreateCube(),  _x, _y, 0, Resources.Title_Cube);
         }
     }
 }

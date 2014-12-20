@@ -11,7 +11,7 @@ namespace VirtualScene.BusinessComponents.Core.Pools
         /// <summary>
         /// Gets the importer of geometry from 3D files with Wavefront format
         /// </summary>
-        /// <returns>THe importer to the wavefront-format</returns>
+        /// <returns>The importer to the wavefront-format</returns>
         public virtual IGeometryImporter GetWavefrontFormatImporter()
         {
             return ServiceLocator.Get<WavefrontFormatImporter>();

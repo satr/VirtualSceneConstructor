@@ -39,6 +39,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,11 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileSystemDataAdapter.cs" />
+    <Compile Include="ArchiveHierarchyBuilderTestCases.cs" />
+    <Compile Include="RepositoryEntityTestCases.cs" />
+    <Compile Include="ArchiveTests.cs" />
+    <Compile Include="Mother.cs" />
     <Compile Include="StageDataManagerTestCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StageFileSystemDataAdapterTestCases.cs" />
+    <Compile Include="TestEntity.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
+      <Project>{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}</Project>
+      <Name>SharpGL.SceneGraph</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>
@@ -71,6 +82,14 @@
       <Project>{6D2F88A3-2115-44BE-B563-9460A0AF55B1}</Project>
       <Name>VirtualScene.UnitTesting.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TestResources\CompositeMesh.mtl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="TestResources\CompositeMesh.obj">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

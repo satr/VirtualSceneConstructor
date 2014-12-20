@@ -6,6 +6,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
     /// <summary>
     /// File system data adapter
     /// </summary>
+    /// <typeparam name="T">Type of the entity.</typeparam>
     public interface IFileSystemDataAdapter<T> : IDataAdapter<T>
     {
         /// <summary>

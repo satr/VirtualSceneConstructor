@@ -45,11 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAdapters\DataAdaptersPool.cs" />
+    <Compile Include="DataAdapters\FileSystem\ArchiveHierarchyBuilder.cs" />
     <Compile Include="DataAdapters\FileSystem\FileSystemDataAdapter.cs" />
     <Compile Include="DataAdapters\FileSystem\FileSystemEnvironmentWrapper.cs" />
     <Compile Include="DataAdapters\FileSystem\IFileSystemDataAdapter.cs" />
     <Compile Include="DataAdapters\FileSystem\StageFileSystemDataAdapter.cs" />
+    <Compile Include="DataAdapters\FileSystem\XmlArchiveDataAdapter.cs" />
     <Compile Include="DataAdapters\IDataAdapter.cs" />
+    <Compile Include="DataAdapters\TypeInfo.cs" />
     <Compile Include="Exceptions\FileFoundWhenDirectoryExpectedException.cs" />
     <Compile Include="Exceptions\FileSystemException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -58,11 +61,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\ArchiveRepositoryEntity.cs" />
+    <Compile Include="Repositories\RepositoryEntity.cs" />
+    <Compile Include="Repositories\IRepositoryEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

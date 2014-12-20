@@ -26,7 +26,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _sceneEngineFactoryMock.Setup(m => m.Create()).Returns(_sceneEngineMock.Object);
             var stageMock = new Mock<IStage>();
             _sceneEntities = new ObservableCollection<ISceneEntity>();
-            stageMock.SetupGet(p => p.Entities).Returns(_sceneEntities);
+            stageMock.SetupGet(p => p.Items).Returns(_sceneEntities);
             _stage = stageMock.Object;
             _sceneContent = new SceneContent();
         }
@@ -77,7 +77,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
             _sceneContent.Stage = _stage;
 
             var sceneEntity = new Mock<ISceneEntity>().Object;
-            _stage.Entities.Add(sceneEntity);
+            _stage.Items.Add(sceneEntity);
 
             _sceneEngineMock.Verify(m => m.AddSceneEntity(sceneEntity), Times.Once());
         }
@@ -86,10 +86,10 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void TestSceneEngineHandlesSceneEntityRemovedToStage()
         {
             var sceneEntity = new Mock<ISceneEntity>().Object;
-            _stage.Entities.Add(sceneEntity);
+            _stage.Items.Add(sceneEntity);
             _sceneContent.Stage = _stage;
 
-            _stage.Entities.Remove(sceneEntity);
+            _stage.Items.Remove(sceneEntity);
 
             _sceneEngineMock.Verify(m => m.RemoveSceneEntity(sceneEntity), Times.Once());
         }

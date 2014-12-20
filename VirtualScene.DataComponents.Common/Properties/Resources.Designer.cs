@@ -70,11 +70,83 @@ namespace VirtualScene.DataComponents.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A type \&quot;{0}\&quot; was expected by the following type was loaded: &quot;{1}&quot;..
+        /// </summary>
+        public static string Message_A_type_N_was_expected_by_the_following_type_was_loaded_M {
+            get {
+                return ResourceManager.GetString("Message_A_type_N_was_expected_by_the_following_type_was_loaded_M", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity cannot be saved because it is empty.
+        /// </summary>
+        public static string Message_Archive_Entity_cannot_be_saved_because_it_is_empty {
+            get {
+                return ResourceManager.GetString("Message_Archive_Entity_cannot_be_saved_because_it_is_empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive entry entity cannot be created &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Archive_entry_entity_cannot_be_created_N {
+            get {
+                return ResourceManager.GetString("Message_Archive_entry_entity_cannot_be_created_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive entry entity is empty for path &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Archive_entry_entity_is_empty_for_path_N {
+            get {
+                return ResourceManager.GetString("Message_Archive_entry_entity_is_empty_for_path_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive entry entity-type cannot be created: &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Archive_entry_entity_type_cannot_be_created_N {
+            get {
+                return ResourceManager.GetString("Message_Archive_entry_entity_type_cannot_be_created_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive entry entity-type is empty for path &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Archive_entry_entity_type_is_empty_for_path_N {
+            get {
+                return ResourceManager.GetString("Message_Archive_entry_entity_type_is_empty_for_path_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No entry elements is defined in the archive path.
+        /// </summary>
+        public static string Message_Archive_No_entry_elements_is_defined_in_the_archive_path {
+            get {
+                return ResourceManager.GetString("Message_Archive_No_entry_elements_is_defined_in_the_archive_path", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File was found when a directory was expected in &quot;{0}&quot;.
         /// </summary>
         public static string Message_File_was_found_when_a_directory_was_expected_in_N {
             get {
                 return ResourceManager.GetString("Message_File_was_found_when_a_directory_was_expected_in_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File with the stage does not exists..
+        /// </summary>
+        public static string Message_File_with_the_stage_does_not_exists {
+            get {
+                return ResourceManager.GetString("Message_File_with_the_stage_does_not_exists", resourceCulture);
             }
         }
         
@@ -88,11 +160,38 @@ namespace VirtualScene.DataComponents.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TypeInfo cannot be created for null.
+        /// </summary>
+        public static string Message_TypeInfo_cannot_be_created_for_null {
+            get {
+                return ResourceManager.GetString("Message_TypeInfo_cannot_be_created_for_null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive entry-type is empty for path &quot;{0}&quot;.
+        /// </summary>
+        public static string StageFileSystemDataAdapter_UnArchive_Archive_entry_type_is_empty_for_path___0_ {
+            get {
+                return ResourceManager.GetString("StageFileSystemDataAdapter_UnArchive_Archive_entry_type_is_empty_for_path___0_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load the stage.
+        /// </summary>
+        public static string Title_Load_the_stage {
+            get {
+                return ResourceManager.GetString("Title_Load_the_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save the stage.
         /// </summary>
-        public static string Title_Save_Save_the_stage {
+        public static string Title_Save_the_stage {
             get {
-                return ResourceManager.GetString("Title_Save_Save_the_stage", resourceCulture);
+                return ResourceManager.GetString("Title_Save_the_stage", resourceCulture);
             }
         }
     }

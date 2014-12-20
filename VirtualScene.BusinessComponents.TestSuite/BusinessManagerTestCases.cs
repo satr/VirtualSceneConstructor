@@ -30,7 +30,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void AddCubeToSceneTest()
         {
             const string testEntityName = "TestEntityName";
-            _businessManager.AddSceneElementInSpace<Cube>(_sceneContentMock.Object, 0, 0, 0, testEntityName);
+            _businessManager.AddSceneElementInSpace(_sceneContentMock.Object, GeometryPrimitiveFactory.CreateCube(), 0, 0, 0, testEntityName);
             _sceneContentMock.Verify(m => m.Add(It.IsAny<ISceneEntity>()), Times.Once());
         }
     }

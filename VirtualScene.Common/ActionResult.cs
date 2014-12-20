@@ -77,5 +77,17 @@ namespace VirtualScene.Common
         {
             Warnings.Add(string.Format(format, args));
         }
+
+        /// <summary>
+        /// Combine the action-result with another action result.
+        /// </summary>
+        /// <param name="actionResult">The action-result which errors and warnings are added to the current action-result.</param>
+        public void CombineWith(IActionResult actionResult)
+        {
+            foreach (var error in actionResult.Errors)
+                AddError(error);
+            foreach (var warning in actionResult.Warnings)
+                AddWarning(warning);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Windows;
 using SharpGL.SceneGraph.Core;
 using VirtualScene.EntityPresentationComponents.WPF.Commands;
+using VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.EntityPresentationComponents.WPF.Views;
 using VirtualScene.PresentationComponents.WPF.Presenters;
