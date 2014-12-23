@@ -1,9 +1,8 @@
 ﻿using System.Windows;
-using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
+using VirtualScene.EntityPresentationComponents.WPF.Views;
 using VirtualScene.PresentationComponents.WPF.Presenters;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
-using SceneEntityContentView = VirtualScene.EntityPresentationComponents.WPF.Views.SceneEntityContentView;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
 {

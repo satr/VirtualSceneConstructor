@@ -6,10 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Properties;
+using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
@@ -189,11 +188,6 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         private static ZipArchiveEntry CreateEntry(ZipArchive archive, string entryPath)
         {
             return archive.CreateEntry(entryPath);
-        }
-
-        private static ZipArchiveEntry GetEntry(ZipArchive archive, string entryPath)
-        {
-            return archive.GetEntry(entryPath);
         }
 
         private static void ValidateEntity<T>(object entity, IActionResult actionResult)

@@ -1,9 +1,8 @@
 using System.IO;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive;
 using VirtualScene.DataComponents.Common.Properties;
+using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
 {
@@ -37,7 +36,12 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
             return actionResult;
         }
 
-        public ActionResult<IStage> Load(string name)
+        /// <summary>
+        /// Load the stage by its name.
+        /// </summary>
+        /// <param name="name">The name of the stage.</param>
+        /// <returns>The result of the operation with loaded stage in action-result property Value.</returns>
+        public override ActionResult<IStage> Load(string name)
         {
             var actionResult = new ActionResult<IStage>(Resources.Title_Load_the_stage);
             var archiveFilePath = GetArchiveFilePathFor(name);
@@ -64,7 +68,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
 
         private string GetArchiveFilePathFor(string entityName)
         {
-            return Path.Combine(StagesFolderPath, entityName + ".zip");
+            return Path.Combine(StagesFolderPath, entityName + Constants.Stage.ArchiveFileExtension);
         }
     }
 }

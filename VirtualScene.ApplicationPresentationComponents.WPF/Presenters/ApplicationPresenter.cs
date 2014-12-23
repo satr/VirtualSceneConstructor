@@ -4,10 +4,9 @@ using System.Windows;
 using VirtualScene.ApplicationPresentationComponents.WPF.Commands;
 using VirtualScene.ApplicationPresentationComponents.WPF.Properties;
 using VirtualScene.ApplicationPresentationComponents.WPF.Views;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Presenters;
 using VirtualScene.PresentationComponents.WPF.Presenters;
 
@@ -54,6 +53,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
             presenter.SceneContent = SceneContent;
             return presenter;
         }
+
         private IContentPresenter RegisterContentPresenter<T>()
             where T: IContentPresenter, new()
         {

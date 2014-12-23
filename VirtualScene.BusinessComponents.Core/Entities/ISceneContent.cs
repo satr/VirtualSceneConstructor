@@ -1,3 +1,5 @@
+using VirtualScene.Entities;
+
 namespace VirtualScene.BusinessComponents.Core.Entities
 {
     /// <summary>

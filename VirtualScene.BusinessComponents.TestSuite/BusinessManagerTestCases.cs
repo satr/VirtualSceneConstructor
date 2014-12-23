@@ -1,6 +1,7 @@
 using System.Collections.Specialized;
 using NUnit.Framework;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.BusinessComponents.Core.Factories;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

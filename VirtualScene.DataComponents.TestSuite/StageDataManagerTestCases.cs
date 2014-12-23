@@ -1,9 +1,9 @@
 ﻿using Moq;
 using NUnit.Framework;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters;
+using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
+using VirtualScene.Entities;
 using VirtualScene.EntityDataComponents;
 using VirtualScene.UnitTesting.Common;
 
@@ -15,7 +15,7 @@ namespace VirtualScene.DataComponents.TestSuite
         private StageDataManager _stageDataManager;
         private Mock<IStage> _stageMock;
         private string _stageName;
-        private Mock<IDataAdapter<IStage>> _dataAdapterMock;
+        private Mock<IFileSystemDataAdapter<IStage>> _dataAdapterMock;
 
         [SetUp]
         public void SetUp()
@@ -24,7 +24,7 @@ namespace VirtualScene.DataComponents.TestSuite
             _stageName = Helper.GetUniqueName();
             _stageMock.SetupGet(p => p.Name).Returns(_stageName);
             var dataAdaptersPoolMock = new Mock<DataAdaptersPool>();
-            _dataAdapterMock = new Mock<IDataAdapter<IStage>>();
+            _dataAdapterMock = new Mock<IFileSystemDataAdapter<IStage>>();
             dataAdaptersPoolMock.Setup(m => m.GetFileSystemDataAdapter<IStage>()).Returns(_dataAdapterMock.Object);
             ServiceLocator.Set(dataAdaptersPoolMock.Object);
             _stageDataManager = new StageDataManager();
@@ -41,6 +41,13 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             _stageDataManager.Save(_stageMock.Object);
             _dataAdapterMock.Verify(m => m.Save(_stageMock.Object));
+        }        
+        
+        [Test]
+        public void TestLoadStage()
+        {
+            _stageDataManager.Load(_stageName);
+            _dataAdapterMock.Verify(m => m.Load(_stageName));
         }
     }
 }

@@ -6,6 +6,8 @@ using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Quadrics;
 using SharpGL.SceneGraph.Transformations;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.Entities;
 using VirtualScene.UnitTesting.Common;
 
 namespace VirtualScene.DataComponents.TestSuite

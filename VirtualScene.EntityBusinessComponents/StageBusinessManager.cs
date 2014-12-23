@@ -1,7 +1,6 @@
-﻿using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
+﻿using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
-using VirtualScene.EntityBusinessComponents.Properties;
+using VirtualScene.Entities;
 using VirtualScene.EntityDataComponents;
 
 namespace VirtualScene.EntityBusinessComponents
@@ -19,6 +18,16 @@ namespace VirtualScene.EntityBusinessComponents
         public IActionResult Save(IStage stage)
         {
             return DataManager.Save(stage);
+        }
+
+        /// <summary>
+        /// Load the stage by specified name.
+        /// </summary>
+        /// <param name="name">The name of the stage to load.</param>
+        /// <returns></returns>
+        public ActionResult<IStage> Load(string name)
+        {
+            return DataManager.Load(name);
         }
 
         /// <summary>

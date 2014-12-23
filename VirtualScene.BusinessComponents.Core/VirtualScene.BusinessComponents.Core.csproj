@@ -43,19 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessManager.cs" />
-    <Compile Include="Entities\GeometryEqualityHelper.cs" />
-    <Compile Include="Entities\GeometryPrimitiveFactory.cs" />
     <Compile Include="Entities\ISceneContent.cs" />
-    <Compile Include="Entities\ISceneEntity.cs" />
-    <Compile Include="Entities\ISceneNavigator.cs" />
-    <Compile Include="Entities\IStage.cs" />
     <Compile Include="Entities\SceneContent.cs" />
-    <Compile Include="Entities\SceneEntity.cs" />
-    <Compile Include="Entities\SceneNavigator.cs" />
-    <Compile Include="Entities\Stage.cs" />
-    <Compile Include="Events\MoveEventArgs.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Factories\GeometryPrimitiveFactory.cs" />
     <Compile Include="Factories\SceneContentFactory.cs" />
     <Compile Include="Importers\IGeometryImporter.cs" />
     <Compile Include="Pools\GeometryImportersPool.cs" />
@@ -94,6 +86,10 @@
     <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
       <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
       <Name>VirtualScene.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Entities\VirtualScene.Entities.csproj">
+      <Project>{64B7F7F7-FF47-46C4-B7F8-0466ECCE39BA}</Project>
+      <Name>VirtualScene.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

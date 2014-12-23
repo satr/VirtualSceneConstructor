@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Windows.Threading;
@@ -9,10 +8,12 @@ using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Cameras;
 using SharpGL.SceneGraph.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
+using SharpGL.SceneGraph.Primitives;
+using SharpGL.SceneGraph.Quadrics;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core
 {
@@ -145,7 +146,9 @@ namespace VirtualScene.BusinessComponents.Core
         /// </summary>
         public void Clear()
         {
-            
+            var sceneElements = Scene.SceneContainer.Traverse();
+            foreach (var sceneElement in sceneElements.Where(sceneElement => sceneElement is Polygon || sceneElement is Quadric).ToList())
+                sceneElement.Parent.RemoveChild(sceneElement);
         }
 
         /// <summary>

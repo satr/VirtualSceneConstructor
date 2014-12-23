@@ -6,6 +6,7 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

@@ -4,6 +4,7 @@ using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Pools;
 using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core
 {

@@ -1,8 +1,7 @@
 using System;
 using System.Windows.Input;
-using VirtualScene.BusinessComponents.Core.Events;
 
-namespace VirtualScene.BusinessComponents.Core.Entities
+namespace VirtualScene.Entities
 {
     /// <summary>
     /// Navigation in the scene

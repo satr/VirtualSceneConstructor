@@ -97,6 +97,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All files.
+        /// </summary>
+        public static string Title_All_files {
+            get {
+                return ResourceManager.GetString("Title_All_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Camera: {0}.
         /// </summary>
         public static string Title_Camera_N {
@@ -160,6 +169,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load stage.
+        /// </summary>
+        public static string Title_Load_stage {
+            get {
+                return ResourceManager.GetString("Title_Load_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Stage.
         /// </summary>
         public static string Title_Save_Stage {
@@ -183,6 +201,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         public static string Title_Stage {
             get {
                 return ResourceManager.GetString("Title_Stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stage files.
+        /// </summary>
+        public static string Title_Stage_files {
+            get {
+                return ResourceManager.GetString("Title_Stage_files", resourceCulture);
             }
         }
     }

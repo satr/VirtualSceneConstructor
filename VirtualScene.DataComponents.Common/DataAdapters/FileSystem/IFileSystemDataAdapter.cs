@@ -1,4 +1,5 @@
 using System.IO;
+using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Exceptions;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem

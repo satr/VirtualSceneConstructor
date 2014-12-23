@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels

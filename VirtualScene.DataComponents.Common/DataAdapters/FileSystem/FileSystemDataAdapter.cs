@@ -70,5 +70,12 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
         /// </summary>
         /// <param name="entity">The entity to be saved</param>
         public abstract IActionResult Save(T entity);
+
+        /// <summary>
+        /// Load the entity by its name.
+        /// </summary>
+        /// <param name="name">The name of the entity.</param>
+        /// <returns>The result of the operation with loaded entity in action-result property Value.</returns>
+        public abstract ActionResult<T> Load(string name);
     }
 }

@@ -1,6 +1,6 @@
 ﻿using SharpGL.SceneGraph.Core;
 
-namespace VirtualScene.BusinessComponents.Core.Entities
+namespace VirtualScene.Entities
 {
     /// <summary>
     /// Represents an objects in the scene

@@ -1,4 +1,5 @@
 ﻿using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core.Factories
 {

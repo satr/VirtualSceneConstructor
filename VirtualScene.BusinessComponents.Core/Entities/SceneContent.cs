@@ -1,6 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
 {
@@ -49,6 +52,8 @@ namespace VirtualScene.BusinessComponents.Core.Entities
                     _stage.Items.CollectionChanged -= EntitiesOnCollectionChanged;
                 _stage = value;
                 _sceneEngine.Clear();
+                foreach (var sceneEntity in _stage.Items)
+                    _sceneEngine.AddSceneEntity(sceneEntity);
                 if (_stage != null)
                     _stage.Items.CollectionChanged += EntitiesOnCollectionChanged;
             }
@@ -65,10 +70,15 @@ namespace VirtualScene.BusinessComponents.Core.Entities
             }
             if(args.NewItems != null)
             {
-                foreach (ISceneEntity item in args.NewItems)
-                {
-                    _sceneEngine.AddSceneEntity(item);
-                }
+                AddSceneEntities(args.NewItems);
+            }
+        }
+
+        private void AddSceneEntities(IList sceneEntities)
+        {
+            foreach (ISceneEntity item in sceneEntities)
+            {
+                _sceneEngine.AddSceneEntity(item);
             }
         }
     }

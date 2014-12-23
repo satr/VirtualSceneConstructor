@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace VirtualScene.BusinessComponents.Core.Entities
+namespace VirtualScene.Entities
 {
     /// <summary>
     /// The stage with objects in 3D environment

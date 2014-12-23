@@ -3,7 +3,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Xml.Serialization;
 using NUnit.Framework;
+using VirtualScene.BusinessComponents.Core;
 using VirtualScene.UnitTesting.Common;
+using Constants = VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Constants;
 
 namespace VirtualScene.DataComponents.TestSuite
 {
@@ -21,7 +23,7 @@ namespace VirtualScene.DataComponents.TestSuite
         public static void TextFixtureSetUp()
         {
             _folderName = Helper.CreateTempFolder();
-            _archiveFileFullName = string.Format(@"{0}\{1}.zip", _folderName, Helper.GetUniqueName());
+            _archiveFileFullName = string.Format(@"{0}\{1}{2}", _folderName, Helper.GetUniqueName(), Constants.Stage.ArchiveFileExtension);
             _entity = Mother.CreateTestEntity();
         }
 

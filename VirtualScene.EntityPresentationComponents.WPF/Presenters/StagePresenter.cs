@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.StageCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
@@ -29,7 +28,11 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
         /// </summary>
         public override IEnumerable<UIElement> TopElements
         {
-            get { yield return CreateButton(Resources.Title_Save_Stage, new SaveStageCommand(SceneContent)); }
+            get
+            {
+                yield return CreateButton(Resources.Title_Save_Stage, new SaveStageCommand(SceneContent));
+                yield return CreateButton(Resources.Title_Load_stage, new LoadStageCommand(SceneContent));
+            }
         }
     }
 }

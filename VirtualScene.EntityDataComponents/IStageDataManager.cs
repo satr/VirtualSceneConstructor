@@ -1,6 +1,5 @@
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.EntityDataComponents
 {
@@ -14,5 +13,12 @@ namespace VirtualScene.EntityDataComponents
         /// </summary>
         /// <param name="stage">The stage to be saved.</param>
         IActionResult Save(IStage stage);
+
+        /// <summary>
+        /// Load the stage by specified name.
+        /// </summary>
+        /// <param name="name">The name of the stage to load.</param>
+        /// <returns></returns>
+        ActionResult<IStage> Load(string name);
     }
 }

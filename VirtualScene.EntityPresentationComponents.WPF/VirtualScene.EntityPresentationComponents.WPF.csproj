@@ -37,6 +37,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xaml">
@@ -55,6 +56,7 @@
     <Compile Include="Commands\GeometryCommands\OpenFileWith3DModelCommand.cs" />
     <Compile Include="Commands\GeometryCommands\PerformImport3DModelCommand.cs" />
     <Compile Include="Commands\CameraCommands\SetCameraToSceneViewCommand.cs" />
+    <Compile Include="Commands\StageCommands\LoadStageCommand.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Presenters\CameraPresenter.cs" />
     <Compile Include="Presenters\GeometryPrimitivePresenter.cs" />
@@ -129,6 +131,14 @@
     <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
       <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
       <Name>VirtualScene.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.DataComponents.Common\VirtualScene.DataComponents.Common.csproj">
+      <Project>{C55E5ED1-54D2-4A29-8908-2C3CC9F665CD}</Project>
+      <Name>VirtualScene.DataComponents.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Entities\VirtualScene.Entities.csproj">
+      <Project>{64B7F7F7-FF47-46C4-B7F8-0466ECCE39BA}</Project>
+      <Name>VirtualScene.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\VirtualScene.EntityBusinessComponents\VirtualScene.EntityBusinessComponents.csproj">
       <Project>{B56FD199-DE98-43A2-8926-AC0C0DE7C4AA}</Project>

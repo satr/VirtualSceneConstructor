@@ -159,4 +159,13 @@
   <data name="Title_Save_Stage" xml:space="preserve">
     <value>Save Stage</value>
   </data>
+  <data name="Title_Load_stage" xml:space="preserve">
+    <value>Load stage</value>
+  </data>
+  <data name="Title_Stage_files" xml:space="preserve">
+    <value>Stage files</value>
+  </data>
+  <data name="Title_All_files" xml:space="preserve">
+    <value>All files</value>
+  </data>
 </root>

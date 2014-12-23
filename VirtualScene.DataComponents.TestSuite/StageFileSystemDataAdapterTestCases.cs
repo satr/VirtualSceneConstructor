@@ -2,10 +2,9 @@
 using System.Linq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Core;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
+using VirtualScene.Entities;
 using VirtualScene.UnitTesting.Common;
 
 namespace VirtualScene.DataComponents.TestSuite

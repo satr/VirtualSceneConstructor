@@ -49,10 +49,6 @@
     <Compile Include="StageDataManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
-      <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
-      <Name>VirtualScene.BusinessComponents.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
       <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
       <Name>VirtualScene.Common</Name>
@@ -60,6 +56,10 @@
     <ProjectReference Include="..\VirtualScene.DataComponents.Common\VirtualScene.DataComponents.Common.csproj">
       <Project>{c55e5ed1-54d2-4a29-8908-2c3cc9f665cd}</Project>
       <Name>VirtualScene.DataComponents.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Entities\VirtualScene.Entities.csproj">
+      <Project>{64B7F7F7-FF47-46C4-B7F8-0466ECCE39BA}</Project>
+      <Name>VirtualScene.Entities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

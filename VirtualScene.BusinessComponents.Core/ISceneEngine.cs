@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Cameras;
-using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core
 {

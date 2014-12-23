@@ -9,9 +9,9 @@ using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Quadrics;
 using SharpGL.SceneGraph.Transformations;
 
-namespace VirtualScene.BusinessComponents.Core.Entities
+namespace VirtualScene.Entities
 {
-    static internal class GeometryEqualityHelper
+    public static class GeometryEqualityHelper
     {
         internal static bool Equal(Polygon x, Polygon y)
         {

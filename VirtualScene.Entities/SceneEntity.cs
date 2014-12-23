@@ -1,12 +1,7 @@
-﻿using System;
-using System.Xml.Serialization;
-using SharpGL.SceneGraph.Cameras;
+﻿using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Lighting;
-using SharpGL.SceneGraph.Primitives;
-using SharpGL.SceneGraph.Quadrics;
 
-namespace VirtualScene.BusinessComponents.Core.Entities
+namespace VirtualScene.Entities
 {
     /// <summary>
     /// An entity in the scene
