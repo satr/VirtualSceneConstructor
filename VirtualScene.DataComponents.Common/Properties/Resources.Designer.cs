@@ -61,15 +61,6 @@ namespace VirtualScene.DataComponents.Common.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A data-adapter for the type &quot;{0}&quot; is not registered..
-        /// </summary>
-        public static string Message_A_data_adapter_for_the_type_N_is_not_registered {
-            get {
-                return ResourceManager.GetString("Message_A_data_adapter_for_the_type_N_is_not_registered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to A type \&quot;{0}\&quot; was expected by the following type was loaded: &quot;{1}&quot;..
         /// </summary>
         public static string Message_A_type_N_was_expected_by_the_following_type_was_loaded_M {
@@ -133,6 +124,24 @@ namespace VirtualScene.DataComponents.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entity information is not defined for the entry &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Entity_information_is_not_defined_for_the_entry_N {
+            get {
+                return ResourceManager.GetString("Message_Entity_information_is_not_defined_for_the_entry_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity-type information is not defined for the entry &quot;{0}&quot;.
+        /// </summary>
+        public static string Message_Entity_type_information_is_not_defined_for_the_entry_N {
+            get {
+                return ResourceManager.GetString("Message_Entity_type_information_is_not_defined_for_the_entry_N", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File was found when a directory was expected in &quot;{0}&quot;.
         /// </summary>
         public static string Message_File_was_found_when_a_directory_was_expected_in_N {
@@ -151,11 +160,38 @@ namespace VirtualScene.DataComponents.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Folder path for the entity is not defined.
+        /// </summary>
+        public static string Message_Folder_path_for_the_entity_is_not_defined {
+            get {
+                return ResourceManager.GetString("Message_Folder_path_for_the_entity_is_not_defined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name of the stage is invalid..
         /// </summary>
         public static string Message_Save_Name_of_the_stage_is_invalid {
             get {
                 return ResourceManager.GetString("Message_Save_Name_of_the_stage_is_invalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The archive &quot;{0}&quot; with a stage cannot be processed due to the error &quot;{1}&quot;.
+        /// </summary>
+        public static string Message_The_archive_N_with_a_stage_cannot_be_processed_due_to_the_error_M {
+            get {
+                return ResourceManager.GetString("Message_The_archive_N_with_a_stage_cannot_be_processed_due_to_the_error_M", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The archive &quot;{0}&quot; with a stage might be currupted &quot;{1}&quot;.
+        /// </summary>
+        public static string Message_The_archive_N_with_a_stage_might_be_currupted_M {
+            get {
+                return ResourceManager.GetString("Message_The_archive_N_with_a_stage_might_be_currupted_M", resourceCulture);
             }
         }
         

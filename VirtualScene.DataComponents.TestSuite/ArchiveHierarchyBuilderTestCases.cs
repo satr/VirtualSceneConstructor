@@ -1,10 +1,8 @@
 ﻿using System.Linq;
 using System.Text;
 using NUnit.Framework;
-using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive;
 using VirtualScene.UnitTesting.Common;
-using ArchiveEntryNames = VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive.ArchiveEntryNames;
 
 namespace VirtualScene.DataComponents.TestSuite
 {
@@ -22,7 +20,7 @@ namespace VirtualScene.DataComponents.TestSuite
         [Test]
         public void TestInitState()
         {
-            Assert.IsNotNull(_builder.GetHierarchy());
+            Assert.IsNotNull(_builder.GetValidatedHierarchy());
         }
 
         [Test]
@@ -30,7 +28,9 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             var obj = new object();
             _builder.Add(obj, ArchiveEntryNames.Entry);
-            var hierarchy = _builder.GetHierarchy();
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+            Assert.IsFalse(actionResult.Success);
             Assert.IsNotNull(hierarchy);
             Assert.IsNotNull(hierarchy.Entity);
             Assert.IsNull(hierarchy.EntityType);
@@ -42,7 +42,9 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             var obj = new object();
             _builder.Add(obj, ArchiveEntryNames.EntryType);
-            var hierarchy = _builder.GetHierarchy();
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+            Assert.IsFalse(actionResult.Success);
             Assert.IsNotNull(hierarchy.EntityType);
             Assert.AreEqual(obj, hierarchy.EntityType);
             Assert.IsNull(hierarchy.Entity);
@@ -54,8 +56,10 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             var obj = new object();
             _builder.Add(obj, BuildPath(ArchiveEntryNames.Items, Helper.GetUniqueName(), ArchiveEntryNames.Entry));
-            
-            var hierarchy = _builder.GetHierarchy();
+
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+            Assert.IsFalse(actionResult.Success);
             Assert.IsNull(hierarchy.Entity);
             Assert.IsNull(hierarchy.EntityType);
             Assert.IsNotNull(hierarchy.Items);
@@ -76,8 +80,11 @@ namespace VirtualScene.DataComponents.TestSuite
             var obj2 = new object();
             var entityName2 = Helper.GetUniqueName();
             _builder.Add(obj2, BuildPath(ArchiveEntryNames.Items, entityName2, ArchiveEntryNames.Entry));
-            
-            var hierarchy = _builder.GetHierarchy();
+
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+
+            Assert.IsFalse(actionResult.Success);
             
             var archiveEntity1 = hierarchy.Items.FirstOrDefault(en => en.Path.EndsWith(entityName1));
             Assert.IsNotNull(archiveEntity1);
@@ -103,8 +110,11 @@ namespace VirtualScene.DataComponents.TestSuite
             var obj3 = new object();
             var entityName3 = Helper.GetUniqueName();
             _builder.Add(obj3, BuildPath(ArchiveEntryNames.Items, entityName2, ArchiveEntryNames.Items, entityName3, ArchiveEntryNames.Entry));
-            
-            var hierarchy = _builder.GetHierarchy();
+
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+
+            Assert.IsFalse(actionResult.Success);
 
             var archiveEntity2 = hierarchy.Items.FirstOrDefault(en => en.Path.EndsWith(entityName2));
             Assert.IsNotNull(archiveEntity2);
@@ -127,8 +137,11 @@ namespace VirtualScene.DataComponents.TestSuite
             _builder.Add(geometry, BuildPath(ArchiveEntryNames.Items, sceneEntityArchiveEntryName, ArchiveEntryNames.Geometry, ArchiveEntryNames.Entry));
             var geometryType = new object();
             _builder.Add(geometryType, BuildPath(ArchiveEntryNames.Items, sceneEntityArchiveEntryName, ArchiveEntryNames.Geometry, ArchiveEntryNames.EntryType));
-            
-            var hierarchy = _builder.GetHierarchy();
+
+            var actionResult = _builder.GetValidatedHierarchy();
+            var hierarchy = actionResult.Value;
+
+            Assert.IsFalse(actionResult.Success);
 
             var sceneEntityArchiveEntry = hierarchy.Items.FirstOrDefault(en => en.Path.EndsWith(sceneEntityArchiveEntryName));
             Assert.IsNotNull(sceneEntityArchiveEntry);
@@ -139,6 +152,16 @@ namespace VirtualScene.DataComponents.TestSuite
             Assert.IsNull(geometryArchiveEntry.Geometry);
             Assert.IsNotNull(geometryArchiveEntry.Items);
             Assert.AreEqual(0, geometryArchiveEntry.Items.Count);
+        }
+
+        [Test]
+        public void TestAddInvalidEntry()
+        {
+            var obj = new object();
+            _builder.Add(obj, BuildPath(Helper.GetUniqueName()));
+
+            var actionResult = _builder.GetValidatedHierarchy();
+            Assert.IsFalse(actionResult.Success);
         }
 
         private static string BuildPath(params string[] pathElements)

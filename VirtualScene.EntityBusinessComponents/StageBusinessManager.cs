@@ -1,5 +1,5 @@
-﻿using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.Common;
+﻿using VirtualScene.Common;
+using VirtualScene.DataComponents.Common.DataAdapters;
 using VirtualScene.Entities;
 using VirtualScene.EntityDataComponents;
 
@@ -10,6 +10,17 @@ namespace VirtualScene.EntityBusinessComponents
     /// </summary>
     public class StageBusinessManager
     {
+        private readonly StageDataManager _dataManager;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="StageBusinessManager"/>
+        /// </summary>
+        /// <param name="dataAdapter"></param>
+        public StageBusinessManager(IDataAdapter<IStage> dataAdapter)
+        {
+            _dataManager = new StageDataManager(dataAdapter);
+        }
+
         /// <summary>
         /// Save the stage with specified name.
         /// </summary>
@@ -17,7 +28,7 @@ namespace VirtualScene.EntityBusinessComponents
         /// <returns></returns>
         public IActionResult Save(IStage stage)
         {
-            return DataManager.Save(stage);
+            return _dataManager.Save(stage);
         }
 
         /// <summary>
@@ -27,14 +38,7 @@ namespace VirtualScene.EntityBusinessComponents
         /// <returns></returns>
         public ActionResult<IStage> Load(string name)
         {
-            return DataManager.Load(name);
-        }
-
-        /// <summary>
-        /// The data manager to save/load stages
-        /// </summary>
-        public IStageDataManager DataManager {
-            get { return ServiceLocator.Get<DataManagerPool>().GetStageDataManager(); } 
+            return _dataManager.Load(name);
         }
     }
 }

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using VirtualScene.Common;
+using VirtualScene.DataComponents.Common.Properties;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
@@ -16,9 +18,27 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         /// The hierarchy of entries.
         /// </summary>
         /// <returns>The root archive-entry.</returns>
-        public IArchiveEntry<T> GetHierarchy()
+        public ActionResult<IArchiveEntry<T>> GetValidatedHierarchy()
         {
-            return _rootArchiveEntry;
+            var actionResult = new ActionResult<IArchiveEntry<T>> {Value = _rootArchiveEntry};
+            Validate(actionResult);
+            return actionResult;
+        }
+
+        private static void Validate(ActionResult<IArchiveEntry<T>> actionResult)
+        {
+            var rootArchiveEntry = actionResult.Value;
+            ValidateArchiveEntry(rootArchiveEntry, actionResult);
+        }
+
+        private static void ValidateArchiveEntry(IArchiveEntry<T> archiveEntry, IActionResult actionResult)
+        {
+            if (archiveEntry.Entity == null)
+                actionResult.AddError(Resources.Message_Entity_information_is_not_defined_for_the_entry_N, archiveEntry.Path);
+            if (archiveEntry.EntityType == null)
+                actionResult.AddError(Resources.Message_Entity_type_information_is_not_defined_for_the_entry_N, archiveEntry.Path);
+            foreach (var subArchiveEntry in archiveEntry.Items)
+                ValidateArchiveEntry(subArchiveEntry, actionResult);
         }
 
         /// <summary>
@@ -59,7 +79,8 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                     AddArchiveEntity(obj, elements, index + 1, archiveSubEntry);
                     break;
                 default:
-                    AddArchiveEntity(obj, elements, index + 1, archiveEntry);
+                    if (index < elements.Count - 1)
+                        AddArchiveEntity(obj, elements, index + 1, archiveEntry);
                     break;
             }
         }
@@ -67,11 +88,10 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         private static IArchiveEntry<T> AddOrGetArchiveSubEntry(IArchiveEntry<T> archiveEntry, string path)
         {
             var nextArchiveEntry = archiveEntry.Items.FirstOrDefault(ent => ent.Path == path);
-            if (nextArchiveEntry == null)
-            {
-                nextArchiveEntry = new ArchiveEntry<T>(path);
-                archiveEntry.Items.Add(nextArchiveEntry);
-            }
+            if (nextArchiveEntry != null) 
+                return nextArchiveEntry;
+            nextArchiveEntry = new ArchiveEntry<T>(path);
+            archiveEntry.Items.Add(nextArchiveEntry);
             return nextArchiveEntry;
         }
 

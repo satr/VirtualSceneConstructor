@@ -12,8 +12,18 @@ using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
-    internal class ArchiveManager
+    /// <summary>
+    /// Procvessing the archive with a stage.
+    /// </summary>
+    internal class StageArchiveManager
     {
+        private readonly Dictionary<Type, XmlSerializer> _xmlSerializers = new Dictionary<Type, XmlSerializer>();
+
+        /// <summary>
+        /// Pack the stage to the archive.
+        /// </summary>
+        /// <param name="stage">The stage to pack.</param>
+        /// <param name="archiveFilePath">The path to the archive where the stage is packed.</param>
         public void PackStage(IStage stage, string archiveFilePath)
         {
             if (stage == null)
@@ -24,18 +34,59 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             using (var fileStream = File.Create(archiveFilePath))
             using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Create))
             {
-                Pack(stage, archive, ArchiveEntryNames.Entry);
-                Pack(new TypeInfo(stage), archive, ArchiveEntryNames.EntryType);
+                PackEntity(stage, archive, ArchiveEntryNames.Entry);
+                PackEntity(new TypeInfo(stage), archive, ArchiveEntryNames.EntryType);
 
                 foreach (var item in stage.Items)
                 {
                     var itemPath = CreateArchiveEntryPath();
-                    Pack(item, archive, CreateEntityPath(itemPath));
-                    Pack(new TypeInfo(item), archive, CreateEntityTypePath(itemPath));
-                    Pack(item.Geometry, archive, CreateGeometryEntityPath(itemPath));
-                    Pack(new TypeInfo(item.Geometry), archive, CreateGeometryEntityEntryPath(itemPath));
+                    PackEntity(item, archive, CreateEntityPath(itemPath));
+                    PackEntity(new TypeInfo(item), archive, CreateEntityTypePath(itemPath));
+                    PackEntity(item.Geometry, archive, CreateGeometryEntityPath(itemPath));
+                    PackEntity(new TypeInfo(item.Geometry), archive, CreateGeometryEntityEntryPath(itemPath));
                 }
             }
+        }
+
+        /// <summary>
+        /// Unpach the stage from the archive.
+        /// </summary>
+        /// <param name="archiveFilePath">The path to the archive with the stage.</param>
+        /// <param name="actionResult">The result of the unpacking of the archive.</param>
+        /// <returns>The unpacked stage.</returns>
+        public IStage UnPackStage(string archiveFilePath, IActionResult actionResult)
+        {
+            try
+            {
+                CreateDirectoryForFileIfNotExists(archiveFilePath);
+                using (var fileStream = File.OpenRead(archiveFilePath))
+                using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Read))
+                {
+                    var hierarchyResult = GetArchiveHierarchy(archive.Entries);
+                    if (!hierarchyResult.Success)
+                    {
+                        actionResult.CombineWith(hierarchyResult);
+                        return null;
+                    }
+                    var archiveHierarchy = hierarchyResult.Value;
+                    var entity = UnPackEntity(archiveHierarchy, actionResult);
+                    ValidateEntity<IStage>(entity, actionResult);
+                    if (!actionResult.Success)
+                        return null;
+                    var stage = (IStage)entity;
+                    UnPackSceneEntities(archiveHierarchy, stage, actionResult);
+                    return stage;
+                }
+            }
+            catch (InvalidDataException e)
+            {
+                actionResult.AddError(Resources.Message_The_archive_N_with_a_stage_might_be_currupted_M, archiveFilePath, e.Message);
+            }
+            catch (Exception e)
+            {
+                actionResult.AddError(Resources.Message_The_archive_N_with_a_stage_cannot_be_processed_due_to_the_error_M, archiveFilePath, e.Message);
+            }
+            return null;
         }
 
         private static string CreateGeometryEntityEntryPath(string itemPath)
@@ -70,20 +121,20 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                 archiveFileInfo.Directory.Create();
         }
 
-        private void Pack<T>(T entity, ZipArchive archive, string path)
+        private void PackEntity<T>(T entity, ZipArchive archive, string path)
         {
             var entityEntry = CreateEntry(archive, path);
             using (var stream = entityEntry.Open())
                 GetSerializerBy(entity).Serialize(stream, entity);
         }
 
-        private object UnArchive(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
+        private object UnPackEntity(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
         {
-            var entryType = UnArchiveEntryType(archiveEntry, actionResult);
-            return UnArchiveEntity(archiveEntry, entryType, actionResult);
+            var entryType = UnPackEntryType(archiveEntry, actionResult);
+            return UnPackEntity(archiveEntry, entryType, actionResult);
         }
 
-        private object UnArchiveEntity(IArchiveEntry<ZipArchiveEntry> archiveEntry, Type entryType, IActionResult actionResult)
+        private object UnPackEntity(IArchiveEntry<ZipArchiveEntry> archiveEntry, Type entryType, IActionResult actionResult)
         {
             var entryEntry = archiveEntry.Entity;
             if (archiveEntry.Entity == null)
@@ -107,7 +158,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             }
         }
 
-        private Type UnArchiveEntryType(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
+        private Type UnPackEntryType(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
         {
             if (archiveEntry.EntityType == null)
             {
@@ -145,36 +196,19 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             return builder.ToString();
         }
 
-        public IStage UnPackStage(string archiveFilePath, IActionResult actionResult)
-        {
-            CreateDirectoryForFileIfNotExists(archiveFilePath);
-            using (var fileStream = File.OpenRead(archiveFilePath))
-            using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Read))
-            {
-                var archiveHierarchy = GetArchiveHierarchy(archive.Entries);
-                var entity = UnArchive(archiveHierarchy, actionResult);
-                ValidateEntity<IStage>(entity, actionResult);
-                if (!actionResult.Success)
-                    return null;
-                var stage = (IStage)entity;
-                UnArchiveSceneEntities(archiveHierarchy, stage, actionResult);
-                return stage;
-            }
-        }
-
-        private void UnArchiveSceneEntities(IArchiveEntry<ZipArchiveEntry> archiveHierarchy, IStage stage, IActionResult actionResult)
+        private void UnPackSceneEntities(IArchiveEntry<ZipArchiveEntry> archiveHierarchy, IStage stage, IActionResult actionResult)
         {
             foreach (var archiveEntry in archiveHierarchy.Items)
             {
                 var sceneEntityActionResult = new ActionResult<ISceneEntity>();
-                var entity = UnArchive(archiveEntry, sceneEntityActionResult);
+                var entity = UnPackEntity(archiveEntry, sceneEntityActionResult);
                 ValidateEntity<ISceneEntity>(entity, sceneEntityActionResult);
                 if (!sceneEntityActionResult.Success)
                     continue;
                 var sceneEntity = (ISceneEntity)entity;
                 if (archiveEntry.Geometry != null)
                 {
-                    var geometryEntity = UnArchive(archiveEntry.Geometry, sceneEntityActionResult);
+                    var geometryEntity = UnPackEntity(archiveEntry.Geometry, sceneEntityActionResult);
                     ValidateEntity<SceneElement>(geometryEntity, sceneEntityActionResult);
                     if (sceneEntityActionResult.Success)
                         sceneEntity.Geometry = (SceneElement)geometryEntity;
@@ -198,16 +232,15 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                 actionResult.AddError(Resources.Message_A_type_N_was_expected_by_the_following_type_was_loaded_M, typeof(T), entity.GetType());
         }
 
-        private static IArchiveEntry<ZipArchiveEntry> GetArchiveHierarchy(IEnumerable<ZipArchiveEntry> entries)
+        private static ActionResult<IArchiveEntry<ZipArchiveEntry>> GetArchiveHierarchy(IEnumerable<ZipArchiveEntry> entries)
         {
             var builder = new ArchiveHierarchyBuilder<ZipArchiveEntry>();
             foreach (var archiveEntry in entries)
             {
                 builder.Add(archiveEntry, archiveEntry.FullName);
             }
-            return builder.GetHierarchy();
+            return builder.GetValidatedHierarchy();
         }
-        private readonly Dictionary<Type, XmlSerializer> _xmlSerializers = new Dictionary<Type, XmlSerializer>();
 
         protected static void CreateArchiveIfDoesNotExist(string archiveFilePath)
         {

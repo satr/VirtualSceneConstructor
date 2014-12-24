@@ -6,16 +6,19 @@ using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
 {
-    internal class StageFileSystemDataAdapter :  FileSystemDataAdapter<IStage>
+    /// <summary>
+    /// The data-adapter to store a stage in the file-system.
+    /// </summary>
+    public class StageFileSystemDataAdapter :  FileSystemDataAdapter<IStage>
     {
-        private readonly ArchiveManager _archiveManager;
+        private readonly StageArchiveManager _stageArchiveManager;
 
         /// <summary>
         /// Creates a new instance of the StageFileSystemDataAdapter
         /// </summary>
         public StageFileSystemDataAdapter()
         {
-            _archiveManager = new ArchiveManager();
+            _stageArchiveManager = new StageArchiveManager();
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
                 return actionResult;
             }
 
-            _archiveManager.PackStage(entity, GetArchiveFilePathFor(entity));
+            _stageArchiveManager.PackStage(entity, GetArchiveFilePathFor(entity.Name));
 
             return actionResult;
         }
@@ -51,24 +54,14 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
                 return actionResult;
             }
             
-            actionResult.Value = _archiveManager.UnPackStage(archiveFilePath, actionResult);
+            actionResult.Value = _stageArchiveManager.UnPackStage(archiveFilePath, actionResult);
 
             return actionResult;
         }
 
-        /// <summary>
-        /// Get the archive file full path for the stage.
-        /// </summary>
-        /// <param name="entity">The stage.</param>
-        /// <returns>THe path to the archive file.</returns>
-        public string GetArchiveFilePathFor(IStage entity)
+        private string GetArchiveFilePathFor(string stageName)
         {
-            return GetArchiveFilePathFor(entity.Name);
-        }
-
-        private string GetArchiveFilePathFor(string entityName)
-        {
-            return Path.Combine(StagesFolderPath, entityName + Constants.Stage.ArchiveFileExtension);
+            return Path.Combine(EntityFolderPath, stageName + Constants.Stage.ArchiveFileExtension);
         }
     }
 }

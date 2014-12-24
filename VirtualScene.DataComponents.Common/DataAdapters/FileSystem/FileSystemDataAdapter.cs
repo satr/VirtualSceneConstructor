@@ -1,7 +1,7 @@
-using System;
 using System.IO;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Exceptions;
+using VirtualScene.DataComponents.Common.Properties;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
 {
@@ -11,7 +11,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
     /// <typeparam name="T">Type of the entity.</typeparam>
     public abstract class FileSystemDataAdapter<T> : IFileSystemDataAdapter<T>
     {
-        private readonly string _fileSystemCommonDocumentsFolderPath;
+        private string _entityFolderPath;
 
         /// <summary>
         /// The name of the product root folder
@@ -23,22 +23,17 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
         public const string StagesFolderName = "Stages";
 
         /// <summary>
-        /// Initializes a new instance of the FileSystemDataAdapter
+        /// The path to the folder where the entity data are stored.
         /// </summary>
-        protected FileSystemDataAdapter()
-        {
-            _fileSystemCommonDocumentsFolderPath = ServiceLocator.Get<FileSystemEnvironmentWrapper>().GetFolderPath(Environment.SpecialFolder.CommonDocuments);
-        }
-
-        /// <summary>
-        /// The path to the folder with stages
-        /// </summary>
-        public string StagesFolderPath
+        public string EntityFolderPath
         {
             get
             {
-                return Path.Combine(_fileSystemCommonDocumentsFolderPath, ProductFilderName, StagesFolderName);
+                if (string.IsNullOrWhiteSpace(_entityFolderPath))
+                    throw new DataAdapterConfigurationException(Resources.Message_Folder_path_for_the_entity_is_not_defined);
+                return _entityFolderPath;
             }
+            set { _entityFolderPath = value; }
         }
 
         /// <summary>

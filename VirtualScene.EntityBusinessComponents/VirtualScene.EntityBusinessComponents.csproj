@@ -60,6 +60,10 @@
       <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
       <Name>VirtualScene.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.DataComponents.Common\VirtualScene.DataComponents.Common.csproj">
+      <Project>{C55E5ED1-54D2-4A29-8908-2C3CC9F665CD}</Project>
+      <Name>VirtualScene.DataComponents.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.Entities\VirtualScene.Entities.csproj">
       <Project>{64B7F7F7-FF47-46C4-B7F8-0466ECCE39BA}</Project>
       <Name>VirtualScene.Entities</Name>

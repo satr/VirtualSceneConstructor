@@ -9,10 +9,15 @@ namespace VirtualScene.EntityDataComponents
     /// </summary>
     public class StageDataManager : IStageDataManager
     {
+        private readonly IDataAdapter<IStage> _dataAdapter;
 
-        private static IDataAdapter<IStage> DataAdapter
+        /// <summary>
+        /// Creates a new instance of the <see cref="StageDataManager"/>
+        /// </summary>
+        /// <param name="dataAdapter"></param>
+        public StageDataManager(IDataAdapter<IStage> dataAdapter)
         {
-            get { return ServiceLocator.Get<DataAdaptersPool>().GetFileSystemDataAdapter<IStage>(); }
+            _dataAdapter = dataAdapter;
         }
 
         /// <summary>
@@ -22,7 +27,7 @@ namespace VirtualScene.EntityDataComponents
         /// <returns>Result of the operation</returns>
         public IActionResult Save(IStage stage)
         {
-            return DataAdapter.Save(stage);
+            return _dataAdapter.Save(stage);
         }
 
         /// <summary>
@@ -32,7 +37,7 @@ namespace VirtualScene.EntityDataComponents
         /// <returns></returns>
         public ActionResult<IStage> Load(string name)
         {
-            return DataAdapter.Load(name);
+            return _dataAdapter.Load(name);
         }
     }
 }

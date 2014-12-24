@@ -1,5 +1,4 @@
 using System.IO;
-using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Exceptions;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
@@ -10,10 +9,11 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
     /// <typeparam name="T">Type of the entity.</typeparam>
     public interface IFileSystemDataAdapter<T> : IDataAdapter<T>
     {
+
         /// <summary>
-        /// The path to the folder with stages
+        /// The path to the folder where the entity data are stored.
         /// </summary>
-        string StagesFolderPath { get; }
+        string EntityFolderPath { get; set; }
 
         /// <summary>
         /// Get folder list in the specified path. The folder is created when it does not exists.

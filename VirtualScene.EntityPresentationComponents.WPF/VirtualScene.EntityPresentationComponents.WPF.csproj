@@ -57,6 +57,7 @@
     <Compile Include="Commands\GeometryCommands\PerformImport3DModelCommand.cs" />
     <Compile Include="Commands\CameraCommands\SetCameraToSceneViewCommand.cs" />
     <Compile Include="Commands\StageCommands\LoadStageCommand.cs" />
+    <Compile Include="Commands\StageCommands\StorageOperationsStageCommandBase.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Presenters\CameraPresenter.cs" />
     <Compile Include="Presenters\GeometryPrimitivePresenter.cs" />

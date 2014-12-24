@@ -23,11 +23,8 @@ namespace VirtualScene.DataComponents.TestSuite
             _stageMock = new Mock<IStage>();
             _stageName = Helper.GetUniqueName();
             _stageMock.SetupGet(p => p.Name).Returns(_stageName);
-            var dataAdaptersPoolMock = new Mock<DataAdaptersPool>();
             _dataAdapterMock = new Mock<IFileSystemDataAdapter<IStage>>();
-            dataAdaptersPoolMock.Setup(m => m.GetFileSystemDataAdapter<IStage>()).Returns(_dataAdapterMock.Object);
-            ServiceLocator.Set(dataAdaptersPoolMock.Object);
-            _stageDataManager = new StageDataManager();
+            _stageDataManager = new StageDataManager(_dataAdapterMock.Object);
         }
 
         [TearDown]

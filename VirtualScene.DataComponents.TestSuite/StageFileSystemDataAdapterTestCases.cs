@@ -4,6 +4,7 @@ using NUnit.Framework;
 using SharpGL.SceneGraph.Core;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
+using VirtualScene.DataComponents.Common.Exceptions;
 using VirtualScene.Entities;
 using VirtualScene.UnitTesting.Common;
 
@@ -14,14 +15,13 @@ namespace VirtualScene.DataComponents.TestSuite
     {
         private StageFileSystemDataAdapter _dataAdapter;
         private IStage _stage;
-        private string _testDocumentsFolderPath;
+        private string _stageFolderPath;
 
         [SetUp]
         public virtual void SetUp()
         {
-            _testDocumentsFolderPath = Helper.GetUniqueName();
-            Helper.MockFileSystemEnvironmentDocumentsFolder(_testDocumentsFolderPath);
-            Directory.CreateDirectory(_testDocumentsFolderPath);
+            _stageFolderPath = Helper.GetUniqueName();
+            Helper.MockFileSystemEnvironmentDocumentsFolder(_stageFolderPath);
 
             _dataAdapter = new StageFileSystemDataAdapter();
             _stage = new Stage { Name = Helper.GetUniqueName() };
@@ -31,30 +31,45 @@ namespace VirtualScene.DataComponents.TestSuite
         public void TearDown()
         {
             ServiceLocator.Clear();
-            if (Directory.Exists(_testDocumentsFolderPath))
-                Directory.Delete(_testDocumentsFolderPath, true);
+            if (Directory.Exists(_stageFolderPath))
+                Directory.Delete(_stageFolderPath, true);
+        }
+
+        [Test, ExpectedException(typeof(DataAdapterConfigurationException))]
+        public void TestFailOnSaveWhenEntityFolderPathIsNotDefined()
+        {
+            _dataAdapter.Save(_stage);
+        }
+
+        [Test, ExpectedException(typeof(DataAdapterConfigurationException))]
+        public void TestFailOnLoadWhenEntityFolderPathIsNotDefined()
+        {
+            _dataAdapter.Load(Helper.GetUniqueName());
         }
 
         [Test]
         public void TestAutomaticallyCreateStagesFolderWhenDoesNotExists()
         {
-            Assert.IsFalse(Directory.Exists(_dataAdapter.StagesFolderPath));
+            Assert.IsFalse(Directory.Exists(_stageFolderPath));
 
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
 
-            Assert.IsTrue(Directory.Exists(_dataAdapter.StagesFolderPath));
+            Assert.IsTrue(Directory.Exists(_stageFolderPath));
         }
 
         [Test]
         public void TestSaveStage()
         {
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
-            Assert.IsTrue(File.Exists(_dataAdapter.GetArchiveFilePathFor(_stage)));
+            Assert.IsTrue(File.Exists(Path.Combine(_stageFolderPath, _stage.Name + Constants.Stage.ArchiveFileExtension)));
         }
 
         [Test]
         public void TestNegativeResultWhenArchiveNotFound()
         {
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             var nonExistingArchivePath = Helper.GetUniqueName();
             var actionResult = _dataAdapter.Load(nonExistingArchivePath);
             Assert.IsNotNull(actionResult);
@@ -64,6 +79,7 @@ namespace VirtualScene.DataComponents.TestSuite
         [Test]
         public void TestLoadEmptyStage()
         {
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
             var actionResult = _dataAdapter.Load(_stage.Name);
             Assert.IsNotNull(actionResult);
@@ -73,6 +89,7 @@ namespace VirtualScene.DataComponents.TestSuite
         [Test]
         public void TestLoadStage()
         {
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
 
             var actionResult = _dataAdapter.Load(_stage.Name);
@@ -93,7 +110,8 @@ namespace VirtualScene.DataComponents.TestSuite
             var geometry2 = Mother.CreateSphere();
             var sceneEntity2 = Mother.CreateSceneEntity(geometry2);
             _stage.Items.Add(sceneEntity2);
-            
+
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
             
             var actionResult = _dataAdapter.Load(_stage.Name);
@@ -152,6 +170,7 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             var sceneEntity = Mother.CreateSceneEntity(geometry);
             _stage.Items.Add(sceneEntity);
+            _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
 
             var actionResult = _dataAdapter.Load(_stage.Name);
