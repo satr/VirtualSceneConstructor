@@ -133,6 +133,24 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cylinder.
+        /// </summary>
+        public static string Title_Cylinder {
+            get {
+                return ResourceManager.GetString("Title_Cylinder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gear.
+        /// </summary>
+        public static string Title_Gear {
+            get {
+                return ResourceManager.GetString("Title_Gear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Geometry Type.
         /// </summary>
         public static string Title_Geometry_Type {

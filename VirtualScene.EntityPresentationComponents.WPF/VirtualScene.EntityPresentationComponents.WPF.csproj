@@ -48,9 +48,11 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\GeometryCommands\AddCylinderCommand.cs" />
     <Compile Include="Commands\CameraCommands\AddCameraCommand.cs" />
     <Compile Include="Commands\GeometryCommands\AddCubeCommand.cs" />
     <Compile Include="Commands\CommonCommands\AddSceneObjectCommandBase.cs" />
+    <Compile Include="Commands\GeometryCommands\AddGearCommand.cs" />
     <Compile Include="Commands\GeometryCommands\AddSphereCommand.cs" />
     <Compile Include="Commands\GeometryCommands\Import3DModelCommand.cs" />
     <Compile Include="Commands\GeometryCommands\OpenFileWith3DModelCommand.cs" />

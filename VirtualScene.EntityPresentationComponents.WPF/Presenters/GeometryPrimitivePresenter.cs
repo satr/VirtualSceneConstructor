@@ -33,6 +33,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
                 yield return CreateButton(Resources.Title_Add_Cube, new AddCubeCommand(SceneContent));
                 yield return CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(SceneContent));
                 yield return CreateButton(Resources.Title_Import3D_model, new Import3DModelCommand(SceneContent));
+                yield return CreateButton(Resources.Title_Gear, new AddGearCommand(SceneContent));
+                yield return CreateButton(Resources.Title_Cylinder, new AddCylinderCommand(SceneContent));
             }
         }
     }

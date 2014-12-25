@@ -168,4 +168,10 @@
   <data name="Title_All_files" xml:space="preserve">
     <value>All files</value>
   </data>
+  <data name="Title_Gear" xml:space="preserve">
+    <value>Gear</value>
+  </data>
+  <data name="Title_Cylinder" xml:space="preserve">
+    <value>Cylinder</value>
+  </data>
 </root>
