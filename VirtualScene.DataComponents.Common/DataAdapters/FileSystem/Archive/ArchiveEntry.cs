@@ -34,6 +34,11 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         public IArchiveEntry<T> Geometry { get; set; }
 
         /// <summary>
+        /// The transformation of the entity.
+        /// </summary>
+        public IArchiveEntry<T> Transformation { get; set; }
+
+        /// <summary>
         /// The entry with the type of entity.
         /// </summary>
         public T EntityType { get; set; }

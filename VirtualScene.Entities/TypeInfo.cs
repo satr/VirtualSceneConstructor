@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VirtualScene.DataComponents.Common.DataAdapters
+namespace VirtualScene.Entities
 {
     /// <summary>
     /// Contains the information about type and assembly of an object.

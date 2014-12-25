@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using VirtualScene.DataComponents.Common.DataAdapters;
+using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.Repositories
 {

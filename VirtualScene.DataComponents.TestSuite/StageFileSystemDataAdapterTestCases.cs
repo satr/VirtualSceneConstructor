@@ -107,7 +107,7 @@ namespace VirtualScene.DataComponents.TestSuite
             var sceneEntity1 = Mother.CreateSceneEntity(geometry1);
             _stage.Items.Add(sceneEntity1);
 
-            var geometry2 = Mother.CreateSphere();
+            var geometry2 = Mother.CreateCube();
             var sceneEntity2 = Mother.CreateSceneEntity(geometry2);
             _stage.Items.Add(sceneEntity2);
 

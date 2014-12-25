@@ -50,8 +50,8 @@ namespace VirtualScene.BusinessComponents.Core.Entities
                     return;
                 if (_stage != null)
                     _stage.Items.CollectionChanged -= EntitiesOnCollectionChanged;
-                _stage = value;
                 _sceneEngine.Clear();
+                _stage = value;
                 foreach (var sceneEntity in _stage.Items)
                     _sceneEngine.AddSceneEntity(sceneEntity);
                 if (_stage != null)

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
@@ -28,5 +29,10 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         /// The entry with geometry of the entity.
         /// </summary>
         IArchiveEntry<T> Geometry { get; set; }
+
+        /// <summary>
+        /// The transformation of the entity.
+        /// </summary>
+        IArchiveEntry<T> Transformation { get; set; }
     }
 }

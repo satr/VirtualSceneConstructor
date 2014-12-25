@@ -12,7 +12,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
     /// <typeparam name="T"></typeparam>
     internal class ArchiveHierarchyBuilder<T>
     {
-        private readonly IArchiveEntry<T> _rootArchiveEntry = new ArchiveEntry<T>("\\");
+        private readonly IArchiveEntry<T> _rootArchiveEntry = new ArchiveEntry<T>(string.Empty);
 
         /// <summary>
         /// The hierarchy of entries.
@@ -67,6 +67,11 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                     if (archiveEntry.Geometry == null)
                         archiveEntry.Geometry = new ArchiveEntry<T>(GetArchiveEntryPath(elements, index));
                     AddArchiveEntity(obj, elements, index + 1, archiveEntry.Geometry);
+                    break;
+                case ArchiveEntryNames.Transformation:
+                    if (archiveEntry.Transformation == null)
+                        archiveEntry.Transformation = new ArchiveEntry<T>(GetArchiveEntryPath(elements, index));
+                    AddArchiveEntity(obj, elements, index + 1, archiveEntry.Transformation);
                     break;
                 case ArchiveEntryNames.EntryType:
                     archiveEntry.EntityType = obj;

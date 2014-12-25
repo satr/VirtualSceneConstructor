@@ -117,61 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Message_File_was_found_when_a_directory_was_expected_in_N" xml:space="preserve">
-    <value>File was found when a directory was expected in "{0}"</value>
-  </data>
-  <data name="Message_Save_Name_of_the_stage_is_invalid" xml:space="preserve">
-    <value>Name of the stage is invalid.</value>
-  </data>
-  <data name="Title_Save_the_stage" xml:space="preserve">
-    <value>Save the stage</value>
-  </data>
-  <data name="Title_Load_the_stage" xml:space="preserve">
-    <value>Load the stage</value>
-  </data>
-  <data name="Message_File_with_the_stage_does_not_exists" xml:space="preserve">
-    <value>File with the stage does not exists.</value>
-  </data>
-  <data name="Message_Archive_Entity_cannot_be_saved_because_it_is_empty" xml:space="preserve">
-    <value>Entity cannot be saved because it is empty</value>
-  </data>
-  <data name="Message_Archive_No_entry_elements_is_defined_in_the_archive_path" xml:space="preserve">
-    <value>No entry elements is defined in the archive path</value>
-  </data>
-  <data name="StageFileSystemDataAdapter_UnArchive_Archive_entry_type_is_empty_for_path___0_" xml:space="preserve">
-    <value>Archive entry-type is empty for path "{0}"</value>
-  </data>
-  <data name="Message_Archive_entry_entity_type_is_empty_for_path_N" xml:space="preserve">
-    <value>Archive entry entity-type is empty for path "{0}"</value>
-  </data>
-  <data name="Message_Archive_entry_entity_is_empty_for_path_N" xml:space="preserve">
-    <value>Archive entry entity is empty for path "{0}"</value>
-  </data>
-  <data name="Message_Archive_entry_object_cannot_be_deserialized_N" xml:space="preserve">
-    <value>Archive entry object cannot be deserialized: "{0}"</value>
-  </data>
-  <data name="Message_A_type_N_was_expected_by_the_following_type_was_loaded_M" xml:space="preserve">
-    <value>A type "{0}" was expected by the following type was loaded: "{1}".</value>
-  </data>
-  <data name="Message_Folder_path_for_the_entity_is_not_defined" xml:space="preserve">
-    <value>Folder path for the entity is not defined</value>
-  </data>
-  <data name="Message_Entity_information_is_not_defined_for_the_entry_N" xml:space="preserve">
-    <value>Entity information is not defined for the entry "{0}"</value>
-  </data>
-  <data name="Message_Entity_type_information_is_not_defined_for_the_entry_N" xml:space="preserve">
-    <value>Entity-type information is not defined for the entry "{0}"</value>
-  </data>
-  <data name="Message_The_archive_N_with_a_stage_might_be_currupted_M" xml:space="preserve">
-    <value>The archive "{0}" with a stage might be currupted "{1}"</value>
-  </data>
-  <data name="Message_The_archive_N_with_a_stage_cannot_be_processed_due_to_the_error_M" xml:space="preserve">
-    <value>The archive "{0}" with a stage cannot be processed due to the error "{1}"</value>
-  </data>
-  <data name="Message_Transformation_is_found_by_the_entity_does_not_need_it_N" xml:space="preserve">
-    <value>Transformation is found by the entity does not need it: "{0}"</value>
-  </data>
-  <data name="Message_Null_packer_is_executed_for_N" xml:space="preserve">
-    <value>Null-packer is executed for {0}</value>
+  <data name="Message_TypeInfo_cannot_be_created_for_null" xml:space="preserve">
+    <value>TypeInfo cannot be created for null</value>
   </data>
 </root>

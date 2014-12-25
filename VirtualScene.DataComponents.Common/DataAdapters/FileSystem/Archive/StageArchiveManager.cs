@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Text;
-using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Properties;
@@ -17,7 +14,15 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
     /// </summary>
     internal class StageArchiveManager
     {
-        private readonly Dictionary<Type, XmlSerializer> _xmlSerializers = new Dictionary<Type, XmlSerializer>();
+        private readonly EntityPackerManager _entityPackerManager;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="StageArchiveManager"/>
+        /// </summary>
+        public StageArchiveManager()
+        {
+            _entityPackerManager = new EntityPackerManager();
+        }
 
         /// <summary>
         /// Pack the stage to the archive.
@@ -34,16 +39,12 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             using (var fileStream = File.Create(archiveFilePath))
             using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Create))
             {
-                PackEntity(stage, archive, ArchiveEntryNames.Entry);
-                PackEntity(new TypeInfo(stage), archive, ArchiveEntryNames.EntryType);
-
-                foreach (var item in stage.Items)
+                _entityPackerManager.Pack(stage, archive, string.Empty);
+                foreach (var sceneEntity in stage.Items)
                 {
-                    var itemPath = CreateArchiveEntryPath();
-                    PackEntity(item, archive, CreateEntityPath(itemPath));
-                    PackEntity(new TypeInfo(item), archive, CreateEntityTypePath(itemPath));
-                    PackEntity(item.Geometry, archive, CreateGeometryEntityPath(itemPath));
-                    PackEntity(new TypeInfo(item.Geometry), archive, CreateGeometryEntityEntryPath(itemPath));
+                    var sceneEntityArchiveName = Guid.NewGuid().ToString();
+                    _entityPackerManager.Pack(sceneEntity, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
+                    _entityPackerManager.Pack(sceneEntity.Geometry, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
                 }
             }
         }
@@ -68,13 +69,14 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                         actionResult.CombineWith(hierarchyResult);
                         return null;
                     }
-                    var archiveHierarchy = hierarchyResult.Value;
-                    var entity = UnPackEntity(archiveHierarchy, actionResult);
-                    ValidateEntity<IStage>(entity, actionResult);
+                    var stageArchiveEntry = hierarchyResult.Value;
+                    var stageEntity = UnPackEntity(stageArchiveEntry, actionResult);
+                    ValidateEntity<IStage>(stageEntity, actionResult);
                     if (!actionResult.Success)
                         return null;
-                    var stage = (IStage)entity;
-                    UnPackSceneEntities(archiveHierarchy, stage, actionResult);
+                    var stage = (IStage)stageEntity;
+                    if (stageArchiveEntry.Items != null)
+                        UnPackSceneEntities(stage, stageArchiveEntry.Items, actionResult);
                     return stage;
                 }
             }
@@ -89,31 +91,6 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             return null;
         }
 
-        private static string CreateGeometryEntityEntryPath(string itemPath)
-        {
-            return CombinePath(itemPath, ArchiveEntryNames.Geometry, ArchiveEntryNames.EntryType);
-        }
-
-        private static string CreateGeometryEntityPath(string itemPath)
-        {
-            return CombinePath(itemPath, ArchiveEntryNames.Geometry, ArchiveEntryNames.Entry);
-        }
-
-        private static string CreateEntityTypePath(string itemPath)
-        {
-            return CombinePath(itemPath, ArchiveEntryNames.EntryType);
-        }
-
-        private static string CreateEntityPath(string itemPath)
-        {
-            return CombinePath(itemPath, ArchiveEntryNames.Entry);
-        }
-
-        private static string CreateArchiveEntryPath()
-        {
-            return CombinePath(ArchiveEntryNames.Items, Guid.NewGuid().ToString());
-        }
-
         private static void CreateDirectoryForFileIfNotExists(string archiveFilePath)
         {
             var archiveFileInfo = new FileInfo(archiveFilePath);
@@ -121,107 +98,96 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                 archiveFileInfo.Directory.Create();
         }
 
-        private void PackEntity<T>(T entity, ZipArchive archive, string path)
-        {
-            var entityEntry = CreateEntry(archive, path);
-            using (var stream = entityEntry.Open())
-                GetSerializerBy(entity).Serialize(stream, entity);
-        }
-
         private object UnPackEntity(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
         {
-            var entryType = UnPackEntryType(archiveEntry, actionResult);
+            var entryType = UnPackEntityType(archiveEntry, actionResult);
             return UnPackEntity(archiveEntry, entryType, actionResult);
+        }
+
+        private Type UnPackEntityType(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
+        {
+            if (archiveEntry.EntityType != null) 
+                return UnPackEntity(archiveEntry.EntityType, typeof (TypeInfo), actionResult) as Type;
+
+            actionResult.AddError(String.Format(Resources.Message_Archive_entry_entity_type_is_empty_for_path_N, archiveEntry.Path));
+            return null;
         }
 
         private object UnPackEntity(IArchiveEntry<ZipArchiveEntry> archiveEntry, Type entryType, IActionResult actionResult)
         {
-            var entryEntry = archiveEntry.Entity;
-            if (archiveEntry.Entity == null)
-            {
-                actionResult.AddError(Resources.Message_Archive_entry_entity_is_empty_for_path_N, archiveEntry.Path);
-                return null;
-            }
+            if (archiveEntry.Entity != null) 
+                return UnPackEntity(archiveEntry.Entity, entryType, actionResult);
+            
+            actionResult.AddError(Resources.Message_Archive_entry_entity_is_empty_for_path_N, archiveEntry.Path);
+            return null;
+        }
+
+        private object UnPackEntity(ZipArchiveEntry archiveEntry, Type type, IActionResult actionResult)
+        {
             try
             {
-                object obj;
-                using (var stream = entryEntry.Open())
+                using (var stream = archiveEntry.Open())
                 {
-                    obj = GetSerializerByType(entryType).Deserialize(stream);
+                    return _entityPackerManager.UnPack(type, stream);
                 }
-                return obj;
             }
             catch (Exception e)
             {
-                actionResult.AddError(Resources.Message_Archive_entry_entity_cannot_be_created_N, e.Message);
-                return null;
-            }
-        }
-
-        private Type UnPackEntryType(IArchiveEntry<ZipArchiveEntry> archiveEntry, IActionResult actionResult)
-        {
-            if (archiveEntry.EntityType == null)
-            {
-                actionResult.AddError(String.Format(Resources.Message_Archive_entry_entity_type_is_empty_for_path_N, archiveEntry.Path));
-                return null;
-            }
-            using (var stream = archiveEntry.EntityType.Open())
-            {
-                try
-                {
-                    var entityTypeInfo = (TypeInfo)GetSerializer<TypeInfo>().Deserialize(stream);
-                    if (entityTypeInfo != null)
-                        return entityTypeInfo.CreateEntityType(true);
-                }
-                catch (Exception e)
-                {
-                    actionResult.AddError(Resources.Message_Archive_entry_entity_type_cannot_be_created_N, e.Message);
-                }
+                actionResult.AddError(Resources.Message_Archive_entry_object_cannot_be_deserialized_N, e.Message);
             }
             return null;
         }
 
-        private static string CombinePath(params string[] entryPathElements)
-        {
-            if (entryPathElements.Length == 0)
-                throw new ArgumentException(Resources.Message_Archive_No_entry_elements_is_defined_in_the_archive_path, "entryPathElements");
 
-            var builder = new StringBuilder();
-            foreach (var entryPathElement in entryPathElements.Where(entryPathElement => !String.IsNullOrWhiteSpace(entryPathElement)))
-            {
-                if (builder.Length > 0)
-                    builder.Append(@"\");
-                builder.Append(entryPathElement);
-            }
-            return builder.ToString();
-        }
-
-        private void UnPackSceneEntities(IArchiveEntry<ZipArchiveEntry> archiveHierarchy, IStage stage, IActionResult actionResult)
+        private void UnPackSceneEntities(IStage stage, IEnumerable<IArchiveEntry<ZipArchiveEntry>> sceneEntityArchiveEntries, IActionResult actionResult)
         {
-            foreach (var archiveEntry in archiveHierarchy.Items)
+            foreach (var sceneEntityArchiveEntry in sceneEntityArchiveEntries)
             {
                 var sceneEntityActionResult = new ActionResult<ISceneEntity>();
-                var entity = UnPackEntity(archiveEntry, sceneEntityActionResult);
+                var entity = UnPackEntity(sceneEntityArchiveEntry, sceneEntityActionResult);
+                
                 ValidateEntity<ISceneEntity>(entity, sceneEntityActionResult);
-                if (!sceneEntityActionResult.Success)
-                    continue;
-                var sceneEntity = (ISceneEntity)entity;
-                if (archiveEntry.Geometry != null)
-                {
-                    var geometryEntity = UnPackEntity(archiveEntry.Geometry, sceneEntityActionResult);
-                    ValidateEntity<SceneElement>(geometryEntity, sceneEntityActionResult);
-                    if (sceneEntityActionResult.Success)
-                        sceneEntity.Geometry = (SceneElement)geometryEntity;
-                }
+
                 if (sceneEntityActionResult.Success)
-                    stage.Items.Add(sceneEntity);
+                {
+                    var sceneEntity = (ISceneEntity) entity;
+
+                    if (sceneEntityArchiveEntry.Geometry != null)
+                        UnPackGeometry(sceneEntityArchiveEntry.Geometry, sceneEntity, sceneEntityActionResult);
+
+                    if (sceneEntityActionResult.Success)
+                        stage.Items.Add(sceneEntity);
+                }
                 actionResult.CombineWith(sceneEntityActionResult);
             }
         }
 
-        private static ZipArchiveEntry CreateEntry(ZipArchive archive, string entryPath)
+        private void UnPackGeometry(IArchiveEntry<ZipArchiveEntry> geometryArchiveEntry, ISceneEntity sceneEntity, IActionResult actionResult)
         {
-            return archive.CreateEntry(entryPath);
+            var geometryEntity = UnPackEntity(geometryArchiveEntry, actionResult);
+            ValidateEntity<SceneElement>(geometryEntity, actionResult);
+            if (!actionResult.Success) 
+                return;
+
+            sceneEntity.Geometry = (SceneElement) geometryEntity;
+
+            if (geometryArchiveEntry.Transformation != null)
+                UnpackGeometryTransformation(geometryArchiveEntry, sceneEntity, actionResult);
+        }
+
+        private void UnpackGeometryTransformation(IArchiveEntry<ZipArchiveEntry> geometryArchiveEntry, ISceneEntity sceneEntity, IActionResult actionResult)
+        {
+            var objectSpace = sceneEntity.Geometry as IHasObjectSpace;
+            if (objectSpace == null)
+            {
+                actionResult.AddError(Resources.Message_Transformation_is_found_by_the_entity_does_not_need_it_N, geometryArchiveEntry.Path);
+                return;
+            }
+            var transformationEntity = UnPackEntity(geometryArchiveEntry.Transformation, actionResult);
+            ValidateEntity<Transformation>(transformationEntity, actionResult);
+            if (!actionResult.Success)
+                return;
+            ((Transformation) transformationEntity).Transform(objectSpace.Transformation);
         }
 
         private static void ValidateEntity<T>(object entity, IActionResult actionResult)
@@ -251,23 +217,6 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             {
                 //create an empty archive
             }
-        }
-
-        protected XmlSerializer GetSerializerBy<TObject>(TObject obj)
-        {
-            return GetSerializerByType(obj.GetType());
-        }
-
-        protected XmlSerializer GetSerializer<TObject>()
-        {
-            return GetSerializerByType(typeof(TObject));
-        }
-
-        protected XmlSerializer GetSerializerByType(Type type)
-        {
-            if (!_xmlSerializers.ContainsKey(type))
-                _xmlSerializers.Add(type, new XmlSerializer(type));
-            return _xmlSerializers[type];
         }
     }
 }

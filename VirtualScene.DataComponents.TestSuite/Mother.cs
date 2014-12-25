@@ -4,8 +4,6 @@ using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Lighting;
 using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Quadrics;
-using SharpGL.SceneGraph.Transformations;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Entities;
 using VirtualScene.UnitTesting.Common;
@@ -19,13 +17,22 @@ namespace VirtualScene.DataComponents.TestSuite
             //The class Polygon is used instead of the class Cube - read the comment in the CreateCube factory method.
             var cube = GeometryPrimitiveFactory.CreateCube();
             cube.Name = Helper.GetUniqueName();
-            cube.Transformation = new LinearTransformation { TranslateX = 2, TranslateY = 3, TranslateZ = 4 };
+            SetTransformation(cube, 2, 3 ,4);
             return cube;
         }
 
         public static Sphere CreateSphere()
         {
-            return new Sphere { Name = Helper.GetUniqueName(), Radius = 1.2 };
+            var sphere = new Sphere { Name = Helper.GetUniqueName(), Radius = 1.2 };
+            SetTransformation(sphere, 2, 3, 4);
+            return sphere;
+        }
+
+        private static void SetTransformation(IHasObjectSpace objectSpace, int translateX, int translateY, int translateZ)
+        {
+            objectSpace.Transformation.TranslateX = translateX;
+            objectSpace.Transformation.TranslateY = translateY;
+            objectSpace.Transformation.TranslateZ = translateZ;
         }
 
         public static TestEntity CreateTestEntity()
@@ -40,20 +47,24 @@ namespace VirtualScene.DataComponents.TestSuite
 
         public static Disk CreateDisk()
         {
-            return new Disk
-                {
-                    Name = Helper.GetUniqueName(),
-                    Loops = 2,
-                    InnerRadius = 1.2,
-                    OuterRadius = 3.4,
-                    StartAngle = 10.2,
-                    SweepAngle = 20.3
-                };
+            var disk = new Disk
+            {
+                Name = Helper.GetUniqueName(),
+                Loops = 2,
+                InnerRadius = 1.2,
+                OuterRadius = 3.4,
+                StartAngle = 10.2,
+                SweepAngle = 20.3
+            };
+            SetTransformation(disk, 2, 3, 4);
+            return disk;
         }
 
         public static Cylinder CreateCylinder()
         {
-            return new Cylinder {Name = Helper.GetUniqueName(), TopRadius = 10.2, BaseRadius = 10.2, Height = 11.3};
+            var cylinder = new Cylinder {Name = Helper.GetUniqueName(), TopRadius = 10.2, BaseRadius = 10.2, Height = 11.3};
+            SetTransformation(cylinder, 2, 3, 4);
+            return cylinder;
         }
 
         public static Light CreateLight()
