@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
+using VirtualScene.ApplicationPresentationComponents.WPF.Views;
 using VirtualScene.PresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.Views;
-using HelpView = VirtualScene.ApplicationPresentationComponents.WPF.Views.HelpView;
 
 namespace VirtualScene.ApplicationPresentationComponents.WPF.Commands
 {
@@ -15,7 +14,8 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Commands
         /// <summary>
         /// Show the help window
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             if (_helpView == null)
                 _helpView = new HelpView();

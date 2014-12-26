@@ -33,7 +33,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <param name="parameter"></param>
         public void Execute(object parameter)
         {
-            Execute();
+            ExecuteAction(parameter);
             PerformAfterExecuteAction();
         }
 
@@ -46,7 +46,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <summary>
         /// Executes the command
         /// </summary>
-        protected abstract void Execute();
+        /// <param name="parameter"></param>
+        protected abstract void ExecuteAction(object parameter);
 
         /// <summary>
         /// Raises the event when the state CanExecute is changed.

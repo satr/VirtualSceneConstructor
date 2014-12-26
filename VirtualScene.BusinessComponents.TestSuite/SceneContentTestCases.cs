@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Moq;
 using NUnit.Framework;
 using VirtualScene.BusinessComponents.Core;
@@ -106,6 +105,63 @@ namespace VirtualScene.BusinessComponents.TestSuite
             CollectionAssert.Contains(_sceneEntities, sceneEntity);
         }
 
+        [Test]
+        public void TestAddSelectedItem()
+        {
+            var sceneEntity = Mock.Of<ISceneEntity>();
+            _sceneContent.SelectedItems.Add(sceneEntity);
 
+            CollectionAssert.Contains(_sceneContent.SelectedItems, sceneEntity);
+        }
+
+        [Test]
+        public void TestRemoveSelectedItem()
+        {
+            var sceneEntity = Mock.Of<ISceneEntity>();
+            _sceneContent.SelectedItems.Add(sceneEntity);
+
+            _sceneContent.SelectedItems.Remove(sceneEntity);
+
+            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
+        }
+
+        [Test]
+        public void TestSetNewCollectionToSelectedItems()
+        {
+            var items = new ObservableCollection<ISceneEntity>
+            {
+                Mock.Of<ISceneEntity>(),
+                Mock.Of<ISceneEntity>()
+            };
+
+            var origCollection = _sceneContent.SelectedItems;
+            _sceneContent.SetSelectedItems(items);
+
+            Assert.AreSame(origCollection, _sceneContent.SelectedItems);
+            Assert.AreEqual(2, _sceneContent.SelectedItems.Count);
+        }
+
+        [Test]
+        public void TestSetEmptyCollectionToSelectedItems()
+        {
+            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
+            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
+
+            _sceneContent.SetSelectedItems(new ObservableCollection<ISceneEntity>());
+
+            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
+        }
+
+        [Test]
+        public void TestSetNullToSelectionItems()
+        {
+            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
+
+            _sceneContent.SetSelectedItems(null);
+
+            Assert.IsNotNull(_sceneContent.SelectedItems);
+            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
+            
+        }
     }
 }

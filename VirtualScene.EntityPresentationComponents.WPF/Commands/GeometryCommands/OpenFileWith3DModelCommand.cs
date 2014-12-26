@@ -26,7 +26,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         /// <summary>
         /// Executes the command to open the dialog to select a file with 3D viewModel
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             var fileDialog = new OpenFileDialog
             {

@@ -15,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands
             _camera = camera;
         }
 
-        protected override void Execute()
+        protected override void ExecuteAction(object parameter)
         {
             _sceneViewport.CurrentCamera = _camera;
         }

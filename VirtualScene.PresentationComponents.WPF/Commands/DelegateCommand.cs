@@ -21,7 +21,8 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         /// <summary>
         /// The command execution routine
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             _action();
         }

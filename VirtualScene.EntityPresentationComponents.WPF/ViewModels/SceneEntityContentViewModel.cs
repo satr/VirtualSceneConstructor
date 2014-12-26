@@ -1,4 +1,3 @@
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels

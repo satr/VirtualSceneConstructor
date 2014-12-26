@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
@@ -14,11 +16,33 @@ namespace VirtualScene.BusinessComponents.Core.Entities
     {
         private readonly ISceneEngine _sceneEngine;
         private IStage _stage;
-        
+        private readonly ObservableCollection<ISceneEntity> _selectedItems = new ObservableCollection<ISceneEntity>();
+
+        /// <summary>
+        /// The collection of items selected in the scene.
+        /// </summary>
+        public ObservableCollection<ISceneEntity> SelectedItems
+        {
+            get { return _selectedItems; }
+        }
+
         /// <summary>
         /// Occures when the <seealso cref="SceneContent.Stage" /> is changed.
         /// </summary>
         public event EventHandler<IStage> StageChanged;
+
+        /// <summary>
+        /// Set the collection of selected items.
+        /// </summary>
+        /// <param name="items">The collection of <see cref="ISceneEntity" /></param>
+        public void SetSelectedItems(IEnumerable<ISceneEntity> items)
+        {
+            _selectedItems.Clear();
+            if (items == null)
+                return;
+            foreach (var entity in items)
+                _selectedItems.Add(entity);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SceneContent" />

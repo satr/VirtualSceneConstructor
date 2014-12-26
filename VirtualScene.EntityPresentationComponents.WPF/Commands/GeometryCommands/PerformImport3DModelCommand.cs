@@ -28,7 +28,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         /// <summary>
         /// Perform the import of 3D model from the selected file
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             ServiceLocator.Get<BusinessManager>().Import3DModel(_viewModel.Name, _viewModel.FileName, _sceneContent);
         }

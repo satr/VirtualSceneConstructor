@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using Moq;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

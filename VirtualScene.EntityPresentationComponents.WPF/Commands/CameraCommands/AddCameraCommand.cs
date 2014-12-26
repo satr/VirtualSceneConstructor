@@ -33,7 +33,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands
         /// <summary>
         /// Adding of the new camera
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             var viewModel = new EntityNameDialogViewModel(_title, CreateCameraNameBasedOnCameraType());
             new EntityNameDialogView(viewModel).ShowDialog();

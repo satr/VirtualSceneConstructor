@@ -21,7 +21,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.StageCommands
         /// <summary>
         /// Open the save-stage operation dialog
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             var operationName = Resources.Title_Save_Stage;
             while (true)

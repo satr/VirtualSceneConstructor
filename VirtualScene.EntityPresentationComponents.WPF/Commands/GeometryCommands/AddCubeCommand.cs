@@ -25,7 +25,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         /// <summary>
         /// Executes the command
         /// </summary>
-        protected override void Execute()
+        /// <param name="parameter"></param>
+        protected override void ExecuteAction(object parameter)
         {
             _x += 1;
             _y += 1;
