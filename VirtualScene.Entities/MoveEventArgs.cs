@@ -21,7 +21,7 @@ namespace VirtualScene.Entities
         public float Z { get; set; }
 
         /// <summary>
-        /// Creates a new instance of the MoveEventArgs
+        /// Initializes a new instance of the <see cref="MoveEventArgs" />
         /// </summary>
         /// <param name="x">Offset on X axis</param>
         /// <param name="y">Offset on Y axis</param>

@@ -1,5 +1,4 @@
 ﻿using VirtualScene.ApplicationPresentationComponents.WPF.ViewModels;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.ApplicationPresentationComponents.WPF.Views
 {
@@ -9,7 +8,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Views
     public partial class HelpView
     {
         /// <summary>
-        /// Creates a new instance of the HelpView
+        /// Initializes a new instance of the <see cref="HelpView" />
         /// </summary>
         public HelpView()
         {

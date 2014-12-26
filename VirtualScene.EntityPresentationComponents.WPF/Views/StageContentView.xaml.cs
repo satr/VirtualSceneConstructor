@@ -1,5 +1,4 @@
 ﻿using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Views
 {
@@ -9,7 +8,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Views
     public partial class StageContentView
     {
         /// <summary>
-        /// Creates a new instance of the content view for the stage
+        /// Initializes a new instance of the content <see cref="StageContentView" />
         /// </summary>
         /// <param name="viewModel"></param>
         public StageContentView(StageContentViewModel viewModel)

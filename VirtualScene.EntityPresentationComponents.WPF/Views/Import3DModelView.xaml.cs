@@ -8,7 +8,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Views
     public partial class Import3DModelView
     {
         /// <summary>
-        /// Creates a new instance of the view accepting parameters for importing of 3D model
+        /// Initializes a new instance of the <see cref="Import3DModelView" />
         /// </summary>
         /// <param name="viewModel">The view-model of the view</param>
         public Import3DModelView(Import3DModelViewModel viewModel)

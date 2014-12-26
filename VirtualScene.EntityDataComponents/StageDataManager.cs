@@ -12,7 +12,7 @@ namespace VirtualScene.EntityDataComponents
         private readonly IDataAdapter<IStage> _dataAdapter;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StageDataManager"/>
+        /// Initializes a new instance of the <see cref="StageDataManager"/>
         /// </summary>
         /// <param name="dataAdapter"></param>
         public StageDataManager(IDataAdapter<IStage> dataAdapter)

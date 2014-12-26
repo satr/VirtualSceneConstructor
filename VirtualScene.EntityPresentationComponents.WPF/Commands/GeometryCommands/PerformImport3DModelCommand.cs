@@ -3,9 +3,8 @@ using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands
 {
     /// <summary>
     /// The command importing 3D model
@@ -16,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         private readonly ISceneContent _sceneContent;
 
         /// <summary>
-        /// Creates a new instance of the Import3DModel command
+        /// Initializes a new instance of the <see cref="PerformImport3DModelCommand" />
         /// </summary>
         /// <param name="viewModel">Th view-model of the importing view</param>
         /// <param name="sceneContent">The content of the scene</param>

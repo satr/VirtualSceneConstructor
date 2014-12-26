@@ -10,7 +10,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands
     public abstract class AddSceneObjectCommandBase : CommandWithSceneContentBase
     {
         /// <summary>
-        /// Creates a new instance of the AddSphereCommand
+        /// Initializes a new instance of the <see cref="AddSceneObjectCommandBase" />
         /// </summary>
         /// <param name="sceneContent"></param>
         protected AddSceneObjectCommandBase(ISceneContent sceneContent): base(sceneContent)

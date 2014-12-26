@@ -11,7 +11,7 @@ namespace VirtualScene.BusinessComponents.Core
         private readonly ISceneViewport _sceneViewport;
 
         /// <summary>
-        /// Creates a new instance of the navigation component
+        /// Initializes a new instance of the <see cref="SceneViewportNavigation" />
         /// </summary>
         /// <param name="sceneViewport"></param>
         public SceneViewportNavigation(ISceneViewport sceneViewport)

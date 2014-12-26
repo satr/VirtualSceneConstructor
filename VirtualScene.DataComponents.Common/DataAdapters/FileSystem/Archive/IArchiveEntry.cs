@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {

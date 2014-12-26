@@ -27,7 +27,7 @@ namespace VirtualScene.BusinessComponents.Core
         private readonly ObservableCollection<SceneViewport> _viewports = new ObservableCollection<SceneViewport>();
 
         /// <summary>
-        /// Creates a new instance of the 3D scene.
+        /// Initializes a new instance of <see cref="SceneEngine" />
         /// </summary>
         public SceneEngine()
         {

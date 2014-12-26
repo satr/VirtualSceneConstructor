@@ -48,6 +48,8 @@
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Factories\CylinderFactory.cs" />
+    <Compile Include="Factories\GearFactory.cs" />
+    <Compile Include="Factories\GeometryFactoryBase.cs" />
     <Compile Include="Factories\GeometryPrimitiveFactory.cs" />
     <Compile Include="Factories\SceneContentFactory.cs" />
     <Compile Include="Importers\IGeometryImporter.cs" />

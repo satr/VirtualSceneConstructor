@@ -15,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         private int _x, _y;
 
         /// <summary>
-        /// Creates a new instance of the AddSphereCommand
+        /// Initializes a new instance of the <see cref="AddSphereCommand" />
         /// </summary>
         /// <param name="sceneContent"></param>
         public AddSphereCommand(ISceneContent sceneContent): base(sceneContent)

@@ -8,7 +8,7 @@ namespace VirtualScene.DataComponents.Common.Exceptions
     public class FileFoundWhenDirectoryExpectedException: FileSystemException
     {
         /// <summary>
-        /// Creates a new instance of the FileFoundWhenDirectoryExpectedException
+        /// Initializes a new instance of the <see cref="FileFoundWhenDirectoryExpectedException" />
         /// </summary>
         /// <param name="path">The path to a folder</param>
         public FileFoundWhenDirectoryExpectedException(string path)

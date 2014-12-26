@@ -11,7 +11,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         private Action _afterExecuteAction;
 
         /// <summary>
-        /// /// Creates a new instance of a command
+        /// /// Initializes a new instance of a command
         /// </summary>
         protected CommandBase()
         {

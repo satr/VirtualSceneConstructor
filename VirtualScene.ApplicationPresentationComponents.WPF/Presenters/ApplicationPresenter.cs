@@ -19,6 +19,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
     {
         private readonly FrameworkElement _stageContentView;
         private readonly Dictionary<Type, IEntityPresenter> _entityPresenters = new Dictionary<Type, IEntityPresenter>();
+        // ReSharper disable once CollectionNeverQueried.Local
         private readonly List<IContentPresenter> _contentPresenters = new List<IContentPresenter>();
         private readonly FrameworkElement _sceneEntityDetailView;
         private readonly IContentPresenter _viewportPresenter1;
@@ -26,7 +27,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         private readonly IContentPresenter _viewportPresenter3;
 
         /// <summary>
-        /// Creates a new instance of the presenter
+        /// Initializes a new instance of the <see cref="ApplicationPresenter" />
         /// </summary>
         public ApplicationPresenter()
         {

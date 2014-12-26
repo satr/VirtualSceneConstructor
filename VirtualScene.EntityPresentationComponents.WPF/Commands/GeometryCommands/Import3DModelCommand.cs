@@ -1,12 +1,9 @@
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
-using VirtualScene.PresentationComponents.WPF.Views;
-using Import3DModelView = VirtualScene.EntityPresentationComponents.WPF.Views.Import3DModelView;
+using VirtualScene.EntityPresentationComponents.WPF.Views;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands
 {
     /// <summary>
     /// The command opening the dialog for importing 3D model
@@ -14,7 +11,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
     public class Import3DModelCommand : AddSceneObjectCommandBase
     {
         /// <summary>
-        /// Creates a new instance of the Import3DModel command
+        /// Initializes a new instance of the <see cref="Import3DModelCommand" />
         /// </summary>
         /// <param name="sceneContent"></param>
         public Import3DModelCommand(ISceneContent sceneContent)

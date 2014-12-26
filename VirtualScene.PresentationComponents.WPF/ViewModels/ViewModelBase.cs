@@ -19,7 +19,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         public event EventHandler CloseView;
 
         /// <summary>
-        /// Creates a new instance of the base view-model
+        /// Initializes a new instance of the <see cref="ViewModelBase" />
         /// </summary>
         protected ViewModelBase()
         {

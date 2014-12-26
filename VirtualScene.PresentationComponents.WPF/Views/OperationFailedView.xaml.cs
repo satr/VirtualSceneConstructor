@@ -8,7 +8,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
     public partial class OperationFailedView
     {
         /// <summary>
-        /// Creates a new instance of the view
+        /// Initializes a new instance of the <see cref="OperationFailedView" />
         /// </summary>
         /// <param name="viewModel">The view-model of the view</param>
         public OperationFailedView(OperationFailedViewModel viewModel)

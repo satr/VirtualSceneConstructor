@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace VirtualScene.EntityPresentationComponents.WPF.Views
+﻿namespace VirtualScene.EntityPresentationComponents.WPF.Views
 {
     /// <summary>
     /// Interaction logic for CameraContentView.xaml
@@ -8,7 +6,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Views
     public partial class CameraContentView
     {
         /// <summary>
-        /// Creates a new instance of the CameraContentView
+        /// Initializes a new instance of the <see cref="CameraContentView" />
         /// </summary>
         public CameraContentView()
         {

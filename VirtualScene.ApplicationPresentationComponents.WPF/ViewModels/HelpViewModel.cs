@@ -13,7 +13,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.ViewModels
         const string HelpFileName = "Help.htm";
 
         /// <summary>
-        /// Creates a new instance of the view model for the HelpView
+        /// Initializes a new instance of the <see cref="HelpViewModel" />
         /// </summary>
         /// <param name="browser">The web browser control to display the help</param>
         /// <param name="closeViewAction">The action closing the view</param>

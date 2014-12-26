@@ -6,7 +6,7 @@
     public class ArchiveRepositoryEntity<T> : RepositoryEntity<T>
     {
         /// <summary>
-        /// Creates a new instance of the archive-repository entry.
+        /// Initializes a new instance of the <see cref="ArchiveRepositoryEntity&lt;T&gt;" />
         /// </summary>
         /// <param name="entity"></param>
         public ArchiveRepositoryEntity(T entity) : base(entity)

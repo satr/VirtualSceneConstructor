@@ -2,9 +2,8 @@
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Commands;
-using VirtualScene.PresentationComponents.WPF.ViewModels;
 
-namespace VirtualScene.EntityPresentationComponents.WPF.Commands
+namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands
 {
     /// <summary>
     /// The command opening the dialog to choose the file with 3D viewModel
@@ -14,7 +13,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         private readonly Import3DModelViewModel _viewModel;
 
         /// <summary>
-        /// Creates a new instance of the command
+        /// Initializes a new instance of the <see cref="OpenFileWith3DModelCommand" />
         /// </summary>
         /// <param name="viewModel">The viewModel to keep state of the importing 3D viewModel operation</param>
         public OpenFileWith3DModelCommand(Import3DModelViewModel viewModel)

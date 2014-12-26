@@ -15,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         private int _x;
         private int _y;
         /// <summary>
-        /// Creates a new instance of the <see cref="AddGearCommand"/>
+        /// Initializes a new instance of the <see cref="AddGearCommand"/>
         /// </summary>
         /// <param name="sceneContent">The content of the scene.</param>
         public AddGearCommand(ISceneContent sceneContent)

@@ -8,7 +8,7 @@ namespace VirtualScene.DataComponents.Common.Exceptions
     public abstract class FileSystemException: Exception
     {
         /// <summary>
-        /// Creates a new instance of the FileSystemException
+        /// Initializes a new instance of the <see cref="FileSystemException" />
         /// </summary>
         /// <param name="message"></param>
         protected FileSystemException(string message) : base(message)

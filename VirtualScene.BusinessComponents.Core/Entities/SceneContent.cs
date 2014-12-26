@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
@@ -16,7 +15,7 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         private IStage _stage;
 
         /// <summary>
-        /// Creates a new instance of the content of the virtual scene
+        /// Initializes a new instance of the <see cref="SceneContent" />
         /// </summary>
         public SceneContent()
         {

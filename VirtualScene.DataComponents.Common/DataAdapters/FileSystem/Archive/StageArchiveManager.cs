@@ -17,7 +17,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         private readonly EntityPackerManager _entityPackerManager;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StageArchiveManager"/>
+        /// Initializes a new instance of the <see cref="StageArchiveManager"/>
         /// </summary>
         public StageArchiveManager()
         {

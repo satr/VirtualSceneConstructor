@@ -13,7 +13,7 @@ namespace VirtualScene.EntityBusinessComponents
         private readonly StageDataManager _dataManager;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="StageBusinessManager"/>
+        /// Initializes a new instance of the <see cref="StageBusinessManager"/>
         /// </summary>
         /// <param name="dataAdapter"></param>
         public StageBusinessManager(IDataAdapter<IStage> dataAdapter)

@@ -8,7 +8,7 @@ namespace VirtualScene.DataComponents.Common.Exceptions
     public class DataAdapterConfigurationException : Exception
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="DataAdapterConfigurationException"/>
+        /// Initializes a new instance of the <see cref="DataAdapterConfigurationException"/>
         /// </summary>
         /// <param name="format"></param>
         /// <param name="args"></param>

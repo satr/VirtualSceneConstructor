@@ -14,7 +14,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         private readonly string _operationName;
 
         /// <summary>
-        /// Creates a new instance of the view-model 
+        /// Initializes a new instance of the <see cref="OperationFailedViewModel" />
         /// </summary>
         /// <param name="operationName">The name of failed operation</param>
         /// <param name="actionResult">The result of an operation</param>

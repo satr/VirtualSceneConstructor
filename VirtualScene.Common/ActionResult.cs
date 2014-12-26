@@ -12,14 +12,14 @@ namespace VirtualScene.Common
         private readonly string _operationTitle;
 
         /// <summary>
-        /// Creates a new instance of the action result
+        /// Initializes a new instance of the <see cref="ActionResult&lt;T&gt;" />
         /// </summary>
         public ActionResult(): this(Resources.Message_Not_defined)
         {
         }
 
         /// <summary>
-        /// Creates a new instance of the action result
+        /// Initializes a new instance of the <see cref="ActionResult&lt;T&gt;" />
         /// </summary>
         /// <param name="operationTitle">The name of the operation.</param>
         public ActionResult(string operationTitle)

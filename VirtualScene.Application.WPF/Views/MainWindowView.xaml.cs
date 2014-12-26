@@ -9,7 +9,7 @@ namespace VirtualScene.Application.WPF.Views
     public partial class MainWindowView : IMainWindowView
     {
         /// <summary>
-        /// Creates a new instance of the main window of the application
+        /// Initializes a new instance of the main window of the <see cref="MainWindowView" />
         /// </summary>
         public MainWindowView()
         {

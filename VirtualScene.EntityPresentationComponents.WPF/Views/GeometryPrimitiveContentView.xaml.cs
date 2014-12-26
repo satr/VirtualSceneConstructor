@@ -6,7 +6,7 @@
     public partial class GeometryPrimitiveContentView
     {
         /// <summary>
-        /// Creates a new instance if the GeometryPrimitiveContentView
+        /// Initializes a new instance if the <see cref="GeometryPrimitiveContentView" />
         /// </summary>
         public GeometryPrimitiveContentView()
         {

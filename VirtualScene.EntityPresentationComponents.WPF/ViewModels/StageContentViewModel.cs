@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
@@ -14,7 +13,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
         private readonly ISceneContent _sceneContent;
 
         /// <summary>
-        /// Creates a new instance of the StageContentViewModel
+        /// Initializes a new instance of the <see cref="StageContentViewModel" />
         /// </summary>
         /// <param name="sceneContent"></param>
         public StageContentViewModel(ISceneContent sceneContent)

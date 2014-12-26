@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Models;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
@@ -19,7 +18,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
         private readonly SceneViewportModel _sceneViewportModel;
 
         /// <summary>
-        /// Creates a new instance of the view-model of the main window of the application.
+        /// Initializes a new instance of the <see cref="SceneViewportViewModel" />
         /// </summary>
         /// <param name="sceneContent">The content of the scene</param>
         public SceneViewportViewModel(ISceneContent sceneContent)

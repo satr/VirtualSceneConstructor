@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="ArchiveHierarchyBuilderTestCases.cs" />
     <Compile Include="RepositoryEntityTestCases.cs" />
-    <Compile Include="ArchiveTests.cs" />
     <Compile Include="Mother.cs" />
     <Compile Include="StageDataManagerTestCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

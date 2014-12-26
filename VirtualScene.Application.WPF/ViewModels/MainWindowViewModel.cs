@@ -18,7 +18,7 @@ namespace VirtualScene.Application.WPF.ViewModels
         private FrameworkElement _contentView5;
 
         /// <summary>
-        /// Creates a new instance of the MainWindowViewModel
+        /// Initializes a new instance of the <see cref="MainWindowViewModel" />
         /// </summary>
         /// <param name="mainWindowView">The main window view.</param>
         public MainWindowViewModel(IMainWindowView mainWindowView)

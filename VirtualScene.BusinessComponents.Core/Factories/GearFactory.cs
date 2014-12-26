@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 
 namespace VirtualScene.BusinessComponents.Core.Factories
 {
     /// <summary>
-    /// The factory creating cylinder geometry.
+    /// The factory creating gear geometry.
     /// </summary>
-    public class CylinderFactory : GeometryFactoryBase
+    public class GearFactory : GeometryFactoryBase
     {
         /// <summary>
-        /// Create a new cylinder.
+        /// Create a new gear.
         /// </summary>
         /// <returns></returns>
         public static Polygon Create()
@@ -18,7 +19,10 @@ namespace VirtualScene.BusinessComponents.Core.Factories
 
             var polygon = new Polygon();
 
-            AddTextureCoordinates(polygon);
+            polygon.UVs.Add(new UV(0, 0));
+            polygon.UVs.Add(new UV(0, 1));
+            polygon.UVs.Add(new UV(1, 1));
+            polygon.UVs.Add(new UV(1, 0));
 
             const int radius = 5;
             const int heightZ = 1;

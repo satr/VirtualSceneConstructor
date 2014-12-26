@@ -10,7 +10,7 @@ namespace VirtualScene.PresentationComponents.WPF.Commands
         private readonly Action _action;
 
         /// <summary>
-        /// Creates a new instance of the command invoking the action
+        /// Initializes a new instance of the <see cref="DelegateCommand" />
         /// </summary>
         /// <param name="action">The action to be invoked</param>
         public DelegateCommand(Action action)

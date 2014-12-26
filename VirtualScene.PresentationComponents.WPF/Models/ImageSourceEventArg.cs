@@ -14,7 +14,7 @@ namespace VirtualScene.PresentationComponents.WPF.Models
         public ImageSource ImageSource { get; set; }
 
         /// <summary>
-        /// Creates a new instance of the event argument for an updated image
+        /// Initializes a new instance of the event argument for an updated image
         /// </summary>
         /// <param name="imageSource"></param>
         public ImageSourceEventArg(ImageSource imageSource)

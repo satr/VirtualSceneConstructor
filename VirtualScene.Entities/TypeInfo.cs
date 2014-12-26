@@ -8,7 +8,7 @@ namespace VirtualScene.Entities
     public class TypeInfo
     {
         /// <summary>
-        /// Creates a new instance of the type information.
+        /// Initializes a new instance of the <see cref="TypeInfo" />.
         /// </summary>
         public TypeInfo(object obj)
         {
@@ -20,7 +20,7 @@ namespace VirtualScene.Entities
         }
 
         /// <summary>
-        /// Creates a new instance of the type information. It is required during deserialiozation.
+        /// Initializes a new instance of the type <see cref="TypeInfo" />. It is required during deserialization.
         /// </summary>
         private TypeInfo()
         {

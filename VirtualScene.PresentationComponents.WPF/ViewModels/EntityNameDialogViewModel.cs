@@ -10,7 +10,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
         private string _name;
 
         /// <summary>
-        /// Creates a new instance of the EntityNameDialogViewModel
+        /// Initializes a new instance of the <see cref="EntityNameDialogViewModel" />
         /// </summary>
         /// <param name="title">The title of the dialog</param>
         /// <param name="name">The entity name</param>

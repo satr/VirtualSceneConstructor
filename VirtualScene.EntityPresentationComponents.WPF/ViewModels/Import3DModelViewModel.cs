@@ -1,7 +1,6 @@
 ﻿using System.Windows.Input;
-using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.EntityPresentationComponents.WPF.Commands;
+using VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
@@ -16,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
         private string _name;
 
         /// <summary>
-        /// Creates a new instance of the import 3D view-model
+        /// Initializes a new instance of the <see cref="Import3DModelViewModel" />
         /// </summary>
         /// <param name="sceneContent"></param>
         public Import3DModelViewModel(ISceneContent sceneContent)

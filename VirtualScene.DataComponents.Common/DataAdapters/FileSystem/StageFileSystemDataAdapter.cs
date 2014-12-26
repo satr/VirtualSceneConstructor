@@ -14,7 +14,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
         private readonly StageArchiveManager _stageArchiveManager;
 
         /// <summary>
-        /// Creates a new instance of the StageFileSystemDataAdapter
+        /// Initializes a new instance of the <see cref="StageFileSystemDataAdapter" />
         /// </summary>
         public StageFileSystemDataAdapter()
         {

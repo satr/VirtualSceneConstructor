@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using VirtualScene.DataComponents.Common.DataAdapters;
 using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.Repositories
@@ -11,7 +10,7 @@ namespace VirtualScene.DataComponents.Common.Repositories
     public class RepositoryEntity<T> : IRepositoryEntity
     {
         /// <summary>
-        /// Creates a new instance of the repository.
+        /// Initializes a new instance of the <see cref="RepositoryEntity&lt;T&gt;" />.
         /// </summary>
         public RepositoryEntity(T entity)
         {
