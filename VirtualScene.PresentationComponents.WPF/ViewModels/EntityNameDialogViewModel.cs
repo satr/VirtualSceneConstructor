@@ -5,7 +5,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
     /// <summary>
     /// The view model for EntityNameDialogView
     /// </summary>
-    public class EntityNameDialogViewModel: ViewModelBase
+    public class EntityNameDialogViewModel: WindowViewModelBase
     {
         private string _name;
 

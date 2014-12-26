@@ -9,7 +9,7 @@ namespace VirtualScene.Application.WPF.ViewModels
     /// <summary>
     /// The view-model of the main window of the application.
     /// </summary>
-    public class MainWindowViewModel: ViewModelBase
+    public class MainWindowViewModel : WindowViewModelBase
     {
         private FrameworkElement _contentView1;
         private FrameworkElement _contentView2;

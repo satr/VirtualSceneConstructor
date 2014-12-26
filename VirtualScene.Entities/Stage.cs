@@ -61,7 +61,7 @@ namespace VirtualScene.Entities
         /// <filterpriority>2</filterpriority>
         public override int GetHashCode()
         {
-            return Name.GetHashCode();
+            return Name == null? 0: Name.GetHashCode();
         }
     }
 }

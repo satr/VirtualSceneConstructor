@@ -11,7 +11,7 @@ namespace VirtualScene.PresentationComponents.WPF.Views
         /// Creates a new oinstance of the EntityNameDialogView
         /// </summary>
         /// <param name="viewModel">The view-model to enter a name on the view</param>
-        public EntityNameDialogView(ViewModelBase viewModel)
+        public EntityNameDialogView(WindowViewModelBase viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

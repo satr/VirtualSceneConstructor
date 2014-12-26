@@ -31,7 +31,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
             _x += 1;
             _y += 1;
             //TODO: temporary use cylinder
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace(SceneContent, CylinderFactory.Create(), _x, _y, 0, Resources.Title_Gear);
+            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace(SceneContent, GearFactory.Create(), _x, _y, 0, Resources.Title_Gear);
         }
     }
 }

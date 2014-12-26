@@ -9,7 +9,7 @@ namespace VirtualScene.PresentationComponents.WPF.ViewModels
     /// <summary>
     /// The view-model of the OperationFailedView
     /// </summary>
-    public class OperationFailedViewModel: ViewModelBase
+    public class OperationFailedViewModel: WindowViewModelBase
     {
         private readonly string _operationName;
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Specialized;
 using VirtualScene.BusinessComponents.Core.Factories;
@@ -13,6 +14,11 @@ namespace VirtualScene.BusinessComponents.Core.Entities
     {
         private readonly ISceneEngine _sceneEngine;
         private IStage _stage;
+        
+        /// <summary>
+        /// Occures when the <seealso cref="SceneContent.Stage" /> is changed.
+        /// </summary>
+        public event EventHandler<IStage> StageChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SceneContent" />
@@ -55,6 +61,7 @@ namespace VirtualScene.BusinessComponents.Core.Entities
                     _sceneEngine.AddSceneEntity(sceneEntity);
                 if (_stage != null)
                     _stage.Items.CollectionChanged += EntitiesOnCollectionChanged;
+                OnStageChanged(_stage);
             }
         }
 
@@ -79,6 +86,13 @@ namespace VirtualScene.BusinessComponents.Core.Entities
             {
                 _sceneEngine.AddSceneEntity(item);
             }
+        }
+
+        private void OnStageChanged(IStage stage)
+        {
+            var handler = StageChanged;
+            if (handler != null) 
+                handler(this, stage);
         }
     }
 }

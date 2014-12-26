@@ -15,6 +15,6 @@
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
         <Label Content="{Binding Title}" Height="26" Background="#FFF5E7E7"></Label>
-        <TreeView ItemsSource="{Binding Source}" ItemTemplate="{StaticResource ContentTypes}" Height="200"></TreeView>
+        <TreeView ItemsSource="{Binding Stage.Items}" ItemTemplate="{StaticResource ContentTypes}" Height="200"></TreeView>
     </StackPanel>
 </UserControl>

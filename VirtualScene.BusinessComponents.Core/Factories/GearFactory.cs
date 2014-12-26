@@ -19,10 +19,7 @@ namespace VirtualScene.BusinessComponents.Core.Factories
 
             var polygon = new Polygon();
 
-            polygon.UVs.Add(new UV(0, 0));
-            polygon.UVs.Add(new UV(0, 1));
-            polygon.UVs.Add(new UV(1, 1));
-            polygon.UVs.Add(new UV(1, 0));
+            AddTextureCoordinates(polygon);
 
             const int radius = 5;
             const int heightZ = 1;
@@ -30,13 +27,13 @@ namespace VirtualScene.BusinessComponents.Core.Factories
             const float centerY = -1;
             const int segmentAngle = 5;
 
-            foreach (var pos in GetPositionsForCircle(radius, centerX, centerY, segmentAngle))
+            foreach (var pos in GetPositionsForGear(radius, centerX, centerY, segmentAngle))
                 AddFace(pos.X, pos.Y, heightZ, polygon);
 
             return polygon;
         }
 
-        private static IEnumerable<Pos2D> GetPositionsForCircle(int radius, float centerX, float centerY, int segmentAngle)
+        private static IEnumerable<Pos2D> GetPositionsForGear(int radius, float centerX, float centerY, int segmentAngle)
         {
             yield return new Pos2D(0 + centerX, radius + centerY);
             const double rad2DegRatio = Math.PI / 180;

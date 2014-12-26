@@ -1,3 +1,4 @@
+using System;
 using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
@@ -21,5 +22,10 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// Navigation in the scene
         /// </summary>
         ISceneNavigator Navigator { get; set; }
+
+        /// <summary>
+        /// Occures when the <see cref="ISceneContent.Stage" /> is changed.
+        /// </summary>
+        event EventHandler<IStage> StageChanged;
     }
 }

@@ -8,7 +8,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
     /// <summary>
     /// The view model of the import 3D model view
     /// </summary>
-    public class Import3DModelViewModel: ViewModelBase
+    public class Import3DModelViewModel: WindowViewModelBase
     {
         private string _fileName;
 

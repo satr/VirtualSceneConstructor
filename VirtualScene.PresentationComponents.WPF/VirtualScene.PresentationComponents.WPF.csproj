@@ -56,6 +56,7 @@
     <Compile Include="Presenters\IEntityPresenter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="ViewModels\WindowViewModelBase.cs" />
     <Compile Include="Views\EntityNameDialogView.xaml.cs">
       <DependentUpon>EntityNameDialogView.xaml</DependentUpon>
     </Compile>

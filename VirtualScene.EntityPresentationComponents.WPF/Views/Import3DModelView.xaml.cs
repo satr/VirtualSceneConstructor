@@ -1,4 +1,4 @@
-﻿using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
+﻿using VirtualScene.PresentationComponents.WPF.ViewModels;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Views
 {
@@ -11,7 +11,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Views
         /// Initializes a new instance of the <see cref="Import3DModelView" />
         /// </summary>
         /// <param name="viewModel">The view-model of the view</param>
-        public Import3DModelView(Import3DModelViewModel viewModel)
+        public Import3DModelView(WindowViewModelBase viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;
