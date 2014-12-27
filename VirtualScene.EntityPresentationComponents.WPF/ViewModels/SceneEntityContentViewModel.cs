@@ -43,7 +43,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.ViewModels
             get { return _sceneEntity; }
             set
             {
-                if (Equals(value, _sceneEntity)) return;
+                if (Equals(value, _sceneEntity) || value == null) 
+                    return;
                 _sceneEntity = value;
                 OnPropertyChanged();
             }
