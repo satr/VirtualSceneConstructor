@@ -1,3 +1,4 @@
+using System;
 using System.Windows;
 using VirtualScene.Application.WPF.Views;
 using VirtualScene.ApplicationPresentationComponents.WPF.Presenters;
@@ -30,10 +31,15 @@ namespace VirtualScene.Application.WPF.ViewModels
             }
             mainWindowView.KeyDown += (s, e) => applicationPresenter.SceneContent.Navigator.KeyboardAction(e);
             ContentView1 = applicationPresenter.GetStageContentView();
-            ContentView2 = applicationPresenter.GetDetailView();
             ContentView3 = applicationPresenter.Get3DViewport1();
             ContentView4 = applicationPresenter.Get3DViewport2();
             ContentView5 = applicationPresenter.Get3DViewport3();
+            applicationPresenter.SetDetailedView += ApplicationPresenterOnSetDetailedView;
+        }
+
+        private void ApplicationPresenterOnSetDetailedView(object sender, FrameworkElement uiElement)
+        {
+            ContentView2 = uiElement;
         }
 
         /// <summary>

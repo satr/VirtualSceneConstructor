@@ -11,17 +11,17 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive.Pac
     internal class EntityPacker<T> : IEntityPacker
     {
         private readonly XmlSerializerPool _serializerPool;
-        private readonly Type _entityType;
+        private readonly Type _typeKey;
 
         public EntityPacker(XmlSerializerPool serializerPool)
         {
             _serializerPool = serializerPool;
-            _entityType = typeof (T);
+            _typeKey = typeof (T);
         }
 
-        public Type EntityType
+        public Type TypeKey
         {
-            get { return _entityType; }
+            get { return _typeKey; }
         }
 
         public void Pack(object obj, ZipArchive archive, params string[] pathElements)

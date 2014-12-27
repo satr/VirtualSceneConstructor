@@ -18,11 +18,11 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public override void Init()
         {
             base.Init();
-            _geometryImportersPoolMock = Helper.CreateMockInServiceLocator<GeometryImportersPool>();
+            _geometryImportersPoolMock = Helper.MockObjectInServiceLocator<GeometryImportersPool>();
             var importerMock = new Mock<IGeometryImporter>();
             _geometryImportersPoolMock.Setup(m => m.GetWavefrontFormatImporter()).Returns(importerMock.Object);
             var actionResultMock = new Mock<ActionResult<SceneElement>>();
-            actionResultMock.SetupGet(p => p.Value).Returns(Helper.CreateMockedObject<SceneElement>());
+            actionResultMock.SetupGet(p => p.Value).Returns(Mock.Of<SceneElement>());
             importerMock.Setup(m => m.LoadGeometry(It.IsAny<string>(), It.IsAny<ISceneEngine>())).Returns(actionResultMock.Object);
         }
 

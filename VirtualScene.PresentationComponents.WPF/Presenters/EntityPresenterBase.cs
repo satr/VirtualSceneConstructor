@@ -26,19 +26,20 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
 
 
         /// <summary>
-        /// TODO
+        /// Create a button for an operation.
         /// </summary>
-        /// <param name="title"></param>
-        /// <param name="command"></param>
-        /// <returns></returns>
-        protected static Button CreateButton(string title, ICommand command)
+        /// <param name="title">Title of the button.</param>
+        /// <param name="command">The command executed by the button.</param>
+        /// <returns>The UI control executing the operation.</returns>
+        protected static UIElement CreateButton(string title, ICommand command)
         {
             var button = new Button
             {
                 Width = 60,
                 Height = 48,
                 Content = title,
-                Command = command
+                Command = command,
+                ToolTip = title
             };
             return button;
         }

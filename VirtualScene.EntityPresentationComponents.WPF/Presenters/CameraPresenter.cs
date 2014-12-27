@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using SharpGL.SceneGraph.Cameras;
-using VirtualScene.EntityPresentationComponents.WPF.Commands;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.EntityPresentationComponents.WPF.Views;

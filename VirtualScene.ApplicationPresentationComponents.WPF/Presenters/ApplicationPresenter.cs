@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using VirtualScene.ApplicationPresentationComponents.WPF.Commands;
 using VirtualScene.ApplicationPresentationComponents.WPF.Properties;
@@ -25,6 +26,11 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         private readonly IContentPresenter _viewportPresenter1;
         private readonly IContentPresenter _viewportPresenter2;
         private readonly IContentPresenter _viewportPresenter3;
+        
+        /// <summary>
+        /// Set the detailed view of the item(s) selected in the scene-content
+        /// </summary>
+        public event EventHandler<FrameworkElement> SetDetailedView;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ApplicationPresenter" />
@@ -42,6 +48,15 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
             SceneContent.Stage = new Stage();
             _stageContentView = stagePresenter.GetContentView();
             _sceneEntityDetailView = sceneEntityPresenter.GetContentView();
+            SceneContent.SelectedSceneElementsChanged += SceneContentSelectedSceneElementsChanged;
+        }
+
+        private void SceneContentSelectedSceneElementsChanged(object sender, IEnumerable<ISceneEntity> sceneEntities)
+        {
+            var selectedSceneEntities = sceneEntities.ToList();
+            OnSetDetailedView(selectedSceneEntities.Count == 1 
+                                ? _sceneEntityDetailView 
+                                : null);
         }
 
         private IEntityPresenter RegisterEntityPresenter<T>()
@@ -100,15 +115,6 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         }
 
         /// <summary>
-        /// TODO temporary show some entity content
-        /// </summary>
-        /// <returns></returns>
-        public FrameworkElement GetDetailView()
-        {
-            return _sceneEntityDetailView;
-        }
-
-        /// <summary>
         /// Viewport
         /// </summary>
         /// <returns></returns>
@@ -133,6 +139,17 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         public FrameworkElement Get3DViewport3()
         {
             return _viewportPresenter3.GetContentView();
+        }
+
+        /// <summary>
+        /// Invoke the event <see cref="SetDetailedView" />
+        /// </summary>
+        /// <param name="e"></param>
+        protected virtual void OnSetDetailedView(FrameworkElement e)
+        {
+            var handler = SetDetailedView;
+            if (handler != null) 
+                handler(this, e);
         }
     }
 }

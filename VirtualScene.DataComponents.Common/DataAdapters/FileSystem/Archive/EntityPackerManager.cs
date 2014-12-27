@@ -1,54 +1,45 @@
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
+using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive.Packers;
 using VirtualScene.Entities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {
-    internal class EntityPackerManager
+    internal class EntityPackerManager : ProxyManagerBase<IEntityPacker>
     {
-        private readonly Collection<IEntityPacker> _entityPackers;
-        private readonly NullEntityPacker _nullEntityPacker = new NullEntityPacker();
+        private readonly XmlSerializerPool _serializerPool;
 
         public EntityPackerManager()
         {
-            var serializerPool = new XmlSerializerPool();
-            _entityPackers = new Collection<IEntityPacker>
-            {
-                new EntityPacker<IStage>(serializerPool),
-                new EntityPacker<ISceneEntity>(serializerPool),
-                new QuadricEntityPacker(serializerPool),
-                new PolygonEntityPacker(serializerPool),
-                new TypeInfoPacker(serializerPool),
-                new EntityPacker<Transformation>(serializerPool)
-            };
+            _serializerPool = new XmlSerializerPool();
         }
 
         public void Pack<T>(T entity, ZipArchive archive, params string[] pathElements)
         {
-            GetPackerFor(entity).Pack(entity, archive, pathElements);
-        }
-
-        private IEntityPacker GetPackerFor<T>(T entity)
-        {
-            if (entity == null)
-                return _nullEntityPacker;
-            return _entityPackers.FirstOrDefault(p => p.EntityType.IsInstanceOfType(entity)) ?? _nullEntityPacker;
+            GetProxyHolderFor(entity).Pack(entity, archive, pathElements);
         }
 
         public object UnPack(Type type, Stream stream)
         {
-            return GetPackerBy(type).UnPack(type, stream);
+            return GetProxyHolderBy(type).UnPack(type, stream);
         }
 
-        private IEntityPacker GetPackerBy(Type type)
+        protected override IEnumerable<IEntityPacker> RegisterProxyHolders()
         {
-            if (type == null)
-                return _nullEntityPacker;
-            return _entityPackers.FirstOrDefault(p => p.EntityType.IsAssignableFrom(type)) ?? _nullEntityPacker;
+            yield return new EntityPacker<IStage>(_serializerPool);
+            yield return new EntityPacker<ISceneEntity>(_serializerPool);
+            yield return new QuadricEntityPacker(_serializerPool);
+            yield return new PolygonEntityPacker(_serializerPool);
+            yield return new TypeInfoPacker(_serializerPool);
+            yield return new EntityPacker<Transformation>(_serializerPool);
+        }
+
+        protected override IEntityPacker CreateNullProxyHolder()
+        {
+            return new NullEntityPacker();
         }
     }
 }

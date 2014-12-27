@@ -14,7 +14,8 @@
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">
         <Label Content="{Binding Title}" Height="26" Background="#FFF5E7E7"></Label>
-        <ListBox x:Name="StageListTreeView" ItemsSource="{Binding Stage.Items}" ItemTemplate="{StaticResource ContentTypes}" Height="200">
+        <ListBox x:Name="StageListTreeView" ItemsSource="{Binding Stage.Items}" ItemTemplate="{StaticResource ContentTypes}" 
+                 Height="200" IsTextSearchCaseSensitive="True" SelectionMode="Extended" >
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged" >
                     <i:InvokeCommandAction Command="{Binding SelectItemsCommand}" 

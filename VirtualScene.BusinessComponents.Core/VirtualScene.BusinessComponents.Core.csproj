@@ -45,6 +45,7 @@
     <Compile Include="BusinessManager.cs" />
     <Compile Include="Entities\ISceneContent.cs" />
     <Compile Include="Entities\SceneContent.cs" />
+    <Compile Include="Events\ICollectionChangedSubscriber.cs" />
     <Compile Include="Factories\CameraFactory.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Factories\CylinderFactory.cs" />
@@ -95,9 +96,7 @@
       <Name>VirtualScene.Entities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

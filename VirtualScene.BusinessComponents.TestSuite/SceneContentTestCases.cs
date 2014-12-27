@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Moq;
 using NUnit.Framework;
 using VirtualScene.BusinessComponents.Core;
@@ -17,11 +18,14 @@ namespace VirtualScene.BusinessComponents.TestSuite
         private Mock<SceneEngineFactory> _sceneEngineFactoryMock;
         private IStage _stage;
         private ObservableCollection<ISceneEntity> _sceneEntities;
+        private IEnumerable<ISceneEntity> _receivedSelectedSceneElements;
+        private bool _selectedSceneEntitiesEventFired;
 
         [SetUp]
         public void Init()
         {
-            _sceneEngineFactoryMock = Helper.CreateMockInServiceLocator<SceneEngineFactory>();
+            ClearSelectedSceneElementsResult();
+            _sceneEngineFactoryMock = Helper.MockObjectInServiceLocator<SceneEngineFactory>();
             _sceneEngineMock = new Mock<ISceneEngine>();
             _sceneEngineFactoryMock.Setup(m => m.Create()).Returns(_sceneEngineMock.Object);
             var stageMock = new Mock<IStage>();
@@ -29,6 +33,17 @@ namespace VirtualScene.BusinessComponents.TestSuite
             stageMock.SetupGet(p => p.Items).Returns(_sceneEntities);
             _stage = stageMock.Object;
             _sceneContent = new SceneContent();
+            _sceneContent.SelectedSceneElementsChanged += (sender, entities) =>
+            {
+                _receivedSelectedSceneElements = entities;
+                _selectedSceneEntitiesEventFired = true;
+            };
+        }
+
+        private void ClearSelectedSceneElementsResult()
+        {
+            _receivedSelectedSceneElements = null;
+            _selectedSceneEntitiesEventFired = false;
         }
 
         [TearDown]
@@ -43,7 +58,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
             Assert.IsNotNull(_sceneContent.SceneEngine);
             Assert.IsNull(_sceneContent.Stage);
         }
-        
+
         [Test]
         public void TestSetStage()
         {
@@ -106,62 +121,104 @@ namespace VirtualScene.BusinessComponents.TestSuite
         }
 
         [Test]
-        public void TestAddSelectedItem()
-        {
-            var sceneEntity = Mock.Of<ISceneEntity>();
-            _sceneContent.SelectedItems.Add(sceneEntity);
-
-            CollectionAssert.Contains(_sceneContent.SelectedItems, sceneEntity);
-        }
-
-        [Test]
-        public void TestRemoveSelectedItem()
-        {
-            var sceneEntity = Mock.Of<ISceneEntity>();
-            _sceneContent.SelectedItems.Add(sceneEntity);
-
-            _sceneContent.SelectedItems.Remove(sceneEntity);
-
-            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
-        }
-
-        [Test]
         public void TestSetNewCollectionToSelectedItems()
         {
-            var items = new ObservableCollection<ISceneEntity>
-            {
-                Mock.Of<ISceneEntity>(),
-                Mock.Of<ISceneEntity>()
-            };
+            const int sceneEntityCount = 2;
+            var items = Helper.MockList<ISceneEntity>(sceneEntityCount);
 
             var origCollection = _sceneContent.SelectedItems;
             _sceneContent.SetSelectedItems(items);
 
             Assert.AreSame(origCollection, _sceneContent.SelectedItems);
-            Assert.AreEqual(2, _sceneContent.SelectedItems.Count);
+            CollectionAssert.AreEqual(items, _sceneContent.SelectedItems);
         }
 
         [Test]
         public void TestSetEmptyCollectionToSelectedItems()
         {
-            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
-            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
+            _sceneContent.SetSelectedItems(Helper.MockList<ISceneEntity>(2));
 
             _sceneContent.SetSelectedItems(new ObservableCollection<ISceneEntity>());
 
-            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
+            CollectionAssert.IsEmpty(_sceneContent.SelectedItems);
         }
 
         [Test]
         public void TestSetNullToSelectionItems()
         {
-            _sceneContent.SelectedItems.Add(Mock.Of<ISceneEntity>());
+            _sceneContent.SetSelectedItems(Helper.MockList<ISceneEntity>(1));
 
             _sceneContent.SetSelectedItems(null);
 
             Assert.IsNotNull(_sceneContent.SelectedItems);
-            Assert.AreEqual(0, _sceneContent.SelectedItems.Count);
-            
+            CollectionAssert.IsEmpty(_sceneContent.SelectedItems);
+        }
+
+        [Test]
+        public void TestSelectedChangedEventOnSetItems()
+        {
+            var itemsToSelect = Helper.MockList<ISceneEntity>(2);
+            ClearSelectedSceneElementsResult();
+
+            _sceneContent.SetSelectedItems(itemsToSelect);
+
+            Assert.IsTrue(_selectedSceneEntitiesEventFired);
+            CollectionAssert.AreEqual(itemsToSelect, _receivedSelectedSceneElements);
+        }
+
+        [Test]
+        public void TestSelectedChangedEventOnSetEmptyCollection()
+        {
+            ClearSelectedSceneElementsResult();
+
+            _sceneContent.SetSelectedItems(new List<ISceneEntity>());
+
+            Assert.IsTrue(_selectedSceneEntitiesEventFired);
+            CollectionAssert.IsEmpty(_receivedSelectedSceneElements);
+        }
+
+        [Test]
+        public void TestSelectedChangedEventOnSetNull()
+        {
+            ClearSelectedSceneElementsResult();
+
+            _sceneContent.SetSelectedItems(null);
+
+            Assert.IsTrue(_selectedSceneEntitiesEventFired);    
+            CollectionAssert.IsEmpty(_receivedSelectedSceneElements);
+        }
+
+        [Test]
+        public void TestSelectedChangedEventOnChangeStage()
+        {
+            _sceneContent.SetSelectedItems(Helper.MockList<ISceneEntity>(1));
+            var stage = new Stage();
+            stage.Items.Add(Mock.Of<ISceneEntity>());
+            ClearSelectedSceneElementsResult();
+
+            _sceneContent.Stage = stage;
+
+            Assert.IsTrue(_selectedSceneEntitiesEventFired);    
+            CollectionAssert.IsEmpty(_receivedSelectedSceneElements);
+        }
+
+        [Test]
+        public void TestSelectedChangedWhenItemWhichIsSelected()
+        {
+            var stage = new Stage();
+            var sceneEntity1 = Mock.Of<ISceneEntity>();
+            stage.Items.Add(sceneEntity1);
+            var sceneEntity2 = Mock.Of<ISceneEntity>();
+            stage.Items.Add(sceneEntity2);
+            _sceneContent.Stage = stage;
+            _sceneContent.SetSelectedItems(new List<ISceneEntity> { sceneEntity1, sceneEntity2 });
+            ClearSelectedSceneElementsResult();
+
+            _sceneContent.Stage.Items.Remove(sceneEntity1);
+
+            Assert.IsTrue(_selectedSceneEntitiesEventFired);
+            CollectionAssert.DoesNotContain(_sceneContent.SelectedItems, sceneEntity1);
+            CollectionAssert.Contains(_sceneContent.SelectedItems, sceneEntity2);
         }
     }
 }

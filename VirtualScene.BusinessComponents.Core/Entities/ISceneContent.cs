@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using VirtualScene.BusinessComponents.Core.Events;
 using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
@@ -28,7 +28,7 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// <summary>
         /// The collection of items selected in the scene.
         /// </summary>
-        ObservableCollection<ISceneEntity> SelectedItems { get; }
+        IEnumerable<ISceneEntity> SelectedItems { get; }
 
         /// <summary>
         /// Occures when the <see cref="ISceneContent.Stage" /> is changed.
@@ -40,5 +40,17 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// </summary>
         /// <param name="items">The collection of <see cref="ISceneEntity" /></param>
         void SetSelectedItems(IEnumerable<ISceneEntity> items);
+
+        /// <summary>
+        /// Subscribe on the action when items of specified type are selected.
+        /// </summary>
+        /// <param name="subscriber">The subcriber to be notified about the operation.</param>
+        /// <typeparam name="T">The type of selected items.</typeparam>
+        void SubscribeOnSelectedItems<T>(ICollectionChangedSubscriber subscriber);
+
+        /// <summary>
+        /// Occures when the <seealso cref="SceneContent.Stage" /> is changed.
+        /// </summary>
+        event EventHandler<IEnumerable<ISceneEntity>> SelectedSceneElementsChanged;
     }
 }
