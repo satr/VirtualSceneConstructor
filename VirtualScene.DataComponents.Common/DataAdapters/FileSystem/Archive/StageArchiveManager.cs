@@ -14,14 +14,14 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
     /// </summary>
     internal class StageArchiveManager
     {
-        private readonly EntityPackerManager _entityPackerManager;
+        private readonly EntityArchiveControllerManager _entityArchiveControllerManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StageArchiveManager"/>
         /// </summary>
         public StageArchiveManager()
         {
-            _entityPackerManager = new EntityPackerManager();
+            _entityArchiveControllerManager = new EntityArchiveControllerManager();
         }
 
         /// <summary>
@@ -39,12 +39,12 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             using (var fileStream = File.Create(archiveFilePath))
             using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Create))
             {
-                _entityPackerManager.Pack(stage, archive, string.Empty);
+                _entityArchiveControllerManager.Pack(stage, archive, string.Empty);
                 foreach (var sceneEntity in stage.Items)
                 {
                     var sceneEntityArchiveName = Guid.NewGuid().ToString();
-                    _entityPackerManager.Pack(sceneEntity, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
-                    _entityPackerManager.Pack(sceneEntity.Geometry, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
+                    _entityArchiveControllerManager.Pack(sceneEntity, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
+                    _entityArchiveControllerManager.Pack(sceneEntity.Geometry, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
                 }
             }
         }
@@ -128,7 +128,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             {
                 using (var stream = archiveEntry.Open())
                 {
-                    return _entityPackerManager.UnPack(type, stream);
+                    return _entityArchiveControllerManager.UnPack(type, stream);
                 }
             }
             catch (Exception e)
@@ -156,7 +156,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                         UnPackGeometry(sceneEntityArchiveEntry.Geometry, sceneEntity, sceneEntityActionResult);
 
                     if (sceneEntityActionResult.Success)
-                        stage.Items.Add(sceneEntity);
+                        stage.Add(sceneEntity);
                 }
                 actionResult.CombineWith(sceneEntityActionResult);
             }

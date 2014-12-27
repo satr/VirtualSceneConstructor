@@ -1,5 +1,6 @@
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.ViewModels;
 using VirtualScene.PresentationComponents.WPF.Commands;
@@ -31,7 +32,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         /// <param name="parameter"></param>
         protected override void ExecuteAction(object parameter)
         {
-            ServiceLocator.Get<BusinessManager>().Import3DModel(_viewModel.Name, _viewModel.FileName, _sceneContent);
+            ServiceLocator.Get<SceneContentBusinessManager>().Import3DModel(_viewModel.Name, _viewModel.FileName, _sceneContent);
         }
     }
 }

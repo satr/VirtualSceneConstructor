@@ -1,3 +1,4 @@
+using System;
 using System.Collections.ObjectModel;
 
 namespace VirtualScene.Entities
@@ -13,8 +14,30 @@ namespace VirtualScene.Entities
         string Name { get; set; }
 
         /// <summary>
-        /// A list of visual representations of objects in the scene
+        /// The collection of <see cref="ISceneEntity" /> exists in the scene.
         /// </summary>
-        ObservableCollection<ISceneEntity> Items { get; set; }
+        ReadOnlyObservableCollection<ISceneEntity> Items { get; }
+
+        /// <summary>
+        /// Add <see cref="ISceneEntity" /> to the stage.
+        /// </summary>
+        /// <param name="sceneEntity">The <see cref="ISceneEntity" /> to be added.</param>
+        void Add(ISceneEntity sceneEntity);
+
+        /// <summary>
+        /// Remove <see cref="ISceneEntity" /> from the stage.
+        /// </summary>
+        /// <param name="sceneEntity">The <see cref="ISceneEntity" /> to be removed.</param>
+        void Remove(ISceneEntity sceneEntity);
+
+        /// <summary>
+        /// Occures when <see cref="ISceneEntity" /> is added to the stage.
+        /// </summary>
+        event EventHandler<ISceneEntity> SceneEntityAdded;
+
+        /// <summary>
+        /// Occures when <see cref="ISceneEntity" /> is removed from the stage.
+        /// </summary>
+        event EventHandler<ISceneEntity> SceneEntityRemoved;
     }
 }

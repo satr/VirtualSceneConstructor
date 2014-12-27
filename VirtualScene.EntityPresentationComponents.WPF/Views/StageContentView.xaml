@@ -9,7 +9,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <DataTemplate x:Key="ContentTypes" DataType="{x:Type entities1:ISceneEntity}">
-            <Label Content="{Binding Geometry.Name}"></Label>
+            <Label Content="{Binding Name}"></Label>
         </DataTemplate>
     </UserControl.Resources>
     <StackPanel Orientation="Vertical">

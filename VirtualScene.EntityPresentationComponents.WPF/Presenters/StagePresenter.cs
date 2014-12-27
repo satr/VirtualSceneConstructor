@@ -15,10 +15,10 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
     public class StagePresenter : EntityPresenterBase<Stage>
     {
         /// <summary>
-        /// Content of the stage
+        /// Create the content view.
         /// </summary>
-        /// <returns>The view with the content of the stage</returns>
-        public override FrameworkElement GetContentView()
+        /// <returns>The view displaying content of an entity.</returns>
+        protected override FrameworkElement CreateContentView()
         {
             return new StageContentView(new StageContentViewModel(SceneContent));
         }

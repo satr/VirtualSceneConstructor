@@ -11,10 +11,10 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
     public class SceneViewportPresenter : ContentPresenterBase
     {
         /// <summary>
-        /// Content of the camera
+        /// Create the content view.
         /// </summary>
-        /// <returns>The view with the content of the 3D viewport</returns>
-        public override FrameworkElement GetContentView()
+        /// <returns>The view displaying content of an entity.</returns>
+        protected override FrameworkElement CreateContentView()
         {
             return new SceneViewportView(new SceneViewportViewModel(SceneContent));
         }

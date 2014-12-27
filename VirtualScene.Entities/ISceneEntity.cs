@@ -1,4 +1,5 @@
-﻿using SharpGL.SceneGraph.Core;
+﻿using System;
+using SharpGL.SceneGraph.Core;
 
 namespace VirtualScene.Entities
 {
@@ -8,13 +9,23 @@ namespace VirtualScene.Entities
     public interface ISceneEntity
     {
         /// <summary>
-        /// Visual representation of the SceneEntity
+        /// The is of the <see cref="ISceneEntity" />
+        /// </summary>
+        Guid Id { get; set; }
+
+        /// <summary>
+        /// Visual representation of the <see cref="ISceneEntity" />
         /// </summary>
         SceneElement Geometry { get; set; }
 
         /// <summary>
-        /// The name of the entity in the scene
+        /// The name of the  <see cref="ISceneEntity" /> in the scene
         /// </summary>
         string Name { get; set; }
+
+        /// <summary>
+        /// The description of the <see cref="ISceneEntity" />
+        /// </summary>
+        string Description { get; }
     }
 }

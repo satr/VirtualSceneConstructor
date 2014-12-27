@@ -6,6 +6,7 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Importers;
 using VirtualScene.BusinessComponents.Core.Pools;
 using VirtualScene.Common;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -29,8 +30,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestImport3DModel()
         {
-            BusinessManager.Import3DModel("filename", "filepath", SceneContentMock.Object);
-            AssertSceneEntityCollectionAction(NotifyCollectionChangedAction.Add);
+            SceneContentBusinessManager.Import3DModel("filename", "filepath", SceneContentMock.Object);
+            StageMock.Verify(m => m.Add(It.IsAny<ISceneEntity>()), Times.Once());
         }
     }
 }

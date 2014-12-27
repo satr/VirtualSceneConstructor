@@ -5,8 +5,8 @@ using System.Windows;
 using VirtualScene.ApplicationPresentationComponents.WPF.Commands;
 using VirtualScene.ApplicationPresentationComponents.WPF.Properties;
 using VirtualScene.ApplicationPresentationComponents.WPF.Views;
-using VirtualScene.BusinessComponents.Core.Factories;
-using VirtualScene.Common;
+using VirtualScene.BusinessComponents.Core;
+using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Entities;
 using VirtualScene.EntityPresentationComponents.WPF.Presenters;
 using VirtualScene.PresentationComponents.WPF.Presenters;
@@ -22,11 +22,11 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         private readonly Dictionary<Type, IEntityPresenter> _entityPresenters = new Dictionary<Type, IEntityPresenter>();
         // ReSharper disable once CollectionNeverQueried.Local
         private readonly List<IContentPresenter> _contentPresenters = new List<IContentPresenter>();
-        private readonly FrameworkElement _sceneEntityDetailView;
         private readonly IContentPresenter _viewportPresenter1;
         private readonly IContentPresenter _viewportPresenter2;
         private readonly IContentPresenter _viewportPresenter3;
-        
+        private readonly IEntityPresenter _sceneEntityPresenter;
+
         /// <summary>
         /// Set the detailed view of the item(s) selected in the scene-content
         /// </summary>
@@ -37,25 +37,26 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         /// </summary>
         public ApplicationPresenter()
         {
-            SceneContent = ServiceLocator.Get<SceneContentFactory>().Create();
+            SceneContent = new SceneContent(new SceneEngine()) {Stage = new Stage()};
+
             var stagePresenter = RegisterEntityPresenter<StagePresenter>();
             RegisterEntityPresenter<CameraPresenter>();
             RegisterEntityPresenter<GeometryPrimitivePresenter>();
-            var sceneEntityPresenter = RegisterEntityPresenter<SceneEntityPresenter>();
+            _sceneEntityPresenter = RegisterEntityPresenter<SceneEntityPresenter>();
             _viewportPresenter1 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter2 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter3 = RegisterContentPresenter<SceneViewportPresenter>();
-            SceneContent.Stage = new Stage();
+
             _stageContentView = stagePresenter.GetContentView();
-            _sceneEntityDetailView = sceneEntityPresenter.GetContentView();
+            
             SceneContent.SelectedSceneElementsChanged += SceneContentSelectedSceneElementsChanged;
         }
 
         private void SceneContentSelectedSceneElementsChanged(object sender, IEnumerable<ISceneEntity> sceneEntities)
         {
             var selectedSceneEntities = sceneEntities.ToList();
-            OnSetDetailedView(selectedSceneEntities.Count == 1 
-                                ? _sceneEntityDetailView 
+            OnSetDetailedView(selectedSceneEntities.Count == 1
+                                ? _sceneEntityPresenter.GetContentView() 
                                 : null);
         }
 
@@ -106,10 +107,10 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         }
 
         /// <summary>
-        /// The content view of the main entity
+        /// Create the content view.
         /// </summary>
-        /// <returns>The view with content</returns>
-        public override FrameworkElement GetContentView()
+        /// <returns>The view displaying content of an entity.</returns>
+        protected override FrameworkElement CreateContentView()
         {
             return new MainEntityContentView();
         }

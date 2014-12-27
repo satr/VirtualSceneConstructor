@@ -14,10 +14,10 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
     public class CameraPresenter : EntityPresenterBase<Camera>
     {
         /// <summary>
-        /// Content of the camera
+        /// Create the content view.
         /// </summary>
-        /// <returns>The view with the content of the camera</returns>
-        public override FrameworkElement GetContentView()
+        /// <returns>The view displaying content of an entity.</returns>
+        protected override FrameworkElement CreateContentView()
         {
             return new CameraContentView();
         }

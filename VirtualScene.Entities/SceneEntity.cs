@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 
 namespace VirtualScene.Entities
@@ -9,6 +10,19 @@ namespace VirtualScene.Entities
     public class SceneEntity : ISceneEntity
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="SceneEntity" />
+        /// </summary>
+        public SceneEntity()
+        {
+            Id = Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// The is of the <see cref="ISceneEntity" />
+        /// </summary>
+        public Guid Id { get; set; }
+
+        /// <summary>
         /// Visual representation of the entity in the scene
         /// </summary>
         [XmlIgnore]
@@ -18,6 +32,14 @@ namespace VirtualScene.Entities
         /// The name of the entity in the scene
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The description of the <see cref="ISceneEntity" />
+        /// </summary>
+        public string Description
+        {
+            get { return Geometry == null ? "?" : Geometry.GetType().ToString(); }
+        }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -44,7 +66,7 @@ namespace VirtualScene.Entities
         /// <filterpriority>2</filterpriority>
         public override int GetHashCode()
         {
-            return Name.GetHashCode();
+            return Id.ToString().GetHashCode();
         }
     }
 }

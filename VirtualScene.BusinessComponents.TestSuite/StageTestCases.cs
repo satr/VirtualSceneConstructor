@@ -21,7 +21,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void TestAddEntity()
         {
             var sceneEntity = new SceneEntity { Geometry = GeometryPrimitiveFactory.CreateCube() };
-            _stage.Items.Add(sceneEntity);
+            _stage.Add(sceneEntity);
 
         }
     }

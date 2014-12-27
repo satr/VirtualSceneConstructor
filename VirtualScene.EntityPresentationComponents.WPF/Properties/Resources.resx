@@ -174,4 +174,7 @@
   <data name="Title_Cylinder" xml:space="preserve">
     <value>Cylinder</value>
   </data>
+  <data name="Title_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>

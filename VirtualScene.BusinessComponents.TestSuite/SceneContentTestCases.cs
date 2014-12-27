@@ -15,9 +15,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
     {
         private ISceneContent _sceneContent;
         private Mock<ISceneEngine> _sceneEngineMock;
-        private Mock<SceneEngineFactory> _sceneEngineFactoryMock;
         private IStage _stage;
-        private ObservableCollection<ISceneEntity> _sceneEntities;
         private IEnumerable<ISceneEntity> _receivedSelectedSceneElements;
         private bool _selectedSceneEntitiesEventFired;
 
@@ -25,14 +23,9 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void Init()
         {
             ClearSelectedSceneElementsResult();
-            _sceneEngineFactoryMock = Helper.MockObjectInServiceLocator<SceneEngineFactory>();
             _sceneEngineMock = new Mock<ISceneEngine>();
-            _sceneEngineFactoryMock.Setup(m => m.Create()).Returns(_sceneEngineMock.Object);
-            var stageMock = new Mock<IStage>();
-            _sceneEntities = new ObservableCollection<ISceneEntity>();
-            stageMock.SetupGet(p => p.Items).Returns(_sceneEntities);
-            _stage = stageMock.Object;
-            _sceneContent = new SceneContent();
+            _stage = new Stage();
+            _sceneContent = new SceneContent(_sceneEngineMock.Object);
             _sceneContent.SelectedSceneElementsChanged += (sender, entities) =>
             {
                 _receivedSelectedSceneElements = entities;
@@ -62,10 +55,9 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestSetStage()
         {
-            var stage = _stage;
-            _sceneContent.Stage = stage;
+            _sceneContent.Stage = _stage;
 
-            Assert.AreSame(stage, _sceneContent.Stage);
+            Assert.AreSame(_stage, _sceneContent.Stage);
         }
 
         [Test]
@@ -79,9 +71,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestDoNotCleanSceneEngineOnSettingSameStage()
         {
-            var stage = _stage;
-            _sceneContent.Stage = stage;
-            _sceneContent.Stage = stage;
+            _sceneContent.Stage = _stage;
+            _sceneContent.Stage = _stage;
 
             _sceneEngineMock.Verify(m => m.Clear(), Times.Once());
         }
@@ -91,8 +82,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
         {
             _sceneContent.Stage = _stage;
 
-            var sceneEntity = new Mock<ISceneEntity>().Object;
-            _stage.Items.Add(sceneEntity);
+            var sceneEntity = Mock.Of<ISceneEntity>();
+            _stage.Add(sceneEntity);
 
             _sceneEngineMock.Verify(m => m.AddSceneEntity(sceneEntity), Times.Once());
         }
@@ -100,11 +91,11 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestSceneEngineHandlesSceneEntityRemovedToStage()
         {
-            var sceneEntity = new Mock<ISceneEntity>().Object;
-            _stage.Items.Add(sceneEntity);
+            var sceneEntity = Mock.Of<ISceneEntity>();
+            _stage.Add(sceneEntity);
             _sceneContent.Stage = _stage;
 
-            _stage.Items.Remove(sceneEntity);
+            _stage.Remove(sceneEntity);
 
             _sceneEngineMock.Verify(m => m.RemoveSceneEntity(sceneEntity), Times.Once());
         }
@@ -113,11 +104,11 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void TestStageGetsNewEntityWhenItIsAddedToSceneContent()
         {
             _sceneContent.Stage = _stage;
-            var sceneEntity = new Mock<ISceneEntity>().Object;
+            var sceneEntity = Mock.Of<ISceneEntity>();
 
-            _sceneContent.Stage.Items.Add(sceneEntity);
+            _sceneContent.Stage.Add(sceneEntity);
 
-            CollectionAssert.Contains(_sceneEntities, sceneEntity);
+            CollectionAssert.Contains(_stage.Items, sceneEntity);
         }
 
         [Test]
@@ -192,11 +183,10 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void TestSelectedChangedEventOnChangeStage()
         {
             _sceneContent.SetSelectedItems(Helper.MockList<ISceneEntity>(1));
-            var stage = new Stage();
-            stage.Items.Add(Mock.Of<ISceneEntity>());
+            _stage.Add(Mock.Of<ISceneEntity>());
             ClearSelectedSceneElementsResult();
 
-            _sceneContent.Stage = stage;
+            _sceneContent.Stage = _stage;
 
             Assert.IsTrue(_selectedSceneEntitiesEventFired);    
             CollectionAssert.IsEmpty(_receivedSelectedSceneElements);
@@ -207,14 +197,14 @@ namespace VirtualScene.BusinessComponents.TestSuite
         {
             var stage = new Stage();
             var sceneEntity1 = Mock.Of<ISceneEntity>();
-            stage.Items.Add(sceneEntity1);
+            stage.Add(sceneEntity1);
             var sceneEntity2 = Mock.Of<ISceneEntity>();
-            stage.Items.Add(sceneEntity2);
+            stage.Add(sceneEntity2);
             _sceneContent.Stage = stage;
             _sceneContent.SetSelectedItems(new List<ISceneEntity> { sceneEntity1, sceneEntity2 });
             ClearSelectedSceneElementsResult();
 
-            _sceneContent.Stage.Items.Remove(sceneEntity1);
+            _sceneContent.Stage.Remove(sceneEntity1);
 
             Assert.IsTrue(_selectedSceneEntitiesEventFired);
             CollectionAssert.DoesNotContain(_sceneContent.SelectedItems, sceneEntity1);

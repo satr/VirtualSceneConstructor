@@ -61,6 +61,24 @@ namespace VirtualScene.Entities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scene-entity already exists in the stage..
+        /// </summary>
+        internal static string Message_Scene_entity_already_exists_in_the_stage {
+            get {
+                return ResourceManager.GetString("Message_Scene_entity_already_exists_in_the_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scene-entity does not exists in the stage..
+        /// </summary>
+        internal static string Message_Scene_entity_does_not_exists_in_the_stage {
+            get {
+                return ResourceManager.GetString("Message_Scene_entity_does_not_exists_in_the_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TypeInfo cannot be created for null.
         /// </summary>
         internal static string Message_TypeInfo_cannot_be_created_for_null {

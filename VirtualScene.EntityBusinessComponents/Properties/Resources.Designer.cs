@@ -59,14 +59,5 @@ namespace VirtualScene.EntityBusinessComponents.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save Stage.
-        /// </summary>
-        public static string Title_Save_Stage {
-            get {
-                return ResourceManager.GetString("Title_Save_Stage", resourceCulture);
-            }
-        }
     }
 }

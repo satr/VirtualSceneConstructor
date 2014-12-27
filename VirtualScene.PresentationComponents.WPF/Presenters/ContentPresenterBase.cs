@@ -8,6 +8,8 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
     /// </summary>
     public abstract class ContentPresenterBase: IContentPresenter
     {
+        private FrameworkElement _contentView;
+
         /// <summary>
         /// The content of the scene
         /// </summary>
@@ -17,6 +19,15 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
         /// Content of the entity
         /// </summary>
         /// <returns>The view with the content of the entity</returns>
-        public abstract FrameworkElement GetContentView();
+        public FrameworkElement GetContentView()
+        {
+            return _contentView ?? (_contentView = CreateContentView());
+        }
+
+        /// <summary>
+        /// Create the content view.
+        /// </summary>
+        /// <returns>The view displaying content of an entity.</returns>
+        protected abstract FrameworkElement CreateContentView();
     }
 }

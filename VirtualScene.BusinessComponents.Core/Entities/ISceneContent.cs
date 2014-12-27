@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using VirtualScene.BusinessComponents.Core.Events;
+using VirtualScene.BusinessComponents.Core.Controllers;
 using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
@@ -46,7 +46,7 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// </summary>
         /// <param name="subscriber">The subcriber to be notified about the operation.</param>
         /// <typeparam name="T">The type of selected items.</typeparam>
-        void SubscribeOnSelectedItems<T>(ICollectionChangedSubscriber subscriber);
+        void SubscribeOnSelectedItems<T>(ICollectionItemsOperationSubscriber subscriber);
 
         /// <summary>
         /// Occures when the <seealso cref="SceneContent.Stage" /> is changed.

@@ -64,6 +64,10 @@
       <Project>{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}</Project>
       <Name>SharpGL.SceneGraph</Name>
     </ProjectReference>
+    <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
+      <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
+      <Name>VirtualScene.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

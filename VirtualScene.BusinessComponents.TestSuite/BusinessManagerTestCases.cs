@@ -1,7 +1,7 @@
-using System.Collections.Specialized;
+using Moq;
 using NUnit.Framework;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.Entities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -13,8 +13,8 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void AddCubeToSceneTest()
         {
             const string testEntityName = "TestEntityName";
-            BusinessManager.AddSceneElementInSpace(SceneContentMock.Object, GeometryPrimitiveFactory.CreateCube(), 0, 0, 0, testEntityName);
-            AssertSceneEntityCollectionAction(NotifyCollectionChangedAction.Add);
+            SceneContentBusinessManager.AddSceneElementInSpace(SceneContentMock.Object, GeometryPrimitiveFactory.CreateCube(), 0, 0, 0, testEntityName);
+            StageMock.Verify(m => m.Add(It.IsAny<ISceneEntity>()), Times.Once());
         }
     }
 }

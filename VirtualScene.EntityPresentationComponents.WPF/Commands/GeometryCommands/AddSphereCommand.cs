@@ -1,6 +1,7 @@
 ﻿using SharpGL.SceneGraph.Quadrics;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
+using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
@@ -30,7 +31,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands
         {
             _x -= 1;
             _y += 1;
-            ServiceLocator.Get<BusinessManager>().AddSceneElementInSpace<Sphere>(SceneContent, _x, _y, 0, Resources.Title_Sphere);
+            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace<Sphere>(SceneContent, _x, _y, 0, Resources.Title_Sphere);
         }
     }
 }

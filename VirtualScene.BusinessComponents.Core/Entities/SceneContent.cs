@@ -1,10 +1,10 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using VirtualScene.BusinessComponents.Core.Events;
+using System.Linq;
+using VirtualScene.BusinessComponents.Core.Controllers;
 using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
 using VirtualScene.Entities;
 
@@ -15,11 +15,9 @@ namespace VirtualScene.BusinessComponents.Core.Entities
     /// </summary>
     public class SceneContent : ISceneContent
     {
-        private readonly ISceneEngine _sceneEngine;
         private IStage _stage;
         private readonly ObservableCollection<ISceneEntity> _selectedItems = new ObservableCollection<ISceneEntity>();
-        private readonly IDictionary<Type, ICollection<ICollectionChangedSubscriber>> _selectedItemChangedSubscribers = new Dictionary<Type, ICollection<ICollectionChangedSubscriber>>();
-        private readonly object _subscribeSyncRoot = new object();
+        private readonly CollectionNotificationControllerManager _collectionNotificationControllerManager = new CollectionNotificationControllerManager();
 
         /// <summary>
         /// Occures when the <seealso cref="SceneContent.Stage" /> is changed.
@@ -34,11 +32,12 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// <summary>
         /// Initializes a new instance of the <see cref="SceneContent" />
         /// </summary>
-        public SceneContent()
+        /// <param name="sceneEngine">The <see cref="ISceneEngine" /> performing operations with the scene.</param>
+        public SceneContent(ISceneEngine sceneEngine)
         {
-            _sceneEngine = ServiceLocator.Get<SceneEngineFactory>().Create();
+            SceneEngine = sceneEngine;
             Navigator = ServiceLocator.Get<SceneNavigationFactory>().Create();
-            Navigator.Move += (s, e) => _sceneEngine.Move(e.X, e.Y, e.Z);
+            Navigator.Move += (s, e) => SceneEngine.Move(e.X, e.Y, e.Z);
         }
 
         /// <summary>
@@ -50,18 +49,42 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         }
 
         /// <summary>
-        /// Set the collection of selected items.
+        /// Set the collection of selected <see cref="ISceneEntity" />.
         /// </summary>
-        /// <param name="items">The collection of <see cref="ISceneEntity" /></param>
+        /// <param name="items">The collection of selected <see cref="ISceneEntity" />.</param>
         public void SetSelectedItems(IEnumerable<ISceneEntity> items)
         {
             _selectedItems.Clear();
-            if (items != null)
+            if (items == null)
             {
-                foreach (var entity in items)
-                    _selectedItems.Add(entity);
+                OnStageSelectedItemsChanged();
+                return;
             }
+
+            var selectedSceneEntities = items.Where(entity => entity != null).ToList();
+            var entityTypes = SetSelectedItems(_selectedItems, selectedSceneEntities);
+            if (entityTypes.Count == 1)
+                NotifySubscribersOnSelectedItems(entityTypes[0], selectedSceneEntities);
             OnStageSelectedItemsChanged();
+
+        }
+
+        private static List<Type> SetSelectedItems(ICollection<ISceneEntity> sceneEntities, IEnumerable<ISceneEntity> entities)
+        {
+            var entityTypes = new List<Type>();
+            foreach (var entity in entities)
+            {
+                sceneEntities.Add(entity);
+                var type = entity.GetType();
+                if (!entityTypes.Contains(type))
+                    entityTypes.Add(type);
+            }
+            return entityTypes;
+        }
+
+        private void NotifySubscribersOnSelectedItems(Type entityType, ICollection<ISceneEntity> sceneEntities)
+        {
+            _collectionNotificationControllerManager.Notify(entityType, sceneEntities);
         }
 
         /// <summary>
@@ -69,14 +92,9 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// </summary>
         /// <param name="subscriber">The subcriber to be notified about the operation.</param>
         /// <typeparam name="T">The type of selected items.</typeparam>
-        public void SubscribeOnSelectedItems<T>(ICollectionChangedSubscriber subscriber)
+        public void SubscribeOnSelectedItems<T>(ICollectionItemsOperationSubscriber subscriber)
         {
-            lock (_subscribeSyncRoot)
-            {
-                if(!_selectedItemChangedSubscribers.ContainsKey(typeof(T)))
-                    _selectedItemChangedSubscribers.Add(typeof(T), new List<ICollectionChangedSubscriber>());
-                _selectedItemChangedSubscribers[typeof (T)].Add(subscriber);
-            }
+            _collectionNotificationControllerManager.Add<T>(subscriber);
         }
 
         /// <summary>
@@ -87,10 +105,7 @@ namespace VirtualScene.BusinessComponents.Core.Entities
         /// <summary>
         /// The instance of the SceneEngine
         /// </summary>
-        public ISceneEngine SceneEngine
-        {
-            get { return _sceneEngine; }
-        }
+        public ISceneEngine SceneEngine { get; private set; }
 
         /// <summary>
         /// The stage of the 3D environment
@@ -102,53 +117,63 @@ namespace VirtualScene.BusinessComponents.Core.Entities
             {
                 if(Equals(_stage, value))
                     return;
-                ReplaceStage(value);
+                ReplaceCurrentStage(value);
                 OnStageSelectedItemsChanged();
                 OnStageChanged(_stage);
             }
         }
 
-        private void ReplaceStage(IStage value)
+        private void ReplaceCurrentStage(IStage stage)
         {
-            if (_stage != null)
-                _stage.Items.CollectionChanged -= OnSceneEntityCollectionChanged;
-            _sceneEngine.Clear();
+            UnBind(_stage);
+            SceneEngine.Clear();
             _selectedItems.Clear();
-            _stage = value;
-            foreach (var sceneEntity in _stage.Items)
-                _sceneEngine.AddSceneEntity(sceneEntity);
-            if (_stage != null)
-                _stage.Items.CollectionChanged += OnSceneEntityCollectionChanged;
+            _stage = stage;
+            AddSceneEntitiesToScene(_stage.Items);
+            Bind(_stage);
         }
 
-        private void OnSceneEntityCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+        private void AddSceneEntitiesToScene(IEnumerable<ISceneEntity> sceneEntities)
         {
-            if (args.OldItems != null)
-                RemoveSceneEntities(args);
-            
-            if (args.NewItems != null)
-                AddSceneEntities(args.NewItems);
+            foreach (var sceneEntity in sceneEntities)
+                SceneEngine.AddSceneEntity(sceneEntity);
         }
 
-        private void RemoveSceneEntities(NotifyCollectionChangedEventArgs args)
+        private void Bind(IStage stage)
         {
-            var selectedItemsRemoved = false;
-            foreach (ISceneEntity sceneEntity in args.OldItems)
-            {
-                _sceneEngine.RemoveSceneEntity(sceneEntity);
-                if (!_selectedItems.Contains(sceneEntity)) 
-                    continue;
-                _selectedItems.Remove(sceneEntity);
-                selectedItemsRemoved = true;
-            }
-            if(selectedItemsRemoved)
-                OnStageSelectedItemsChanged();
+            if (stage == null)
+                return;
+            stage.SceneEntityAdded += StageOnSceneEntityAdded;
+            stage.SceneEntityRemoved += StageOnSceneEntityRemoved;
         }
 
-        private void AddSceneEntities(IEnumerable sceneEntities)
+        private void UnBind(IStage stage)
         {
-            foreach (ISceneEntity sceneEntity in sceneEntities)
-                _sceneEngine.AddSceneEntity(sceneEntity);
+            if (stage == null) 
+                return;
+            stage.SceneEntityAdded -= StageOnSceneEntityAdded;
+            stage.SceneEntityRemoved -= StageOnSceneEntityRemoved;
+        }
+
+        private void StageOnSceneEntityRemoved(object sender, ISceneEntity sceneEntity)
+        {
+            if (sceneEntity != null)
+                RemoveSceneEntities(sceneEntity);
+        }
+
+        private void StageOnSceneEntityAdded(object sender, ISceneEntity sceneEntity)
+        {
+            if (sceneEntity != null)
+                SceneEngine.AddSceneEntity(sceneEntity);
+        }
+
+        private void RemoveSceneEntities(ISceneEntity sceneEntity)
+        {
+            SceneEngine.RemoveSceneEntity(sceneEntity);
+            if (!_selectedItems.Contains(sceneEntity)) 
+                return;
+            _selectedItems.Remove(sceneEntity);
+            OnStageSelectedItemsChanged();
         }
 
         private void OnStageChanged(IStage stage)

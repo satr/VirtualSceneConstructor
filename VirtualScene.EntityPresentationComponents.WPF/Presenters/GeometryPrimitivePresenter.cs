@@ -15,10 +15,10 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
     public class GeometryPrimitivePresenter : EntityPresenterBase<SceneElement>
     {
         /// <summary>
-        /// Content of the geometry-primitive
+        /// Create the content view.
         /// </summary>
-        /// <returns>The view with the content of the geometry-primitive</returns>
-        public override FrameworkElement GetContentView()
+        /// <returns>The view displaying content of an entity.</returns>
+        protected override FrameworkElement CreateContentView()
         {
             return new GeometryPrimitiveContentView();
         }

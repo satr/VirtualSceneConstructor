@@ -6,12 +6,12 @@ using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
 using VirtualScene.Entities;
 
-namespace VirtualScene.BusinessComponents.Core
+namespace VirtualScene.BusinessComponents.Core.Managers
 {
     /// <summary>
-    /// Business logic holder
+    /// Operations with <see cref="SceneContent" />
     /// </summary>
-    public class BusinessManager
+    public class SceneContentBusinessManager
     {
         /// <summary>
         /// Add a new polygon to the scene
@@ -28,7 +28,7 @@ namespace VirtualScene.BusinessComponents.Core
         }
 
         /// <summary>
-        /// Add a new polygon to the scene
+        /// Add a new <see cref="SceneElement" /> to the stage
         /// </summary>
         /// <param name="sceneContent">The content of the scene.</param>
         /// <param name="sceneElement">The scene element.</param>
@@ -67,7 +67,7 @@ namespace VirtualScene.BusinessComponents.Core
         {
             if (sceneContent.Stage == null)
                 throw new InvalidOperationException(Resources.Title_Add_The_stage_of_the_scene_is_not_initialized);
-            sceneContent.Stage.Items.Add(sceneEntity);
+            sceneContent.Stage.Add(sceneEntity);
         }
     }
 }

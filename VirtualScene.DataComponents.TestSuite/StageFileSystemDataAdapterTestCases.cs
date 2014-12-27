@@ -105,11 +105,11 @@ namespace VirtualScene.DataComponents.TestSuite
         {
             var geometry1 = Mother.CreateCube();
             var sceneEntity1 = Mother.CreateSceneEntity(geometry1);
-            _stage.Items.Add(sceneEntity1);
+            _stage.Add(sceneEntity1);
 
             var geometry2 = Mother.CreateCube();
             var sceneEntity2 = Mother.CreateSceneEntity(geometry2);
-            _stage.Items.Add(sceneEntity2);
+            _stage.Add(sceneEntity2);
 
             _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
@@ -169,7 +169,7 @@ namespace VirtualScene.DataComponents.TestSuite
         private void TestLoadGeometry(SceneElement geometry)
         {
             var sceneEntity = Mother.CreateSceneEntity(geometry);
-            _stage.Items.Add(sceneEntity);
+            _stage.Add(sceneEntity);
             _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
 
