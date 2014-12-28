@@ -1,25 +1,24 @@
-﻿using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.BusinessComponents.Core.Factories;
+﻿using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
+using VirtualScene.Entities.SceneEntities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommands
 {
     /// <summary>
-    /// The command creates a gear and adds it to the scene
+    /// The command creates a spur gear and adds it to the scene
     /// </summary>
-    public class AddGearCommand : AddSceneObjectCommandBase
+    public class AddSpurGearCommand : AddSceneObjectCommandBase
     {
         private int _x;
         private int _y;
         /// <summary>
-        /// Initializes a new instance of the <see cref="AddGearCommand"/>
+        /// Initializes a new instance of the <see cref="AddSpurGearCommand"/>
         /// </summary>
         /// <param name="sceneContent">The content of the scene.</param>
-        public AddGearCommand(ISceneContent sceneContent)
+        public AddSpurGearCommand(ISceneContent sceneContent)
             : base(sceneContent)
         {
         }
@@ -32,8 +31,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         {
             _x += 1;
             _y += 1;
-            //TODO: temporary use cylinder
-            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace(SceneContent, GearFactory.Create(), _x, _y, 0, Resources.Title_Gear);
+            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace<SpurGearEntity>(SceneContent, _x, _y, 0, Resources.Title_Spur_Gear);
         }
     }
 }

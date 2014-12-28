@@ -49,7 +49,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
         }
 
         /// <summary>
-        /// Create a folder if it does not exists
+        /// Build a folder if it does not exists
         /// </summary>
         /// <param name="path">The folder path</param>
         protected static void CreateFolderIfDoesNotExist(string path)

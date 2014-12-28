@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 
-namespace VirtualScene.BusinessComponents.Core.Factories
+namespace VirtualScene.Entities.SceneEntities.Factories
 {
     /// <summary>
     /// The factory creating gear geometry.
@@ -11,7 +10,7 @@ namespace VirtualScene.BusinessComponents.Core.Factories
     public class GearFactory : GeometryFactoryBase
     {
         /// <summary>
-        /// Create a new gear.
+        /// Build a new gear.
         /// </summary>
         /// <returns></returns>
         public static Polygon Create()

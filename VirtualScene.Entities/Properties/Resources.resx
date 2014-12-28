@@ -126,4 +126,28 @@
   <data name="Message_Scene_entity_does_not_exists_in_the_stage" xml:space="preserve">
     <value>Scene-entity does not exists in the stage.</value>
   </data>
+  <data name="Title_Empty" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Title_Sphere" xml:space="preserve">
+    <value>Sphere</value>
+  </data>
+  <data name="Title_Cube" xml:space="preserve">
+    <value>Cube</value>
+  </data>
+  <data name="Title_Cylinder" xml:space="preserve">
+    <value>Cylinder</value>
+  </data>
+  <data name="Title_Spur_gear" xml:space="preserve">
+    <value>Spur gear</value>
+  </data>
+  <data name="Title_Custom_Polygon" xml:space="preserve">
+    <value>Custom Polygon</value>
+  </data>
+  <data name="Title_Disk" xml:space="preserve">
+    <value>Disk</value>
+  </data>
+  <data name="Title_Hollow_Cylinder" xml:space="preserve">
+    <value>Hollow Cylinder</value>
+  </data>
 </root>

@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
 using SharpGL.SceneGraph;
-using SharpGL.SceneGraph.Primitives;
 using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
+using VirtualScene.Entities.SceneEntities.Factories;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -27,15 +26,15 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void AddCubeTest()
         {
-            _scene.SceneContainer.AddChild(GeometryPrimitiveFactory.CreateCube());
+            _scene.SceneContainer.AddChild(CubeFactory.Create(1));
             Assert.AreEqual(1 + Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
         }
 
         [Test]
         public void AddTwoCubesTest()
         {
-            _scene.SceneContainer.AddChild(GeometryPrimitiveFactory.CreateCube());
-            _scene.SceneContainer.AddChild(GeometryPrimitiveFactory.CreateCube());
+            _scene.SceneContainer.AddChild(CubeFactory.Create(1));
+            _scene.SceneContainer.AddChild(CubeFactory.Create(1));
             Assert.AreEqual(2 + Constants.Scene.DefaultSceneElementsCount, _scene.SceneContainer.Children.Count);
         }
 

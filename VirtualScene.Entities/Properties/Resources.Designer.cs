@@ -86,5 +86,77 @@ namespace VirtualScene.Entities.Properties {
                 return ResourceManager.GetString("Message_TypeInfo_cannot_be_created_for_null", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cube.
+        /// </summary>
+        internal static string Title_Cube {
+            get {
+                return ResourceManager.GetString("Title_Cube", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Polygon.
+        /// </summary>
+        internal static string Title_Custom_Polygon {
+            get {
+                return ResourceManager.GetString("Title_Custom_Polygon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cylinder.
+        /// </summary>
+        internal static string Title_Cylinder {
+            get {
+                return ResourceManager.GetString("Title_Cylinder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Disk.
+        /// </summary>
+        internal static string Title_Disk {
+            get {
+                return ResourceManager.GetString("Title_Disk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty.
+        /// </summary>
+        internal static string Title_Empty {
+            get {
+                return ResourceManager.GetString("Title_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hollow Cylinder.
+        /// </summary>
+        internal static string Title_Hollow_Cylinder {
+            get {
+                return ResourceManager.GetString("Title_Hollow_Cylinder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sphere.
+        /// </summary>
+        internal static string Title_Sphere {
+            get {
+                return ResourceManager.GetString("Title_Sphere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spur gear.
+        /// </summary>
+        internal static string Title_Spur_gear {
+            get {
+                return ResourceManager.GetString("Title_Spur_gear", resourceCulture);
+            }
+        }
     }
 }

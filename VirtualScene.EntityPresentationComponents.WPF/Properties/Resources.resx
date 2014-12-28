@@ -168,13 +168,31 @@
   <data name="Title_All_files" xml:space="preserve">
     <value>All files</value>
   </data>
-  <data name="Title_Gear" xml:space="preserve">
-    <value>Gear</value>
+  <data name="Title_Spur_Gear" xml:space="preserve">
+    <value>Spur Gear</value>
   </data>
   <data name="Title_Cylinder" xml:space="preserve">
     <value>Cylinder</value>
   </data>
   <data name="Title_Description" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="Title_Radius" xml:space="preserve">
+    <value>Radius</value>
+  </data>
+  <data name="Title_Scene_Entity" xml:space="preserve">
+    <value>Scene Entity</value>
+  </data>
+  <data name="Title_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Title_Hollow_Cylinder" xml:space="preserve">
+    <value>Hollow Cylinder</value>
+  </data>
+  <data name="Title_BaseRadius" xml:space="preserve">
+    <value>Base Radius</value>
+  </data>
+  <data name="Title_TopRadius" xml:space="preserve">
+    <value>Top Radius</value>
   </data>
 </root>

@@ -38,6 +38,7 @@
     <DocumentationFile>bin\Release\VirtualScene.EntityPresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpGL, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity">
@@ -58,7 +59,8 @@
     <Compile Include="Commands\CameraCommands\AddCameraCommand.cs" />
     <Compile Include="Commands\GeometryCommands\AddCubeCommand.cs" />
     <Compile Include="Commands\CommonCommands\AddSceneObjectCommandBase.cs" />
-    <Compile Include="Commands\GeometryCommands\AddGearCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\AddHollowCylinderCommand.cs" />
+    <Compile Include="Commands\GeometryCommands\AddSpurGearCommand.cs" />
     <Compile Include="Commands\GeometryCommands\AddSphereCommand.cs" />
     <Compile Include="Commands\GeometryCommands\Import3DModelCommand.cs" />
     <Compile Include="Commands\GeometryCommands\OpenFileWith3DModelCommand.cs" />
@@ -70,9 +72,12 @@
     <Compile Include="Commands\StageCommands\StorageOperationsStageCommandBase.cs" />
     <Compile Include="Models\SceneViewportModel.cs" />
     <Compile Include="Presenters\CameraPresenter.cs" />
+    <Compile Include="Presenters\CubeEntityPresenter.cs" />
+    <Compile Include="Presenters\CylinderEntityPresenter.cs" />
     <Compile Include="Presenters\GeometryPrimitivePresenter.cs" />
     <Compile Include="Commands\StageCommands\SaveStageCommand.cs" />
-    <Compile Include="Presenters\SceneEntityPresenter.cs" />
+    <Compile Include="Presenters\HollowCylinderEntityPresenter.cs" />
+    <Compile Include="Presenters\SphereEntityPresenter.cs" />
     <Compile Include="Presenters\SceneViewportPresenter.cs" />
     <Compile Include="Presenters\StagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -95,17 +100,29 @@
     <Compile Include="Views\CameraContentView.xaml.cs">
       <DependentUpon>CameraContentView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\SceneEntityContentView.xaml.cs">
+      <DependentUpon>SceneEntityContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CubeEntityContentView.xaml.cs">
+      <DependentUpon>CubeEntityContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CylinderEntityContentView.xaml.cs">
+      <DependentUpon>CylinderEntityContentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\GeometryPrimitiveContentView.xaml.cs">
       <DependentUpon>GeometryPrimitiveContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\HollowCylinderEntityContentView.xaml.cs">
+      <DependentUpon>HollowCylinderEntityContentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Import3DModelView.xaml.cs">
       <DependentUpon>Import3DModelView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SceneEntityContentView.xaml.cs">
-      <DependentUpon>SceneEntityContentView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\SceneViewportView.xaml.cs">
       <DependentUpon>SceneViewportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SphereEntityContentView.xaml.cs">
+      <DependentUpon>SphereEntityContentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StageContentView.xaml.cs">
       <DependentUpon>StageContentView.xaml</DependentUpon>
@@ -166,7 +183,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Controls\SceneEntityContentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CubeEntityContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CylinderEntityContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GeometryPrimitiveContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\HollowCylinderEntityContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,13 +207,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SceneEntityContentView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\SceneViewportView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SphereEntityContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StageContentView.xaml">
       <Generator>MSBuild:Compile</Generator>

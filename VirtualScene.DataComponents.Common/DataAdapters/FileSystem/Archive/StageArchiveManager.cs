@@ -6,6 +6,7 @@ using SharpGL.SceneGraph.Core;
 using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.Properties;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
 {

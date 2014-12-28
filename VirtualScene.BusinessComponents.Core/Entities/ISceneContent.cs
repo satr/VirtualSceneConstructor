@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using VirtualScene.BusinessComponents.Core.Controllers;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
 {

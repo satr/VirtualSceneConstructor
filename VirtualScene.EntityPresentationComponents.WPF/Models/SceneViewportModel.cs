@@ -42,7 +42,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Models
         private double _frameRate = 28.0f;
 
         /// <summary>
-        /// Create ethe new instance of the viewport
+        /// Build ethe new instance of the viewport
         /// </summary>
         /// <param name="sceneContent"></param>
         public SceneViewportModel(ISceneContent sceneContent)

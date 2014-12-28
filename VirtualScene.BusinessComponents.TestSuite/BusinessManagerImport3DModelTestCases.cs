@@ -7,6 +7,7 @@ using VirtualScene.BusinessComponents.Core.Importers;
 using VirtualScene.BusinessComponents.Core.Pools;
 using VirtualScene.Common;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {

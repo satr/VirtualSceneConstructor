@@ -1,11 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Moq;
 using NUnit.Framework;
 using SharpGL.SceneGraph.Assets;
 using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Importers;
 using VirtualScene.Common;
 
@@ -16,6 +14,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
     {
         private WavefrontFormatImporter _importer;
         private Mock<ISceneEngine> _sceneEngineMock;
+        // ReSharper disable once CollectionNeverUpdated.Local
         private List<Material> _materialsAssets;
         private Texture _texture;
 

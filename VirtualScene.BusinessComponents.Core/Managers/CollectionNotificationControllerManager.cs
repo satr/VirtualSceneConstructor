@@ -22,7 +22,7 @@ namespace VirtualScene.BusinessComponents.Core.Managers
         }
 
         /// <summary>
-        /// Create a null-operation-controller which is used when no operation-controller is found for specific type.
+        /// Build a null-operation-controller which is used when no operation-controller is found for specific type.
         /// </summary>
         /// <returns>The null-operation-controller.</returns>
         protected override ISubscriberSetController CreateNullOperationController()

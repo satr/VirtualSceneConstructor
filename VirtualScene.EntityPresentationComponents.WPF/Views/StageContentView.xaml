@@ -5,10 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:entities1="clr-namespace:VirtualScene.Entities;assembly=VirtualScene.Entities"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:sceneEntities="clr-namespace:VirtualScene.Entities.SceneEntities;assembly=VirtualScene.Entities"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-        <DataTemplate x:Key="ContentTypes" DataType="{x:Type entities1:ISceneEntity}">
+        <DataTemplate x:Key="ContentTypes" DataType="{x:Type sceneEntities:ISceneEntity}">
             <Label Content="{Binding Name}"></Label>
         </DataTemplate>
     </UserControl.Resources>

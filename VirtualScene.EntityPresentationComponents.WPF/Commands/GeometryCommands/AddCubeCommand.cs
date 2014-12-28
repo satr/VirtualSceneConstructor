@@ -3,6 +3,8 @@ using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
+using VirtualScene.Entities.SceneEntities;
+using VirtualScene.Entities.SceneEntities.Factories;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
@@ -31,8 +33,8 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         {
             _x += 1;
             _y += 1;
-            //The class Polygon is used instead of the class Cube - read the comment in the CreateCube factory method.
-            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace(SceneContent, GeometryPrimitiveFactory.CreateCube(),  _x, _y, 0, Resources.Title_Cube);
+            //The class Polygon is used instead of the class Cube - read the comment in the Build factory method.
+            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace<CubeEntity>(SceneContent, _x, _y, 0, Resources.Title_Cube);
         }
     }
 }

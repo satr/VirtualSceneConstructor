@@ -1,8 +1,6 @@
 ﻿using NUnit.Framework;
-using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -20,7 +18,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
         [Test]
         public void TestAddEntity()
         {
-            var sceneEntity = new SceneEntity { Geometry = GeometryPrimitiveFactory.CreateCube() };
+            var sceneEntity = new CubeEntity();
             _stage.Add(sceneEntity);
 
         }

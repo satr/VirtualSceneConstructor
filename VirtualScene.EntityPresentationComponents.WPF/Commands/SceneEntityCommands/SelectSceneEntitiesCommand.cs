@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.EntityPresentationComponents.WPF.Commands.SceneEntityCommands
 {

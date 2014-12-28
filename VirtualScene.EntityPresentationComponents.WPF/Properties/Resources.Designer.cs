@@ -106,6 +106,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base Radius.
+        /// </summary>
+        public static string Title_BaseRadius {
+            get {
+                return ResourceManager.GetString("Title_BaseRadius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Camera: {0}.
         /// </summary>
         public static string Title_Camera_N {
@@ -151,20 +160,29 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Gear.
-        /// </summary>
-        public static string Title_Gear {
-            get {
-                return ResourceManager.GetString("Title_Gear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Geometry Type.
         /// </summary>
         public static string Title_Geometry_Type {
             get {
                 return ResourceManager.GetString("Title_Geometry_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string Title_Height {
+            get {
+                return ResourceManager.GetString("Title_Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hollow Cylinder.
+        /// </summary>
+        public static string Title_Hollow_Cylinder {
+            get {
+                return ResourceManager.GetString("Title_Hollow_Cylinder", resourceCulture);
             }
         }
         
@@ -205,6 +223,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Radius.
+        /// </summary>
+        public static string Title_Radius {
+            get {
+                return ResourceManager.GetString("Title_Radius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Stage.
         /// </summary>
         public static string Title_Save_Stage {
@@ -214,11 +241,29 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scene Entity.
+        /// </summary>
+        public static string Title_Scene_Entity {
+            get {
+                return ResourceManager.GetString("Title_Scene_Entity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sphere.
         /// </summary>
         public static string Title_Sphere {
             get {
                 return ResourceManager.GetString("Title_Sphere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spur Gear.
+        /// </summary>
+        public static string Title_Spur_Gear {
+            get {
+                return ResourceManager.GetString("Title_Spur_Gear", resourceCulture);
             }
         }
         
@@ -237,6 +282,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         public static string Title_Stage_files {
             get {
                 return ResourceManager.GetString("Title_Stage_files", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top Radius.
+        /// </summary>
+        public static string Title_TopRadius {
+            get {
+                return ResourceManager.GetString("Title_TopRadius", resourceCulture);
             }
         }
     }

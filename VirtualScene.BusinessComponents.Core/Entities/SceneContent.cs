@@ -7,6 +7,7 @@ using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.Core.Entities
 {
@@ -63,10 +64,9 @@ namespace VirtualScene.BusinessComponents.Core.Entities
 
             var selectedSceneEntities = items.Where(entity => entity != null).ToList();
             var entityTypes = SetSelectedItems(_selectedItems, selectedSceneEntities);
+            OnStageSelectedItemsChanged();
             if (entityTypes.Count == 1)
                 NotifySubscribersOnSelectedItems(entityTypes[0], selectedSceneEntities);
-            OnStageSelectedItemsChanged();
-
         }
 
         private static List<Type> SetSelectedItems(ICollection<ISceneEntity> sceneEntities, IEnumerable<ISceneEntity> entities)

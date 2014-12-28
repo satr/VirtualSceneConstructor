@@ -1,8 +1,7 @@
-﻿using VirtualScene.BusinessComponents.Core;
-using VirtualScene.BusinessComponents.Core.Entities;
-using VirtualScene.BusinessComponents.Core.Factories;
+﻿using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Managers;
 using VirtualScene.Common;
+using VirtualScene.Entities.SceneEntities;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 
@@ -32,7 +31,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.GeometryCommand
         {
             _x += 1;
             _y += 1;
-            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace(SceneContent, CylinderFactory.Create(), _x, _y, 0, Resources.Title_Cylinder);
+            ServiceLocator.Get<SceneContentBusinessManager>().AddSceneElementInSpace<CylinderEntity>(SceneContent, _x, _y, 0, Resources.Title_Cylinder);
         }
     }
 }

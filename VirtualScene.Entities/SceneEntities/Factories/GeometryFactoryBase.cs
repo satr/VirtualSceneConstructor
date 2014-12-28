@@ -1,7 +1,7 @@
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Primitives;
 
-namespace VirtualScene.BusinessComponents.Core.Factories
+namespace VirtualScene.Entities.SceneEntities.Factories
 {
     /// <summary>
     ///  The factory creating a geometry.

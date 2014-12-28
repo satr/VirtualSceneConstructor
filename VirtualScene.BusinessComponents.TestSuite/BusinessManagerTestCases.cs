@@ -1,7 +1,6 @@
 using Moq;
 using NUnit.Framework;
-using VirtualScene.BusinessComponents.Core.Factories;
-using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.TestSuite
 {
@@ -13,7 +12,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
         public void AddCubeToSceneTest()
         {
             const string testEntityName = "TestEntityName";
-            SceneContentBusinessManager.AddSceneElementInSpace(SceneContentMock.Object, GeometryPrimitiveFactory.CreateCube(), 0, 0, 0, testEntityName);
+            SceneContentBusinessManager.AddSceneElementInSpace<CubeEntity>(SceneContentMock.Object, 0, 0, 0, testEntityName);
             StageMock.Verify(m => m.Add(It.IsAny<ISceneEntity>()), Times.Once());
         }
     }

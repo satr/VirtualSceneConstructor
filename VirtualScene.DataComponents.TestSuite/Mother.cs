@@ -2,30 +2,19 @@
 using SharpGL.SceneGraph;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Lighting;
-using SharpGL.SceneGraph.Primitives;
 using SharpGL.SceneGraph.Quadrics;
-using VirtualScene.BusinessComponents.Core.Factories;
-using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 using VirtualScene.UnitTesting.Common;
 
 namespace VirtualScene.DataComponents.TestSuite
 {
     internal class Mother
     {
-        public static Polygon CreateCube()
+        public static SphereEntity CreateSphereEntity()
         {
-            //The class Polygon is used instead of the class Cube - read the comment in the CreateCube factory method.
-            var cube = GeometryPrimitiveFactory.CreateCube();
-            cube.Name = Helper.GetUniqueName();
-            SetTransformation(cube, 2, 3 ,4);
-            return cube;
-        }
-
-        public static Sphere CreateSphere()
-        {
-            var sphere = new Sphere { Name = Helper.GetUniqueName(), Radius = 1.2 };
-            SetTransformation(sphere, 2, 3, 4);
-            return sphere;
+            var entity = new SphereEntity { Name = Helper.GetUniqueName(), Radius = 1.2f };
+            SetTransformation((IHasObjectSpace)entity.Geometry, 2, 3, 4);
+            return entity;
         }
 
         private static void SetTransformation(IHasObjectSpace objectSpace, int translateX, int translateY, int translateZ)
@@ -40,34 +29,39 @@ namespace VirtualScene.DataComponents.TestSuite
             return new TestEntity {Id = Helper.GetUniqueInt(), Name = Helper.GetUniqueName()};
         }
 
-        public static ISceneEntity CreateSceneEntity(SceneElement sceneElement)
+        public static ISceneEntity CreateCubeEntity()
         {
-            return new SceneEntity {Name = Helper.GetUniqueName(), Geometry = sceneElement};
+            return new CubeEntity{Name = Helper.GetUniqueName()};
         }
 
-        public static Disk CreateDisk()
+        public static DiskEntity CreateDiskEntity()
         {
-            var disk = new Disk
+            var entity = new DiskEntity
+            {
+                Name = Helper.GetUniqueName()
+            };
+            var disk = ((Disk) entity.Geometry);
+            disk.Loops = 2;
+            disk.InnerRadius = 1.2;
+            disk.OuterRadius = 3.4;
+            disk.StartAngle = 10.2;
+            disk.SweepAngle = 20.3;
+            SetTransformation(((IHasObjectSpace) entity.Geometry), 2, 3, 4);
+            return entity;
+        }
+
+        public static CustomEntity CreateCustomEntityWithCylinder()
+        {
+            var entity = new CustomEntity
             {
                 Name = Helper.GetUniqueName(),
-                Loops = 2,
-                InnerRadius = 1.2,
-                OuterRadius = 3.4,
-                StartAngle = 10.2,
-                SweepAngle = 20.3
+                Geometry = new Cylinder {TopRadius = 10.2, BaseRadius = 10.2, Height = 11.3}
             };
-            SetTransformation(disk, 2, 3, 4);
-            return disk;
+            SetTransformation(((IHasObjectSpace) entity.Geometry), 2, 3, 4);
+            return entity;
         }
 
-        public static Cylinder CreateCylinder()
-        {
-            var cylinder = new Cylinder {Name = Helper.GetUniqueName(), TopRadius = 10.2, BaseRadius = 10.2, Height = 11.3};
-            SetTransformation(cylinder, 2, 3, 4);
-            return cylinder;
-        }
-
-        public static Light CreateLight()
+        public static Light CreateLight()//TODO rework to LightEntity
         {
             return new Light
                 {

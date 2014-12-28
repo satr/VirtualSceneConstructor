@@ -4,6 +4,7 @@ using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.Common;
+using VirtualScene.Entities.SceneEntities.Factories;
 using VirtualScene.EntityPresentationComponents.WPF.Commands.CommonCommands;
 using VirtualScene.EntityPresentationComponents.WPF.Properties;
 using VirtualScene.PresentationComponents.WPF.ViewModels;
@@ -21,7 +22,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Commands.CameraCommands
         private readonly string _title;
 
         /// <summary>
-        /// Create a new instance of the command
+        /// Build a new instance of the command
         /// </summary>
         /// <param name="sceneContent">Content od the scene</param>
         /// <param name="title"></param>

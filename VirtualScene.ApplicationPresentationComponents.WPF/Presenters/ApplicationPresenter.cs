@@ -8,6 +8,7 @@ using VirtualScene.ApplicationPresentationComponents.WPF.Views;
 using VirtualScene.BusinessComponents.Core;
 using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 using VirtualScene.EntityPresentationComponents.WPF.Presenters;
 using VirtualScene.PresentationComponents.WPF.Presenters;
 
@@ -25,7 +26,6 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         private readonly IContentPresenter _viewportPresenter1;
         private readonly IContentPresenter _viewportPresenter2;
         private readonly IContentPresenter _viewportPresenter3;
-        private readonly IEntityPresenter _sceneEntityPresenter;
 
         /// <summary>
         /// Set the detailed view of the item(s) selected in the scene-content
@@ -42,7 +42,10 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
             var stagePresenter = RegisterEntityPresenter<StagePresenter>();
             RegisterEntityPresenter<CameraPresenter>();
             RegisterEntityPresenter<GeometryPrimitivePresenter>();
-            _sceneEntityPresenter = RegisterEntityPresenter<SceneEntityPresenter>();
+            RegisterEntityPresenter<CubeEntityPresenter>();
+            RegisterEntityPresenter<SphereEntityPresenter>();
+            RegisterEntityPresenter<HollowCylinderEntityPresenter>();
+            RegisterEntityPresenter<CylinderEntityPresenter>();
             _viewportPresenter1 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter2 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter3 = RegisterContentPresenter<SceneViewportPresenter>();
@@ -55,9 +58,15 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         private void SceneContentSelectedSceneElementsChanged(object sender, IEnumerable<ISceneEntity> sceneEntities)
         {
             var selectedSceneEntities = sceneEntities.ToList();
-            OnSetDetailedView(selectedSceneEntities.Count == 1
-                                ? _sceneEntityPresenter.GetContentView() 
-                                : null);
+            OnSetDetailedView(GetContentViewForSelectedEntity(selectedSceneEntities));
+        }
+
+        private FrameworkElement GetContentViewForSelectedEntity(IReadOnlyCollection<ISceneEntity> selectedSceneEntities)
+        {
+            if (selectedSceneEntities.Count != 1)
+                return null;
+            var selectedSceneEntityType = selectedSceneEntities.First().GetType();
+            return _entityPresenters.ContainsKey(selectedSceneEntityType) ? _entityPresenters[selectedSceneEntityType].GetContentView() : null;
         }
 
         private IEntityPresenter RegisterEntityPresenter<T>()
@@ -107,7 +116,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
         }
 
         /// <summary>
-        /// Create the content view.
+        /// Build the content view.
         /// </summary>
         /// <returns>The view displaying content of an entity.</returns>
         protected override FrameworkElement CreateContentView()

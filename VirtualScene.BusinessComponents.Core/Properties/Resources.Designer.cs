@@ -79,7 +79,7 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum bitDepth value: {0}.
+        ///   Looks up a localized string similar to Maximum bitDepth newValue: {0}.
         /// </summary>
         internal static string Message_ValidateSceneArguments_Maximum_bitDepth_value_N {
             get {
@@ -97,7 +97,7 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum height value: {0}.
+        ///   Looks up a localized string similar to Minimum height newValue: {0}.
         /// </summary>
         internal static string Message_ValidateSceneArguments_Minimum_height_value_N {
             get {
@@ -106,7 +106,7 @@ namespace VirtualScene.BusinessComponents.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum width value: {0}.
+        ///   Looks up a localized string similar to Minimum width newValue: {0}.
         /// </summary>
         internal static string Message_ValidateSceneArguments_Minimum_width_value_N {
             get {

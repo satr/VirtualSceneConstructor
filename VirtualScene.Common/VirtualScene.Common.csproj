@@ -42,20 +42,22 @@
     <Compile Include="ActionResult.cs" />
     <Compile Include="Exceptions\ItemAlreadyExistsException.cs" />
     <Compile Include="Exceptions\ItemDoesNotExistException.cs" />
+    <Compile Include="Helpers\Math.cs" />
     <Compile Include="IActionResult.cs" />
     <Compile Include="IOperationController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="OperationControllerManagerBase.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="OperationControllerManagerBase.cs" />
     <Compile Include="ServiceLocator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

@@ -59,12 +59,12 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msitems="urn:schemas-microsoft-com:xml-msitems">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msitems:IsDataSet="true">
+    <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metaitems">
+          <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" />
@@ -81,22 +81,22 @@
               <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
-          <xsd:element name="items">
+          <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msitems:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msitems:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msitems:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msitems:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msitems:Ordinal="4" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
               <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msitems:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
               <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
@@ -117,31 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <items name="Message_ValidateSceneArguments_Minimum_width_value_N" xml:space="preserve">
-    <value>Minimum width value: {0}</value>
-  </items>
-  <items name="Message_ValidateSceneArguments_Minimum_height_value_N" xml:space="preserve">
-    <value>Minimum height value: {0}</value>
-  </items>
-  <items name="Message_ValidateSceneArguments_Minimum_bitDepth_value_N" xml:space="preserve">
+  <data name="Message_ValidateSceneArguments_Minimum_width_value_N" xml:space="preserve">
+    <value>Minimum width newValue: {0}</value>
+  </data>
+  <data name="Message_ValidateSceneArguments_Minimum_height_value_N" xml:space="preserve">
+    <value>Minimum height newValue: {0}</value>
+  </data>
+  <data name="Message_ValidateSceneArguments_Minimum_bitDepth_value_N" xml:space="preserve">
     <value>Minimum bitDepth value: {0}</value>
-  </items>
-  <items name="Message_ValidateSceneArguments_Maximum_bitDepth_value_N" xml:space="preserve">
-    <value>Maximum bitDepth value: {0}</value>
-  </items>
-  <items name="Title_Navigation_Camera" xml:space="preserve">
+  </data>
+  <data name="Message_ValidateSceneArguments_Maximum_bitDepth_value_N" xml:space="preserve">
+    <value>Maximum bitDepth newValue: {0}</value>
+  </data>
+  <data name="Title_Navigation_Camera" xml:space="preserve">
     <value>Navigation</value>
-  </items>
-  <items name="Title_Add_The_stage_of_the_scene_is_not_initialized" xml:space="preserve">
+  </data>
+  <data name="Title_Add_The_stage_of_the_scene_is_not_initialized" xml:space="preserve">
     <value>The stage of the scene is not initialized</value>
-  </items>
-  <items name="Message_LoadGeometry_File_N_not_found" xml:space="preserve">
+  </data>
+  <data name="Message_LoadGeometry_File_N_not_found" xml:space="preserve">
     <value>File {0} not found.</value>
-  </items>
-  <items name="Message_AddMaterials_File_with_material_N_not_found" xml:space="preserve">
+  </data>
+  <data name="Message_AddMaterials_File_with_material_N_not_found" xml:space="preserve">
     <value>File with material "{0}" not found.</value>
-  </items>
-  <items name="Title_Save_Stage" xml:space="preserve">
+  </data>
+  <data name="Title_Save_Stage" xml:space="preserve">
     <value>Save Stage</value>
-  </items>
+  </data>
 </root>

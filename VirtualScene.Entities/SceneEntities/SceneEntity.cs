@@ -2,17 +2,19 @@
 using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 
-namespace VirtualScene.Entities
+namespace VirtualScene.Entities.SceneEntities
 {
     /// <summary>
     /// An entity in the scene
     /// </summary>
-    public class SceneEntity : ISceneEntity
+    public abstract class SceneEntity : ISceneEntity
     {
+        private SceneElement _geometry;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SceneEntity" />
         /// </summary>
-        public SceneEntity()
+        protected SceneEntity()
         {
             Id = Guid.NewGuid();
         }
@@ -23,10 +25,26 @@ namespace VirtualScene.Entities
         public Guid Id { get; set; }
 
         /// <summary>
-        /// Visual representation of the entity in the scene
+        /// Representation of the <see cref="ISceneEntity" /> in the scene.
         /// </summary>
         [XmlIgnore]
-        public SceneElement Geometry { get; set; }
+        public virtual SceneElement Geometry
+        {
+            get
+            {
+                return _geometry?? (_geometry = CreateGeometry());
+            }
+            set
+            {
+                _geometry = value;
+            }
+        }
+
+        /// <summary>
+        /// Build the <see cref="SceneElement" /> specific for each type of <see cref="ISceneEntity" />
+        /// </summary>
+        /// <returns>Returns <see cref="SceneElement" /></returns>
+        protected abstract SceneElement CreateGeometry();
 
         /// <summary>
         /// The name of the entity in the scene
@@ -36,10 +54,7 @@ namespace VirtualScene.Entities
         /// <summary>
         /// The description of the <see cref="ISceneEntity" />
         /// </summary>
-        public string Description
-        {
-            get { return Geometry == null ? "?" : Geometry.GetType().ToString(); }
-        }
+        public abstract string Description { get; }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.

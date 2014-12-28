@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 using VirtualScene.Common.Exceptions;
 using VirtualScene.Entities.Properties;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.Entities
 {

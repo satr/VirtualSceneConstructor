@@ -15,7 +15,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
     public class GeometryPrimitivePresenter : EntityPresenterBase<SceneElement>
     {
         /// <summary>
-        /// Create the content view.
+        /// Build the content view.
         /// </summary>
         /// <returns>The view displaying content of an entity.</returns>
         protected override FrameworkElement CreateContentView()
@@ -33,8 +33,9 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Presenters
                 yield return CreateButton(Resources.Title_Add_Cube, new AddCubeCommand(SceneContent));
                 yield return CreateButton(Resources.Title_Add_Sphere, new AddSphereCommand(SceneContent));
                 yield return CreateButton(Resources.Title_Import3D_model, new Import3DModelCommand(SceneContent));
-                yield return CreateButton(Resources.Title_Gear, new AddGearCommand(SceneContent));
+                yield return CreateButton(Resources.Title_Spur_Gear, new AddSpurGearCommand(SceneContent));
                 yield return CreateButton(Resources.Title_Cylinder, new AddCylinderCommand(SceneContent));
+                yield return CreateButton(Resources.Title_Hollow_Cylinder, new AddHollowCylinderCommand(SceneContent));
             }
         }
     }

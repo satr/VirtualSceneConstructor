@@ -14,6 +14,8 @@ using VirtualScene.BusinessComponents.Core.Factories;
 using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
+using VirtualScene.Entities.SceneEntities.Factories;
 
 namespace VirtualScene.BusinessComponents.Core
 {

@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="VirtualScene.EntityPresentationComponents.WPF.Views.SphereEntityContentView"
+             xmlns:controls="clr-namespace:VirtualScene.EntityPresentationComponents.WPF.Views.Controls"  
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:entityProperties="clr-namespace:VirtualScene.EntityPresentationComponents.WPF.Properties"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <StackPanel>
+        <Label Content="{Binding Title}" Background="#FFF5E7E7" MinHeight="26" ></Label>
+        <controls:SceneEntityContentView />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{Binding TitleColumnWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="{x:Static entityProperties:Resources.Title_Radius}" Grid.Row="0" Grid.Column="0" ></Label>
+            <TextBox Text="{Binding SceneEntity.Radius}" Grid.Row="0" Grid.Column="1" ></TextBox>
+        </Grid>
+
+    </StackPanel>
+</UserControl>

@@ -26,7 +26,7 @@ namespace VirtualScene.PresentationComponents.WPF.Presenters
 
 
         /// <summary>
-        /// Create a button for an operation.
+        /// Build a button for an operation.
         /// </summary>
         /// <param name="title">Title of the button.</param>
         /// <param name="command">The command executed by the button.</param>

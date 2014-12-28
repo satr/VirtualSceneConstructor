@@ -4,7 +4,7 @@ using VirtualScene.BusinessComponents.Core.Entities;
 using VirtualScene.BusinessComponents.Core.Pools;
 using VirtualScene.BusinessComponents.Core.Properties;
 using VirtualScene.Common;
-using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.BusinessComponents.Core.Managers
 {
@@ -14,7 +14,7 @@ namespace VirtualScene.BusinessComponents.Core.Managers
     public class SceneContentBusinessManager
     {
         /// <summary>
-        /// Add a new polygon to the scene
+        /// Add a new <see cref="SceneElement" /> to the stage
         /// </summary>
         /// <param name="sceneContent">The content of the scene.</param>
         /// <param name="x">The translation X of the scene element.</param>
@@ -22,27 +22,21 @@ namespace VirtualScene.BusinessComponents.Core.Managers
         /// <param name="z">The translation Z of the scene element.</param>
         /// <param name="name">The name of the scene element.</param>
         public void AddSceneElementInSpace<T>(ISceneContent sceneContent, int x, int y, int z, string name)
-            where T : SceneElement, IHasObjectSpace, new()
+            where T : ISceneEntity, new()
         {
-            AddSceneElementInSpace(sceneContent, new T(), x, y, z, name);
+            var sphereEntity = new T{ Name = name };
+            SetTransformationWhenApplicable(x, y, z, sphereEntity);
+            AddToStage(sphereEntity, sceneContent);
         }
 
-        /// <summary>
-        /// Add a new <see cref="SceneElement" /> to the stage
-        /// </summary>
-        /// <param name="sceneContent">The content of the scene.</param>
-        /// <param name="sceneElement">The scene element.</param>
-        /// <param name="x">The translation X of the scene element.</param>
-        /// <param name="y">The translation Y of the scene element.</param>
-        /// <param name="z">The translation Z of the scene element.</param>
-        /// <param name="name">The name of the scene element.</param>
-        public void AddSceneElementInSpace<T>(ISceneContent sceneContent, T sceneElement, int x, int y, int z, string name)
-            where T : SceneElement, IHasObjectSpace
+        private static void SetTransformationWhenApplicable(int x, int y, int z, ISceneEntity sphereEntity)
         {
+            var sceneElement = sphereEntity.Geometry as IHasObjectSpace;
+            if (sceneElement == null) 
+                return;
             sceneElement.Transformation.TranslateX += x;
             sceneElement.Transformation.TranslateY += y;
             sceneElement.Transformation.TranslateZ += z;
-            AddToStage(new SceneEntity { Name = name, Geometry = sceneElement }, sceneContent);
         }
 
         /// <summary>
@@ -58,7 +52,7 @@ namespace VirtualScene.BusinessComponents.Core.Managers
                                          .LoadGeometry(fullFileName, sceneContent.SceneEngine);
             if(!actionResult.Success)
                 return actionResult;
-            var sceneEntity = new SceneEntity { Name = name, Geometry = actionResult.Value };
+            var sceneEntity = new CustomEntity { Name = name, Geometry = actionResult.Value };
             AddToStage(sceneEntity, sceneContent);
             return actionResult;
         }

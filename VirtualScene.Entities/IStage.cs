@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using VirtualScene.Entities.SceneEntities;
 
 namespace VirtualScene.Entities
 {

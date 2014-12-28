@@ -6,6 +6,7 @@ using VirtualScene.Common;
 using VirtualScene.DataComponents.Common.DataAdapters.FileSystem;
 using VirtualScene.DataComponents.Common.Exceptions;
 using VirtualScene.Entities;
+using VirtualScene.Entities.SceneEntities;
 using VirtualScene.UnitTesting.Common;
 
 namespace VirtualScene.DataComponents.TestSuite
@@ -103,12 +104,10 @@ namespace VirtualScene.DataComponents.TestSuite
         [Test]
         public void TestLoadStageWithTwoSceneEntities()
         {
-            var geometry1 = Mother.CreateCube();
-            var sceneEntity1 = Mother.CreateSceneEntity(geometry1);
+            var sceneEntity1 = Mother.CreateCubeEntity();
             _stage.Add(sceneEntity1);
 
-            var geometry2 = Mother.CreateCube();
-            var sceneEntity2 = Mother.CreateSceneEntity(geometry2);
+            var sceneEntity2 = Mother.CreateCubeEntity();
             _stage.Add(sceneEntity2);
 
             _dataAdapter.EntityFolderPath = _stageFolderPath;
@@ -137,38 +136,37 @@ namespace VirtualScene.DataComponents.TestSuite
         [Test]
         public void TestLoadCube()
         {
-            TestLoadGeometry(Mother.CreateCube());
+            TestLoadGeometry(Mother.CreateCubeEntity());
         }
 
         [Test]
         public void TestLoadSphere()
         {
-            TestLoadGeometry(Mother.CreateSphere());
+            TestLoadGeometry(Mother.CreateCubeEntity());
         }
 
         [Test]
         public void TestLoadDisk()
         {
-            TestLoadGeometry(Mother.CreateDisk());
+            TestLoadGeometry(Mother.CreateCubeEntity());
         }
 
         [Test]
         public void TestLoadCylinder()
         {
-            TestLoadGeometry(Mother.CreateCylinder());
+            TestLoadGeometry(Mother.CreateCubeEntity());
         }
 
         [Test, Ignore("TODO - Color is not serialized - create wrapping")]
         public void TestLoadLight()
         {
-            TestLoadGeometry(Mother.CreateLight());
+            TestLoadGeometry(Mother.CreateCubeEntity());
         }
 
         //TODO - add more scene element tests
 
-        private void TestLoadGeometry(SceneElement geometry)
+        private void TestLoadGeometry(ISceneEntity sceneEntity)
         {
-            var sceneEntity = Mother.CreateSceneEntity(geometry);
             _stage.Add(sceneEntity);
             _dataAdapter.EntityFolderPath = _stageFolderPath;
             _dataAdapter.Save(_stage);
@@ -180,8 +178,8 @@ namespace VirtualScene.DataComponents.TestSuite
             Assert.AreEqual(1, loadedStage.Items.Count);
             var loadedGeometry = loadedStage.Items[0].Geometry;
             Assert.IsNotNull(loadedGeometry);
-            Assert.AreEqual(geometry.GetType(), loadedGeometry.GetType());
-            Assert.IsTrue(GeometryEqualityHelper.SceneElementEqual(geometry, loadedGeometry));
+            Assert.AreEqual(sceneEntity.Geometry.GetType(), loadedGeometry.GetType());
+            Assert.IsTrue(GeometryEqualityHelper.SceneElementEqual(sceneEntity.Geometry, loadedGeometry));
         }
     }
 }
