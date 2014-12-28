@@ -11,33 +11,27 @@ namespace VirtualScene.Entities.SceneEntities
     /// because the <see cref="Cube" /> invokes in its default constructor the method populating its collections,
     /// because of this collections UVs, Vertices and Faces are populated second time during deserialization.
     /// </summary>
-    public class CubeEntity : SceneEntity
+    public class CubeEntity : SceneEntity<Polygon>
     {
-        private readonly string _description;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CubeEntity" />
         /// </summary>
         public CubeEntity()
+            : base(Resources.Title_Cube)
         {
-            _description = Resources.Title_Cube;
+        }
+
+        protected override void UpdateFields(Polygon sceneElement)
+        {
         }
 
         /// <summary>
         /// Build the cubic <see cref="Polygon" />.
         /// </summary>
         /// <returns>Returns cubic <see cref="Polygon" /> as <see cref="SceneElement" />.</returns>
-        protected override SceneElement CreateGeometry()
+        protected override Polygon CreateGeometry()
         {
             return CubeFactory.Create(1);
-        }
-
-        /// <summary>
-        /// The description of the <see cref="ISceneEntity" />
-        /// </summary>
-        public override string Description
-        {
-            get { return _description; }
         }
     }
 }

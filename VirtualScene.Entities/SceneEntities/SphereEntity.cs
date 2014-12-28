@@ -1,6 +1,6 @@
-using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Quadrics;
+using VirtualScene.Common.Helpers;
 using VirtualScene.Entities.Properties;
 
 namespace VirtualScene.Entities.SceneEntities
@@ -8,18 +8,16 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// The <see cref="ISceneEntity" /> with a <see cref="Sphere" /> geometry.
     /// </summary>
-    public class SphereEntity : SceneEntity
+    public class SphereEntity : SceneEntity<Sphere>
     {
-        private Sphere _sphere;
-        private readonly string _description;
         private float _radius;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SphereEntity" />
         /// </summary>
         public SphereEntity()
+            : base(Resources.Title_Sphere)
         {
-            _description = Resources.Title_Sphere;
         }
 
         /// <summary>
@@ -28,48 +26,25 @@ namespace VirtualScene.Entities.SceneEntities
         public float Radius
         {
             get { return _radius; }
-            set { Common.Helpers.Math.AssignValue(ref _radius, value, _sphere, v => _sphere.Radius = v, 0); }
+            set { Math.AssignValue(ref _radius, value, ConcreteGeometry, v => ConcreteGeometry.Radius = v, 0); }
         }
 
         /// <summary>
-        /// Representation of the <see cref="ISceneEntity" /> in the scene.
+        /// Update private data after new geometry was assigned.
         /// </summary>
-        [XmlIgnore]
-        public override SceneElement Geometry
+        /// <param name="sceneElement">The concrete geometry of type <see cref="Sphere" />.</param>
+        protected override void UpdateFields(Sphere sceneElement)
         {
-            get { return base.Geometry; }
-            set
-            {
-                if(Geometry == value)
-                    return;
-                base.Geometry = _sphere = value as Sphere;
-                UpdateFields(_sphere);
-            }
-        }
-
-        private void UpdateFields(Sphere sphere)
-        {
-            _radius = (float) (sphere == null ? 0 : sphere.Radius);
-        }
-
-        /// <summary>
-        /// The description of the <see cref="ISceneEntity" />
-        /// </summary>
-        public override string Description
-        {
-            get { return _description; }
+            _radius = (float)(sceneElement == null ? 0 : sceneElement.Radius);
         }
 
         /// <summary>
         /// Build the <see cref="Sphere" />.
         /// </summary>
         /// <returns>Returns the <see cref="Sphere" /> as <see cref="SceneElement" />.</returns>
-        protected override SceneElement CreateGeometry()
+        protected override Sphere CreateGeometry()
         {
-            const double radius = 1;
-            _sphere = new Sphere{Radius = radius};
-            UpdateFields(_sphere);
-            return _sphere;
+            return new Sphere{Radius = 1};
         }
     }
 }

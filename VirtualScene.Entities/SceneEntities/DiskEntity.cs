@@ -7,31 +7,29 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// The <see cref="ISceneEntity" /> with a <see cref="Disk" /> geometry.
     /// </summary>
-    public class DiskEntity : SceneEntity
+    public class DiskEntity : SceneEntity<Disk>
     {
-        private readonly string _description;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DiskEntity" />
         /// </summary>
         public DiskEntity()
+            : base(Resources.Title_Disk)
         {
-            _description = Resources.Title_Disk;
         }
 
         /// <summary>
-        /// The description of the <see cref="ISceneEntity" />
+        /// Update private data after new geometry was assigned.
         /// </summary>
-        public override string Description
+        /// <param name="sceneElement">The concrete geometry of type <see cref="Disk" />.</param>
+        protected override void UpdateFields(Disk sceneElement)
         {
-            get { return _description; }
         }
 
         /// <summary>
         /// Build the <see cref="Disk" />.
         /// </summary>
         /// <returns>Returns the <see cref="Disk" /> as <see cref="SceneElement" />.</returns>
-        protected override SceneElement CreateGeometry()
+        protected override Disk CreateGeometry()
         {
             return new Disk();
         }

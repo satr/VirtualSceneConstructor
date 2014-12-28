@@ -7,16 +7,22 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// An entity in the scene
     /// </summary>
-    public abstract class SceneEntity : ISceneEntity
+    public abstract class SceneEntity<T> : ISceneEntity
+        where T: SceneElement
     {
-        private SceneElement _geometry;
+        /// <summary>
+        /// The inctance of the concrete type <see cref="T" />.
+        /// </summary>
+        protected T ConcreteGeometry { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SceneEntity" />
+        /// Initializes a new instance of the <see cref="SceneEntity{T}" />
         /// </summary>
-        protected SceneEntity()
+        /// <param name="description">The description of the <see cref="ISceneEntity" /></param>
+        protected SceneEntity(string description)
         {
             Id = Guid.NewGuid();
+            Description = description;
         }
 
         /// <summary>
@@ -28,23 +34,34 @@ namespace VirtualScene.Entities.SceneEntities
         /// Representation of the <see cref="ISceneEntity" /> in the scene.
         /// </summary>
         [XmlIgnore]
-        public virtual SceneElement Geometry
+        public SceneElement Geometry
         {
             get
             {
-                return _geometry?? (_geometry = CreateGeometry());
+                if (ConcreteGeometry != null) 
+                    return ConcreteGeometry;
+                ConcreteGeometry = CreateGeometry();
+                UpdateFields(ConcreteGeometry);
+                return ConcreteGeometry;
             }
             set
             {
-                _geometry = value;
+                ConcreteGeometry = value as T;
+                UpdateFields(ConcreteGeometry);
             }
         }
 
         /// <summary>
-        /// Build the <see cref="SceneElement" /> specific for each type of <see cref="ISceneEntity" />
+        /// Update private data after a new geometry was assigned.
         /// </summary>
-        /// <returns>Returns <see cref="SceneElement" /></returns>
-        protected abstract SceneElement CreateGeometry();
+        /// <param name="sceneElement">The concrete geometry of type <see cref="T" />.</param>
+        protected abstract void UpdateFields(T sceneElement);
+
+        /// <summary>
+        /// Create the <see cref="SceneElement" /> specific for each type of <see cref="ISceneEntity" />
+        /// </summary>
+        /// <returns>Returns a new instance of <see cref="T" /></returns>
+        protected abstract T CreateGeometry();
 
         /// <summary>
         /// The name of the entity in the scene
@@ -54,7 +71,8 @@ namespace VirtualScene.Entities.SceneEntities
         /// <summary>
         /// The description of the <see cref="ISceneEntity" />
         /// </summary>
-        public abstract string Description { get; }
+        [XmlIgnore]
+        public string Description { get; private set; }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
@@ -67,7 +85,7 @@ namespace VirtualScene.Entities.SceneEntities
         {
             if (obj == null || obj.GetType() != GetType())
                 return false;
-            var sceneEntity = (SceneEntity)obj;
+            var sceneEntity = (SceneEntity<T>)obj;
             return string.Equals(Name, sceneEntity.Name) 
                    && GeometryEqualityHelper.SceneElementEqual(Geometry, sceneEntity.Geometry);
         }

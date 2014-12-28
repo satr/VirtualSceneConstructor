@@ -1,5 +1,4 @@
-﻿using SharpGL.SceneGraph.Core;
-using SharpGL.SceneGraph.Primitives;
+﻿using SharpGL.SceneGraph.Primitives;
 using VirtualScene.Entities.Properties;
 
 namespace VirtualScene.Entities.SceneEntities
@@ -7,33 +6,31 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// The <see cref="ISceneEntity" /> with a custom geometry.
     /// </summary>
-    public class CustomEntity : SceneEntity
+    public class CustomEntity : SceneEntity<Polygon>
     {
-        private readonly string _description;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CustomEntity" />
         /// </summary>
         public CustomEntity()
+            : base(Resources.Title_Custom_Polygon)
         {
-            _description = Resources.Title_Custom_Polygon;
+        }
+
+        /// <summary>
+        /// Update private data after new geometry was assigned.
+        /// </summary>
+        /// <param name="sceneElement">The concrete geometry of type <see cref="T" />.</param>
+        protected override void UpdateFields(Polygon sceneElement)
+        {
         }
 
         /// <summary>
         /// Build the <see cref="Polygon" /> specific for the <see cref="CustomEntity" />.
         /// </summary>
         /// <returns>Returns <see cref="Polygon" />.</returns>
-        protected override SceneElement CreateGeometry()
+        protected override Polygon CreateGeometry()
         {
             return new Polygon();
-        }
-
-        /// <summary>
-        /// The description of the <see cref="CustomEntity" />
-        /// </summary>
-        public override string Description
-        {
-            get { return _description; }
         }
     }
 }

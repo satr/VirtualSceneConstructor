@@ -1,6 +1,6 @@
-using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 using SharpGL.SceneGraph.Primitives;
+using VirtualScene.Common.Helpers;
 using VirtualScene.Entities.Properties;
 using VirtualScene.Entities.SceneEntities.Factories;
 using VirtualScene.Entities.SceneEntities.SceneElements;
@@ -10,19 +10,17 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// The <see cref="ISceneEntity" /> with <see cref="SpurGear" /> geometry.
     /// </summary>
-    public class SpurGearEntity : SceneEntity
+    public class SpurGearEntity : SceneEntity<SpurGear>
     {
-        private readonly string _description;
         private float _pitchDiameter;
-        private SpurGear _spurGear;
         private float _height;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpurGearEntity" />
         /// </summary>
         public SpurGearEntity()
+            : base(Resources.Title_Spur_gear)
         {
-            _description = Resources.Title_Spur_gear;
         }
 
         /// <summary>
@@ -31,7 +29,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float PitchDiameter
         {
             get { return _pitchDiameter; }
-            set { Common.Helpers.Math.AssignValue(ref _pitchDiameter, value, _spurGear, v => _spurGear.PitchDiameter = v, 0); }
+            set { Math.AssignValue(ref _pitchDiameter, value, ConcreteGeometry, v => ConcreteGeometry.PitchDiameter = v, 0); }
         }
 
         /// <summary>
@@ -40,50 +38,28 @@ namespace VirtualScene.Entities.SceneEntities
         public float Height
         {
             get { return _height; }
-            set { Common.Helpers.Math.AssignValue(ref _height, value, _spurGear, v => _spurGear.Height = v, 0); }
-        }
-
-
-        /// <summary>
-        /// Representation of the <see cref="ISceneEntity" /> in the scene.
-        /// </summary>
-        [XmlIgnore]
-        public override SceneElement Geometry
-        {
-            get { return base.Geometry; }
-            set
-            {
-                if (Geometry == value)
-                    return;
-                base.Geometry = _spurGear = value as SpurGear;
-                UpdateFields(_spurGear);
-            }
-        }
-
-        private void UpdateFields(SpurGear spurGear)
-        {
-            _pitchDiameter = spurGear == null? 0: spurGear.PitchDiameter;
-            _height = spurGear == null? 0: spurGear.Height;
+            set { Math.AssignValue(ref _height, value, ConcreteGeometry, v => ConcreteGeometry.Height = v, 0); }
         }
 
         /// <summary>
-        /// The description of the <see cref="ISceneEntity" />
+        /// Update private data after new geometry was assigned.
         /// </summary>
-        public override string Description
+        /// <param name="sceneElement">The concrete geometry of type <see cref="SpurGear" />.</param>
+        protected override void UpdateFields(SpurGear sceneElement)
         {
-            get { return _description; }
+            _pitchDiameter = sceneElement == null? 0: sceneElement.PitchDiameter;
+            _height = sceneElement == null? 0: sceneElement.Height;
         }
 
         /// <summary>
         /// Build the spur gear shaped <see cref="Polygon" />.
         /// </summary>
         /// <returns>Returns the spur gear shaped <see cref="Polygon" /> as <see cref="SceneElement" />.</returns>
-        protected override SceneElement CreateGeometry()
+        protected override SpurGear CreateGeometry()
         {
-            _spurGear = SpurGear.Create(4f, 0.5f);
-            SpurGearBuilder.Build(4f, 0.5f, _spurGear);
-            UpdateFields(_spurGear);
-            return _spurGear;
+            var spurGear = SpurGear.Create(4f, 0.5f);
+            SpurGearBuilder.Build(4f, 0.5f, spurGear);
+            return spurGear;
         }
     }
 }
