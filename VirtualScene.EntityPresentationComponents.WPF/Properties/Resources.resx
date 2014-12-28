@@ -195,4 +195,7 @@
   <data name="Title_TopRadius" xml:space="preserve">
     <value>Top Radius</value>
   </data>
+  <data name="Title_Pitch_Diameter" xml:space="preserve">
+    <value>Pitch Diameter</value>
+  </data>
 </root>

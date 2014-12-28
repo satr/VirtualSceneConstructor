@@ -34,7 +34,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
                 return actionResult;
             }
 
-            _stageArchiveManager.PackStage(entity, GetArchiveFilePathFor(entity.Name));
+            _stageArchiveManager.Pack(entity, GetArchiveFilePathFor(entity.Name));
 
             return actionResult;
         }
@@ -54,7 +54,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem
                 return actionResult;
             }
             
-            actionResult.Value = _stageArchiveManager.UnPackStage(archiveFilePath, actionResult);
+            actionResult.Value = _stageArchiveManager.UnPack(archiveFilePath, actionResult);
 
             return actionResult;
         }

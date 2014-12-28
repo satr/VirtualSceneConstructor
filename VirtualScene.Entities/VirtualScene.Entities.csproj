@@ -59,11 +59,12 @@
     <Compile Include="SceneEntities\Factories\CameraFactory.cs" />
     <Compile Include="SceneEntities\Factories\CubeFactory.cs" />
     <Compile Include="SceneEntities\Factories\HollowCylinderBuilder.cs" />
-    <Compile Include="SceneEntities\Factories\GearFactory.cs" />
+    <Compile Include="SceneEntities\Factories\SpurGearBuilder.cs" />
     <Compile Include="SceneEntities\Factories\GeometryFactoryBase.cs" />
     <Compile Include="SceneEntities\HollowCylinderEntity.cs" />
     <Compile Include="SceneEntities\ISceneEntity.cs" />
     <Compile Include="SceneEntities\SceneElements\HollowCylinder.cs" />
+    <Compile Include="SceneEntities\SceneElements\SpurGear.cs" />
     <Compile Include="SceneEntities\SceneEntity.cs" />
     <Compile Include="SceneEntities\SphereEntity.cs" />
     <Compile Include="SceneEntities\SpurGearEntity.cs" />

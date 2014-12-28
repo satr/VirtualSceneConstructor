@@ -30,7 +30,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         /// </summary>
         /// <param name="stage">The stage to pack.</param>
         /// <param name="archiveFilePath">The path to the archive where the stage is packed.</param>
-        public void PackStage(IStage stage, string archiveFilePath)
+        public void Pack(IStage stage, string archiveFilePath)
         {
             if (stage == null)
                 throw new ArgumentNullException(Resources.Message_Archive_Entity_cannot_be_saved_because_it_is_empty);
@@ -40,13 +40,19 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
             using (var fileStream = File.Create(archiveFilePath))
             using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Create))
             {
-                _entityArchiveControllerManager.Pack(stage, archive, string.Empty);
-                foreach (var sceneEntity in stage.Items)
-                {
-                    var sceneEntityArchiveName = Guid.NewGuid().ToString();
-                    _entityArchiveControllerManager.Pack(sceneEntity, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
-                    _entityArchiveControllerManager.Pack(sceneEntity.Geometry, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
-                }
+                PackStage(stage, archive);
+            }
+        }
+
+        private void PackStage(IStage stage, ZipArchive archive)
+        {
+            _entityArchiveControllerManager.Pack(stage, archive, string.Empty);
+            foreach (var sceneEntity in stage.Items)
+            {
+                var sceneEntityArchiveName = Guid.NewGuid().ToString();
+                _entityArchiveControllerManager.Pack(sceneEntity, archive, ArchiveEntryNames.Items, sceneEntityArchiveName);
+                _entityArchiveControllerManager.Pack(sceneEntity.Geometry, archive, ArchiveEntryNames.Items,
+                    sceneEntityArchiveName);
             }
         }
 
@@ -56,7 +62,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
         /// <param name="archiveFilePath">The path to the archive with the stage.</param>
         /// <param name="actionResult">The result of the unpacking of the archive.</param>
         /// <returns>The unpacked stage.</returns>
-        public IStage UnPackStage(string archiveFilePath, IActionResult actionResult)
+        public IStage UnPack(string archiveFilePath, IActionResult actionResult)
         {
             try
             {
@@ -64,21 +70,7 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                 using (var fileStream = File.OpenRead(archiveFilePath))
                 using (var archive = new ZipArchive(fileStream, ZipArchiveMode.Read))
                 {
-                    var hierarchyResult = GetArchiveHierarchy(archive.Entries);
-                    if (!hierarchyResult.Success)
-                    {
-                        actionResult.CombineWith(hierarchyResult);
-                        return null;
-                    }
-                    var stageArchiveEntry = hierarchyResult.Value;
-                    var stageEntity = UnPackEntity(stageArchiveEntry, actionResult);
-                    ValidateEntity<IStage>(stageEntity, actionResult);
-                    if (!actionResult.Success)
-                        return null;
-                    var stage = (IStage)stageEntity;
-                    if (stageArchiveEntry.Items != null)
-                        UnPackSceneEntities(stage, stageArchiveEntry.Items, actionResult);
-                    return stage;
+                    return UnPackStage(archive, actionResult);
                 }
             }
             catch (InvalidDataException e)
@@ -90,6 +82,28 @@ namespace VirtualScene.DataComponents.Common.DataAdapters.FileSystem.Archive
                 actionResult.AddError(Resources.Message_The_archive_N_with_a_stage_cannot_be_processed_due_to_the_error_M, archiveFilePath, e.Message);
             }
             return null;
+        }
+
+        private IStage UnPackStage(ZipArchive archive, IActionResult actionResult)
+        {
+            var hierarchyResult = GetArchiveHierarchy(archive.Entries);
+            if (!hierarchyResult.Success)
+            {
+                actionResult.CombineWith(hierarchyResult);
+                return null;
+            }
+
+            var stageArchiveEntry = hierarchyResult.Value;
+            var stageEntity = UnPackEntity(stageArchiveEntry, actionResult);
+            ValidateEntity<IStage>(stageEntity, actionResult);
+            
+            if (!actionResult.Success)
+                return null;
+
+            var stage = (IStage) stageEntity;
+            if (stageArchiveEntry.Items != null)
+                UnPackSceneEntities(stage, stageArchiveEntry.Items, actionResult);
+            return stage;
         }
 
         private static void CreateDirectoryForFileIfNotExists(string archiveFilePath)

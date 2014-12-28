@@ -223,6 +223,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pitch Diameter.
+        /// </summary>
+        public static string Title_Pitch_Diameter {
+            get {
+                return ResourceManager.GetString("Title_Pitch_Diameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Radius.
         /// </summary>
         public static string Title_Radius {

@@ -46,6 +46,7 @@ namespace VirtualScene.ApplicationPresentationComponents.WPF.Presenters
             RegisterEntityPresenter<SphereEntityPresenter>();
             RegisterEntityPresenter<HollowCylinderEntityPresenter>();
             RegisterEntityPresenter<CylinderEntityPresenter>();
+            RegisterEntityPresenter<SpurGearEntityPresenter>();
             _viewportPresenter1 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter2 = RegisterContentPresenter<SceneViewportPresenter>();
             _viewportPresenter3 = RegisterContentPresenter<SceneViewportPresenter>();

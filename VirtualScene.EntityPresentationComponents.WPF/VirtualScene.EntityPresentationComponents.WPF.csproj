@@ -79,6 +79,7 @@
     <Compile Include="Presenters\HollowCylinderEntityPresenter.cs" />
     <Compile Include="Presenters\SphereEntityPresenter.cs" />
     <Compile Include="Presenters\SceneViewportPresenter.cs" />
+    <Compile Include="Presenters\SpurGearEntityPresenter.cs" />
     <Compile Include="Presenters\StagePresenter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -123,6 +124,9 @@
     </Compile>
     <Compile Include="Views\SphereEntityContentView.xaml.cs">
       <DependentUpon>SphereEntityContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SpurGearEntityContentView.xaml.cs">
+      <DependentUpon>SpurGearEntityContentView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StageContentView.xaml.cs">
       <DependentUpon>StageContentView.xaml</DependentUpon>
@@ -212,6 +216,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\SphereEntityContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SpurGearEntityContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
