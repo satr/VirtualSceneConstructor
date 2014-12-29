@@ -29,7 +29,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float Radius
         {
             get { return _radius; }
-            set { Math.AssignValue(ref _radius, value, ConcreteGeometry, v => ConcreteGeometry.Radius = v, 0);}
+            set { Math.AssignValue(ref _radius, value, SceneElement, v => SceneElement.Radius = v, 0);}
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float SegmentAngle
         {
             get { return _segmentAngle; }
-            set { Math.AssignValue(ref _segmentAngle, value, ConcreteGeometry, v => ConcreteGeometry.SegmentAngle = v, 0);}
+            set { Math.AssignValue(ref _segmentAngle, value, SceneElement, v => SceneElement.SegmentAngle = v, 0);}
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float Height
         {
             get { return _height; }
-            set { Math.AssignValue(ref _height, value, ConcreteGeometry, v => ConcreteGeometry.Height = v);}
+            set { Math.AssignValue(ref _height, value, SceneElement, v => SceneElement.Height = v);}
         }
 
         /// <summary>

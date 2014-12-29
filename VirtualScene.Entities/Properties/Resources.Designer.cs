@@ -61,6 +61,15 @@ namespace VirtualScene.Entities.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calculation strategy cannot be null..
+        /// </summary>
+        internal static string Message_Calculation_strategy_cannot_be_null {
+            get {
+                return ResourceManager.GetString("Message_Calculation_strategy_cannot_be_null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scene-entity already exists in the stage..
         /// </summary>
         internal static string Message_Scene_entity_already_exists_in_the_stage {
@@ -84,6 +93,24 @@ namespace VirtualScene.Entities.Properties {
         internal static string Message_TypeInfo_cannot_be_created_for_null {
             get {
                 return ResourceManager.GetString("Message_TypeInfo_cannot_be_created_for_null", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By number of teeth and outside diameter.
+        /// </summary>
+        internal static string Title_By_number_of_teeth_and_outside_diameter {
+            get {
+                return ResourceManager.GetString("Title_By_number_of_teeth_and_outside_diameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By number of teeth and pitch diameter.
+        /// </summary>
+        internal static string Title_By_number_of_teeth_and_pitch_diameter {
+            get {
+                return ResourceManager.GetString("Title_By_number_of_teeth_and_pitch_diameter", resourceCulture);
             }
         }
         

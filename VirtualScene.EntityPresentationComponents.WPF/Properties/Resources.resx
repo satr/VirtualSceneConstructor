@@ -184,7 +184,7 @@
     <value>Scene Entity</value>
   </data>
   <data name="Title_Height" xml:space="preserve">
-    <value>Height</value>
+    <value>FaceWidth</value>
   </data>
   <data name="Title_Hollow_Cylinder" xml:space="preserve">
     <value>Hollow Cylinder</value>
@@ -197,5 +197,35 @@
   </data>
   <data name="Title_Pitch_Diameter" xml:space="preserve">
     <value>Pitch Diameter</value>
+  </data>
+  <data name="Title_Face_Width" xml:space="preserve">
+    <value>Face Width</value>
+  </data>
+  <data name="Title_Number_of_Teeth" xml:space="preserve">
+    <value>Number of Teeth</value>
+  </data>
+  <data name="Title_Outside_Diameter" xml:space="preserve">
+    <value>Outside Diameter</value>
+  </data>
+  <data name="Title_Addendum" xml:space="preserve">
+    <value>Addendum</value>
+  </data>
+  <data name="Title_Dedendum" xml:space="preserve">
+    <value>Dedendum</value>
+  </data>
+  <data name="Title_Diametral_Pitch" xml:space="preserve">
+    <value>Diametral Pitch</value>
+  </data>
+  <data name="Title_Whole_Depth" xml:space="preserve">
+    <value>Whole Depth</value>
+  </data>
+  <data name="Title_Working_Depth" xml:space="preserve">
+    <value>Working Depth</value>
+  </data>
+  <data name="Title_Tooth_Thickness" xml:space="preserve">
+    <value>Tooth Thickness</value>
+  </data>
+  <data name="Title_Circular_Pitch" xml:space="preserve">
+    <value>Circular Pitch</value>
   </data>
 </root>

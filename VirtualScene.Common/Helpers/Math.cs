@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Policy;
 
 namespace VirtualScene.Common.Helpers
 {
@@ -20,7 +21,7 @@ namespace VirtualScene.Common.Helpers
         }
 
         /// <summary>
-        /// Assign one newValue to currentValue if they are different.
+        /// Assign newValue to currentValue if they are different.
         /// </summary>
         /// <param name="currentValue">The value to be changed.</param>
         /// <param name="newValue">The new value.</param>
@@ -28,10 +29,51 @@ namespace VirtualScene.Common.Helpers
         /// <returns>Returns true if the new value has been assigned.</returns>
         public static bool AssignValue(ref float currentValue, float newValue, params float[] illegalValues)
         {
-            if (illegalValues.Any(illegalValue => FloatEqual(newValue, illegalValue)))
-                return false;
+            return AssignValue(ref currentValue, newValue, () => true, illegalValues);
+        }
 
-            if (FloatEqual(currentValue, newValue))
+        /// <summary>
+        /// Assign newValue to currentValue if they are different.
+        /// </summary>
+        /// <param name="currentValue">The value to be changed.</param>
+        /// <param name="newValue">The new value.</param>
+        /// <param name="validate">When the validator returns false - newValue should be skipped (not to be assigned).</param>
+        /// <param name="illegalValues">Values which should be skipped (not to be assigned).</param>
+        /// <returns>Returns true if the new value has been assigned.</returns>
+        public static bool AssignValue(ref float currentValue, float newValue, Func<bool> validate, params float[] illegalValues)
+        {
+            if (!validate() || FloatEqual(currentValue, newValue)
+                || illegalValues.Any(illegalValue => FloatEqual(newValue, illegalValue)))
+                return false;
+            
+            currentValue = newValue;
+            return true;
+        }
+
+        /// <summary>
+        /// Assign newValue to currentValue if they are different.
+        /// </summary>
+        /// <param name="currentValue">The value to be changed.</param>
+        /// <param name="newValue">The new value.</param>
+        /// <param name="illegalValues">Values which should be skipped (not to be assigned).</param>
+        /// <returns>Returns true if the new value has been assigned.</returns>
+        public static bool AssignValue(ref int currentValue, int newValue, params int[] illegalValues)
+        {
+            return AssignValue(ref currentValue, newValue, () => true, illegalValues);
+        }
+
+        /// <summary>
+        /// Assign newValue to currentValue if they are different.
+        /// </summary>
+        /// <param name="currentValue">The value to be changed.</param>
+        /// <param name="newValue">The new value.</param>
+        /// <param name="validate">When the validator returns false - newValue should be skipped (not to be assigned).</param>
+        /// <param name="illegalValues">Values which should be skipped (not to be assigned).</param>
+        /// <returns>Returns true if the new value has been assigned.</returns>
+        public static bool AssignValue(ref int currentValue, int newValue, Func<bool> validate, params int[] illegalValues)
+        {
+            if (!validate() || currentValue == newValue 
+                || illegalValues.Any(illegalValue => newValue == illegalValue))
                 return false;
             
             currentValue = newValue;

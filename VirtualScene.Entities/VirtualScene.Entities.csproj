@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,7 +61,7 @@
     <Compile Include="SceneEntities\Factories\CubeFactory.cs" />
     <Compile Include="SceneEntities\Factories\HollowCylinderBuilder.cs" />
     <Compile Include="SceneEntities\Factories\SpurGearBuilder.cs" />
-    <Compile Include="SceneEntities\Factories\GeometryFactoryBase.cs" />
+    <Compile Include="SceneEntities\Factories\SceneElementBuilderBase.cs" />
     <Compile Include="SceneEntities\HollowCylinderEntity.cs" />
     <Compile Include="SceneEntities\ISceneEntity.cs" />
     <Compile Include="SceneEntities\SceneElements\HollowCylinder.cs" />

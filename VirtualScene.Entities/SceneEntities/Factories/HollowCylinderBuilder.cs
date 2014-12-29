@@ -7,7 +7,7 @@ namespace VirtualScene.Entities.SceneEntities.Factories
     /// <summary>
     /// The builder makes the hollow cylinder geometry.
     /// </summary>
-    public class HollowCylinderBuilder : GeometryFactoryBase
+    public class HollowCylinderBuilder : SceneElementBuilderBase
     {
         const double Rad2DegRatio = Math.PI / 180;
 

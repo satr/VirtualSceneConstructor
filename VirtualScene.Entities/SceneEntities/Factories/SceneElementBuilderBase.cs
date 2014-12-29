@@ -4,9 +4,9 @@ using SharpGL.SceneGraph.Primitives;
 namespace VirtualScene.Entities.SceneEntities.Factories
 {
     /// <summary>
-    ///  The factory creating a geometry.
+    ///  The builder making geometry.
     /// </summary>
-    public abstract class GeometryFactoryBase
+    public abstract class SceneElementBuilderBase
     {
         /// <summary>
         /// Add a face between the point in position x, y, z=0, the point in the position x, y, offsetZ and positions of two last vertices.

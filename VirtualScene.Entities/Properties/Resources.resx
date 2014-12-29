@@ -150,4 +150,13 @@
   <data name="Title_Hollow_Cylinder" xml:space="preserve">
     <value>Hollow Cylinder</value>
   </data>
+  <data name="Title_By_number_of_teeth_and_pitch_diameter" xml:space="preserve">
+    <value>By number of teeth and pitch diameter</value>
+  </data>
+  <data name="Title_By_number_of_teeth_and_outside_diameter" xml:space="preserve">
+    <value>By number of teeth and outside diameter</value>
+  </data>
+  <data name="Message_Calculation_strategy_cannot_be_null" xml:space="preserve">
+    <value>Calculation strategy cannot be null.</value>
+  </data>
 </root>

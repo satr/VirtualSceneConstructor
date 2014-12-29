@@ -12,7 +12,7 @@ namespace VirtualScene.BusinessComponents.Core.Validators
         /// Validates argumets for creating of the virtual scene
         /// </summary>
         /// <param name="width">Width of the scene</param>
-        /// <param name="height">Height of the scene</param>
+        /// <param name="height">FaceWidth of the scene</param>
         /// <param name="bitDepth">Color depth of the scene</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public static void ValidateArguments(int width, int height, int bitDepth)

@@ -97,6 +97,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Addendum.
+        /// </summary>
+        public static string Title_Addendum {
+            get {
+                return ResourceManager.GetString("Title_Addendum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All files.
         /// </summary>
         public static string Title_All_files {
@@ -133,6 +142,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Circular Pitch.
+        /// </summary>
+        public static string Title_Circular_Pitch {
+            get {
+                return ResourceManager.GetString("Title_Circular_Pitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cube.
         /// </summary>
         public static string Title_Cube {
@@ -151,11 +169,38 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dedendum.
+        /// </summary>
+        public static string Title_Dedendum {
+            get {
+                return ResourceManager.GetString("Title_Dedendum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string Title_Description {
             get {
                 return ResourceManager.GetString("Title_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Diametral Pitch.
+        /// </summary>
+        public static string Title_Diametral_Pitch {
+            get {
+                return ResourceManager.GetString("Title_Diametral_Pitch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Face Width.
+        /// </summary>
+        public static string Title_Face_Width {
+            get {
+                return ResourceManager.GetString("Title_Face_Width", resourceCulture);
             }
         }
         
@@ -169,7 +214,7 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Height.
+        ///   Looks up a localized string similar to FaceWidth.
         /// </summary>
         public static string Title_Height {
             get {
@@ -219,6 +264,24 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         public static string Title_Load_stage {
             get {
                 return ResourceManager.GetString("Title_Load_stage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of Teeth.
+        /// </summary>
+        public static string Title_Number_of_Teeth {
+            get {
+                return ResourceManager.GetString("Title_Number_of_Teeth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outside Diameter.
+        /// </summary>
+        public static string Title_Outside_Diameter {
+            get {
+                return ResourceManager.GetString("Title_Outside_Diameter", resourceCulture);
             }
         }
         
@@ -295,11 +358,38 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tooth Thickness.
+        /// </summary>
+        public static string Title_Tooth_Thickness {
+            get {
+                return ResourceManager.GetString("Title_Tooth_Thickness", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Top Radius.
         /// </summary>
         public static string Title_TopRadius {
             get {
                 return ResourceManager.GetString("Title_TopRadius", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whole Depth.
+        /// </summary>
+        public static string Title_Whole_Depth {
+            get {
+                return ResourceManager.GetString("Title_Whole_Depth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Working Depth.
+        /// </summary>
+        public static string Title_Working_Depth {
+            get {
+                return ResourceManager.GetString("Title_Working_Depth", resourceCulture);
             }
         }
     }

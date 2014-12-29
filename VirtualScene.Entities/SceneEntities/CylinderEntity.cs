@@ -28,7 +28,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float TopRadius
         {
             get { return _topRadius; }
-            set { Math.AssignValue(ref _topRadius, value, ConcreteGeometry, v => ConcreteGeometry.TopRadius = v, 0); }
+            set { Math.AssignValue(ref _topRadius, value, SceneElement, v => SceneElement.TopRadius = v, 0); }
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float BaseRadius
         {
             get { return _baseRadius; }
-            set { Math.AssignValue(ref _baseRadius, value, ConcreteGeometry, v => ConcreteGeometry.BaseRadius = v, 0); }
+            set { Math.AssignValue(ref _baseRadius, value, SceneElement, v => SceneElement.BaseRadius = v, 0); }
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float Height
         {
             get { return _height; }
-            set { Math.AssignValue(ref _height, value, ConcreteGeometry, v => ConcreteGeometry.Height = v, 0); }
+            set { Math.AssignValue(ref _height, value, SceneElement, v => SceneElement.Height = v, 0); }
         }
 
         /// <summary>

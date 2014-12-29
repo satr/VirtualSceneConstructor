@@ -26,7 +26,7 @@ namespace VirtualScene.Entities.SceneEntities
         public float Radius
         {
             get { return _radius; }
-            set { Math.AssignValue(ref _radius, value, ConcreteGeometry, v => ConcreteGeometry.Radius = v, 0); }
+            set { Math.AssignValue(ref _radius, value, SceneElement, v => SceneElement.Radius = v, 0); }
         }
 
         /// <summary>

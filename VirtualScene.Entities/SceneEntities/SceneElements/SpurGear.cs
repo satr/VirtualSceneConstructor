@@ -1,6 +1,8 @@
 using System;
+using System.Xml.Serialization;
 using SharpGL.SceneGraph.Primitives;
 using VirtualScene.Entities.SceneEntities.Factories;
+using Math = VirtualScene.Common.Helpers.Math;
 
 namespace VirtualScene.Entities.SceneEntities.SceneElements
 {
@@ -10,9 +12,6 @@ namespace VirtualScene.Entities.SceneEntities.SceneElements
     [Serializable]
     public class SpurGear : Polygon
     {
-        private float _height;
-        private float _pitchDiameter;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SpurGear" />. 
         /// Only for deserialisation - use method <see cref="Create" /> to create a new instance.
@@ -22,48 +21,84 @@ namespace VirtualScene.Entities.SceneEntities.SceneElements
         }
 
         /// <summary>
-        /// The pitch diameter of the spur gear.
+        /// The face width.
         /// </summary>
-        public float PitchDiameter
-        {
-            get { return _pitchDiameter; }
-            set
-            {
-                if (Common.Helpers.Math.AssignValue(ref _pitchDiameter, value, 0))
-                    Rebuild();
-            }
-        }
+        public float FaceWidth { get; set; }
 
         /// <summary>
-        /// The height of the spur gear.
+        /// The number of teeth.
         /// </summary>
-        public float Height
-        {
-            get { return _height; }
-            set
-            {
-                if (Common.Helpers.Math.AssignValue(ref _height, value))
-                    Rebuild();
-            }
-        }
+        public int NumberOfTeeth { get; set; }
 
-        private void Rebuild()
-        {
-            Faces.Clear();
-            Vertices.Clear();
-            SpurGearBuilder.Build(PitchDiameter, Height, this);
-        }
+        /// <summary>
+        /// The outside diameter.
+        /// </summary>
+        public float OutsideDiameter { get; set; }
 
+        /// <summary>
+        /// The pitch diameter.
+        /// </summary>
+        public float PitchDiameter { get; set; }
+
+        /// <summary>
+        /// The addendum.
+        /// </summary>
+        [XmlIgnore]
+        public float Addendum { get; set;}
+
+        /// <summary>
+        /// The dedendum.
+        /// </summary>
+        [XmlIgnore]
+        public float Dedendum { get; set;}
+
+        /// <summary>
+        /// The whole depth.
+        /// </summary>
+        [XmlIgnore]
+        public float WholeDepth { get; set; }
+
+        /// <summary>
+        /// The working depth.
+        /// </summary>
+        [XmlIgnore]
+        public float WorkingDepth { get; set; }
+
+        /// <summary>
+        /// The diametral pitch.
+        /// </summary>
+        [XmlIgnore]
+        public float DiametralPitch { get; set; }
+
+        /// <summary>
+        /// The tooth thicknes at the pitch diameter.
+        /// </summary>
+        [XmlIgnore]
+        public float ToothThickness { get; set; }
+
+        /// <summary>
+        /// The circular pitch - step of teeth at the pitch diameter.
+        /// </summary>
+        [XmlIgnore]
+        public float CircularPitch { get; set; }
+        
         /// <summary>
         /// Create a new instance of the <see cref="SpurGear" />.
         /// </summary>
-        /// <param name="pitchDiameter">The pitch diameter of the spur gear.</param>
-        /// <param name="height">The height of the spur gear.</param>
+        /// <param name="diametralPitch">The pitch diameter.</param>
+        /// <param name="faceWidth">The face width.</param>
+        /// <param name="numberOfTeeth">The number of teeth.</param>
         /// <returns>Returns the new instance of <see cref="SpurGear" />.</returns>
-        public static SpurGear Create(float pitchDiameter, float height)
+        public static SpurGear Create(float diametralPitch, float faceWidth, int numberOfTeeth)
         {
-            var spurGear = new SpurGear { _pitchDiameter = pitchDiameter, _height = height };
-            SpurGearBuilder.Build(pitchDiameter, height, spurGear);
+            var spurGear = new SpurGear
+            {
+                DiametralPitch = diametralPitch,
+                FaceWidth = faceWidth,
+                NumberOfTeeth = numberOfTeeth,
+                PitchDiameter = diametralPitch,
+                OutsideDiameter = diametralPitch + 0.2f,
+            };
             return spurGear;
         }
     }

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Xml.Serialization;
 using SharpGL.SceneGraph.Core;
 
@@ -7,13 +9,14 @@ namespace VirtualScene.Entities.SceneEntities
     /// <summary>
     /// An entity in the scene
     /// </summary>
-    public abstract class SceneEntity<T> : ISceneEntity
+    public abstract class SceneEntity<T> : ISceneEntity, INotifyPropertyChanged
         where T: SceneElement
     {
         /// <summary>
         /// The inctance of the concrete type <see cref="T" />.
         /// </summary>
-        protected T ConcreteGeometry { get; set; }
+        [XmlIgnore]
+        public T SceneElement { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SceneEntity{T}" />
@@ -38,16 +41,16 @@ namespace VirtualScene.Entities.SceneEntities
         {
             get
             {
-                if (ConcreteGeometry != null) 
-                    return ConcreteGeometry;
-                ConcreteGeometry = CreateGeometry();
-                UpdateFields(ConcreteGeometry);
-                return ConcreteGeometry;
+                if (SceneElement != null) 
+                    return SceneElement;
+                SceneElement = CreateGeometry();
+                UpdateFields(SceneElement);
+                return SceneElement;
             }
             set
             {
-                ConcreteGeometry = value as T;
-                UpdateFields(ConcreteGeometry);
+                SceneElement = value as T;
+                UpdateFields(SceneElement);
             }
         }
 
@@ -58,7 +61,7 @@ namespace VirtualScene.Entities.SceneEntities
         protected abstract void UpdateFields(T sceneElement);
 
         /// <summary>
-        /// Create the <see cref="SceneElement" /> specific for each type of <see cref="ISceneEntity" />
+        /// Create the <see cref="SharpGL.SceneGraph.Core.SceneElement" /> specific for each type of <see cref="ISceneEntity" />
         /// </summary>
         /// <returns>Returns a new instance of <see cref="T" /></returns>
         protected abstract T CreateGeometry();
@@ -100,6 +103,22 @@ namespace VirtualScene.Entities.SceneEntities
         public override int GetHashCode()
         {
             return Id.ToString().GetHashCode();
+        }
+
+        /// <summary>
+        /// Occurs when a property value changes.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Invoke the event <see cref="PropertyChanged" />.
+        /// </summary>
+        /// <param name="propertyName">(Optional) The name of the changed property.</param>
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null) 
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
