@@ -35,22 +35,31 @@ namespace VirtualScene.Entities.SceneEntities.CalculationStrategies
         public abstract void Calculate(SpurGearEntity spurGearEntity);
 
         /// <summary>
-        /// Validate if the parameter <see cref="SpurGearEntity.NumberOfTeeth" /> can be manually changed.
+        /// Specifies if the parameter <see cref="SpurGearEntity.NumberOfTeeth" /> can be manually changed.
         /// </summary>
-        /// <returns>Returns true if changes are allowed.</returns>
-        public virtual bool ValidateIsAllowedToChangeNumberOfTeeth() { return false; }
+        /// <value>Returns false if changes are allowed.</value>
+        public virtual bool NumberOfTeethReadOnly
+        {
+            get { return true; }
+        }
 
         /// <summary>
-        /// Validate if the parameter <see cref="SpurGearEntity.OutsideDiameter" /> can be manually changed.
+        /// Specifies if the parameter <see cref="SpurGearEntity.OutsideDiameter" /> can be manually changed.
         /// </summary>
-        /// <returns>Returns true if changes are allowed.</returns>
-        public virtual bool ValidateIsAllowedToChangeOutsideDiameter() { return false; }
+        /// <value>Returns false if changes are allowed.</value>
+        public virtual bool OutsideDiameterReadOnly
+        {
+            get { return true; }
+        }
 
         /// <summary>
-        /// Validate if the parameter <see cref="SpurGearEntity.PitchDiameter" /> can be manually changed.
+        /// Specifies if the parameter <see cref="SpurGearEntity.PitchDiameter" /> can be manually changed.
         /// </summary>
-        /// <returns>Returns true if changes are allowed.</returns>
-        public virtual bool ValidateIsAllowedToChangePitchDiameter() { return false; }
+        /// <value>Returns false if changes are allowed.</value>
+        public virtual bool PitchDiameterReadOnly
+        {
+            get { return true; }
+        }
 
         /// <summary>
         /// Create the <see cref="SpurGear" />.

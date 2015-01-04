@@ -234,4 +234,10 @@
   <data name="Title_Auxiliary_Geometry" xml:space="preserve">
     <value>Auxiliary Geometry</value>
   </data>
+  <data name="Title_Advanced" xml:space="preserve">
+    <value>Advanced</value>
+  </data>
+  <data name="Title_Pressure_Angle" xml:space="preserve">
+    <value>Pressure Angle</value>
+  </data>
 </root>

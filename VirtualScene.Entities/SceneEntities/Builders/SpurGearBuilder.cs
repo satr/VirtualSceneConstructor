@@ -11,67 +11,83 @@ namespace VirtualScene.Entities.SceneEntities.Builders
     /// </summary>
     public class SpurGearBuilder : SceneElementBuilderBase
     {
-        private static readonly Material MaterialForAuxiliaryGeometry = new Material { Diffuse = Color.Red };
-        private static readonly object SyncRoot = new object();
+        private readonly Material _materialForAuxiliaryGeometry = new Material { Diffuse = Color.Red };
+        private readonly object _syncRoot = new object();
+        private readonly float _segmentAngleInRad;
         private const double RadInCyrcle = 2 * Math.PI;
-        const double Rad2DegRatio = Math.PI / 180;
+        const float Rad2DegRatio = (float) (Math.PI / 180);
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SpurGearBuilder" />
+        /// </summary>
+        /// <param name="segmentAngle">The angle of the segment (in degrees)</param>
+        public SpurGearBuilder(float segmentAngle)
+        {
+            _segmentAngleInRad = segmentAngle * Rad2DegRatio;
+        }
+
+        /// <summary>
+        /// The spur gear to be built.
+        /// </summary>
+        public SpurGear SpurGear { private get; set; }
 
         /// <summary>
         /// Build a spur gear.
         /// </summary>
-        /// <param name="spurGear">The spur gear to be built.</param>
+        /// <param name="centerX">The X of the center.</param>
+        /// <param name="centerY">The Y of the center.</param>
         /// <param name="showAxiliaryGeometry">Show the auxiliary geometry.</param>
-        public static void Build(SpurGear spurGear, bool showAxiliaryGeometry)
+        public void Build(float centerX, float centerY, bool showAxiliaryGeometry)
         {
-            lock (SyncRoot)
+            lock (_syncRoot)
             {
-                spurGear.Faces.Clear();
-                spurGear.Vertices.Clear();
-                if (spurGear.PitchDiameter < 0
-                    || spurGear.OutsideDiameter < 0
-                    || spurGear.WorkingDepth < 0
-                    || spurGear.WholeDepth < 0
-                    || spurGear.ShaftDiameter < 0)
+                SpurGear.Faces.Clear();
+                SpurGear.Vertices.Clear();
+                if (SpurGear.PitchDiameter < 0
+                    || SpurGear.OutsideDiameter < 0
+                    || SpurGear.WorkingDepth < 0
+                    || SpurGear.WholeDepth < 0
+                    || SpurGear.ShaftDiameter < 0)
                 {
                     return;
                 }
 
-                if (spurGear.UVs.Count == 0)
-                    AddTextureCoordinates(spurGear);
+                if (SpurGear.UVs.Count == 0)
+                    AddTextureCoordinates(SpurGear);
 
-                DrawSpurGear(spurGear, showAxiliaryGeometry);
+                DrawSpurGear(showAxiliaryGeometry, centerX, centerY);
             }
         }
 
-        private static void DrawSpurGear(SpurGear spurGear, bool showAxiliaryGeometry)
+        private void DrawSpurGear(bool showAxiliaryGeometry, float centerX, float centerY)
         {
-            DrawGearShaft(spurGear);
-            DrawGearFace(spurGear);
+            DrawGearShaft(centerX, centerY);
+            DrawGearFace(centerX, centerY);
             if (showAxiliaryGeometry)
-                DrawAxiliaryGeometry(spurGear);
+                DrawAxiliaryGeometry(centerX, centerY);
         }
 
-        private static void DrawAxiliaryGeometry(SpurGear spurGear)
+        private void DrawAxiliaryGeometry(float centerX, float centerY)
         {
             const float addendum = 0.1f;
-            DrawCylinder(spurGear, spurGear.OutsideDiameter, addendum, MaterialForAuxiliaryGeometry);
-            DrawCylinder(spurGear, spurGear.PitchDiameter, addendum, MaterialForAuxiliaryGeometry);
-            DrawCylinder(spurGear, spurGear.OutsideDiameter - (spurGear.WorkingDepth*2), addendum, MaterialForAuxiliaryGeometry);
-            DrawCylinder(spurGear, spurGear.OutsideDiameter - (spurGear.WholeDepth*2), addendum, MaterialForAuxiliaryGeometry);
+            DrawCylinder(SpurGear.OutsideDiameter, addendum, _materialForAuxiliaryGeometry, centerX, centerY);
+            DrawCylinder(SpurGear.PitchDiameter, addendum, _materialForAuxiliaryGeometry, centerX, centerY);
+            DrawCylinder(SpurGear.OutsideDiameter - (SpurGear.WorkingDepth * 2), addendum, _materialForAuxiliaryGeometry, centerX, centerY);
+            DrawCylinder(SpurGear.OutsideDiameter - (SpurGear.WholeDepth * 2), addendum, _materialForAuxiliaryGeometry, centerX, centerY);
         }
 
-        private static void DrawGearShaft(SpurGear spurGear)
+        private void DrawGearShaft(float centerX, float centerY)
         {
-            if (spurGear.ShaftDiameter <= 0) 
+            if (SpurGear.ShaftDiameter <= 0) 
                 return;
-            DrawCylinder(spurGear, spurGear.ShaftDiameter/2, 0);
+            DrawCylinder(SpurGear.ShaftDiameter/2, 0, null, centerX, centerY);
         }
 
-        private static void DrawGearFace(SpurGear spurGear)
+        private void DrawGearFace(float centerX, float centerY)
         {
-            var initVerticesCount = spurGear.Vertices.Count;
-            foreach (var pos in GetPositionsForPitches(spurGear, 10))
-                AddFace(pos.X, pos.Y, spurGear.FaceWidth, spurGear, 0, initVerticesCount);
+            var initVerticesCount = SpurGear.Vertices.Count;
+            foreach (var pos in GetPositionsForPitches(centerX, centerY))
+                AddFace(pos.X, pos.Y, SpurGear.FaceWidth, SpurGear, 0, initVerticesCount);
         }
         
         //     4__5<-------- OuterDiameter
@@ -80,30 +96,27 @@ namespace VirtualScene.Entities.SceneEntities.Builders
         //  ->|----|<------- Tooth Pitch
         // ___|    |___<---- Whole Depth; Root Radius
         // 1  2    7   8
-        private static IEnumerable<Pos2D> GetPositionsForPitches(SpurGear spurGear, double segmentAngle)
+        private IEnumerable<Pos2D> GetPositionsForPitches(float centerX, float centerY)
         {
-            const float centerX = 0;
-            const float centerY = 0;
-            var segmentAngleInRad = (float)(segmentAngle * Rad2DegRatio);
-            var outsideRadius = spurGear.OutsideDiameter / 2 + centerX;
-            var rootRadius = outsideRadius - spurGear.WholeDepth;
-            var pitchRadius = spurGear.PitchDiameter / 2;
-            var circularPitchAngle = (float)(RadInCyrcle / spurGear.NumberOfTeeth);
-            var toothThicknessAngle = ((float)(RadInCyrcle * spurGear.ToothThickness) / (Math.PI * spurGear.PitchDiameter));
+            var outsideRadius = SpurGear.OutsideDiameter / 2 + centerX;
+            var rootRadius = outsideRadius - SpurGear.WholeDepth;
+            var pitchRadius = SpurGear.PitchDiameter / 2;
+            var circularPitchAngle = (float)(RadInCyrcle / SpurGear.NumberOfTeeth);
+            var toothThicknessAngle = ((float)(RadInCyrcle * SpurGear.ToothThickness) / (Math.PI * SpurGear.PitchDiameter));
             var halfBottomLandPitch = ((circularPitchAngle - toothThicknessAngle) / 2f);
             /*1*/
             var startPos = new Pos2D(centerX, rootRadius + centerY);
             yield return startPos;
             float startAngle = 0;
         
-            for (int i = 0; i < spurGear.NumberOfTeeth; i++)
+            for (var i = 0; i < SpurGear.NumberOfTeeth; i++)
             {
-                /*1-2*/
-                for (var angle = segmentAngleInRad; angle < halfBottomLandPitch; angle += segmentAngleInRad)
+                /*1-2 draw first half base*/
+                for (var angle = _segmentAngleInRad; angle < halfBottomLandPitch; angle += _segmentAngleInRad)
                     yield return Pos(rootRadius, startAngle + angle, centerX, centerY);
                 /*2*/
                 yield return Pos(rootRadius, startAngle + halfBottomLandPitch, centerX, centerY);
-                /*3*/
+                /*3 - draw tooth*/
                 yield return Pos(pitchRadius, startAngle + halfBottomLandPitch, centerX, centerY);
                 /*4*/
                 var q = toothThicknessAngle / 4;
@@ -114,14 +127,15 @@ namespace VirtualScene.Entities.SceneEntities.Builders
                 yield return Pos(pitchRadius, startAngle + halfBottomLandPitch + toothThicknessAngle, centerX, centerY);
                 /*7*/
                 yield return Pos(rootRadius, startAngle + halfBottomLandPitch + toothThicknessAngle, centerX, centerY);
-                /*8*/
-                for (var angle = startAngle + halfBottomLandPitch + toothThicknessAngle; angle < circularPitchAngle; angle += segmentAngleInRad)
+                /*8* draw second half base*/
+                for (var angle = startAngle + halfBottomLandPitch + toothThicknessAngle; angle < circularPitchAngle; angle += _segmentAngleInRad)
                     yield return Pos(rootRadius, angle, centerX, centerY);
 
                 startAngle += circularPitchAngle;
             }
-            /*1*/
-            yield return startPos;
+            /*1 draw last half base*/
+            for (var angle = _segmentAngleInRad; angle < halfBottomLandPitch; angle += _segmentAngleInRad)
+                yield return Pos(rootRadius, startAngle + angle, centerX, centerY);
         }
 
         private static Pos2D Pos(float rootRadius, double angle, float centerX, float centerY)
@@ -129,11 +143,11 @@ namespace VirtualScene.Entities.SceneEntities.Builders
             return new Pos2D((float)(rootRadius * Math.Sin(angle)) + centerX, (float)(rootRadius * Math.Cos(angle)) + centerY);
         }
 
-        private static void DrawCylinder(SpurGear spurGear, float diameter, float addendum, Material material = null)
+        private void DrawCylinder(float diameter, float addendum, Material material, float centerX, float centerY)
         {
-            var initVerticesCount = spurGear.Vertices.Count;
+            var initVerticesCount = SpurGear.Vertices.Count;
             foreach (var pos in GetPositionsForGear(diameter / 2, 0, 0, 5))
-                AddFace(pos.X, pos.Y, spurGear.FaceWidth, spurGear, addendum, initVerticesCount, material);
+                AddFace(pos.X + centerX, pos.Y + centerY, SpurGear.FaceWidth, SpurGear, addendum, initVerticesCount, material);
         }
 
         private static IEnumerable<Pos2D> GetPositionsForGear(float radius, float centerX, float centerY, int segmentAngle)

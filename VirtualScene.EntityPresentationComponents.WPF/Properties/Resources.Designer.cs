@@ -106,6 +106,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced.
+        /// </summary>
+        public static string Title_Advanced {
+            get {
+                return ResourceManager.GetString("Title_Advanced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to All files.
         /// </summary>
         public static string Title_All_files {
@@ -300,6 +309,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         public static string Title_Pitch_Diameter {
             get {
                 return ResourceManager.GetString("Title_Pitch_Diameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pressure Angle.
+        /// </summary>
+        public static string Title_Pressure_Angle {
+            get {
+                return ResourceManager.GetString("Title_Pressure_Angle", resourceCulture);
             }
         }
         

@@ -27,6 +27,8 @@ namespace VirtualScene.Entities.SceneEntities
         private float _pitchDiameter;
         private float _shaftDiameter;
         private bool _showAxiliaryGeometry;
+        private float _pressureAngle;
+        private readonly SpurGearBuilder _spurGearBuilder;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SpurGearEntity" />
@@ -35,6 +37,7 @@ namespace VirtualScene.Entities.SceneEntities
             : base(Resources.Title_Spur_gear)
         {
             CalculationStrategy = new SpurGearCalculationStrategyByNumberOfTeethAndOutsideDiameter();
+            _spurGearBuilder = new SpurGearBuilder(2f);
         }
 
         /// <summary>
@@ -47,6 +50,19 @@ namespace VirtualScene.Entities.SceneEntities
             set
             {
                 if (Math.AssignValue(ref _faceWidth, value, SceneElement, v => SceneElement.FaceWidth = v, 0))
+                    Rebuild();
+            }
+        }
+        /// <summary>
+        /// The pressure angle of teeth.
+        /// </summary>
+        [XmlIgnore]
+        public float PressureAngle
+        {
+            get { return _pressureAngle; }
+            set
+            {
+                if (Math.AssignValue(ref _pressureAngle, value, SceneElement, v => SceneElement.PressureAngle = v, 0))
                     Rebuild();
             }
         }
@@ -74,11 +90,17 @@ namespace VirtualScene.Entities.SceneEntities
             get { return _numberOfTeeth; }
             set
             {
-                if (SceneElement == null || !Math.AssignValue(ref _numberOfTeeth, value, CalculationStrategy.ValidateIsAllowedToChangeNumberOfTeeth, 0)) 
-                    return;
+                if (SceneElement == null ||
+                    !Math.AssignValue(ref _numberOfTeeth, value, () => ValidateNumberOfTeeth(value))) 
+                return;
                 SceneElement.NumberOfTeeth = _numberOfTeeth;
                 RecalculateGear();
             }
+        }
+
+        private bool ValidateNumberOfTeeth(int value)
+        {
+            return !CalculationStrategy.NumberOfTeethReadOnly && value > 1;
         }
 
         /// <summary>
@@ -90,11 +112,16 @@ namespace VirtualScene.Entities.SceneEntities
             get { return _outsideDiameter; }
             set
             {
-                if (SceneElement == null || !Math.AssignValue(ref _outsideDiameter, value, CalculationStrategy.ValidateIsAllowedToChangeOutsideDiameter, 0))
+                if (SceneElement == null || !Math.AssignValue(ref _outsideDiameter, value, () => ValidateOutsideDiameter(value)))
                     return;
                 SceneElement.OutsideDiameter = _outsideDiameter;
                 RecalculateGear();
             }
+        }
+
+        private bool ValidateOutsideDiameter(float value)
+        {
+            return !CalculationStrategy.OutsideDiameterReadOnly && value > 0;
         }
 
         /// <summary>
@@ -106,11 +133,16 @@ namespace VirtualScene.Entities.SceneEntities
             get { return _pitchDiameter; }
             set
             {
-                if (SceneElement == null || !Math.AssignValue(ref _pitchDiameter, value, CalculationStrategy.ValidateIsAllowedToChangePitchDiameter, 0))
+                if (SceneElement == null || !Math.AssignValue(ref _pitchDiameter, value, () => ValidatePitchDiameter(value)))
                     return;
                 SceneElement.PitchDiameter = _pitchDiameter;
                 RecalculateGear();
             }
+        }
+
+        private bool ValidatePitchDiameter(float value)
+        {
+            return !CalculationStrategy.PitchDiameterReadOnly && value > 0;
         }
 
         /// <summary>
@@ -146,6 +178,11 @@ namespace VirtualScene.Entities.SceneEntities
                 Rebuild();
             }
         }
+        /// <summary>
+        /// Show the advanced details.
+        /// </summary>
+        [XmlIgnore]
+        public bool ShowAdvancedDetails { get; set; }
 
         private void RecalculateGear()
         {
@@ -166,6 +203,8 @@ namespace VirtualScene.Entities.SceneEntities
             _pitchDiameter = sceneElement == null ? 0 : sceneElement.PitchDiameter;
             _faceWidth = sceneElement == null? 0: sceneElement.FaceWidth;
             _shaftDiameter = sceneElement == null ? 0 : sceneElement.ShaftDiameter;
+            _pressureAngle = sceneElement == null ? 0 : sceneElement.PressureAngle;
+            _spurGearBuilder.SpurGear = sceneElement;
             RecalculateGear();
         }
 
@@ -190,9 +229,9 @@ namespace VirtualScene.Entities.SceneEntities
 
         private void Rebuild()
         {
-            SpurGearBuilder.Build(SceneElement, ShowAxiliaryGeometry);
+            _spurGearBuilder.Build(0f, 0f, ShowAxiliaryGeometry);
             // ReSharper disable once ExplicitCallerInfoArgument
-            OnPropertyChanged(string.Empty);
+            OnPropertyChanged(string.Empty);//notify "all properties changed"
         }
     }
 }

@@ -22,20 +22,24 @@
                 <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
                 <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
                 <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
+                <RowDefinition Height="Auto" MinHeight="26"></RowDefinition>
             </Grid.RowDefinitions>
             <Label Content="{x:Static entityProperties:Resources.Title_Face_Width}" Grid.Row="0" Grid.Column="0" ></Label>
             <TextBox Text="{Binding SceneEntity.FaceWidth}" Grid.Row="0" Grid.Column="1" ></TextBox>
             <Label Content="{x:Static entityProperties:Resources.Title_Shaft_Diameter}" Grid.Row="1" Grid.Column="0" ></Label>
             <TextBox Text="{Binding SceneEntity.ShaftDiameter}" Grid.Row="1" Grid.Column="1" ></TextBox>
             <Label Content="{x:Static entityProperties:Resources.Title_Number_of_Teeth}" Grid.Row="2" Grid.Column="0" ></Label>
-            <TextBox Text="{Binding SceneEntity.NumberOfTeeth}" Grid.Row="2" Grid.Column="1" ></TextBox>
+            <TextBox Text="{Binding SceneEntity.NumberOfTeeth}" Grid.Row="2" Grid.Column="1" IsReadOnly="{Binding SceneEntity.CalculationStrategy.NumberOfTeethReadOnly}"></TextBox>
             <Label Content="{x:Static entityProperties:Resources.Title_Outside_Diameter}" Grid.Row="3" Grid.Column="0" ></Label>
-            <TextBox Text="{Binding SceneEntity.OutsideDiameter}" Grid.Row="3" Grid.Column="1" ></TextBox>
+            <TextBox Text="{Binding SceneEntity.OutsideDiameter}" Grid.Row="3" Grid.Column="1" IsReadOnly="{Binding SceneEntity.CalculationStrategy.OutsideDiameterReadOnly}"></TextBox>
             <Label Content="{x:Static entityProperties:Resources.Title_Pitch_Diameter}" Grid.Row="4" Grid.Column="0" ></Label>
-            <TextBox Text="{Binding SceneEntity.PitchDiameter}" Grid.Row="4" Grid.Column="1" ></TextBox>
-            <Label Content="{x:Static entityProperties:Resources.Title_Auxiliary_Geometry}" Grid.Row="5" Grid.Column="0" ></Label>
-            <CheckBox IsChecked="{Binding SceneEntity.ShowAxiliaryGeometry}" Grid.Row="5" Grid.Column="1" ></CheckBox>
+            <TextBox Text="{Binding SceneEntity.PitchDiameter}" Grid.Row="4" Grid.Column="1" IsReadOnly="{Binding SceneEntity.CalculationStrategy.PitchDiameterReadOnly}"></TextBox>
+            <Label Content="{x:Static entityProperties:Resources.Title_Pressure_Angle}" Grid.Row="5" Grid.Column="0" ></Label>
+            <TextBox Text="{Binding SceneEntity.PressureAngle}" Grid.Row="5" Grid.Column="1" ></TextBox>
+            <Label Content="{x:Static entityProperties:Resources.Title_Auxiliary_Geometry}" Grid.Row="6" Grid.Column="0" ></Label>
+            <CheckBox IsChecked="{Binding SceneEntity.ShowAxiliaryGeometry}" Grid.Row="6" Grid.Column="1" ></CheckBox>
         </Grid>
+        <Expander Header="{x:Static entityProperties:Resources.Title_Advanced}" IsExpanded="{Binding ShowAdvancedDetails}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="{Binding TitleColumnWidth}"></ColumnDefinition>
@@ -65,4 +69,5 @@
             <Label Content="{x:Static entityProperties:Resources.Title_Circular_Pitch}" Grid.Row="6" Grid.Column="0" ></Label>
             <Label Content="{Binding SceneEntity.SceneElement.CircularPitch}" ContentStringFormat="F2" Grid.Row="6" Grid.Column="1" ></Label>
         </Grid>
+        </Expander>
     </StackPanel></UserControl>

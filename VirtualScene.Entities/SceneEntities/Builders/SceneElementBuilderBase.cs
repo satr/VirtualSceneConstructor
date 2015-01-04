@@ -24,19 +24,24 @@ namespace VirtualScene.Entities.SceneEntities.Builders
             var verticesCount = AddVertices(x, y, offsetZ, polygon, addendum);
             if (verticesCount - initVerticesCount <= 2)
                 return;
+            AddTriangleFace(polygon, material, verticesCount, 3, 2, 1);
+            AddTriangleFace(polygon, material, verticesCount, 3, 2, 4);
+        }
+
+        private static void AddTriangleFace(Polygon polygon, Material material, int verticesCount, params int[] verticeOffsets)
+        {
             var face = new Face();
             if (material != null)
                 face.Material = material;
-            face.Indices.Add(new Index(verticesCount - 3, 0));
-            face.Indices.Add(new Index(verticesCount - 4, 1));
-            face.Indices.Add(new Index(verticesCount - 2, 2));
-            face.Indices.Add(new Index(verticesCount - 1, 3));
+            foreach (var verticeOffset in verticeOffsets)
+                face.Indices.Add(new Index(verticesCount - verticeOffset, 0));
             polygon.Faces.Add(face);
         }
 
         private static int AddVertices(float x, float y, float offsetZ, Polygon polygon, float addendum)
         {
-            polygon.Vertices.Add(new Vertex(x, y, offsetZ + addendum));
+            var vertex1 = new Vertex(x, y, offsetZ + addendum);
+            polygon.Vertices.Add(vertex1);
             polygon.Vertices.Add(new Vertex(x, y, 0 - addendum));
             return polygon.Vertices.Count;
         }

@@ -27,7 +27,7 @@ namespace VirtualScene.BusinessComponents.TestSuite
             {
                 CalculationStrategy = new SpurGearCalculationStrategyByNumberOfTeethAndOutsideDiameter()
             };
-            var spurGear = SpurGear.Create(1f, 1f, 1f, numberOfTeeth, 0f);
+            var spurGear = SpurGear.Create(1f, 1f, 1f, numberOfTeeth, 0f, 20f);
             spurGearEntity.Geometry = spurGear;
 
             spurGearEntity.OutsideDiameter = outsideDiameter;

@@ -1,8 +1,6 @@
 using System;
 using System.Xml.Serialization;
 using SharpGL.SceneGraph.Primitives;
-using VirtualScene.Entities.SceneEntities.Factories;
-using Math = VirtualScene.Common.Helpers.Math;
 
 namespace VirtualScene.Entities.SceneEntities.SceneElements
 {
@@ -24,6 +22,11 @@ namespace VirtualScene.Entities.SceneEntities.SceneElements
         /// The face width.
         /// </summary>
         public float FaceWidth { get; set; }
+
+        /// <summary>
+        /// The pressure angle of teeth.
+        /// </summary>
+        public float PressureAngle { get; set; }
 
         /// <summary>
         /// The number of teeth.
@@ -95,12 +98,14 @@ namespace VirtualScene.Entities.SceneEntities.SceneElements
         /// <param name="faceWidth">The face width.</param>
         /// <param name="numberOfTeeth">The number of teeth.</param>
         /// <param name="shaftDiameter">The diameter of the shaft.</param>
+        /// <param name="pressureAngle">The pressure angle of teeth.</param>
         /// <returns>Returns the new instance of <see cref="SpurGear" />.</returns>
-        public static SpurGear Create(float pitchDiameter, float outsideDiameter, float faceWidth, int numberOfTeeth, float shaftDiameter)
+        public static SpurGear Create(float pitchDiameter, float outsideDiameter, float faceWidth, int numberOfTeeth, float shaftDiameter, float pressureAngle)
         {
             var spurGear = new SpurGear
             {
                 FaceWidth = faceWidth,
+                PressureAngle = pressureAngle,
                 NumberOfTeeth = numberOfTeeth,
                 PitchDiameter = pitchDiameter,
                 OutsideDiameter = outsideDiameter,

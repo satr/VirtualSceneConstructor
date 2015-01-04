@@ -38,21 +38,21 @@ namespace VirtualScene.Entities.SceneEntities.CalculationStrategies
         }
 
         /// <summary>
-        /// Validate if the parameter <see cref="SpurGearEntity.NumberOfTeeth" /> can be manually changed.
+        /// Specifies if the parameter <see cref="SpurGearEntity.NumberOfTeeth" /> can be manually changed.
         /// </summary>
-        /// <returns>Returns true if changes are allowed.</returns>
-        public override bool ValidateIsAllowedToChangeNumberOfTeeth()
+        /// <value>Returns false if changes are allowed.</value>
+        public override bool NumberOfTeethReadOnly
         {
-            return true;
+            get { return false; }
         }
 
         /// <summary>
-        /// Validate if the parameter <see cref="SpurGearEntity.OutsideDiameter" /> can be manually changed.
+        /// Specifies if the parameter <see cref="SpurGearEntity.OutsideDiameter" /> can be manually changed.
         /// </summary>
-        /// <returns>Returns true if changes are allowed.</returns>
-        public override bool ValidateIsAllowedToChangeOutsideDiameter()
+        /// <value>Returns false if changes are allowed.</value>
+        public override bool OutsideDiameterReadOnly
         {
-            return true;
+            get { return false; }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace VirtualScene.Entities.SceneEntities.CalculationStrategies
         /// <returns></returns>
         public override SpurGear CreateSpurGear()
         {
-            return SpurGear.Create(0f, 4f, 0.5f, 10, 0);
+            return SpurGear.Create(0f, 4f, 0.5f, 10, 0, 20f);
         }
     }
 }
