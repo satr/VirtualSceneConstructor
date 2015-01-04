@@ -58,6 +58,7 @@
     <Compile Include="BusinessManagerTestCasesBase.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Mother.cs" />
+    <Compile Include="NumberOfTeethAndOutsideDiameterTestCases.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SceneContentTestCases.cs" />
     <Compile Include="SceneEngineTestCases.cs" />

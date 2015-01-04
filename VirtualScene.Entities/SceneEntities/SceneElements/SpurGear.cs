@@ -83,21 +83,28 @@ namespace VirtualScene.Entities.SceneEntities.SceneElements
         public float CircularPitch { get; set; }
         
         /// <summary>
+        /// The diameter of the shaft.
+        /// </summary>
+        public float ShaftDiameter { get; set; }
+
+        /// <summary>
         /// Create a new instance of the <see cref="SpurGear" />.
         /// </summary>
-        /// <param name="diametralPitch">The pitch diameter.</param>
+        /// <param name="pitchDiameter">The pitch diameter.</param>
+        /// <param name="outsideDiameter">The outside diameter.</param>
         /// <param name="faceWidth">The face width.</param>
         /// <param name="numberOfTeeth">The number of teeth.</param>
+        /// <param name="shaftDiameter">The diameter of the shaft.</param>
         /// <returns>Returns the new instance of <see cref="SpurGear" />.</returns>
-        public static SpurGear Create(float diametralPitch, float faceWidth, int numberOfTeeth)
+        public static SpurGear Create(float pitchDiameter, float outsideDiameter, float faceWidth, int numberOfTeeth, float shaftDiameter)
         {
             var spurGear = new SpurGear
             {
-                DiametralPitch = diametralPitch,
                 FaceWidth = faceWidth,
                 NumberOfTeeth = numberOfTeeth,
-                PitchDiameter = diametralPitch,
-                OutsideDiameter = diametralPitch + 0.2f,
+                PitchDiameter = pitchDiameter,
+                OutsideDiameter = outsideDiameter,
+                ShaftDiameter = shaftDiameter,
             };
             return spurGear;
         }

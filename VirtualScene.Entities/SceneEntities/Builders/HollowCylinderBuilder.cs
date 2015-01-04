@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using VirtualScene.Entities.SceneEntities.SceneElements;
 
-namespace VirtualScene.Entities.SceneEntities.Factories
+namespace VirtualScene.Entities.SceneEntities.Builders
 {
     /// <summary>
     /// The builder makes the hollow cylinder geometry.
@@ -28,8 +28,9 @@ namespace VirtualScene.Entities.SceneEntities.Factories
 
             const float centerX = 0;
             const float centerY = 0;
+            var initVerticesCount = hollowCylinder.Vertices.Count;
             foreach (var pos in GetPositionsForCircle(radius, centerX, centerY, segmentAngle))
-                AddFace(pos.X, pos.Y, height, hollowCylinder);
+                AddFace(pos.X, pos.Y, height, hollowCylinder, 0, initVerticesCount);
         }
 
         private static IEnumerable<Pos2D> GetPositionsForCircle(float radius, float centerX, float centerY, float segmentAngle)

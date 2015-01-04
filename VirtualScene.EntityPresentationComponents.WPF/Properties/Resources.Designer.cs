@@ -115,6 +115,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auxiliary Geometry.
+        /// </summary>
+        public static string Title_Auxiliary_Geometry {
+            get {
+                return ResourceManager.GetString("Title_Auxiliary_Geometry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Base Radius.
         /// </summary>
         public static string Title_BaseRadius {
@@ -318,6 +327,15 @@ namespace VirtualScene.EntityPresentationComponents.WPF.Properties {
         public static string Title_Scene_Entity {
             get {
                 return ResourceManager.GetString("Title_Scene_Entity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shaft Diameter.
+        /// </summary>
+        public static string Title_Shaft_Diameter {
+            get {
+                return ResourceManager.GetString("Title_Shaft_Diameter", resourceCulture);
             }
         }
         

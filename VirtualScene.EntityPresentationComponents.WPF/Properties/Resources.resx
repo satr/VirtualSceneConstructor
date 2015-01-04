@@ -228,4 +228,10 @@
   <data name="Title_Circular_Pitch" xml:space="preserve">
     <value>Circular Pitch</value>
   </data>
+  <data name="Title_Shaft_Diameter" xml:space="preserve">
+    <value>Shaft Diameter</value>
+  </data>
+  <data name="Title_Auxiliary_Geometry" xml:space="preserve">
+    <value>Auxiliary Geometry</value>
+  </data>
 </root>

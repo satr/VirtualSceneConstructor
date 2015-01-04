@@ -1,7 +1,8 @@
 using SharpGL.SceneGraph;
+using SharpGL.SceneGraph.Assets;
 using SharpGL.SceneGraph.Primitives;
 
-namespace VirtualScene.Entities.SceneEntities.Factories
+namespace VirtualScene.Entities.SceneEntities.Builders
 {
     /// <summary>
     ///  The builder making geometry.
@@ -15,12 +16,17 @@ namespace VirtualScene.Entities.SceneEntities.Factories
         /// <param name="y">Coordinate Y.</param>
         /// <param name="offsetZ">The offset od coordinate Z where the second point is located to form the edge.</param>
         /// <param name="polygon">The poligone where the face is to be added.</param>
-        protected static void AddFace(float x, float y, float offsetZ, Polygon polygon)
+        /// <param name="addendum"></param>
+        /// <param name="initVerticesCount"></param>
+        /// <param name="material"></param>
+        protected static void AddFace(float x, float y, float offsetZ, Polygon polygon, float addendum, int initVerticesCount, Material material = null)
         {
-            var verticesCount = AddVertices(x, y, offsetZ, polygon);
-            if(verticesCount <= 2)
+            var verticesCount = AddVertices(x, y, offsetZ, polygon, addendum);
+            if (verticesCount - initVerticesCount <= 2)
                 return;
             var face = new Face();
+            if (material != null)
+                face.Material = material;
             face.Indices.Add(new Index(verticesCount - 3, 0));
             face.Indices.Add(new Index(verticesCount - 4, 1));
             face.Indices.Add(new Index(verticesCount - 2, 2));
@@ -28,10 +34,10 @@ namespace VirtualScene.Entities.SceneEntities.Factories
             polygon.Faces.Add(face);
         }
 
-        private static int AddVertices(float x, float y, float offsetZ, Polygon polygon)
+        private static int AddVertices(float x, float y, float offsetZ, Polygon polygon, float addendum)
         {
-            polygon.Vertices.Add(new Vertex(x, y, offsetZ));
-            polygon.Vertices.Add(new Vertex(x, y, 0));
+            polygon.Vertices.Add(new Vertex(x, y, offsetZ + addendum));
+            polygon.Vertices.Add(new Vertex(x, y, 0 - addendum));
             return polygon.Vertices.Count;
         }
 

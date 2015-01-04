@@ -1,5 +1,6 @@
 ﻿using System;
 using SharpGL.SceneGraph.Primitives;
+using VirtualScene.Entities.SceneEntities.Builders;
 using VirtualScene.Entities.SceneEntities.Factories;
 
 namespace VirtualScene.Entities.SceneEntities.SceneElements

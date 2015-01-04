@@ -53,15 +53,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SceneEntities\Builders\HollowCylinderBuilder.cs" />
+    <Compile Include="SceneEntities\Builders\SceneElementBuilderBase.cs" />
+    <Compile Include="SceneEntities\Builders\SpurGearBuilder.cs" />
+    <Compile Include="SceneEntities\CalculationStrategies\CalculationStrategyNullException.cs" />
+    <Compile Include="SceneEntities\CalculationStrategies\SpurGearCalculationStrategyBase.cs" />
+    <Compile Include="SceneEntities\CalculationStrategies\SpurGearCalculationStrategyByNumberOfTeethAndOutsideDiameter.cs" />
+    <Compile Include="SceneEntities\CalculationStrategies\SpurGearCalculationStrategyByNumberOfTeethAndPitchDiameter.cs" />
     <Compile Include="SceneEntities\CubeEntity.cs" />
     <Compile Include="SceneEntities\CustomEntity.cs" />
     <Compile Include="SceneEntities\CylinderEntity.cs" />
     <Compile Include="SceneEntities\DiskEntity.cs" />
     <Compile Include="SceneEntities\Factories\CameraFactory.cs" />
     <Compile Include="SceneEntities\Factories\CubeFactory.cs" />
-    <Compile Include="SceneEntities\Factories\HollowCylinderBuilder.cs" />
-    <Compile Include="SceneEntities\Factories\SpurGearBuilder.cs" />
-    <Compile Include="SceneEntities\Factories\SceneElementBuilderBase.cs" />
     <Compile Include="SceneEntities\HollowCylinderEntity.cs" />
     <Compile Include="SceneEntities\ISceneEntity.cs" />
     <Compile Include="SceneEntities\SceneElements\HollowCylinder.cs" />
@@ -90,6 +94,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
