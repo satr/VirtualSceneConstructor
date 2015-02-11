@@ -36,6 +36,10 @@
     <DocumentationFile>bin\Release\VirtualScene.ApplicationPresentationComponents.WPF.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpGL.SceneGraph, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\SharpGL.SceneGraph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -80,10 +84,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
-      <Project>{47bcaa39-edad-4404-b6bd-4742b0abb523}</Project>
-      <Name>SharpGL.SceneGraph</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>

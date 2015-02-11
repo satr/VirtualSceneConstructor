@@ -37,6 +37,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="SharpGL.SceneGraph, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\SharpGL.SceneGraph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -57,10 +61,6 @@
     <Compile Include="TestEntity.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
-      <Project>{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}</Project>
-      <Name>SharpGL.SceneGraph</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.BusinessComponents.Core\VirtualScene.BusinessComponents.Core.csproj">
       <Project>{5BEF2E8C-0895-4A9B-A530-F46CB3793CBE}</Project>
       <Name>VirtualScene.BusinessComponents.Core</Name>

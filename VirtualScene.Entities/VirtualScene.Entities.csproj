@@ -31,6 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="SharpGL.SceneGraph, Version=2.3.0.1, Culture=neutral, PublicKeyToken=27fc851303210b27, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\SharpGL.SceneGraph.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -80,10 +84,6 @@
     <Compile Include="TypeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SharpGL\sharpgl-master\source\SharpGL\Core\SharpGL.SceneGraph\SharpGL.SceneGraph.csproj">
-      <Project>{47BCAA39-EDAD-4404-B6BD-4742B0ABB523}</Project>
-      <Name>SharpGL.SceneGraph</Name>
-    </ProjectReference>
     <ProjectReference Include="..\VirtualScene.Common\VirtualScene.Common.csproj">
       <Project>{3174F130-2690-4751-A37E-2610E3FEC93A}</Project>
       <Name>VirtualScene.Common</Name>
