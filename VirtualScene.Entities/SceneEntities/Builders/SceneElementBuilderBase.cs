@@ -19,16 +19,21 @@ namespace VirtualScene.Entities.SceneEntities.Builders
         /// <param name="addendum"></param>
         /// <param name="initVerticesCount"></param>
         /// <param name="material"></param>
-        protected static void AddFace(float x, float y, float offsetZ, Polygon polygon, float addendum, int initVerticesCount, Material material = null)
+        protected static VerticesPair AddFace(float x, float y, float offsetZ, Polygon polygon, float addendum, int initVerticesCount, Material material = null)
         {
-            var verticesCount = AddVertices(x, y, offsetZ, polygon, addendum);
+            var pair = new VerticesPair(x, y, offsetZ, addendum);
+            polygon.Vertices.Add(pair.Top);
+            polygon.Vertices.Add(pair.Base);
+
+            var verticesCount = polygon.Vertices.Count;
             if (verticesCount - initVerticesCount <= 2)
-                return;
+                return pair;
             AddTriangleFace(polygon, material, verticesCount, 3, 2, 1);
             AddTriangleFace(polygon, material, verticesCount, 3, 2, 4);
+            return pair;
         }
 
-        private static void AddTriangleFace(Polygon polygon, Material material, int verticesCount, params int[] verticeOffsets)
+        protected static void AddTriangleFace(Polygon polygon, Material material, int verticesCount, params int[] verticeOffsets)
         {
             var face = new Face();
             if (material != null)
@@ -36,14 +41,6 @@ namespace VirtualScene.Entities.SceneEntities.Builders
             foreach (var verticeOffset in verticeOffsets)
                 face.Indices.Add(new Index(verticesCount - verticeOffset, 0));
             polygon.Faces.Add(face);
-        }
-
-        private static int AddVertices(float x, float y, float offsetZ, Polygon polygon, float addendum)
-        {
-            var vertex1 = new Vertex(x, y, offsetZ + addendum);
-            polygon.Vertices.Add(vertex1);
-            polygon.Vertices.Add(new Vertex(x, y, 0 - addendum));
-            return polygon.Vertices.Count;
         }
 
         /// <summary>

@@ -56,6 +56,7 @@
     <Compile Include="SceneEntities\Builders\HollowCylinderBuilder.cs" />
     <Compile Include="SceneEntities\Builders\SceneElementBuilderBase.cs" />
     <Compile Include="SceneEntities\Builders\SpurGearBuilder.cs" />
+    <Compile Include="SceneEntities\Builders\VerticesPair.cs" />
     <Compile Include="SceneEntities\CalculationStrategies\CalculationStrategyNullException.cs" />
     <Compile Include="SceneEntities\CalculationStrategies\SpurGearCalculationStrategyBase.cs" />
     <Compile Include="SceneEntities\CalculationStrategies\SpurGearCalculationStrategyByNumberOfTeethAndOutsideDiameter.cs" />
